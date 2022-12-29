@@ -1,0 +1,633 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Poppins&family=Red+Hat+Display:wght@600&display=swap');
+
+/* color variables */
+:root {
+    --primary-color: #F7922F;
+    --black: #000000;
+    --trans-black: #00000030;
+    --white: #ffffff;
+}
+
+/* reset defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    color: var(--black);
+    cursor: default;
+}
+
+/* add no_outline class if outline/border is not required */
+.no_outline {
+    outline: none;
+    border: none;
+}
+
+/* add no_bg class when background is not required */
+.no_bg {
+    background-color: transparent;
+}
+
+/* set cursor to pointer for all anchor tag */
+a,
+button,
+a>*,
+button>*,
+input[type="submit"],
+.menu__for-sidebar {
+    cursor: pointer;
+}
+
+a:hover {
+    opacity: 0.9;
+}
+
+/* add shadow class if shadow is needed */
+.shadow {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+/* set margin auto */
+.margin-auto {
+    margin: auto;
+}
+
+/* set margin auto from left and right */
+.ml-auto {
+    margin: 0 auto;
+}
+
+/* use border-curve class to set border-radius 5px */
+.border-curve {
+    border-radius: 5px;
+}
+
+/* use border-curve-md class to set border-radius 14px */
+.border-curve-md {
+    border-radius: 14px;
+}
+
+/* use border-curve-lg class to set border-radius 25px */
+.border-curve-lg {
+    border-radius: 25px;
+}
+
+/* common flex box property */
+.flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+/* add wrap class if flex-wrap wrap is required */
+.wrap {
+    flex-wrap: wrap;
+}
+
+/* add gap class if gap 20px is required */
+.gap {
+    gap: 20px;
+}
+
+/* add items-center class when align-items center is required */
+.items-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* add justify-center class when justify-content center is required */
+.justify-center {
+    justify-content: center;
+}
+
+/* add justify-start class when justify-content flex-start is required */
+.justify-start {
+    justify-content: flex-start;
+}
+
+/* add direction-col class when flex-direction column is required */
+.direction-col {
+    flex-direction: column;
+}
+
+/* set font-family lexend deca for heading text*/
+.heading {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* set font-family poppins for normal text */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ============== for index.html =================== */
+
+/* logo */
+
+.nav__btn-back {
+    margin-right: 10px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+/* top navigation */
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 10px 20px;
+    background-color: var(--white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: 2;
+}
+
+.top_nav ul li {
+    margin: 0 20px;
+    font-weight: 600;
+}
+
+.top_nav ul li a img {
+    width: 2rem;
+    cursor: pointer;
+}
+
+/* search form */
+.search_form {
+    border: 2px solid var(--black);
+    height: 40px;
+    margin: 0 10px;
+    padding: 3px 5px;
+}
+
+.search_form #search {
+    cursor: text;
+    padding: 0 10px;
+}
+
+.icon_search {
+    width: 25px;
+}
+
+/* nav items tooltip */
+.nav__tooltip {
+    display: none;
+    background-color: var(--trans-black);
+    padding: 3px 5px;
+    border-radius: 3px;
+    position: absolute;
+    top: 50px;
+}
+
+.top_nav ul li:hover .nav__tooltip {
+    display: flex;
+}
+
+/* for hero slider */
+.hero {
+    width: 80%;
+    max-width: 1000px;
+    height: 60vh;
+    background-color: var(--primary-color);
+    margin: 40px auto;
+}
+
+/* main section */
+.our_special {
+    width: fit-content;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.underline {
+    margin-top: 3px;
+    height: 3px;
+    background-color: var(--black);
+    width: 90%;
+}
+
+/* food container */
+.card__container {
+    margin: 20px 40px;
+    z-index: 0;
+}
+
+.card__container::after {
+    content: "";
+    width: 620px;
+}
+
+/* individual food container card */
+.card {
+    background-color: var(--white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 300px;
+    padding-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card__food-img {
+    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.food_img {
+    width: 100%;
+    transition: 0.5s;
+}
+
+.food_img:hover {
+    transform: scale(1.2);
+}
+
+/* card btn container */
+.card__btns {
+    margin: 10px 15px;
+}
+
+/* individual buttons on card */
+.card__btn {
+    height: 50px;
+    padding: 0 10px;
+    background-color: var(--primary-color);
+    color: var(--black);
+    font-weight: bold;
+}
+
+.card__food-desc,
+.card__food-info {
+    padding: 5px 15px;
+}
+
+.card__food-title {
+    font-size: 1.25rem;
+}
+
+.card__food-price {
+    font-weight: 600;
+}
+
+.card__food-desc {
+    font-size: 0.825rem;
+    opacity: 0.75;
+}
+
+/* icons inside button on card */
+.card__btn img {
+    width: 30px;
+    margin: 0 5px;
+}
+
+/* status or something for card */
+.card__tag {
+    position: absolute;
+    color: var(--black);
+    background-color: var(--primary-color);
+    transform: rotate(-45deg);
+    width: 90px;
+    text-align: center;
+    left: -25px;
+    top: 5px;
+}
+
+/* =============== for menu.html ===================*/
+.view_all {
+    text-decoration: underline;
+
+}
+
+.category {
+    margin: 20px 40px;
+}
+
+.food_category hr {
+    margin-top: -5px;
+    background-color: var(--primary-color);
+}
+
+.ml-35 {
+    margin-left: 35px;
+}
+
+/*  ================== for login.html =======================*/
+.center {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    background: white;
+    padding: 10px;
+}
+
+.center h1 {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid black;
+}
+
+.center form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .text_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.text_field input {
+    width: 100%;
+    padding: 0 5px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.text_field label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.text_field input:focus~label,
+.text_field input:valid~label {
+    top: -5px;
+    color: #F7922F;
+}
+
+.text_field input:focus~span::before,
+.text_field input:valid~span::before {
+    width: 100%;
+}
+
+.forget_password:hover {
+    text-decoration: underline;
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    background: var(--primary-color);
+    font-size: 18px;
+    color: var(--black);
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+input[type=submit]:focus,
+input[type="submit"]:hover {
+    outline: 1px solid var(--black);
+}
+
+input[type=submit]:active {
+    outline: 2px solid var(--black);
+}
+
+.signup_link {
+    margin: 30px 0;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.signup_link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.signup_link a:hover {
+    text-decoration: underline;
+}
+
+/* ======================= for admin ===================== */
+.menu__for-sidebar {
+    height: 30px;
+    width: 30px;
+    margin-top: 15px;
+}
+
+.menu__for-sidebar .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--black);
+    margin-bottom: 5px;
+    transition: 0.5s all;
+}
+
+.open .bar2 {
+    opacity: 0;
+}
+
+.open .bar1 {
+    transform: rotate(45deg) translate(11px);
+}
+
+.open .bar3 {
+    transform: rotate(-45deg) translate(11px);
+}
+
+.sidebar {
+    left: -20%;
+    width: 20%;
+    min-height: 100vh;
+    background-color: rgb(179, 179, 179);
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    transition: 0.5s all;
+    z-index: 1;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+/* ============== for admin dashboard.html ================== */
+.admin_dashboard_stat .card {
+    padding: 10px;
+    width: 220px;
+}
+
+.admin_dashboard_stat .card h2 {
+    font-size: 2rem;
+}
+
+.admin_dashboard_stat .card img {
+    width: 65px;
+}
+
+.admin_dashboard_stat {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 30px;
+    justify-content: center;
+    grid-template-rows: repeat(3, 110px);
+
+    /* temporary code */
+    margin: 5%;
+}
+
+/* top selling items */
+.top_selling {
+    padding: 20px;
+    grid-area: 1 / 3 / span 3 / span 1;
+    overflow-y: scroll;
+}
+
+.top_selling h2 {
+    margin-bottom: 20px;
+}
+
+.top_selling_item {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.top_selling_item_img {
+    margin-right: 10px;
+    height: 70px;
+    width: 80px;
+}
+
+.top_selling_item_name {
+    margin-bottom: 10px;
+}
+
+/* to make admin dashboard responsive (little bit) */
+@media(max-width: 1160px) {
+    .card h2 {
+        font-size: 2rem;
+    }
+
+    .card_icon {
+        width: 60px;
+    }
+
+    .card {
+        width: 180px;
+    }
+}
+
+@media(max-width: 980px) {
+    .admin_dashboard_stat {
+        gap: 30px;
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .top_selling {
+        grid-area: 3 / 1 / span 2 / span 3;
+    }
+}
+
+@media(max-width: 768px) {
+    .admin_dashboard_stat {
+        gap: 20px;
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(3, 90px);
+    }
+
+    .top_selling {
+        grid-area: 4 / 1 / span 2 / span 2;
+    }
+}
+
+/* ===================== for admin add-food.html ===================== */
+.modal {
+    display: none;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.modal_form-container {
+    width: 90%;
+    max-width: 550px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow: auto;
+    background-color: var(--white);
+}
+
+.modal_title-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.modal_title-container::before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 24px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+}
+
+.form_add-food input,
+.form_add-food select,
+.form_add-food button,
+.uploaded-img-preview,
+.form_add-food textarea {
+    padding: 10px;
+    margin: 0 20px 20px 0;
+    width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.uploaded-img-preview {
+    margin-bottom: 0;
+}
+
+.form_add-food label {
+    margin-bottom: 3px;
+}
+
+.warning {
+    font-size: 12px;
+}
+
+.row,
+.col {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.upload-img {
+    width: 100px;
+}

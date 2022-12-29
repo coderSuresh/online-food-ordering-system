@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Test | Coder Suresh</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script defer src="../js/admin.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <button class="btn-add-food">Add Food Item</button>
+
+        <section class="modal items-center justify-center">
+            <div class="modal_form-container shadow border-curve-md">
+
+                <div class="modal_title-container flex items-center">
+                    <h2 class="modal-title">Add Food Item</h2>
+                    <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
+                </div>
+
+                <form action="#" method="post" class="form_add-food">
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" autofocus>
+                        </div>
+
+                        <div class="col">
+                            <label for="price">Price:</label>
+                            <input type="number" name="price" id="price">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="col">
+                                <label for="category">Category:</label>
+                                <select name="category" id="category">
+                                    <option value="">Select category</option>
+                                    <option value="">Category 1</option>
+                                    <option value="">Another Category</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <label for="image">Select an image:</label>
+                                <input type="file" name="image" id="image">
+                            </div>
+                        </div>
+
+                        <div class="col text-center flex justify-center">
+                            <div class="uploaded-img-preview">
+                                <img src="../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                            </div>
+                            <p class="warning">Image should be less than 200 KB</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="estimated-cooking-time">Estimated Cooking Time:</label>
+                            <input type="number" name="estimated-cooking-time" id="estimated-cooking-time">
+                        </div>
+
+                        <div class="col">
+                            <label for="tags">Tags (optional):</label>
+                            <input type="text" name="tags" id="tags">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="description">Description: </label>
+                            <textarea name="description" id="description" rows="5"></textarea>
+                        </div>
+
+                        <div class="col">
+                            <div class="col">
+                                <label for="veg-non-veg">Veg or Non-veg: </label>
+                                <select name="veg-non-veg" id="veg-non-veg">
+                                    <option value="">Select one</option>
+                                    <option value="veg">Veg</option>
+                                    <option value="non-veg">Non-veg</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <button type="submit">Add Food Item</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
