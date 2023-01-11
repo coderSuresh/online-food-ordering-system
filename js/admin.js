@@ -29,15 +29,28 @@ addBtn && (
 // toggle dark light mode 
 
 const darkModeIcon = document.querySelector(".dark-mode-icon")
-darkModeIcon.addEventListener("click", () => {
-    darkModeIcon.getAttribute("src") == "../images/ic_light_mode.svg" ? setDarkMode() : setLightMode()
-})
+darkModeIcon && (
+    darkModeIcon.addEventListener("click", () => {
+        darkModeIcon.getAttribute("src") == "../images/ic_light_mode.svg" ? setDarkMode() : setLightMode()
+    })
+)
 
 const setLightMode = () => {
-    darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg")
+    darkModeIcon && darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg")
     console.log("set light mode")
 }
 const setDarkMode = () => {
-    darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg")
+    darkModeIcon && darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg")
     console.log("set dark mode")
 }
+
+// toggle admin profile
+const adminProfile = document.querySelector(".admin_profile_image")
+adminProfile && (
+    adminProfile.classList.remove("open")
+)
+adminProfile && (    
+adminProfile.addEventListener("click", () => {
+        adminProfile.classList.toggle("open")
+    })
+)

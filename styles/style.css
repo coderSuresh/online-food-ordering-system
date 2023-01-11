@@ -17,7 +17,12 @@
     list-style: none;
     text-decoration: none;
     color: var(--black);
-    cursor: default;
+    /* cursor: default; */
+}
+
+hr {
+    background-color: var(--trans-black);
+    height: 1px;
 }
 
 /* add no_outline class if outline/border is not required */
@@ -39,8 +44,7 @@ button>*,
 input[type="submit"],
 .menu__for-sidebar,
 .menu__for-sidebar>*,
-.dashboard_sidebar_content,
-.dashboard_sidebar_content>* {
+.admin_profile_image {
     cursor: pointer;
 }
 
@@ -89,6 +93,10 @@ a:hover {
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: row;
+}
+
+p {
+    font-weight: 400;
 }
 
 /* add wrap class if flex-wrap wrap is required */
@@ -526,10 +534,45 @@ input[type=submit]:active {
 .sidebar.open .dashboard_sidebar_content_text {
     display: block;
     margin-left: 10px;
-
 }
 
 /* ============== for admin dashboard.html ================== */
+
+.admin_profile {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    background-color: var(--white);
+    padding: 20px;
+}
+
+.admin_profile hr {
+    margin: 10px;
+}
+
+.admin_profile div {
+    margin-bottom: 10px;
+}
+
+.admin_profile_image {
+    width: 40px;
+}
+
+.admin_profile_img,
+.admin_profile_icon {
+    margin-right: 20px;
+    z-index: 1;
+}
+
+.admin_profile_icon {
+    width: 25px !important;
+}
+
+.admin_profile_image.open~.admin_profile {
+    display: block;
+}
+
 .admin_dashboard_stat .card {
     padding: 10px;
     width: 220px;
