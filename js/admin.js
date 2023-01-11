@@ -49,8 +49,46 @@ const adminProfile = document.querySelector(".admin_profile_image")
 adminProfile && (
     adminProfile.classList.remove("open")
 )
-adminProfile && (    
-adminProfile.addEventListener("click", () => {
+adminProfile && (
+    adminProfile.addEventListener("click", () => {
         adminProfile.classList.toggle("open")
     })
 )
+
+// show hide calender filter
+const calenderFilter = document.querySelector(".filter_by_date")
+const dateFilterModal = document.querySelector(".date_filter_modal")
+const dateFilterClose = document.querySelector(".date_filter_close")
+
+calenderFilter && (
+    calenderFilter.addEventListener("click", () => {
+        dateFilterModal && dateFilterModal.classList.add("open")
+    })
+)
+
+dateFilterClose && (
+    dateFilterClose.addEventListener("click", () => {
+        dateFilterModal && dateFilterModal.classList.remove("open")
+    })
+)
+
+// filter by date custom option
+const filterForm = document.querySelector(".date_filter_modal_form")
+const customBtn = document.getElementById("filter_option-custom")
+
+filterForm && filterForm.addEventListener("change", (e) => {
+    console.log(e)
+    customBtn && customBtn.checked ? showCustomOption() : hideCustomOption()
+
+})
+const customOption = document.querySelector(".date_filter_form_option-custom")
+const showCustomOption = () => {
+    customOption && (
+        customOption.classList.add("visible")
+    )
+}
+const hideCustomOption = () => {
+    customOption && (
+        customOption.classList.remove("visible")
+    )
+}

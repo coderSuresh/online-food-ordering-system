@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin Dashboard | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
 </head>
@@ -105,8 +105,65 @@
 
     <main class="admin_dashboard_body">
 
-        <section class="dashboard_inner-head">
+        <section class="dashboard_inner-head flex items-center">
             <h2>Dashboard</h2>
+            <img src="../images/ic_calender.svg" class="filter_by_date" alt="filter">
+        </section>
+
+        <section class="date_filter_modal">
+
+            <section
+                class="date_filter_modal_container margin-auto border-curve-md shadow flex items-center direction-col">
+                <!-- filter options -->
+                <div class="date_filter_header flex items-center justify-between">
+                    <h2>Select an option:</h2>
+                    <img src="../images/ic_cross.svg" class="date_filter_close" alt="close modal">
+                </div>
+
+                <hr>
+
+                <form action="#" method="post" class="date_filter_modal_form">
+
+                    <div class="date_filter_form_options flex justify-start items-center wrap">
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-today">
+                            <label for="filter_option-today"> &nbsp; Today</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-yesterday">
+                            <label for="filter_option-yesterday"> &nbsp; Yesterday</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-last-week">
+                            <label for="filter_option-last-week"> &nbsp; Last week</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-last-month">
+                            <label for="filter_option-last-month"> &nbsp; Last month</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-custom">
+                            <label for="filter_option-custom"> &nbsp; Custom</label>
+                        </div>
+
+                    </div>
+
+                    <!-- filter using custom date range start -->
+                    <div class="flex justify-evenly date_filter_form_option-custom">
+                        <div class="flex direction-col">
+                            <label for="start-date">From:</label>
+                            <input type="date" name="start-date" id="start-date">
+                        </div>
+                        <div class="flex direction-col">
+                            <label for="end-date">To:</label>
+                            <input type="date" name="end-date" id="end-date">
+                        </div>
+                    </div>
+                    <!-- filter using custom date range end -->
+
+                    <button type="submit" class="no_outline border-curve-lg">Filter</button>
+                </form>
+            </section>
         </section>
 
         <section class="admin_dashboard_stat">

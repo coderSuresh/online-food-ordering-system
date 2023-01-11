@@ -44,7 +44,8 @@ button>*,
 input[type="submit"],
 .menu__for-sidebar,
 .menu__for-sidebar>*,
-.admin_profile_image {
+.admin_profile_image,
+.date_filter_close {
     cursor: pointer;
 }
 
@@ -57,9 +58,14 @@ a:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-/* set width to 50% */
+/* set width to 90% */
 .w-90 {
     width: 90px !important;
+}
+
+/* set width to 100% */
+.w-full {
+    width: 100px !important;
 }
 
 /* set margin auto */
@@ -580,8 +586,77 @@ input[type=submit]:active {
 
 .admin_dashboard_body {
     padding: 5%;
+    padding-top: 50px;
     max-width: 1440px;
     margin: 0 100px;
+}
+
+.dashboard_inner-head {
+    margin-bottom: 30px;
+}
+
+/* filter by date */
+.date_filter_modal {
+    display: none;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    z-index: 10;
+    background-color: var(--trans-black);
+}
+
+.date_filter_modal_container {
+    background-color: var(--white);
+    height: fit-content;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+.date_filter_header {
+    width: 100%;
+}
+
+.date_filter_modal.open {
+    display: flex;
+}
+
+.date_filter_modal_form div {
+    width: fit-content;
+    margin: 10px 10px 10px 0;
+}
+
+.date_filter_modal_form h2 {
+    margin-bottom: 20px;
+}
+
+.date_filter_modal_form button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    margin: 20px auto;
+    padding: 7px 20px;
+    font-size: 1.2rem;
+    width: 80%;
+}
+
+.date_filter_form_option-custom {
+    display: none;
+}
+
+.date_filter_form_option-custom.visible {
+    display: flex;
+}
+
+.date_filter_modal_form button:hover,
+.date_filter_modal_form button:focus {
+    border: 1px solid var(--black);
+}
+
+.date_filter_modal_form button:active {
+    border: 2px solid var(--black);
 }
 
 .admin_dashboard_stat .card h2 {
