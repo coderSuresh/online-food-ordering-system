@@ -5,6 +5,7 @@
     --primary-color: #F7922F;
     --black: #000000;
     --trans-black: #00000030;
+    --trans-primary: #F7922F50;
     --white: #ffffff;
 }
 
@@ -36,7 +37,10 @@ button,
 a>*,
 button>*,
 input[type="submit"],
-.menu__for-sidebar {
+.menu__for-sidebar,
+.menu__for-sidebar>*,
+.dashboard_sidebar_content,
+.dashboard_sidebar_content>* {
     cursor: pointer;
 }
 
@@ -464,19 +468,55 @@ input[type=submit]:active {
 }
 
 .sidebar {
-    left: -20%;
-    width: 20%;
+    background-color: var(--white);
+    left: 0;
+    padding-top: 100px;
     min-height: 100vh;
-    background-color: rgb(179, 179, 179);
-    overflow-y: scroll;
+    text-align: center;
+    overflow-y: auto;
     position: absolute;
     top: 0;
     transition: 0.5s all;
+    width: 100px;
     z-index: 1;
+}
+
+.sidebar .dashboard_sidebar_content {
+    margin: 0 10px 20px 10px;
+}
+
+.sidebar .dashboard_sidebar_content_text {
+    display: none;
+}
+
+.sidebar .dashboard_sidebar_content_img {
+    width: 30px;
 }
 
 .sidebar.open {
     left: 0;
+    width: fit-content;
+}
+
+.sidebar.open .dashboard_sidebar_content {
+    justify-content: flex-start;
+    margin: 0 30px 20px 10px;
+    padding: 5px 10px;
+    width: 90%;
+}
+
+.sidebar.open .dashboard_sidebar_content.active {
+    background-color: var(--trans-primary);
+}
+
+.sidebar.open .dashboard_sidebar_content:hover {
+    background-color: var(--trans-black);
+}
+
+.sidebar.open .dashboard_sidebar_content_text {
+    display: block;
+    margin-left: 10px;
+
 }
 
 /* ============== for admin dashboard.html ================== */
@@ -499,9 +539,9 @@ input[type=submit]:active {
     gap: 30px;
     justify-content: center;
     grid-template-rows: repeat(3, 110px);
-
-    /* temporary code */
-    margin: 5%;
+    padding: 5%;
+    max-width: 1440px;
+    margin: 0 100px;
 }
 
 /* top selling items */
