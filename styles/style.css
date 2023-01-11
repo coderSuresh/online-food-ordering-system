@@ -45,7 +45,8 @@ input[type="submit"],
 .menu__for-sidebar,
 .menu__for-sidebar>*,
 .admin_profile_image,
-.date_filter_close {
+.date_filter_close,
+.popper-btn {
     cursor: pointer;
 }
 
@@ -58,14 +59,14 @@ a:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-/* set width to 90% */
+/* set width to 90px */
 .w-90 {
     width: 90px !important;
 }
 
 /* set width to 100% */
 .w-full {
-    width: 100px !important;
+    width: 100% !important;
 }
 
 /* set margin auto */
@@ -285,7 +286,6 @@ header {
 }
 
 .food_img {
-    width: 100%;
     transition: 0.5s;
 }
 
@@ -596,50 +596,21 @@ input[type=submit]:active {
 }
 
 /* filter by date */
-.date_filter_modal {
-    display: none;
-    position: absolute;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    overflow-y: auto;
-    z-index: 10;
-    background-color: var(--trans-black);
-}
-
-.date_filter_modal_container {
-    background-color: var(--white);
-    height: fit-content;
-    max-width: 400px;
-    padding: 20px;
-    text-align: center;
-}
-
-.date_filter_header {
-    width: 100%;
-}
-
-.date_filter_modal.open {
-    display: flex;
-}
-
-.date_filter_modal_form div {
-    width: fit-content;
-    margin: 10px 10px 10px 0;
-}
-
-.date_filter_modal_form h2 {
-    margin-bottom: 20px;
-}
-
 .date_filter_modal_form button {
     background-color: var(--primary-color);
     border: 1px solid var(--primary-color);
+    outline: 2px solid var(--primary-color);
     margin: 20px auto;
     padding: 7px 20px;
     font-size: 1.2rem;
-    width: 80%;
+}
+
+.small-modal {
+    max-width: 400px !important;
+}
+
+.date_filter_form_options div {
+    margin: 10px 10px 10px 0;
 }
 
 .date_filter_form_option-custom {
@@ -652,13 +623,14 @@ input[type=submit]:active {
 
 .date_filter_modal_form button:hover,
 .date_filter_modal_form button:focus {
-    border: 1px solid var(--black);
+    outline: 1px solid var(--black);
 }
 
 .date_filter_modal_form button:active {
-    border: 2px solid var(--black);
+    outline: 2px solid var(--black);
 }
 
+/* cards */
 .admin_dashboard_stat .card h2 {
     font-size: 2rem;
 }
@@ -747,7 +719,7 @@ input[type=submit]:active {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color:var(--trans-black);
     z-index: 1;
 }
 

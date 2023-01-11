@@ -12,7 +12,7 @@ menu && (
 // for modal popup 
 const modal = document.querySelector(".modal")
 const closeBtn = document.querySelector(".close-icon")
-const addBtn = document.querySelector(".btn-add-food")
+const popperBtn = document.querySelector(".popper-btn")
 
 closeBtn && (
     closeBtn.addEventListener("click", () => {
@@ -20,14 +20,13 @@ closeBtn && (
     })
 )
 
-addBtn && (
-    addBtn.addEventListener("click", () => {
+popperBtn && (
+    popperBtn.addEventListener("click", () => {
         modal.style.display = "flex"
     })
 )
 
 // toggle dark light mode 
-
 const darkModeIcon = document.querySelector(".dark-mode-icon")
 darkModeIcon && (
     darkModeIcon.addEventListener("click", () => {
@@ -39,6 +38,7 @@ const setLightMode = () => {
     darkModeIcon && darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg")
     console.log("set light mode")
 }
+
 const setDarkMode = () => {
     darkModeIcon && darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg")
     console.log("set dark mode")
@@ -52,23 +52,6 @@ adminProfile && (
 adminProfile && (
     adminProfile.addEventListener("click", () => {
         adminProfile.classList.toggle("open")
-    })
-)
-
-// show hide calender filter
-const calenderFilter = document.querySelector(".filter_by_date")
-const dateFilterModal = document.querySelector(".date_filter_modal")
-const dateFilterClose = document.querySelector(".date_filter_close")
-
-calenderFilter && (
-    calenderFilter.addEventListener("click", () => {
-        dateFilterModal && dateFilterModal.classList.add("open")
-    })
-)
-
-dateFilterClose && (
-    dateFilterClose.addEventListener("click", () => {
-        dateFilterModal && dateFilterModal.classList.remove("open")
     })
 )
 

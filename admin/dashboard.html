@@ -107,20 +107,16 @@
 
         <section class="dashboard_inner-head flex items-center">
             <h2>Dashboard</h2>
-            <img src="../images/ic_calender.svg" class="filter_by_date" alt="filter">
+            <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
-        <section class="date_filter_modal">
+        <section class="modal items-center justify-center">
+            <div class="modal_form-container small-modal shadow border-curve-md">
 
-            <section
-                class="date_filter_modal_container margin-auto border-curve-md shadow flex items-center direction-col">
-                <!-- filter options -->
-                <div class="date_filter_header flex items-center justify-between">
-                    <h2>Select an option:</h2>
-                    <img src="../images/ic_cross.svg" class="date_filter_close" alt="close modal">
-                </div>
-
-                <hr>
+                <div class="modal_title-container flex items-center">
+                    <h2 class="modal-title">Select an option</h2>
+                    <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
+                </div> 
 
                 <form action="#" method="post" class="date_filter_modal_form">
 
@@ -161,9 +157,11 @@
                     </div>
                     <!-- filter using custom date range end -->
 
-                    <button type="submit" class="no_outline border-curve-lg">Filter</button>
+                    <button type="submit" class="no_outline border-curve-lg w-full">Filter</button>
+
                 </form>
-            </section>
+
+            </div>
         </section>
 
         <section class="admin_dashboard_stat">
