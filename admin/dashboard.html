@@ -29,21 +29,12 @@
             <ul class="flex items-center">
                 <li class="flex direction-col"><a href="menu.html">Menu</a></li>
 
-                <!-- nav search form -->
                 <li>
-                    <form action="#" method="post" class="search_form flex items-center border-curve-lg">
-                        <input type="search" name="search" placeholder="search..." id="search"
-                            class="search no_outline">
-                        <button type="submit" class="btn_search no_outline no_bg"><img src="../images/ic_search.svg"
-                                alt="search icon" class="icon_search"></button>
-                    </form>
+                    <a href="#">
+                        <img src="../images/ic_dark_mode.svg" class="dark-mode-icon" alt="toggle night mode">
+                    </a>
+                    
                 </li>
-
-                <li class="flex direction-col"><a href="login.html"><img src="../images/ic_acc.svg" alt="account"></a>
-                    <span class="nav__tooltip">Account</span>
-                </li>
-                <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
 
@@ -53,34 +44,43 @@
 
         <a href="#">
             <article class="dashboard_sidebar_content active border-curve-lg flex items-center justify-center">
-                <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" aria-hidden="true" role="presentation">
+                <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" aria-hidden="true"
+                    role="presentation">
                 <p class="dashboard_sidebar_content_text">Dashboard</p>
             </article>
         </a>
         <a href="#">
             <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" aria-hidden="true" role="presentation">
+                <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" aria-hidden="true"
+                    role="presentation">
                 <p class="dashboard_sidebar_content_text">Food Items</p>
             </article>
         </a>
         <a href="#">
             <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" aria-hidden="true" role="presentation">
+                <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" aria-hidden="true"
+                    role="presentation">
                 <p class="dashboard_sidebar_content_text">Category</p>
             </article>
         </a>
         <a href="#">
             <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" aria-hidden="true" role="presentation">
+                <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" aria-hidden="true"
+                    role="presentation">
                 <p class="dashboard_sidebar_content_text">Users</p>
             </article>
         </a>
 
     </aside>
 
-    <main>
+    <main class="admin_dashboard_body">
+
+        <section class="dashboard_inner-head">
+            <h2>Dashboard</h2>
+        </section>
 
         <section class="admin_dashboard_stat">
+
             <article class="card flex items-center text-center border-curve-md">
                 <img src="../images/ic_total-menu.svg" aria-hidden="true" role="presentation" class="card_icon">
                 <div>

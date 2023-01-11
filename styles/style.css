@@ -535,6 +535,12 @@ input[type=submit]:active {
     width: 220px;
 }
 
+.admin_dashboard_body {
+    padding: 5%;
+    max-width: 1440px;
+    margin: 0 100px;
+}
+
 .admin_dashboard_stat .card h2 {
     font-size: 2rem;
 }
@@ -549,9 +555,6 @@ input[type=submit]:active {
     gap: 30px;
     justify-content: center;
     grid-template-rows: repeat(3, 110px);
-    padding: 5%;
-    max-width: 1440px;
-    margin: 0 100px;
 }
 
 /* top selling items */

@@ -25,3 +25,19 @@ addBtn && (
         modal.style.display = "flex"
     })
 )
+
+// toggle dark light mode 
+
+const darkModeIcon = document.querySelector(".dark-mode-icon")
+darkModeIcon.addEventListener("click", () => {
+    darkModeIcon.getAttribute("src") == "../images/ic_light_mode.svg" ? setDarkMode() : setLightMode()
+})
+
+const setLightMode = () => {
+    darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg")
+    console.log("set light mode")
+}
+const setDarkMode = () => {
+    darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg")
+    console.log("set dark mode")
+}
