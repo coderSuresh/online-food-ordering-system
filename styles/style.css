@@ -49,6 +49,11 @@ a:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+/* set width to 50% */
+.w-90 {
+    width: 90px !important;
+}
+
 /* set margin auto */
 .margin-auto {
     margin: auto;
@@ -106,6 +111,11 @@ a:hover {
     justify-content: center;
 }
 
+/* add justify-evenly class when justify-content evenly is required */
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
 /* add justify-start class when justify-content flex-start is required */
 .justify-start {
     justify-content: flex-start;
@@ -114,6 +124,11 @@ a:hover {
 /* add direction-col class when flex-direction column is required */
 .direction-col {
     flex-direction: column;
+}
+
+/* add direction-row class when flex-direction row is required */
+.direction-row {
+    flex-direction: row !important;
 }
 
 /* set font-family lexend deca for heading text*/
