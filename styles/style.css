@@ -529,7 +529,7 @@ input[type=submit]:active {
 .sidebar_accordion.active .sidebar_sub-menu {
     display: block;
     position: fixed;
-    left: 100px;
+    left: 85px;
     top: 150px;
     background-color: var(--white);
     padding: 20px;
