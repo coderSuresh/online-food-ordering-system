@@ -5,6 +5,7 @@
     --primary-color: #F7922F;
     --black: #000000;
     --trans-black: #00000030;
+    --trans-primary: #F7922F50;
     --white: #ffffff;
 }
 
@@ -16,7 +17,12 @@
     list-style: none;
     text-decoration: none;
     color: var(--black);
-    cursor: default;
+    /* cursor: default; */
+}
+
+hr {
+    background-color: var(--trans-black);
+    height: 1px;
 }
 
 /* add no_outline class if outline/border is not required */
@@ -36,7 +42,11 @@ button,
 a>*,
 button>*,
 input[type="submit"],
-.menu__for-sidebar {
+.menu__for-sidebar,
+.menu__for-sidebar>*,
+.admin_profile_image,
+.date_filter_close,
+.popper-btn {
     cursor: pointer;
 }
 
@@ -47,6 +57,16 @@ a:hover {
 /* add shadow class if shadow is needed */
 .shadow {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+/* set width to 90px */
+.w-90 {
+    width: 90px !important;
+}
+
+/* set width to 100% */
+.w-full {
+    width: 100% !important;
 }
 
 /* set margin auto */
@@ -82,6 +102,10 @@ a:hover {
     flex-direction: row;
 }
 
+p {
+    font-weight: 400;
+}
+
 /* add wrap class if flex-wrap wrap is required */
 .wrap {
     flex-wrap: wrap;
@@ -106,6 +130,11 @@ a:hover {
     justify-content: center;
 }
 
+/* add justify-evenly class when justify-content evenly is required */
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
 /* add justify-start class when justify-content flex-start is required */
 .justify-start {
     justify-content: flex-start;
@@ -114,6 +143,11 @@ a:hover {
 /* add direction-col class when flex-direction column is required */
 .direction-col {
     flex-direction: column;
+}
+
+/* add direction-row class when flex-direction row is required */
+.direction-row {
+    flex-direction: row !important;
 }
 
 /* set font-family lexend deca for heading text*/
@@ -252,7 +286,6 @@ header {
 }
 
 .food_img {
-    width: 100%;
     transition: 0.5s;
 }
 
@@ -449,27 +482,209 @@ input[type=submit]:active {
 }
 
 .sidebar {
-    left: -20%;
-    width: 20%;
+    background-color: var(--white);
+    left: 0;
+    padding-top: 90px;
     min-height: 100vh;
-    background-color: rgb(179, 179, 179);
-    overflow-y: scroll;
-    position: absolute;
+    text-align: center;
+    overflow-y: auto;
+    position: fixed;
     top: 0;
     transition: 0.5s all;
+    width: 100px;
     z-index: 1;
 }
 
-.sidebar.open {
+.sidebar .dashboard_sidebar_content {
+    height: 50px;
+    width: 50px;
+    margin: 20px auto;
+}
+
+/* for sidebar accordion */
+.sidebar_accordion {
+    position: relative;
+}
+
+.sidebar.open .sidebar_accordion.active .sidebar_sub-menu {
+    display: block;
+    position: relative;
     left: 0;
+    top: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.sidebar.open .sidebar_accordion.active .accordion_arrow {
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+.sidebar_accordion .sidebar_sub-menu {
+    display: none;
+    white-space: nowrap;
+}
+
+.sidebar_accordion.active .sidebar_sub-menu {
+    display: block;
+    position: fixed;
+    left: 100px;
+    top: 150px;
+    background-color: var(--white);
+    padding: 20px;
+}
+
+.sidebar .hide-on-close {
+    display: none;
+    white-space: nowrap;
+    transform-origin: top;
+}
+
+.sidebar .dashboard_sidebar_content_img {
+    width: 30px;
+}
+
+.sidebar .sidebar_accordion.active .dashboard_sidebar_content {
+    background-color: var(--trans-primary);
+}
+
+.sidebar.open {
+    width: 200px;
+}
+
+.sidebar.open .dashboard_sidebar_content,
+.sidebar_sub-menu li {
+    justify-content: flex-start;
+    padding: 5px 10px;
+    width: 90%;
+}
+
+.sidebar .dashboard_sidebar_content:hover,
+.sidebar_sub-menu li:hover {
+    background-color: var(--trans-black);
+}
+
+.sidebar.open .sidebar_accordion.active .dashboard_sidebar_content {
+    background-color: var(--trans-primary);
+}
+
+.sidebar.open .dashboard_sidebar_content:hover {
+    background-color: var(--trans-black);
+}
+
+.sidebar.open .hide-on-close {
+    display: block;
+    margin-left: 10px;
 }
 
 /* ============== for admin dashboard.html ================== */
+
+.admin_profile {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    background-color: var(--white);
+    padding: 20px;
+}
+
+.admin_profile hr {
+    margin: 10px;
+}
+
+.admin_profile div {
+    margin-bottom: 10px;
+}
+
+.admin_profile_image {
+    width: 40px;
+}
+
+.admin_profile_img,
+.admin_profile_icon {
+    margin-right: 20px;
+    z-index: 1;
+}
+
+.admin_profile_icon {
+    width: 25px !important;
+}
+
+.admin_profile_image.open~.admin_profile {
+    display: block;
+}
+
 .admin_dashboard_stat .card {
     padding: 10px;
     width: 220px;
 }
 
+.admin_dashboard_body {
+    padding: 5%;
+    padding-top: 50px;
+    max-width: 1440px;
+    margin: 0 100px;
+}
+
+.dashboard_inner-head {
+    margin-bottom: 30px;
+}
+
+/* filter by date */
+.date_filter_modal_form button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    outline: 2px solid var(--primary-color);
+    margin: 20px auto;
+    padding: 7px 20px;
+    font-size: 1.2rem;
+}
+
+.small-modal {
+    max-width: 400px !important;
+}
+
+.date_filter_form_options div {
+    margin: 10px 10px 10px 0;
+}
+
+.date_filter_form_option-custom {
+    display: none;
+}
+
+.date_filter_form_option-custom.visible {
+    display: flex;
+}
+
+.date_filter_modal_form button:hover,
+.date_filter_modal_form button:focus {
+    outline: 1px solid var(--black);
+}
+
+.date_filter_modal_form button:active {
+    outline: 2px solid var(--black);
+}
+
+/* sidebar sub contents */
+.sidebar_sub-menu {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.sidebar_sub-menu li {
+    margin-bottom: 10px;
+    list-style: inside;
+    font-size: 0.9rem;
+}
+
+/* for sidebar arrow */
+.accordian_arrow {
+    width: 20px;
+    margin-left: 10px;
+}
+
+/* cards */
 .admin_dashboard_stat .card h2 {
     font-size: 2rem;
 }
@@ -484,9 +699,6 @@ input[type=submit]:active {
     gap: 30px;
     justify-content: center;
     grid-template-rows: repeat(3, 110px);
-
-    /* temporary code */
-    margin: 5%;
 }
 
 /* top selling items */
@@ -556,13 +768,13 @@ input[type=submit]:active {
 /* ===================== for admin add-food.html ===================== */
 .modal {
     display: none;
-    min-height: 100vh;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    background-color: var(--trans-black);
+    z-index: 10;
 }
 
 .modal_form-container {

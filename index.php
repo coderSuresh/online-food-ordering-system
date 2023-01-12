@@ -21,7 +21,7 @@ session_start();
 
     <header>
         <nav class="top_nav flex items-center">
-            <a href="#" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
+            <a href="./index.html" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
                 <span>Hub</span></a>
 
             <ul class="flex items-center">
@@ -65,7 +65,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
@@ -84,7 +84,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
@@ -103,7 +103,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
@@ -122,7 +122,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
@@ -141,7 +141,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
@@ -160,7 +160,7 @@ session_start();
                 <p class="card__tag text-center">veg</p>
 
                 <div class="card__food-img">
-                    <img src="./images/food.png" class="food_img" alt="food">
+                    <img src="./images/food.png" class="food_img w-full" alt="food">
                 </div>
                 <article class="card__food-info flex items-center">
                     <h2 class="card__food-title">Chinese MoMo</h2>
