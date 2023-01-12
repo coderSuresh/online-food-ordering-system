@@ -62,16 +62,33 @@ const customBtn = document.getElementById("filter_option-custom")
 filterForm && filterForm.addEventListener("change", (e) => {
     console.log(e)
     customBtn && customBtn.checked ? showCustomOption() : hideCustomOption()
-
 })
+
 const customOption = document.querySelector(".date_filter_form_option-custom")
 const showCustomOption = () => {
     customOption && (
         customOption.classList.add("visible")
     )
 }
+
 const hideCustomOption = () => {
     customOption && (
         customOption.classList.remove("visible")
     )
 }
+
+// for sidebar options accordion
+const sidebarSubMenu = document.querySelector(".sidebar_sub-menu")
+const sidebarSubMenuOpener = document.querySelectorAll(".dashboard_sidebar_content")
+
+sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
+    item.onclick = () => {
+        sidebarSubMenuOpener.forEach(subMenu => {
+            subMenu.classList.remove("active")
+        })
+
+        item.addEventListener("click", (e) => {
+            item.classList.toggle("active")
+        })
+    }
+})

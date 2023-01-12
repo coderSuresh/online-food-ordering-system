@@ -501,9 +501,26 @@ input[type=submit]:active {
     margin: 20px auto;
 }
 
-.sidebar .dashboard_sidebar_content_text {
+/* for sidebar accordion */
+.sidebar.open .dashboard_sidebar_content.active .sidebar_sub-menu{
+    display: block;
+    background-color: red;
+}
+
+.sidebar.open .dashboard_sidebar_content.active .accordion_arrow {
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+.sidebar_sub-menu {
+    /* display: none; */
+    background-color: purple;
+}
+
+.sidebar .hide-on-close {
     display: none;
     white-space: nowrap;
+    transform-origin: top;
 }
 
 .sidebar .dashboard_sidebar_content_img {
@@ -519,13 +536,15 @@ input[type=submit]:active {
     width: 200px;
 }
 
-.sidebar.open .dashboard_sidebar_content {
+.sidebar.open .dashboard_sidebar_content,
+.sidebar_sub-menu li {
     justify-content: flex-start;
     padding: 5px 10px;
     width: 90%;
 }
 
-.sidebar .dashboard_sidebar_content:hover {
+.sidebar .dashboard_sidebar_content:hover,
+.sidebar_sub-menu li:hover {
     background-color: var(--trans-black);
 }
 
@@ -537,7 +556,7 @@ input[type=submit]:active {
     background-color: var(--trans-black);
 }
 
-.sidebar.open .dashboard_sidebar_content_text {
+.sidebar.open .hide-on-close {
     display: block;
     margin-left: 10px;
 }
@@ -630,6 +649,24 @@ input[type=submit]:active {
     outline: 2px solid var(--black);
 }
 
+/* sidebar sub contents */
+.sidebar_sub-menu {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.sidebar_sub-menu li {
+    margin-bottom: 10px;
+    list-style: inside;
+    font-size: 0.9rem;
+}
+
+/* for sidebar arrow */
+.accordian_arrow {
+    width: 20px;
+    margin-left: 10px;
+}
+
 /* cards */
 .admin_dashboard_stat .card h2 {
     font-size: 2rem;
@@ -714,13 +751,13 @@ input[type=submit]:active {
 /* ===================== for admin add-food.html ===================== */
 .modal {
     display: none;
-    min-height: 100vh;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background-color:var(--trans-black);
-    z-index: 1;
+    background-color: var(--trans-black);
+    z-index: 10;
 }
 
 .modal_form-container {
