@@ -488,7 +488,7 @@ input[type=submit]:active {
     min-height: 100vh;
     text-align: center;
     overflow-y: auto;
-    position: absolute;
+    position: fixed;
     top: 0;
     transition: 0.5s all;
     width: 100px;
@@ -502,8 +502,18 @@ input[type=submit]:active {
 }
 
 /* for sidebar accordion */
-.sidebar.open .sidebar_accordion.active .sidebar_sub-menu{
+.sidebar_accordion {
+    position: relative;
+}
+
+.sidebar.open .sidebar_accordion.active .sidebar_sub-menu {
     display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
 }
 
 .sidebar.open .sidebar_accordion.active .accordion_arrow {
@@ -513,6 +523,16 @@ input[type=submit]:active {
 
 .sidebar_accordion .sidebar_sub-menu {
     display: none;
+    white-space: nowrap;
+}
+
+.sidebar_accordion.active .sidebar_sub-menu {
+    display: block;
+    position: fixed;
+    left: 100px;
+    top: 150px;
+    background-color: var(--white);
+    padding: 20px;
 }
 
 .sidebar .hide-on-close {
@@ -530,7 +550,6 @@ input[type=submit]:active {
 }
 
 .sidebar.open {
-    left: 0;
     width: 200px;
 }
 

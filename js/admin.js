@@ -77,15 +77,17 @@ const hideCustomOption = () => {
     )
 }
 
-// for sidebar options accordion
+// for sidebar accordion
 const sidebarSubMenuOpener = document.querySelectorAll(".sidebar_accordion")
 
 sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
     item.addEventListener("click", () => {
-        sidebarSubMenuOpener.forEach(subMenu => {
-            subMenu.classList.remove("active")
-        })
 
+        // sidebarSubMenuOpener.forEach(subMenu => {
+        //     subMenu.classList.remove("active")
+        // })
+        
         item.classList.toggle("active")
     })
+
 })
