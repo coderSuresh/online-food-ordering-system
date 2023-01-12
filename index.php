@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +37,7 @@
                     </form>
                 </li>
 
-                <li class="flex direction-col"><a href="login.html"><img src="./images/ic_acc.svg" alt="account"></a>
+                <li class="flex direction-col"><a href="./php/customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span> </li>
                 <li class="flex direction-col"><a href="#"><img src="./images/ic_cart.svg" alt="cart"></a> <span
                         class="nav__tooltip">Cart</span> </li>
@@ -180,3 +183,6 @@
 </body>
 
 </html>
+<?php
+session_unset();
+?>
