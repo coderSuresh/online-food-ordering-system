@@ -862,6 +862,20 @@ textarea {
     position: relative;
 }
 
+.emp_card-overlay {
+    display: none;
+    position: absolute;
+    background-color: var(--trans-black);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.employee_card.disabled .emp_card-overlay {
+    display: block;
+}
+
 .emp_id {
     margin: 10px 0 20px 0;
     color: var(--gray);
