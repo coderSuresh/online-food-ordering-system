@@ -91,3 +91,11 @@ sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
     })
 
 })
+
+// to toggle employee card option menu
+const empOptionMenu = document.querySelector(".emp_card_option-menu")
+const empOptions = document.querySelector(".emp_card_options")
+
+empOptionMenu && empOptionMenu.addEventListener("click", () => {
+    empOptions && empOptions.classList.toggle("open")
+})

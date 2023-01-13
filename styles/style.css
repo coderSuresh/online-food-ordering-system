@@ -858,6 +858,8 @@ textarea {
 /* ==================== for employees.html ======================= */
 .employee_card {
     height: min-content;
+    width: 260px;
+    position: relative;
 }
 
 .emp_id {
@@ -865,11 +867,41 @@ textarea {
     color: var(--gray);
 }
 
-.employee_card div {
+.employee_card .emp_card_content {
     margin-bottom: 10px;
 }
 
 .employee_card div>img {
-    width: 30px;
+    width: 20px;
     margin-right: 10px;
+}
+
+.emp_name {
+    margin-top: 10px;
+}
+
+.employee_card div p {
+    font-size: 0.9rem;
+}
+
+.emp_card_option-menu {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.emp_card_options {
+    display: none;
+    position: absolute;
+    right: 0;
+    transform: translateX(130px);
+    top: 0;
+}
+
+.emp_card_options div {
+    margin: 15px auto;
+}
+
+.emp_card_options.open {
+    display: block;
 }
