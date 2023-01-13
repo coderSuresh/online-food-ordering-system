@@ -70,6 +70,10 @@ a:hover {
     width: 100% !important;
 }
 
+.mt-20 {
+    margin-top: 20px;
+}
+
 /* set padding 20px */
 .p-20 {
     padding: 20px;
@@ -174,6 +178,7 @@ body {
     background-color: var(--primary-color);
     padding: 7px 20px;
     font-size: 1rem;
+    border: none !important;
     outline: 2px solid var(--primary-color);
 }
 
@@ -658,7 +663,6 @@ input[type=submit]:active {
 /* filter by date */
 .date_filter_modal_form button {
     background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
     outline: 2px solid var(--primary-color);
     margin: 20px auto;
     padding: 7px 20px;
@@ -679,15 +683,6 @@ input[type=submit]:active {
 
 .date_filter_form_option-custom.visible {
     display: flex;
-}
-
-.date_filter_modal_form button:hover,
-.date_filter_modal_form button:focus {
-    outline: 1px solid var(--black);
-}
-
-.date_filter_modal_form button:active {
-    outline: 2px solid var(--black);
 }
 
 /* sidebar sub contents */
@@ -800,6 +795,10 @@ input[type=submit]:active {
     z-index: 10;
 }
 
+.warning-no_margin {
+    margin: 0 20px 0 0;
+}
+
 .modal_form-container {
     width: 90%;
     max-width: 550px;
@@ -824,11 +823,11 @@ input[type=submit]:active {
     margin-top: 10px;
 }
 
-.form_add-food input,
-.form_add-food select,
-.form_add-food button,
+.modal_form input,
+.modal_form select,
+.modal_form button,
 .uploaded-img-preview,
-.form_add-food textarea {
+.modal_form textarea {
     padding: 10px;
     margin: 0 20px 20px 0;
     width: 200px;

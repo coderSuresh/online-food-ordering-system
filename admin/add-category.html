@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category | RestroHub</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script defer src="../js/admin.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <button class="btn-add-category popper-btn">Add Category</button>
+
+        <section class="modal items-center justify-center">
+            <div class="modal_form-container small-modal p-20 shadow border-curve-md">
+
+                <div class="modal_title-container flex items-center">
+                    <h2 class="modal-title">Add Category</h2>
+                    <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
+                </div>
+
+                <form action="#" method="post" class="form_add-category modal_form">
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" autofocus>
+                        </div>
+
+                    </div>
+
+                    <div class="col items-center">
+                        <div class="uploaded-img-preview text-center">
+                            <img src="../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                        </div>
+                        <p class="warning warning-no_margin">Image should be less than 200 KB</p>
+                    </div>
+
+                    <div class="row mt-20">
+                        <div class="col">
+                            <label for="image">Select an image:</label>
+                            <input type="file" name="image" id="image">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" class="button">Add Category</button>
+                    </div>
+            </div>
+
+            </form>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
