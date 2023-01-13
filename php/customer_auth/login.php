@@ -20,7 +20,7 @@ session_start();
     <header>
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
-                <!-- test back btn -->
+                <!-- back btn -->
                 <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
                 <a href="#" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
               

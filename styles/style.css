@@ -160,6 +160,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.h-100 {
+    min-height: 100vh;
+}
+
 /* ============== for index.html =================== */
 
 /* logo */
@@ -366,7 +370,7 @@ header {
 .center {
     width: 90%;
     max-width: 400px;
-    margin: 20px auto;
+    margin: auto;
     background: white;
     padding: 10px;
 }
