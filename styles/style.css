@@ -173,6 +173,17 @@ body {
 .button {
     background-color: var(--primary-color);
     padding: 7px 20px;
+    font-size: 1rem;
+    outline: 2px solid var(--primary-color);
+}
+
+.button:hover,
+.button:focus {
+    outline: 1px solid var(--black);
+}
+
+.button:active {
+    outline: 2px solid var(--black);
 }
 
 /* ============== for index.html =================== */
@@ -856,6 +867,14 @@ textarea {
 }
 
 /* ==================== for employees.html ======================= */
+.emp_button-container a {
+    margin: 0 5px;
+}
+
+.emp_card_container {
+    margin-top: 30px;
+}
+
 .employee_card {
     height: min-content;
     width: 260px;

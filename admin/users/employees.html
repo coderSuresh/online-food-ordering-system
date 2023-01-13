@@ -205,42 +205,51 @@
 
             </div>
         </section>
+        <div class="emplooyee_stat">
 
-        <div class="admin_dashboard_stat">
+            <!-- buttons for employee management -->
+            <div class="emp_button-container">
+                <a class="button border-curve-lg">Add</a>
+                <a class="button border-curve-lg">All</a>
+                <a class="button border-curve-lg">Active</a>
+                <a class="button border-curve-lg">Disabled</a>
+            </div>
 
             <!-- employee cards -->
-            <div class="employee_card disabled p-20 text-center shadow border-curve-md">
+            <div class="emp_card_container flex wrap gap">
+                <div class="employee_card p-20 text-center shadow border-curve-md">
 
-                <!-- overlay for disabled account -->
-                <div class="emp_card-overlay border-curve-md"></div>
+                    <!-- overlay for disabled account -->
+                    <div class="emp_card-overlay border-curve-md"></div>
 
-                <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu">
-                <img src="../../images/profile.jpg" alt="user profile">
-                <h3 class="emp_name">Test Employee</h3>
-                <p class="emp_id">#2020295</p>
-                <div class="flex emp_card_content items-center justify-start">
-                    <img src="../../images/ic_acc.svg" alt="account icon">
-                    <p>testemployee123</p>
-                </div>
-                <div class="flex emp_card_content items-center justify-start">
-                    <img src="../../images/ic_mail.svg" alt="mail icon">
-                    <p>testemployee@yandex.ru</p>
-                </div>
+                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu">
+                    <img src="../../images/profile.jpg" alt="user profile">
+                    <h3 class="emp_name">Test Employee</h3>
+                    <p class="emp_id">#2020295</p>
+                    <div class="flex emp_card_content items-center justify-start">
+                        <img src="../../images/ic_acc.svg" alt="account icon">
+                        <p>testemployee123</p>
+                    </div>
+                    <div class="flex emp_card_content items-center justify-start">
+                        <img src="../../images/ic_mail.svg" alt="mail icon">
+                        <p>testemployee@yandex.ru</p>
+                    </div>
 
-                <!-- options -->
-                <div class="emp_card_options shadow border-curve-md p-20">
-                    <a href="#">
-                        <div class="flex items-center justify-start">
-                            <img src="../../images/ic_edit.svg" alt="edit icon">
-                            <p>Edit</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="flex items-center justify-start">
-                            <img src="../../images/ic_disable.svg" alt="disable icon">
-                            <p>Disable</p>
-                        </div>
-                    </a>
+                    <!-- options -->
+                    <div class="emp_card_options shadow border-curve-md p-20">
+                        <a href="#">
+                            <div class="flex items-center justify-start">
+                                <img src="../../images/ic_edit.svg" alt="edit icon">
+                                <p>Edit</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="flex items-center justify-start">
+                                <img src="../../images/ic_disable.svg" alt="disable icon">
+                                <p>Disable</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
