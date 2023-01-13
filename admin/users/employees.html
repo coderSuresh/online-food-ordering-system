@@ -207,12 +207,23 @@
         </section>
         <div class="emplooyee_stat">
 
-            <!-- buttons for employee management -->
-            <div class="emp_button-container">
-                <a class="button border-curve-lg">Add</a>
-                <a class="button border-curve-lg">All</a>
-                <a class="button border-curve-lg">Active</a>
-                <a class="button border-curve-lg">Disabled</a>
+            <div class="flex items-center">
+                <!-- buttons for employee management -->
+                <div class="emp_button-container">
+                    <a class="button border-curve-lg">Add</a>
+                    <a class="button border-curve-lg">All</a>
+                    <a class="button border-curve-lg">Active</a>
+                    <a class="button border-curve-lg">Disabled</a>
+                </div>
+
+                <!-- search form for employee -->
+                <form action="#" method="post" class="employee_search_form border-curve-lg">
+                    <div class="flex items-center">
+                        <input type="search" placeholder="Search..." class="no_outline search_employee"
+                            name="search-employee" id="search-employee">
+                        <img src="../../images/ic_search.svg" alt="search icon">
+                    </div>
+                </form>
             </div>
 
             <!-- employee cards -->
