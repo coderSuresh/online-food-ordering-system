@@ -86,16 +86,17 @@ sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
         // sidebarSubMenuOpener.forEach(subMenu => {
         //     subMenu.classList.remove("active")
         // })
-        
+
         item.classList.toggle("active")
     })
 
 })
 
 // to toggle employee card option menu
-const empOptionMenu = document.querySelector(".emp_card_option-menu")
-const empOptions = document.querySelector(".emp_card_options")
+const empOptionMenu = document.querySelectorAll(".emp_card_option-menu")
 
-empOptionMenu && empOptionMenu.addEventListener("click", () => {
-    empOptions && empOptions.classList.toggle("open")
+empOptionMenu && empOptionMenu.forEach(item => {
+    item.addEventListener("click", () => {
+        item.classList.toggle("open")
+    })
 })
