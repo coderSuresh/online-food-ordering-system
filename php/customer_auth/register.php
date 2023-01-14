@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,10 +44,70 @@
     <div class="center border-curve-lg shadow">
         <h1 class="heading text-center">Register</h1>
         <form method="post" action = "./insert-register.php">
+        <p>
+            <?php
+                if(isset($_SESSION["invalid_name"])){
+                    echo $_SESSION["invalid_name"];
+                    ?><br>
+                    <?php unset($_SESSION["invalid_name"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["invalid_username"])){
+                    echo $_SESSION["invalid_username"];
+                    ?><br>
+                    <?php unset($_SESSION["invalid_username"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["invalid_email"])){
+                    echo $_SESSION["invalid_email"];
+                    ?><br>
+                    <?php unset($_SESSION["invalid_email"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["invlaid_password"])){
+                    echo $_SESSION["invlaid_password"];
+                    ?><br>
+                    <?php unset($_SESSION["invlaid_password"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["password_not_match"])){
+                    echo $_SESSION["password_not_match"];
+                    ?><br>
+                    <?php unset($_SESSION["password_not_match"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["email_already_exit"])){
+                    echo $_SESSION["email_already_exit"];
+                    ?><br>
+                    <?php unset($_SESSION["email_already_exit"]);
+                }   
+            ?>
+            <?php
+                if(isset($_SESSION["username_already_exit"])){
+                    echo $_SESSION["username_already_exit"];
+                    ?><br>
+                    <?php unset($_SESSION["username_already_exit"]);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION["name_already_exit"])){
+                    echo $_SESSION["name_already_exit"];
+                    ?><br>
+                    <?php unset($_SESSION["name_already_exit"]);
+                }
+            ?>       
+
+        </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" name = "name" required autofocus>
                 <label>Name</label>
             </div>
+    
              <div class="text_field">
                 <input type="text" class="no_bg no_outline" name = "username" required autofocus>
                 <label>Username</label>
@@ -58,10 +121,17 @@
                 <label>Password</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline" required>
+                <input type="password" class="no_bg no_outline" name ="confirm_password" required>
                 <label>Confirm password</label>
             </div>
             <input type="submit" class="no_outline border-curve-lg" name = "register" value="Register">
+               <p>
+                   <?php
+                        if (isset($_SESSION['register-insert'])) {
+                              echo $_SESSION['register-insert'];                              
+                        }                             
+                    ?>                        
+                </p>
             <p class="signup_link text-center">
                 Already have an account?<a href="../customer_auth/login.php"> Sign in</a>
             </p>
@@ -71,3 +141,6 @@
 </body>
 
 </html>
+<?php
+session_unset();
+?>

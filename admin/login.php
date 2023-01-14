@@ -16,10 +16,10 @@
     <main class=" flex direction-col h-100 border-curve-lg shadow">
         <div class="center shadow border-curve-md">
             <h1 class="heading text-center">Admin Login</h1>
-            <form action="#" method="post">
+            <form action="./auth.php" method="post">
                 <div class="text_field">
-                    <input type="email" class="no_bg no_outline" name="email" required autofocus>
-                    <label>Email</label>
+                    <input type="text" class="no_bg no_outline" name="username" required autofocus>
+                    <label>Username</label>
                 </div>
                 <div class="text_field">
                     <input type="password" class="no_bg no_outline" name="password" required>
