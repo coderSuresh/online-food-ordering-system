@@ -12,7 +12,7 @@ session_start();
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Login | RestroHub</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <script src="../js/app.js" defer></script>
+    <script src="../../js/app.js" defer></script>
 </head>
 
 
@@ -22,7 +22,7 @@ session_start();
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
                 <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
-                <a href="#" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
               
                     <span>Hub</span>
                 </a>
@@ -44,8 +44,8 @@ session_start();
         <h1 class="heading text-center">Login</h1>
         <form action= "../../php/customer_auth/auth.php" method="post">
             <div class="text_field">
-                <input type="email" class="no_bg no_outline" name = "email" required autofocus>
-                <label>Email</label>
+                <input type="text" class="no_bg no_outline" name = "username" required autofocus>
+                <label>Username</label>
             </div>
             <div class="text_field">
                 <input type="password" class="no_bg no_outline" name = "password" required>
