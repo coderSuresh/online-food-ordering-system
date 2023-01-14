@@ -951,3 +951,26 @@ textarea {
 .employee_search_form div img {
     width: 20px;
 }
+
+/* for kitchen's orderpagelist.html */
+table {
+    border-collapse: collapse;
+    }
+    
+    tr {
+      background: #ffffff;
+      color: rgb(12, 11, 11);
+    }
+    
+    td {
+      padding: 20px;
+    }
+    img{
+        width: 40px;
+        height: 35px;
+    }
+.manage_food{
+    margin: auto;
+    width: 60%;
+    
+}
