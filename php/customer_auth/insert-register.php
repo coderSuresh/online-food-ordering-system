@@ -25,7 +25,7 @@ if (isset($_POST['register'])){
     
     }
     else if(!preg_match("/^[0-9A-Z a-z,!@#$%^&*()_+]{8,50}$/", $password)){
-        $_SESSION["invlaid_password"] = "password number should contain 10 digits only";
+        $_SESSION["invlaid_password"] = "password should contain minimum 8 characters";
         header("Location:./register.php");
     }
 
@@ -35,7 +35,7 @@ if (isset($_POST['register'])){
     }
 
     else {
- ]      $sql_username = "SELECT username FROM customer WHERE username='$username'";
+        $sql_username = "SELECT username FROM customer WHERE username='$username'";
         $res_username = mysqli_query($conn,$sql_username) or die("Error");
 
         $sql_email = "SELECT email FROM customer WHERE email='$email'";
