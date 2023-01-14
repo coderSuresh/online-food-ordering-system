@@ -24,8 +24,8 @@ if (isset($_POST['register'])){
             $_SESSION["invalid_email"] = "invalid_email";                 
     
     }
-    else if(!preg_match("/^[0-9A-Z a-z,!,@,#,$,%,^,&,*,(,),_,+]{2,50}$/", $password)){
-        $_SESSION["invlaid_password"] = "Phone number should contain 10 digits only";
+    else if(!preg_match("/^[0-9A-Z a-z,!@#$%^&*()_+]{8,50}$/", $password)){
+        $_SESSION["invlaid_password"] = "password number should contain 10 digits only";
         header("Location:./register.php");
     }
 
