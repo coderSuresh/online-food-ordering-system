@@ -35,10 +35,7 @@ if (isset($_POST['register'])){
     }
 
     else {
-        $sql_name = "SELECT names FROM customer WHERE names='$name'";
-        $res_name = mysqli_query($conn,$sql_name) or die("Error");
-
-        $sql_username = "SELECT username FROM customer WHERE username='$username'";
+ ]      $sql_username = "SELECT username FROM customer WHERE username='$username'";
         $res_username = mysqli_query($conn,$sql_username) or die("Error");
 
         $sql_email = "SELECT email FROM customer WHERE email='$email'";

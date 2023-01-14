@@ -93,15 +93,7 @@ session_start();
                     ?><br>
                     <?php unset($_SESSION["username_already_exit"]);
                 }
-            ?>
-            <?php
-                if(isset($_SESSION["name_already_exit"])){
-                    echo $_SESSION["name_already_exit"];
-                    ?><br>
-                    <?php unset($_SESSION["name_already_exit"]);
-                }
-            ?>       
-
+            ?>     
         </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" name = "name" required autofocus>
