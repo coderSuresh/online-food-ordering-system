@@ -953,26 +953,23 @@ textarea {
 }
 
 /* for kitchen's orderpagelist.html */
+
+/* reusable css for table */
 table {
     border-collapse: collapse;
 }
 
-tr {
-    background: #ffffff;
-    color: rgb(12, 11, 11);
+.table_food-img {
+    width: 50px;
+    height: 40px;
 }
 
-td {
-    padding: 20px;
-}
-
-img {
-    width: 40px;
-    height: 35px;
+.table_option-menu {
+    transform: rotate(90deg);
+    cursor: pointer;
 }
 
 .manage_food {
     margin: auto;
     width: 60%;
-
 }
