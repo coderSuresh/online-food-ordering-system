@@ -956,7 +956,21 @@ textarea {
 
 /* reusable css for table */
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+table tr {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--gray);
+}
+
+table tr:hover {
+    background-color: var(--trans-black);
+}
+
+table tr td {
+    padding: 10px 20px;
 }
 
 .table_food-img {
