@@ -153,64 +153,90 @@
         </section>
 
         <section class="modal items-center justify-center">
-            <div class="modal_form-container p-20 small-modal shadow border-curve-md">
+            <div class="modal_form-container p-20 shadow border-curve-md">
 
                 <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Select an option</h2>
-                    <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></button>
+                    <h2 class="modal-title">Add an Employee</h2>
+                    <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg"
+                            alt="close"></button>
                 </div>
 
-                <form action="#" method="post" class="date_filter_modal_form">
+                <form action="#" method="post" class="form_add-food modal_form">
 
-                    <div class="date_filter_form_options flex justify-start items-center wrap">
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-today" checked>
-                            <label for="filter_option-today"> &nbsp; Today</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-yesterday">
-                            <label for="filter_option-yesterday"> &nbsp; Yesterday</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-last-week">
-                            <label for="filter_option-last-week"> &nbsp; Last week</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-last-month">
-                            <label for="filter_option-last-month"> &nbsp; Last month</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-custom">
-                            <label for="filter_option-custom"> &nbsp; Custom</label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="col">
+                                <div class="col">
+                                    <label for="name">Name:</label>
+                                    <input type="text" name="name" id="name" autofocus>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email">
+                            </div>
                         </div>
 
+                        <div class="col text-center flex justify-center">
+                            <div class="uploaded-img-preview">
+                                <img src="../../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                            </div>
+                            <p class="warning">Image should be less than 200 KB</p>
+                        </div>
                     </div>
 
-                    <!-- filter using custom date range start -->
-                    <div class="flex justify-evenly date_filter_form_option-custom">
-                        <div class="flex direction-col">
-                            <label for="start-date">From:</label>
-                            <input type="date" name="start-date" id="start-date">
+                    <div class="row">
+                        <div class="col">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username">
                         </div>
-                        <div class="flex direction-col">
-                            <label for="end-date">To:</label>
-                            <input type="date" name="end-date" id="end-date">
+
+                        <div class="col">
+                            <label for="emp_photo">Image:</label>
+                            <input type="file" name="emp_photo" id="emp_photo">
                         </div>
                     </div>
-                    <!-- filter using custom date range end -->
 
-                    <button type="submit" class="no_outline border-curve-lg w-full">Filter</button>
+                    <div class="row">
+                        <div class="col">
+                            <label for="password">Password:</label>
+                            <input type="text" name="password" id="password">
+                        </div>
+
+                        <div class="col">
+                            <label for="con-password">Confirm Password:</label>
+                            <input type="text" name="con-password" id="con-password">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="position">Position:</label>
+                            <input type="text" name="position" id="position">
+                        </div>
+
+                        <div class="col">
+                            <label for="add-employee" class="not-required">not required</label>
+                            <button type="submit" name="add-employee" id="add-employee" class="button">Add an
+                                Employee</button>
+                        </div>
+                    </div>
 
                 </form>
 
             </div>
         </section>
+
         <div class="emplooyee_stat">
 
             <div class="flex items-center">
                 <!-- buttons for employee management -->
                 <div class="emp_button-container">
-                    <a class="button border-curve-lg">Add</a>
+                    <!-- 
+                        // popper-btn class listenes for click event and opens modal popup
+                        // controlled from admin.js
+                    -->
+                    <a class="button border-curve-lg popper-btn">Add</a>
                     <a class="button border-curve-lg">All</a>
                     <a class="button border-curve-lg">Active</a>
                     <a class="button border-curve-lg">Disabled</a>
@@ -221,7 +247,8 @@
                     <div class="flex items-center">
                         <input type="search" placeholder="Search..." class="no_outline search_employee"
                             name="search-employee" id="search-employee">
-                        <button type="submit" class="no_bg no_outline"><img src="../../images/ic_search.svg" alt="search icon"></button>
+                        <button type="submit" class="no_bg no_outline"><img src="../../images/ic_search.svg"
+                                alt="search icon"></button>
                     </div>
                 </form>
             </div>

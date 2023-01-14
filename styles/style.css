@@ -787,12 +787,17 @@ input[type=submit]:active {
 .modal {
     display: none;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     background-color: var(--trans-black);
-    z-index: 10;
+    z-index: 1000;
+}
+
+/* just for styling */
+.not-required {
+    visibility: hidden;
 }
 
 .warning-no_margin {
