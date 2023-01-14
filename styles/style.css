@@ -191,6 +191,10 @@ body {
     outline: 2px solid var(--black);
 }
 
+main {
+    overflow: auto;
+}
+
 /* ============== for index.html =================== */
 
 /* logo */
@@ -304,7 +308,7 @@ header {
 .card {
     background-color: var(--white);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    width: 300px;
+    min-width: 350px;
     padding-bottom: 15px;
     position: relative;
     overflow: hidden;
@@ -793,6 +797,7 @@ input[type=submit]:active {
     right: 0;
     background-color: var(--trans-black);
     z-index: 1000;
+    overflow: auto;
 }
 
 /* just for styling */
@@ -871,7 +876,7 @@ textarea {
 }
 
 /* ==================== for employees.html ======================= */
-.emp_button-container a {
+.emp_button-container button {
     margin: 0 5px;
 }
 
@@ -948,12 +953,12 @@ textarea {
 }
 
 /* search form to search employees */
-.employee_search_form {
+.search_form {
     border: 1px solid var(--black);
     padding: 7px 20px;
 }
 
-.employee_search_form div img {
+.search_form div img {
     width: 20px;
 }
 
@@ -963,6 +968,8 @@ textarea {
 table {
     border-collapse: separate;
     border-spacing: 0 10px;
+    text-align: center;
+    width: 100%;
 }
 
 table th {
