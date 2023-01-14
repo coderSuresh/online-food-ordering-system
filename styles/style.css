@@ -960,27 +960,35 @@ table {
     border-spacing: 0 10px;
 }
 
+table th {
+    font-weight: normal;
+}
+
 table tr {
     background-color: var(--white);
-    border-bottom: 1px solid var(--gray);
 }
 
 table tr:hover {
     background-color: var(--trans-black);
 }
 
-table tr td {
+table tr td,
+table tr th {
     padding: 10px 20px;
+    width: fit-content;
 }
 
 .table_food-img {
     width: 50px;
     height: 40px;
+    vertical-align: middle;
 }
 
 .table_option-menu {
     transform: rotate(90deg);
     cursor: pointer;
+    height: 35px;
+    vertical-align: middle;
 }
 
 .manage_food {
