@@ -43,11 +43,11 @@ session_start();
         <h1 class="heading text-center">Login</h1>
         <form action= "../../php/customer_auth/auth.php" method="post">
             <div class="text_field">
-                <input type="text" class="no_bg no_outline" name="username" required autofocus>
+                <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" name="password" required>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password" required>
                 <label>Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
