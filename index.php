@@ -60,7 +60,7 @@ session_start();
         <section class="card__container flex wrap gap justify-center">
 
             <!-- card start -->
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
@@ -79,7 +79,7 @@ session_start();
                             alt="add to cart">Add to Cart</a>
                 </article>
             </article>
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
@@ -98,7 +98,7 @@ session_start();
                             alt="add to cart">Add to Cart</a>
                 </article>
             </article>
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
@@ -117,7 +117,7 @@ session_start();
                             alt="add to cart">Add to Cart</a>
                 </article>
             </article>
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
@@ -136,7 +136,7 @@ session_start();
                             alt="add to cart">Add to Cart</a>
                 </article>
             </article>
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
@@ -155,7 +155,7 @@ session_start();
                             alt="add to cart">Add to Cart</a>
                 </article>
             </article>
-            <article class="card border-curve shadow">
+            <article class="food_card border-curve shadow">
                 <!-- testing badge or something for card -->
                 <p class="card__tag text-center">veg</p>
 
