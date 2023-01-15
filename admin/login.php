@@ -18,15 +18,15 @@
             <h1 class="heading text-center">Admin Login</h1>
             <form action="./auth.php" method="post">
                 <div class="text_field">
-                    <input type="text" class="no_bg no_outline" name="username" required autofocus>
+                    <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                     <label>Username</label>
                 </div>
                 <div class="text_field">
-                    <input type="password" class="no_bg no_outline" name="password" required>
+                    <input type="password" class="no_bg no_outline" placeholder="xxxxxxxx" name="password" required>
                     <label>Password</label>
                 </div>
                 <a href="#" class="forget_password">Forgot password?</a>
-                <input type="submit" class="no_outline border-curve-lg" name="login" value="login">
+                <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
 
             </form>
         </div>
