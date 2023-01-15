@@ -37,28 +37,28 @@ session_start();
                         class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
-
     </header>
 
-    <div class="center border-curve-lg shadow">
+    <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Login</h1>
         <form action= "../../php/customer_auth/auth.php" method="post">
             <div class="text_field">
-                <input type="text" class="no_bg no_outline" name = "username" required autofocus>
+                <input type="text" class="no_bg no_outline" name="username" required autofocus>
                 <label>Username</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline" name = "password" required>
+                <input type="password" class="no_bg no_outline" name="password" required>
                 <label>Password</label>
+                <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <a href="#" class="forget_password">Forgot password?</a>
-            <input type="submit" class="no_outline border-curve-lg" name="login" value="login">
+            <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
                    
             <p class="signup_link text-center">
-                New to RestroHub?<a href="../customer_auth/register.php"> Sign UP</a>
+                New to RestroHub?<a href="../customer_auth/register.php"> Sign up</a>
             </p>
         </form>
-    </div>
+    </main>
 
 </body>
 

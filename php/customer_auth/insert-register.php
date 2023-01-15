@@ -1,5 +1,5 @@
 <?php
-@include('../../config.php');
+include('../../config.php');
 session_start();
 if (isset($_POST['register'])){
         $name = mysqli_real_escape_string($conn,$_POST['name']);
@@ -12,7 +12,7 @@ if (isset($_POST['register'])){
     {
          $_SESSION["invalid_name"] = "Name sould contain alphabaet only";
          header("Location:./register.php");
-    }
+    } 
     
     else if(!preg_match("/^[0-9A-Za-z_-]{2,30}$/", $username))
     {
@@ -68,9 +68,6 @@ if (isset($_POST['register'])){
     }    
 }
  
-    
-
-     
 else{
         header("Location:./register.php");
 }

@@ -54,7 +54,8 @@ input[type="submit"],
 .menu__for-sidebar>*,
 .admin_profile_image,
 .date_filter_close,
-.popper-btn {
+.popper-btn,
+.pointer {
     cursor: pointer;
 }
 
@@ -414,7 +415,7 @@ header {
 .center {
     width: 90%;
     max-width: 400px;
-    margin: auto;
+    margin: 40px auto;
     background: white;
     padding: 10px;
 }
@@ -426,19 +427,18 @@ header {
 
 .center form {
     padding: 0 40px;
-    box-sizing: border-box;
 }
 
 form .text_field {
     position: relative;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 2px solid var(--gray);
     margin: 30px 0;
 }
 
 .text_field input {
     width: 100%;
     padding: 0 5px;
-    font-size: 16px;
+    font-size: 1rem;
     margin-top: 10px;
 }
 
@@ -446,7 +446,7 @@ form .text_field {
     position: absolute;
     top: 50%;
     left: 5px;
-    color: #adadad;
+    color: var(--gray);
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
@@ -456,12 +456,18 @@ form .text_field {
 .text_field input:focus~label,
 .text_field input:valid~label {
     top: -5px;
-    color: #F7922F;
+    color: var(--primary-color);
 }
 
-.text_field input:focus~span::before,
-.text_field input:valid~span::before {
-    width: 100%;
+.password_toggle_btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+.forget_password {
+    margin-bottom: 30px !important;
 }
 
 .forget_password:hover {
@@ -475,7 +481,6 @@ input[type="submit"] {
     font-size: 18px;
     color: var(--black);
     font-weight: 700;
-    margin-top: 30px;
 }
 
 input[type=submit]:focus,
