@@ -100,3 +100,17 @@ empOptionMenu && empOptionMenu.forEach(item => {
         item.classList.toggle("open")
     })
 })
+
+// toggle password icon
+const passwordToggleBtn = document.querySelector(".password_toggle_btn")
+passwordToggleBtn && passwordToggleBtn.addEventListener("click", () => {
+    passwordToggleBtn.getAttribute("src") == "../../images/ic_eye-off.svg" ? showPassword() : hidePassword()
+})
+
+const showPassword = () => {
+    passwordToggleBtn && passwordToggleBtn.setAttribute("src", "../../images/ic_eye.svg")
+}
+
+const hidePassword = () => {
+    passwordToggleBtn && passwordToggleBtn.setAttribute("src", "../../images/ic_eye-off.svg")
+}

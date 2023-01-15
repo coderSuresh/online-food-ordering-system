@@ -453,8 +453,14 @@ form .text_field {
     transition: .5s;
 }
 
+/* hide placeholder */
+.text_field input::placeholder {
+    color: transparent;
+} 
+
 .text_field input:focus~label,
-.text_field input:valid~label {
+.text_field input:valid~label,
+.text_field input:not(:placeholder-shown)~label {
     top: -5px;
     color: var(--primary-color);
 }
@@ -464,6 +470,7 @@ form .text_field {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
+    width: 25px;
 }
 
 .forget_password {
