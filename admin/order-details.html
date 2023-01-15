@@ -150,103 +150,62 @@
 
         <section class="dashboard_inner-head flex items-center">
             <h2>Order Details</h2>
+            <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
-
         <section class="modal items-center justify-center">
-            <div class="modal_form-container border-curve-md p-20 shadow ">
+            <div class="modal_form-container p-20 small-modal shadow border-curve-md">
 
                 <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Add Food Item</h2>
+                    <h2 class="modal-title">Select an option</h2>
                     <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
                 </div>
 
-                <form action="#" method="post" class="form_add-food modal_form">
-                    <div class="row">
-                        <div class="col">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" autofocus>
-                        </div>
+                <form action="#" method="post" class="date_filter_modal_form">
 
-                        <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="price">Price:</label>
-                                    <input type="number" class="w-90" name="price" id="price">
-                                </div>
-                                <div class="col">
-                                    <label for="cost">Cost:</label>
-                                    <input type="number" class="w-90" name="cost" id="cost">
-                                </div>
-                            </div>
+                    <div class="date_filter_form_options flex justify-start items-center wrap">
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-today" checked>
+                            <label for="filter_option-today"> &nbsp; Today</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-yesterday">
+                            <label for="filter_option-yesterday"> &nbsp; Yesterday</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-last-week">
+                            <label for="filter_option-last-week"> &nbsp; Last week</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-last-month">
+                            <label for="filter_option-last-month"> &nbsp; Last month</label>
+                        </div>
+                        <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" id="filter_option-custom">
+                            <label for="filter_option-custom"> &nbsp; Custom</label>
                         </div>
 
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div class="col">
-                                <label for="category">Category:</label>
-                                <select name="category" id="category">
-                                    <option value="">Select category</option>
-                                    <option value="">Category 1</option>
-                                    <option value="">Another Category</option>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <label for="image">Select an image:</label>
-                                <input type="file" name="image" id="image">
-                            </div>
+                    <!-- filter using custom date range start -->
+                    <div class="flex justify-evenly date_filter_form_option-custom">
+                        <div class="flex direction-col">
+                            <label for="start-date">From:</label>
+                            <input type="date" name="start-date" id="start-date">
                         </div>
-
-                        <div class="col text-center flex justify-center">
-                            <div class="uploaded-img-preview">
-                                <img src="../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
-                            </div>
-                            <p class="warning">Image should be less than 200 KB</p>
+                        <div class="flex direction-col">
+                            <label for="end-date">To:</label>
+                            <input type="date" name="end-date" id="end-date">
                         </div>
                     </div>
+                    <!-- filter using custom date range end -->
 
-                    <div class="row">
-                        <div class="col">
-                            <label for="estimated-cooking-time">Estimated Cooking Time:</label>
-                            <input type="number" name="estimated-cooking-time" id="estimated-cooking-time">
-                        </div>
-
-                        <div class="col">
-                            <label for="tags">Tags (optional):</label>
-                            <input type="text" name="tags" id="tags">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="description">Description: </label>
-                            <textarea name="description" id="description" rows="5"></textarea>
-                        </div>
-
-                        <div class="col">
-                            <div class="col">
-                                <label for="veg-non-veg">Veg or Non-veg: </label>
-                                <select name="veg-non-veg" id="veg-non-veg">
-                                    <option value="">Select one</option>
-                                    <option value="veg">Veg</option>
-                                    <option value="non-veg">Non-veg</option>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <button type="submit" class="button">Add Food Item</button>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="submit" class="no_outline border-curve-lg w-full button">Filter</button>
 
                 </form>
 
             </div>
         </section>
-
 
         <div class="flex items-center">
             <!-- buttons for order management -->
@@ -261,7 +220,7 @@
                                 alt="search icon"></button>
                     </div>
                 </form>
-               
+
                 <button class="button ml-35 border-curve-lg">All</button>
                 <button class="button ml-35 border-curve-lg">Pending</button>
                 <button class="button ml-35 border-curve-lg">Accepted</button>
@@ -348,7 +307,7 @@
                     </td>
                     <td>Bibek Mahat</td>
                     <td>Panauti</td>
-                    <td>Momo</td>
+                    <td>Chinese Fried Momo</td>
                     <td>123</td>
                     <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
                     <td>
