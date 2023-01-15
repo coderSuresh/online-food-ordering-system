@@ -6,11 +6,15 @@
     --gray: #afafaf;
     --primary-color: #F7922F;
     --trans-black: #00000030;
+    --trans-green: #DCFFD380;
+    --trans-green-text: #30B900;
+    --trans-yellow: #fafd3e67;
+    --trans-yellow-text: #46500C;
+    --trans-purple: #FFA0FB66;
+    --trans-purple-text: #A500F3;
     --trans-primary: #F7922F50;
     --trans-red: #FFD6D6;
     --trans-red-text: #934747;
-    --trans-green: #fafd3e67;
-    --trans-green-text: #46500C;
     --white: #ffffff;
 }
 
@@ -80,6 +84,11 @@ a:hover {
 /* set padding 20px */
 .p-20 {
     padding: 20px;
+}
+
+/* set padding 7px 20px */
+.p_7-20 {
+    padding: 7px 20px;
 }
 
 /* set margin auto */
@@ -1010,11 +1019,19 @@ table tr th {
 .pending {
     background-color: var(--trans-red);
     color: var(--trans-red-text);
-    padding: 7px 20px;
 }
 
 .accepted {
+    background-color: var(--trans-yellow);
+    color: var(--trans-yellow-text);
+}
+
+.to-deliver {
+    background-color: var(--trans-purple);
+    color: var(--trans-purple-text);
+}
+
+.delivered {
     background-color: var(--trans-green);
     color: var(--trans-green-text);
-    padding: 7px 20px;
 }
