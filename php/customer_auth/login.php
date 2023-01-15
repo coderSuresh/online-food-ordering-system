@@ -66,3 +66,24 @@ session_start();
 <?php
 session_unset();
 ?>
+
+
+<!-- <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgWmm70VliKQ68Cod0MgzmsncJ2R8h_jI",
+    authDomain: "annular-magnet-374810.firebaseapp.com",
+    projectId: "annular-magnet-374810",
+    storageBucket: "annular-magnet-374810.appspot.com",
+    messagingSenderId: "360310508668",
+    appId: "1:360310508668:web:0bf9048fd87a2741338df9"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script> -->

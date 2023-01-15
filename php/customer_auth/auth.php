@@ -1,10 +1,8 @@
 <?php
-
 session_start();
-@include('../config.php');
+@include('../../config.php');
 if(isset($_POST['login'])){   
   
-    $email = mysqli_real_escape_string($conn,$_POST['email']);
     $username = mysqli_real_escape_string($conn,$_POST['username']);
     $password = md5(mysqli_real_escape_string($conn,$_POST['password']));    
     $sql = "SELECT * from customer";

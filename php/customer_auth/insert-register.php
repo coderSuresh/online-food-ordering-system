@@ -31,10 +31,8 @@ if (isset($_POST['register'])) {
         $sql_email = "SELECT email FROM customer WHERE email='$email'";
         $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
-        if (mysqli_num_rows($res_name) > 0) {
-            $_SESSION['name_already_exit'] = "name already exist";
-            header("Location:./register.php");
-        } else if (mysqli_num_rows($res_username) > 0) {
+      
+        if (mysqli_num_rows($res_username) > 0) {
             $_SESSION["username_already_exit"] = "username already exist";
             header("Location:./register.php");
         } else if (mysqli_num_rows($res_email) > 0) {
