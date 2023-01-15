@@ -1006,9 +1006,15 @@ table tr th {
     vertical-align: middle;
 }
 
-.manage_food {
-    margin: auto;
-    width: 60%;
+/* ==================== for orders page (kitchen + admin) ====================== */
+.pending {
+    background-color: var(--trans-red);
+    color: var(--trans-red-text);
+    padding: 7px 20px;
 }
 
-/* ==================== for orders page (kitchen + admin) ====================== */
+.accepted {
+    background-color: var(--trans-green);
+    color: var(--trans-green-text);
+    padding: 7px 20px;
+}
