@@ -7,6 +7,10 @@
     --primary-color: #F7922F;
     --trans-black: #00000030;
     --trans-primary: #F7922F50;
+    --trans-red: #FFD6D6;
+    --trans-red-text: #934747;
+    --trans-green: #fafd3e67;
+    --trans-green-text: #46500C;
     --white: #ffffff;
 }
 
@@ -18,7 +22,6 @@
     list-style: none;
     text-decoration: none;
     color: var(--black);
-    /* cursor: default; */
 }
 
 hr {
@@ -1007,3 +1010,5 @@ table tr th {
     margin: auto;
     width: 60%;
 }
+
+/* ==================== for orders page (kitchen + admin) ====================== */
