@@ -181,8 +181,7 @@ p {
 /* set font-family poppins for normal text */
 body {
     font-family: 'Poppins', sans-serif;
-    max-width: 1440px;
-    margin: auto;
+
 }
 
 .h-100 {
