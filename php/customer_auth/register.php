@@ -12,7 +12,7 @@ session_start();
     <link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon">
     <title>Register | RestroHub</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <script src="../../js/app.js" defer></script>
+    <script type="module" src="../../js/app.js" defer></script>
 </head>
 
 <body>
