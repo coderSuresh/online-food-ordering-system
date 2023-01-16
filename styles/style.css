@@ -181,6 +181,8 @@ p {
 /* set font-family poppins for normal text */
 body {
     font-family: 'Poppins', sans-serif;
+    max-width: 1440px;
+    margin: auto;
 }
 
 .h-100 {
@@ -313,9 +315,8 @@ header {
     z-index: 0;
 }
 
-.card__container::after {
-    content: "";
-    width: 620px;
+.cards_main {
+    width: 90%;
 }
 
 /* individual food container card */
@@ -335,6 +336,7 @@ header {
 }
 
 .food_img {
+    width: 100%;
     transition: 0.5s;
 }
 
@@ -377,7 +379,7 @@ header {
 /* icons inside button on card */
 .card__btn img {
     width: 30px;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
 }
 
 /* status or something for card */
@@ -395,11 +397,6 @@ header {
 /* =============== for menu.html ===================*/
 .view_all {
     text-decoration: underline;
-
-}
-
-.category {
-    margin: 20px 40px;
 }
 
 .food_category hr {
@@ -1064,7 +1061,6 @@ table tr th {
 }
 
 .icons {
-    width: 50px;
     height: 60px;
     width: 60px;
     object-fit: contain;
