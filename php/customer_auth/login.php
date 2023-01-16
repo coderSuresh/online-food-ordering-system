@@ -21,9 +21,11 @@ session_start();
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
-              
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
+                        alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
+                        alt="logo">Restro
+
                     <span>Hub</span>
                 </a>
             </div>
@@ -41,22 +43,37 @@ session_start();
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Login</h1>
-        <form action= "../../php/customer_auth/auth.php" method="post">
+        <form action="../../php/customer_auth/auth.php" method="post">
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password" required>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password"
+                    required>
                 <label>Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <a href="#" class="forget_password">Forgot password?</a>
             <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
-                   
-            <p class="signup_link text-center">
-                New to RestroHub?<a href="../customer_auth/register.php"> Sign up</a>
-            </p>
+
+            <div class="flex items-center or justify-center mt-20">
+                <siv class="bar"></siv>
+                <h4>Or Signup With</h4>
+                <siv class="bar"></siv>
+            </div>
+
+            <div class="flex items-center mt-20">
+
+                <img src="../../images/ic_apple.png" class="icons pointer shadow" alt="sign in with apple">
+
+                <img src="../../images/ic_google.svg" class="icons pointer shadow" alt="sign in with google">
+
+                <img src="../../images/ic_facebook.svg" class="icons pointer shadow" alt="sign in with facebook">
+
+                <a href="./register.php"><img src="../../images/ic_mail.svg" class="icons pointer shadow"
+                        alt="sign in with email"></a>
+            </div>
         </form>
     </main>
 
