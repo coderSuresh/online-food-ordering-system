@@ -30,24 +30,18 @@ const hidePassword = (i) => {
 }
 
 // show error alert (for login / register)
-const errorMessage = document.querySelector(".error-message")
-const errorContainer = document.querySelector(".error-container")
-const errorListener = document.querySelector(".form")
+const errorContainer = document.querySelectorAll(".error-container")
 
 const showErrorAlert = () => {
 
-    errorContainer && (
+    errorContainer && errorContainer.forEach((container) => {
+
         setTimeout(() => {
-            errorContainer.classList.remove("active")
-        }, 3000))
+            container.classList.remove("active")
+        }, 3000)
 
-    errorContainer && errorContainer.classList.add("active")
-
-    errorContainer && errorMessage.textContent && (errorContainer.textContent = errorMessage.textContent)
+        container.classList.add("active")
+    })
 }
 
-errorListener && errorListener.addEventListener("submit", (e) => {
-
-    console.log(errorMessage.textContent)
-    errorMessage && errorMessage.textContent != 0 && showErrorAlert()
-})
+showErrorAlert()

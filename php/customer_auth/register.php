@@ -45,60 +45,117 @@ session_start();
         <h1 class="heading text-center">Register</h1>
         <form method="post" class="form" action="./insert-register.php">
 
-            <!-- to show errors -->
-            <p class="error-container p_7-20">This is test error</p>
 
             <p class="error-message">
-                
+
                 <?php
                 if (isset($_SESSION["invalid_name"])) {
-                    echo $_SESSION["invalid_name"];
-                    ?><br>
-                    <?php unset($_SESSION["invalid_name"]);
-                }
-                ?>
+
+                    // test start
+                    ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["invalid_name"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["invalid_username"])) {
-                    echo $_SESSION["invalid_username"];
-                    ?><br>
-                    <?php unset($_SESSION["invalid_username"]);
+
+                // <!-- test end -->
+            
+                echo $_SESSION["invalid_name"];
+                ?><br>
+                <?php unset($_SESSION["invalid_name"]);
                 }
                 ?>
+            <?php
+            if (isset($_SESSION["invalid_username"])) {
+
+                ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["invalid_username"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["invalid_email"])) {
-                    echo $_SESSION["invalid_email"];
-                    ?><br>
-                    <?php unset($_SESSION["invalid_email"]);
-                }
+
+                echo $_SESSION["invalid_username"];
+                ?><br>
+                <?php unset($_SESSION["invalid_username"]);
+            }
+            ?>
+            <?php
+            if (isset($_SESSION["invalid_email"])) {
+
                 ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["invalid_email"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["invlaid_password"])) {
-                    echo $_SESSION["invlaid_password"];
-                    ?><br>
-                    <?php unset($_SESSION["invlaid_password"]);
-                }
+
+                echo $_SESSION["invalid_email"];
+                ?><br>
+                <?php unset($_SESSION["invalid_email"]);
+            }
+            ?>
+            <?php
+            if (isset($_SESSION["invlaid_password"])) {
+
                 ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["invlaid_password"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["password_not_match"])) {
-                    echo $_SESSION["password_not_match"];
-                    ?><br>
-                    <?php unset($_SESSION["password_not_match"]);
-                }
+
+                echo $_SESSION["invlaid_password"];
+                ?><br>
+                <?php unset($_SESSION["invlaid_password"]);
+            }
+            ?>
+            <?php
+            if (isset($_SESSION["password_not_match"])) {
+
                 ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["password_not_match"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["email_already_exit"])) {
-                    echo $_SESSION["email_already_exit"];
-                    ?><br>
-                    <?php unset($_SESSION["email_already_exit"]);
-                }
+
+                echo $_SESSION["password_not_match"];
+                ?><br>
+                <?php unset($_SESSION["password_not_match"]);
+            }
+            ?>
+            <?php
+            if (isset($_SESSION["email_already_exit"])) {
+
                 ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["email_already_exit"]; ?>
+                </p>
                 <?php
-                if (isset($_SESSION["username_already_exit"])) {
-                    echo $_SESSION["username_already_exit"];
-                    ?><br>
-                    <?php unset($_SESSION["username_already_exit"]);
-                }
+
+                echo $_SESSION["email_already_exit"];
+                ?><br>
+                <?php unset($_SESSION["email_already_exit"]);
+            }
+            ?>
+            <?php
+            if (isset($_SESSION["username_already_exit"])) {
+
                 ?>
+                    <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["username_already_exit"]; ?>
+                </p>
+                <?php
+
+                echo $_SESSION["username_already_exit"];
+                ?><br>
+                <?php unset($_SESSION["username_already_exit"]);
+            }
+            ?>
             </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="name" required autofocus>
@@ -114,12 +171,14 @@ session_start();
                 <label>Email</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx" name="password" required>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx" name="password"
+                    required>
                 <label>Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx" name="confirm_password" required>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx"
+                    name="confirm_password" required>
                 <label>Confirm Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>

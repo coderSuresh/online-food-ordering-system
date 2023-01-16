@@ -1054,7 +1054,7 @@ table tr th {
     background-color: var(--trans-black);
     border-radius: 4px;
     position: fixed;
-    right: -200px;
+    right: -100%;
     top: 100px;
     transition: 0.3s all;
 }
