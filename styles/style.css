@@ -456,7 +456,7 @@ form .text_field {
 /* hide placeholder */
 .text_field input::placeholder {
     color: transparent;
-} 
+}
 
 .text_field input:focus~label,
 .text_field input:valid~label,
@@ -1047,4 +1047,23 @@ table tr th {
 .delivered {
     background-color: var(--trans-green);
     color: var(--trans-green-text);
+}
+
+/* for error popup during backend operations */
+.error-container {
+    background-color: var(--trans-black);
+    border-radius: 4px;
+    position: fixed;
+    right: -200px;
+    top: 100px;
+    transition: 0.3s all;
+}
+
+/* hide error messages on page */
+.error-message {
+    /* display: none; */
+}
+
+.error-container.active {
+    right: 40px;
 }

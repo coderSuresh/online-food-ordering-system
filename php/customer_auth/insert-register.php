@@ -17,7 +17,7 @@ if (isset($_POST['register'])) {
         header("Location:./register.php");
     } else if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
         $_SESSION["invalid_email"] = "invalid_email";
-
+        header("Location:./register.php");
     } else if (!preg_match("/^[0-9A-Z a-z,!@#$%^&*()_+]{8,50}$/", $password)) {
         $_SESSION["invlaid_password"] = "password should contain minimum 8 characters";
         header("Location:./register.php");
@@ -31,7 +31,7 @@ if (isset($_POST['register'])) {
         $sql_email = "SELECT email FROM customer WHERE email='$email'";
         $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
-      
+
         if (mysqli_num_rows($res_username) > 0) {
             $_SESSION["username_already_exit"] = "username already exist";
             header("Location:./register.php");

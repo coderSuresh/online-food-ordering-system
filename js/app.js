@@ -13,7 +13,7 @@ if (history.length > 1 && navBackBtn !== null) {
 const passwordToggleBtn = document.querySelectorAll(".password_toggle_btn")
 const passwordInput = document.querySelectorAll(".password_input")
 
-passwordToggleBtn && passwordToggleBtn.forEach((btn,i) => {
+passwordToggleBtn && passwordToggleBtn.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         btn.getAttribute("src") == "../../images/ic_eye-off.svg" ? showPassword(i) : hidePassword(i)
     })
@@ -27,5 +27,27 @@ const showPassword = (i) => {
 const hidePassword = (i) => {
     passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", "../../images/ic_eye-off.svg")
     passwordInput && passwordInput[i].setAttribute("type", "password")
-
 }
+
+// show error alert (for login / register)
+const errorMessage = document.querySelector(".error-message")
+const errorContainer = document.querySelector(".error-container")
+const errorListener = document.querySelector(".form")
+
+const showErrorAlert = () => {
+
+    errorContainer && (
+        setTimeout(() => {
+            errorContainer.classList.remove("active")
+        }, 3000))
+
+    errorContainer && errorContainer.classList.add("active")
+
+    errorContainer && errorMessage.textContent && (errorContainer.textContent = errorMessage.textContent)
+}
+
+errorListener && errorListener.addEventListener("submit", (e) => {
+
+    console.log(errorMessage.textContent)
+    errorMessage && errorMessage.textContent != 0 && showErrorAlert()
+})

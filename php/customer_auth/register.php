@@ -15,7 +15,6 @@ session_start();
     <script src="../../js/app.js" defer></script>
 </head>
 
-
 <body>
     <header>
         <nav class="top_nav flex items-center">
@@ -40,13 +39,17 @@ session_start();
                         class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
-
     </header>
 
     <div class="center border-curve-lg shadow">
         <h1 class="heading text-center">Register</h1>
-        <form method="post" action="./insert-register.php">
-            <p>
+        <form method="post" class="form" action="./insert-register.php">
+
+            <!-- to show errors -->
+            <p class="error-container p_7-20">This is test error</p>
+
+            <p class="error-message">
+                
                 <?php
                 if (isset($_SESSION["invalid_name"])) {
                     echo $_SESSION["invalid_name"];
