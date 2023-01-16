@@ -65,11 +65,11 @@ session_start();
 
             <div class="flex items-center mt-20">
 
-                <img src="../../images/ic_apple.png" class="icons pointer shadow" alt="sign in with apple">
+                <img src="../../images/ic_apple.png" class="icons pointer shadow apple" alt="sign in with apple">
 
-                <img src="../../images/ic_google.svg" class="icons pointer shadow" alt="sign in with google">
+                <img src="../../images/ic_google.svg" class="icons pointer shadow google" alt="sign in with google" id="google">
 
-                <img src="../../images/ic_facebook.svg" class="icons pointer shadow" alt="sign in with facebook">
+                <img src="../../images/ic_facebook.svg" class="icons pointer shadow facebook" alt="sign in with facebook">
 
                 <a href="./register.php"><img src="../../images/ic_mail.svg" class="icons pointer shadow"
                         alt="sign in with email"></a>
@@ -77,19 +77,10 @@ session_start();
         </form>
     </main>
 
-</body>
-
-</html>
-<?php
-session_unset();
-?>
-
-
-<!-- <script type="module">
-  // Import the functions you need from the SDKs you need
+<script type="module">
+      // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getAuth ,GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -103,4 +94,41 @@ session_unset();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-</script> -->
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider(app);
+
+  const google = document.querySelector(".google")
+  google.addEventListener('click',(e)=>{
+
+    signInWithPopup(auth, provider)
+    .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    
+    alert(user.displayName);
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+    alert(errorMessage);
+  });
+});
+
+</script>
+</body>
+
+</html>
+<?php
+session_unset();
+?>
+
+
