@@ -46,11 +46,11 @@ const showErrorAlert = () => {
 
 showErrorAlert()
 
-// ================ Google authentication =======================
+// ================ authentication =======================
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -64,13 +64,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider(app);
+const google_auth = getAuth(app);
+const googel_provider = new GoogleAuthProvider(app);
 
 const google = document.querySelector(".google")
 google && google.addEventListener('click', (e) => {
 
-    signInWithPopup(auth, provider)
+    signInWithPopup(google_auth, googel_provider)
         .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -79,6 +79,20 @@ google && google.addEventListener('click', (e) => {
             const user = result.user;
 
             alert(user.displayName);
+            // console.log(window.location)
+            // window.location.assign("../../index.php ")
+            const auth = getAuth();
+            onAuthStateChanged(auth, (user) => {
+              if (user !== null) {
+            user.providerData.forEach((profile) => {
+            console.log("Sign-in provider: " + profile.providerId);
+            console.log("  Provider-specific UID: " + profile.uid);
+            console.log("  Name: " + profile.displayName);
+            console.log("  Email: " + profile.email);
+            console.log("  Photo URL: " + profile.photoURL);
+        });
+        }
+            });
             // ...
         }).catch((error) => {
             // Handle Errors here.
@@ -92,3 +106,46 @@ google && google.addEventListener('click', (e) => {
             alert(errorMessage);
         });
 });
+
+const facebook_provider = new FacebookAuthProvider(app);
+const facebook_auth = getAuth(app);
+const facebook = document.querySelector(".facebook")
+
+facebook && facebook.addEventListener('click', (e) => {
+    signInWithPopup(facebook_auth, facebook_provider)
+        .then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+            alert(user.displayName);
+            // ...
+
+            const auth = getAuth();
+            onAuthStateChanged(auth, (user) => {
+              if (user !== null) {
+            user.providerData.forEach((profile) => {
+            console.log("Sign-in provider: " + profile.providerId);
+            console.log("  Provider-specific UID: " + profile.uid);
+            console.log("  Name: " + profile.displayName);
+            console.log("  Email: " + profile.email);
+            console.log("  Photo URL: " + profile.photoURL);
+             });
+            }
+        });
+        })
+        .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = FacebookAuthProvider.credentialFromError(error);
+            alert(errorMessage);
+            // ...
+        });
+});
+
