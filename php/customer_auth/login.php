@@ -59,13 +59,11 @@ session_start();
 
             <div class="flex items-center or justify-center mt-20">
                 <siv class="bar"></siv>
-                <h4>Or Signup With</h4>
+                <h4>Or Continue With</h4>
                 <siv class="bar"></siv>
             </div>
 
             <div class="flex items-center mt-20">
-
-                <img src="../../images/ic_apple.png" class="icons pointer shadow apple" alt="sign in with apple">
 
                 <img src="../../images/ic_google.svg" class="icons pointer shadow google" alt="sign in with google" id="google">
 
