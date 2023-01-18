@@ -68,7 +68,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
 
 const google = document.querySelector(".google")
-google.addEventListener('click', (e) => {
+google && google.addEventListener('click', (e) => {
 
     signInWithPopup(auth, provider)
         .then((result) => {
