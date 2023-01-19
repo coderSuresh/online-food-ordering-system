@@ -81,10 +81,19 @@ if (isset($_COOKIE['user'])) {
     $signin_provider =$_COOKIE['sign_in_provider'];
     $names  =   $_COOKIE['profile_name'];
     $email = $_COOKIE['email'];
-    $image = $_COOKIE['image'];
-    $sql = "Insert into customer values(default,'$names',NULL,'$email',NULL,'$signin_provider','$image')";
-    mysqli_query($conn,$sql) or die(mysqli_error);
+    $images = $_COOKIE['image'];
+    
+    $sql_email = "SELECT email FROM customer WHERE email='$email'";
+    $res_email = mysqli_query($conn, $sql_email) or die("Error"); 
+  
+    if(!(mysqli_num_rows($res_email) > 0)){
+        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images')";
+        mysqli_query($conn,$sql) or die(mysqli_error);
+
+    }
+
 }
+// var_dump($_COOKIE);
 ?>
 
 </html>
