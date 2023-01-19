@@ -50,7 +50,7 @@ showErrorAlert()
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -83,15 +83,15 @@ google && google.addEventListener('click', (e) => {
             // window.location.assign("../../index.php ")
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
-              if (user !== null) {
-            user.providerData.forEach((profile) => {
-            console.log("Sign-in provider: " + profile.providerId);
-            console.log("  Provider-specific UID: " + profile.uid);
-            console.log("  Name: " + profile.displayName);
-            console.log("  Email: " + profile.email);
-            console.log("  Photo URL: " + profile.photoURL);
-        });
-        }
+                if (user !== null) {
+                    user.providerData.forEach((profile) => {
+                        console.log("Sign-in provider: " + profile.providerId);
+                        console.log("  Provider-specific UID: " + profile.uid);
+                        console.log("  Name: " + profile.displayName);
+                        console.log("  Email: " + profile.email);
+                        console.log("  Photo URL: " + profile.photoURL);
+                    });
+                }
             });
             // ...
         }).catch((error) => {
@@ -125,16 +125,16 @@ facebook && facebook.addEventListener('click', (e) => {
 
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
-              if (user !== null) {
-            user.providerData.forEach((profile) => {
-            console.log("Sign-in provider: " + profile.providerId);
-            console.log("  Provider-specific UID: " + profile.uid);
-            console.log("  Name: " + profile.displayName);
-            console.log("  Email: " + profile.email);
-            console.log("  Photo URL: " + profile.photoURL);
-             });
-            }
-        });
+                if (user !== null) {
+                    user.providerData.forEach((profile) => {
+                        console.log("Sign-in provider: " + profile.providerId);
+                        console.log("  Provider-specific UID: " + profile.uid);
+                        console.log("  Name: " + profile.displayName);
+                        console.log("  Email: " + profile.email);
+                        console.log("  Photo URL: " + profile.photoURL);
+                    });
+                }
+            });
         })
         .catch((error) => {
             // Handle Errors here.
@@ -148,4 +148,39 @@ facebook && facebook.addEventListener('click', (e) => {
             // ...
         });
 });
+
+// handle menu categories (front end validation)
+// TODO: replace this with client side validation
+const categories = document.querySelectorAll(".food_category")
+const categoryHolder = document.querySelector(".category_container")
+const categoryHolderTitle = document.querySelector(".food_category-title")
+const btnToggleCategories = document.querySelector(".toggle_categories")
+
+let isFull = false
+
+toggleCategories()
+
+const checkCategoryState = () => {
+    btnToggleCategories.addEventListener("click", () => {
+        isFull = !isFull
+        toggleCategories()
+    })
+}
+
+checkCategoryState()
+
+function toggleCategories() {
+    categories && categories.forEach((category, i) => {
+        if (isFull) {
+            categoryHolder.appendChild(category)
+            categoryHolderTitle.textContent = "All Categories"
+            btnToggleCategories.textContent = "View Less"
+        }
+        else {
+            i >= 5 && categoryHolder.removeChild(category)
+            categoryHolderTitle.textContent = "Top Categories"
+            btnToggleCategories.textContent = "View all"
+        }
+    })
+}
 

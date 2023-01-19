@@ -28,6 +28,20 @@
     color: var(--black);
 }
 
+/* custom scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--trans-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+}
+
 hr {
     background-color: var(--trans-black);
     height: 1px;
@@ -65,7 +79,7 @@ a:hover {
 
 /* add shadow class if shadow is needed */
 .shadow {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 /* set width to 90px */
@@ -90,6 +104,10 @@ a:hover {
 /* set padding 7px 20px */
 .p_7-20 {
     padding: 7px 20px;
+}
+
+.ml-35 {
+    margin-left: 35px;
 }
 
 /* set margin auto */
@@ -289,7 +307,7 @@ header {
 .hero {
     width: 80%;
     max-width: 1000px;
-    height: 60vh;
+    height: 400px;
     background-color: var(--primary-color);
     margin: 40px auto;
 }
@@ -314,14 +332,9 @@ header {
     z-index: 0;
 }
 
-.cards_main {
-    width: 90%;
-}
-
 /* individual food container card */
 .food_card {
     background-color: var(--white);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width: 320px !important;
     padding-bottom: 15px;
     position: relative;
@@ -345,16 +358,18 @@ header {
 
 /* card btn container */
 .card__btns {
-    margin: 10px 15px;
+    margin: 10px;
+}
+
+.card__btn:first-child {
+    margin-right: 5px;
 }
 
 /* individual buttons on card */
 .card__btn {
-    height: 50px;
-    padding: 0 10px;
     background-color: var(--primary-color);
     color: var(--black);
-    font-weight: bold;
+    flex: 1;
 }
 
 .card__food-desc,
@@ -366,19 +381,14 @@ header {
     font-size: 1.25rem;
 }
 
-.card__food-price {
-    font-weight: 600;
-}
-
 .card__food-desc {
     font-size: 0.825rem;
-    opacity: 0.75;
 }
 
 /* icons inside button on card */
 .card__btn img {
-    width: 30px;
-    margin: 0 5px 0 0;
+    width: 25px;
+    height: 30px;
 }
 
 /* status or something for card */
@@ -388,23 +398,67 @@ header {
     background-color: var(--primary-color);
     transform: rotate(-45deg);
     width: 90px;
-    text-align: center;
+    font-size: 0.8rem;
     left: -25px;
-    top: 5px;
+    top: 10px;
 }
 
 /* =============== for menu.html ===================*/
-.view_all {
-    text-decoration: underline;
+.menu_sidebar {
+    width: 150px !important;
+    text-align: left !important;
 }
 
-.food_category hr {
-    margin-top: -5px;
-    background-color: var(--primary-color);
+.menu_sidebar .form input {
+    margin: 10px 0;
 }
 
-.ml-35 {
-    margin-left: 35px;
+.menu_sidebar form label {
+    font-size: 1rem;
+}
+
+.price_filter_form input {
+    width: 80%
+}
+
+.menu_container {
+    padding: 20px 40px;
+    margin-left: 150px;
+}
+
+.food_categories {
+    margin: 0 0 20px 0;
+}
+
+.food_category {
+    font-size: 0.8rem;
+}
+
+.food_category-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    outline: 1px solid var(--primary-color);
+}
+
+.menu_food-card {
+    width: 200px;
+    position: relative;
+    padding-bottom: 10px;
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+.menu_food-card h2 {
+    font-size: 1rem;
+}
+
+.menu_food-card .card__food-price {
+    font-size: 0.825rem;
+}
+
+.menu_food-card .card__btn-text {
+    display: none;
 }
 
 /*  ================== for login.html =======================*/
