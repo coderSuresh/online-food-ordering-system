@@ -62,13 +62,14 @@ const firebaseConfig = {
     appId: "1:360310508668:web:0bf9048fd87a2741338df9"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const google_auth = getAuth(app);
 const googel_provider = new GoogleAuthProvider(app);
 
 const google = document.querySelector(".google")
-google && google.addEventListener('click', (e) => {
+google.addEventListener('click', (e) => {
 
     signInWithPopup(google_auth, googel_provider)
         .then((result) => {
@@ -84,6 +85,7 @@ google && google.addEventListener('click', (e) => {
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
                 if (user !== null) {
+<<<<<<< HEAD
                     user.providerData.forEach((profile) => {
                         console.log("Sign-in provider: " + profile.providerId);
                         console.log("  Provider-specific UID: " + profile.uid);
@@ -92,6 +94,25 @@ google && google.addEventListener('click', (e) => {
                         console.log("  Photo URL: " + profile.photoURL);
                     });
                 }
+=======
+                    if (document.cookie = "user=" + user) {
+                        user.providerData.forEach((profile) => {
+                            let sign_in_provider = profile.providerId;
+                            document.cookie = "sign_in_provider=" + sign_in_provider;
+                            let profile_name = profile.displayName;
+                            document.cookie = "profile_name=" + profile_name;
+                            let email = profile.email;
+                            document.cookie = "email=" + email;
+                            let image = profile.photoURL;
+                            document.cookie = "image=" + image;
+                        });
+                    }
+                    else {
+                        alert("user not found")
+                    }
+                }
+
+>>>>>>> a834fe89e1f58833733895d5e5eb645b68a3f8fe
             });
             // ...
         }).catch((error) => {
@@ -127,6 +148,7 @@ facebook && facebook.addEventListener('click', (e) => {
             onAuthStateChanged(auth, (user) => {
                 if (user !== null) {
                     user.providerData.forEach((profile) => {
+<<<<<<< HEAD
                         console.log("Sign-in provider: " + profile.providerId);
                         console.log("  Provider-specific UID: " + profile.uid);
                         console.log("  Name: " + profile.displayName);
@@ -135,6 +157,19 @@ facebook && facebook.addEventListener('click', (e) => {
                     });
                 }
             });
+=======
+                        let sign_in_provider = profile.providerId;
+                        document.cookie = "sign_in_provider" + sign_in_provider;
+                        let profile_name = profile.displayName;
+                        document.cookie = "profile_name" + profile_name;
+                        let email = profile.email;
+                        document.cookie = "email" + email;
+            console.log("  Photo URL: " + profile.photoURL);
+             
+             });
+            }
+        });
+>>>>>>> a834fe89e1f58833733895d5e5eb645b68a3f8fe
         })
         .catch((error) => {
             // Handle Errors here.
@@ -148,6 +183,7 @@ facebook && facebook.addEventListener('click', (e) => {
             // ...
         });
 });
+<<<<<<< HEAD
 
 // handle menu categories (front end validation)
 // TODO: replace this with client side validation
@@ -184,3 +220,5 @@ function toggleCategories() {
     })
 }
 
+=======
+>>>>>>> a834fe89e1f58833733895d5e5eb645b68a3f8fe

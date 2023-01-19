@@ -8,6 +8,7 @@ if (isset($_POST['register'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = md5(mysqli_real_escape_string($conn, $_POST['password']));
     $confirmpassword = md5(mysqli_real_escape_string($conn, $_POST['confirm_password']));
+    $signin_provider = "email";
 
     if (!preg_match("/^[A-Z a-z]{2,30}$/", $name)) {
         $_SESSION["invalid_name"] = "Name sould contain alphabaet only";
@@ -29,8 +30,8 @@ if (isset($_POST['register'])) {
         $res_username = mysqli_query($conn, $sql_username) or die("Error");
 
         $sql_email = "SELECT email FROM customer WHERE email='$email'";
-        $res_email = mysqli_query($conn, $sql_email) or die("Error");
-
+        $res_email = mysqli_query($conn, $sql_email) or die("Error");        
+       
 
         if (mysqli_num_rows($res_username) > 0) {
             $_SESSION["username_already_exit"] = "username already exist";
@@ -39,7 +40,8 @@ if (isset($_POST['register'])) {
             $_SESSION["email_already_exit"] = "email already exist";
             header("Location:./register.php");
         } else {
-            $sql = "Insert into customer values (default,'$name','$username','$email', '$password')";
+           
+            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider')";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";
