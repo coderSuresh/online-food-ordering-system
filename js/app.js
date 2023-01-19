@@ -148,7 +148,6 @@ facebook && facebook.addEventListener('click', (e) => {
             onAuthStateChanged(auth, (user) => {
                 if (user !== null) {
                     user.providerData.forEach((profile) => {
-<<<<<<< HEAD
                         console.log("Sign-in provider: " + profile.providerId);
                         console.log("  Provider-specific UID: " + profile.uid);
                         console.log("  Name: " + profile.displayName);
@@ -157,34 +156,27 @@ facebook && facebook.addEventListener('click', (e) => {
                     });
                 }
             });
-=======
-                        let sign_in_provider = profile.providerId;
-                        document.cookie = "sign_in_provider" + sign_in_provider;
-                        let profile_name = profile.displayName;
-                        document.cookie = "profile_name" + profile_name;
-                        let email = profile.email;
-                        document.cookie = "email" + email;
+            let sign_in_provider = profile.providerId;
+            document.cookie = "sign_in_provider" + sign_in_provider;
+            let profile_name = profile.displayName;
+            document.cookie = "profile_name" + profile_name;
+            let email = profile.email;
+            document.cookie = "email" + email;
             console.log("  Photo URL: " + profile.photoURL);
-             
-             });
-            }
-        });
->>>>>>> a834fe89e1f58833733895d5e5eb645b68a3f8fe
-        })
-        .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = FacebookAuthProvider.credentialFromError(error);
-            alert(errorMessage);
-            // ...
-        });
-});
-<<<<<<< HEAD
 
+        });
+})
+    .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error);
+        alert(errorMessage);
+        // ...
+    });
 // handle menu categories (front end validation)
 // TODO: replace this with client side validation
 const categories = document.querySelectorAll(".food_category")
@@ -220,5 +212,3 @@ function toggleCategories() {
     })
 }
 
-=======
->>>>>>> a834fe89e1f58833733895d5e5eb645b68a3f8fe
