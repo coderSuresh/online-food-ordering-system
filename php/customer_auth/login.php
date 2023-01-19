@@ -75,6 +75,17 @@ session_start();
         </form>
     </main>
 </body>
+<?php
+if (isset($_COOKIE['user'])) {
+    include('../../config.php');
+    $signin_provider =$_COOKIE['sign_in_provider'];
+    $names  =   $_COOKIE['profile_name'];
+    $email = $_COOKIE['email'];
+    $image = $_COOKIE['image'];
+    $sql = "Insert into customer values(default,'$names',NULL,'$email',NULL,'$signin_provider','$image')";
+    mysqli_query($conn,$sql) or die(mysqli_error);
+}
+?>
 
 </html>
 <?php
