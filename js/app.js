@@ -94,8 +94,8 @@ google && google.addEventListener('click', (e) => {
                         let email = profile.email;
                         document.cookie = "email=" + email;
                         let image = profile.photoURL;
-                        document.cookie = "image=" + image;
-                        location.reload();
+                        document.cookie = "image=" + image;                 
+                        location.reload();//
                     });
                 }                    
                 else {
@@ -137,17 +137,23 @@ facebook && facebook.addEventListener('click', (e) => {
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
                 if (user !== null) {
+                    document.cookie = "user=" + user
                     user.providerData.forEach((profile) => {
                         let sign_in_provider = profile.providerId;
-                        document.cookie = "sign_in_provider" + sign_in_provider;
+                        document.cookie = "sign_in_provider=" + sign_in_provider;
                         let profile_name = profile.displayName;
-                        document.cookie = "profile_name" + profile_name;
+                        document.cookie = "profile_name=" + profile_name;
                         let email = profile.email;
-                        document.cookie = "email" + email;
-                        console.log("  Photo URL: " + profile.photoURL);
-
+                        document.cookie = "email=" + email;
+                        let image = profile.photoURL;
+                        document.cookie = "image=" + image;
+                        location.reload();
+                        window.location("../index.php");
                     });
-                }
+                }                    
+                else {
+                        alert("user not found");
+                    }
             });
         })
         .catch((error) => {

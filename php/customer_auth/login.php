@@ -89,7 +89,10 @@ if (isset($_COOKIE['user'])) {
     if(!(mysqli_num_rows($res_email) > 0)){
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images')";
         mysqli_query($conn,$sql) or die(mysqli_error);
-
+        header("location: ../../index.php");
+    }
+    else{
+        header("location: ../../index.php");
     }
 
 }
