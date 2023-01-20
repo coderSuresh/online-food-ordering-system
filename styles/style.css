@@ -565,6 +565,7 @@ input[type=submit]:active {
     overflow-x: auto;
     overflow-y: hidden;
 }
+
 .menu__for-sidebar {
     height: 30px;
     width: 30px;
@@ -866,15 +867,22 @@ input[type=submit]:active {
 }
 
 .table_action_options {
+    display: none;
     position: absolute;
     background-color: var(--white);
     top: 0;
     right: 100px;
     z-index: 10;
 }
-.table_action_options div {
-    margin: 5px 0;
+
+.table_option-menu.visible~.table_action_options {
+    display: block;
 }
+
+.table_action_options div {
+    margin: 20px 0;
+}
+
 .table_action_options div img {
     margin-right: 10px;
     width: 24px;

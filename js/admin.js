@@ -121,15 +121,27 @@ const imgUploadInput = document.querySelector(".img_upload-input")
 
 imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
 
-    const url = window.URL.createObjectURL(e.target.files[0])
+    const url = URL.createObjectURL(e.target.files[0])
     uploadedImg && uploadedImg.setAttribute("src", url)
 
-    uploadedImg.onload = () => {
-        URL.revokeObjectURL(uploadedImg.src)
-    }
-
+    uploadedImg && (
+        uploadedImg.onload = () => {
+            URL.revokeObjectURL(uploadedImg.src)
+        }
+    )
 })
 
 // for action menu of any table
-const actionMenu = document.querySelectorAll(".table_option-menu")
-const actionOptions = document.querySelector(".table_action_options")
+const actionMenus = document.querySelectorAll(".table_option-menu")
+const actionOptions = document.querySelectorAll(".table_action_options")
+
+actionMenus && actionMenus.forEach((actionMenu) => {
+    actionMenu.addEventListener("click", () => {
+        const arr = Object.values(actionMenus)
+        const otherActionMenus = arr.filter(otherActionMenu => otherActionMenu !== actionMenu)
+        otherActionMenus.forEach(menu => {
+            menu.classList.remove("visible")
+        })
+        actionMenu.classList.toggle("visible")
+    })
+})
