@@ -60,7 +60,6 @@ const filterForm = document.querySelector(".date_filter_modal_form")
 const customBtn = document.getElementById("filter_option-custom")
 
 filterForm && filterForm.addEventListener("change", (e) => {
-    console.log(e)
     customBtn && customBtn.checked ? showCustomOption() : hideCustomOption()
 })
 

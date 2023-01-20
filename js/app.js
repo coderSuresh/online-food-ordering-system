@@ -101,8 +101,6 @@ google && google.addEventListener('click', (e) => {
                 else {
                         alert("user not found");
                     }
-                
-
             });
             // ...
         }).catch((error) => {
