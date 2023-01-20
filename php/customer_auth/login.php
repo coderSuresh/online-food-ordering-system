@@ -40,7 +40,30 @@ session_start();
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Login</h1>
-        <form action="../../php/customer_auth/auth.php" method="post">
+        <form action="./auth.php" method="post">
+            <?php
+            if (isset($_SESSION["username"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["username"]; ?>
+                </p>
+            <?php
+                unset($_SESSION["username"]);
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION["pass"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["pass"]; ?>
+                </p>
+            <?php
+                unset($_SESSION["pass"]);
+            }
+            ?>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>

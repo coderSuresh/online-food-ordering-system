@@ -65,9 +65,9 @@ session_start();
                 unset($_SESSION["invalid_username"]);
             }
             ?>
+
             <?php
             if (isset($_SESSION["invalid_email"])) {
-
             ?>
                 <!-- to show error alert -->
                 <p class="error-container p_7-20">
@@ -77,9 +77,9 @@ session_start();
                 unset($_SESSION["invalid_email"]);
             }
             ?>
+
             <?php
             if (isset($_SESSION["invlaid_password"])) {
-
             ?>
                 <!-- to show error alert -->
                 <p class="error-container p_7-20">
@@ -89,9 +89,9 @@ session_start();
                 unset($_SESSION["invlaid_password"]);
             }
             ?>
+
             <?php
             if (isset($_SESSION["password_not_match"])) {
-
             ?>
                 <!-- to show error alert -->
                 <p class="error-container p_7-20">
@@ -101,9 +101,9 @@ session_start();
                 unset($_SESSION["password_not_match"]);
             }
             ?>
+
             <?php
             if (isset($_SESSION["email_already_exit"])) {
-
             ?>
                 <!-- to show error alert -->
                 <p class="error-container p_7-20">

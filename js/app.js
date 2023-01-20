@@ -94,13 +94,13 @@ google && google.addEventListener('click', (e) => {
                         let email = profile.email;
                         document.cookie = "email=" + email;
                         let image = profile.photoURL;
-                        document.cookie = "image=" + image;                 
+                        document.cookie = "image=" + image;
                         location.reload();//
                     });
-                }                    
+                }
                 else {
-                        alert("user not found");
-                    }
+                    alert("user not found");
+                }
             });
             // ...
         }).catch((error) => {
@@ -148,10 +148,10 @@ facebook && facebook.addEventListener('click', (e) => {
                         location.reload();
                         window.location("../index.php");
                     });
-                }                    
+                }
                 else {
-                        alert("user not found");
-                    }
+                    alert("user not found");
+                }
             });
         })
         .catch((error) => {
@@ -179,7 +179,7 @@ let isFull = false
 toggleCategories()
 
 const checkCategoryState = () => {
-    btnToggleCategories.addEventListener("click", () => {
+    btnToggleCategories && btnToggleCategories.addEventListener("click", () => {
         isFull = !isFull
         toggleCategories()
     })
