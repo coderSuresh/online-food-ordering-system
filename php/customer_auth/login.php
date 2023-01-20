@@ -21,10 +21,8 @@ session_start();
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
-                        alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
-                        alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -35,8 +33,7 @@ session_start();
                 <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
@@ -49,8 +46,7 @@ session_start();
                 <label>Username</label>
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password"
-                    required>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password" required>
                 <label>Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
@@ -69,8 +65,7 @@ session_start();
 
                 <img src="../../images/ic_facebook.svg" class="icons pointer shadow facebook" alt="sign in with facebook">
 
-                <a href="./register.php"><img src="../../images/ic_mail.svg" class="icons pointer shadow"
-                        alt="sign in with email"></a>
+                <a href="./register.php"><img src="../../images/ic_mail.svg" class="icons pointer shadow" alt="sign in with email"></a>
             </div>
         </form>
     </main>
@@ -78,17 +73,20 @@ session_start();
 <?php
 if (isset($_COOKIE['user'])) {
     include('../../config.php');
-    $signin_provider =$_COOKIE['sign_in_provider'];
+    $signin_provider = $_COOKIE['sign_in_provider'];
     $names  =   $_COOKIE['profile_name'];
     $email = $_COOKIE['email'];
     $images = $_COOKIE['image'];
-    
+
     $sql_email = "SELECT email FROM customer WHERE email='$email'";
-    $res_email = mysqli_query($conn, $sql_email) or die("Error"); 
-  
-    if(!(mysqli_num_rows($res_email) > 0)){
+    $res_email = mysqli_query($conn, $sql_email) or die("Error");
+
+    if (!(mysqli_num_rows($res_email) > 0)) {
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images')";
-        mysqli_query($conn,$sql) or die(mysqli_error($conn));
+        mysqli_query($conn, $sql) or die(mysqli_error($conn));
+        header("location: ../../index.php");
+    } else {
+        header("location: ../../index.php");
     }
 }
 // var_dump($_COOKIE);
@@ -98,5 +96,3 @@ if (isset($_COOKIE['user'])) {
 <?php
 session_unset();
 ?>
-
-
