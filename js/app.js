@@ -163,8 +163,8 @@ facebook && facebook.addEventListener('click', (e) => {
         });
 });
 
-// handle menu categories (front end validation)
-// TODO: replace this with client side validation
+// handle menu categories (client side validation)
+// TODO: replace this with server side validation
 const categories = document.querySelectorAll(".food_category")
 const categoryHolder = document.querySelector(".category_container")
 const categoryHolderTitle = document.querySelector(".food_category-title")

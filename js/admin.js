@@ -129,3 +129,7 @@ imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
     }
 
 })
+
+// for action menu of any table
+const actionMenu = document.querySelectorAll(".table_option-menu")
+const actionOptions = document.querySelector(".table_action_options")

@@ -224,10 +224,6 @@ body {
     outline: 2px solid var(--black);
 }
 
-main {
-    overflow: auto;
-}
-
 /* ============== for index.html =================== */
 
 /* logo */
@@ -565,6 +561,10 @@ input[type=submit]:active {
 }
 
 /* ======================= for admin ===================== */
+.admin_dashboard_body {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 .menu__for-sidebar {
     height: 30px;
     width: 30px;
@@ -729,10 +729,8 @@ input[type=submit]:active {
 }
 
 .admin_dashboard_body {
-    padding: 5%;
-    padding-top: 50px;
+    padding: 40px 40px 40px 140px;
     max-width: 1440px;
-    margin: 0 100px;
 }
 
 .dashboard_inner-head {
@@ -862,7 +860,28 @@ input[type=submit]:active {
     }
 }
 
-/* ===================== for admin add-food.html ===================== */
+/* ===================== for admin manage food.html ===================== */
+.table_action_container {
+    position: relative;
+}
+
+.table_action_options {
+    position: absolute;
+    background-color: var(--white);
+    top: 0;
+    right: 100px;
+    z-index: 10;
+}
+.table_action_options div {
+    margin: 5px 0;
+}
+.table_action_options div img {
+    margin-right: 10px;
+    width: 24px;
+    height: 20px;
+}
+
+/* resuable modal */
 .modal {
     display: none;
     height: 100vh;
