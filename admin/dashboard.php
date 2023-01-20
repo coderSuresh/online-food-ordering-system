@@ -41,8 +41,7 @@
                     <ul class="admin_profile p-20 shadow border-curve-md">
                         <li>
                             <div class="admin_profile_info flex items-center">
-                                <img src="../images/profile.jpg" class="admin_profile_img" alt="admin profile picture"
-                                    aria-hidden="true">
+                                <img src="../images/profile.jpg" class="admin_profile_img" alt="admin profile picture" aria-hidden="true">
                                 <div>
                                     <h4>Admin Kumar</h4>
                                     <p class="body-text">adminkumar@yandex.ru</p>
@@ -55,8 +54,7 @@
                         <li>
                             <a href="#">
                                 <div class="flex items-center justify-start">
-                                    <img class="admin_profile_icon" alt="manage account"
-                                        src="../images/ic_manage_account.svg" aria-hidden="true">
+                                    <img class="admin_profile_icon" alt="manage account" src="../images/ic_manage_account.svg" aria-hidden="true">
                                     <p>Manage account</p>
                                 </div>
                             </a>
@@ -64,8 +62,7 @@
                         <li>
                             <a href="#">
                                 <div class="flex items-center justify-start">
-                                    <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon"
-                                        aria-hidden="true">
+                                    <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon" aria-hidden="true">
                                     <p>Logout</p>
                                 </div>
                             </a>
@@ -83,12 +80,10 @@
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" alt="dashboard"
-                        aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" alt="dashboard" aria-hidden="true">
                         <div class="flex items-center">
                             <h4 class="dashboard_sidebar_content_text hide-on-close">Dashboard</h4>
-                            <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                                aria-hidden="true" alt="accordion arrow">
+                            <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                         </div>
                     </article>
                 </a>
@@ -112,33 +107,27 @@
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" alt="view"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" alt="view" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Food Items</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" alt="category"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" alt="category" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Category</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" alt="edit user"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" alt="edit user" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Users</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
@@ -200,7 +189,7 @@
                     </div>
                     <!-- filter using custom date range end -->
 
-                    <button type="submit" class="no_outline border-curve-lg w-full button">Filter</button>
+                    <button type="submit" class="no_outline border-curve-md w-full button mt-20">Filter</button>
 
                 </form>
 
@@ -209,42 +198,42 @@
 
         <div class="admin_dashboard_stat">
 
-            <article class="card flex items-center text-center border-curve-md">
+            <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-menu.svg" alt="total menu" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>15</h2>
                     <p>Total Menu</p>
                 </div>
             </article>
-            <article class="card flex items-center text-center border-curve-md">
+            <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-revenue.svg" alt="total revenue" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>15K</h2>
                     <p>Total Revenue</p>
                 </div>
             </article>
-            <article class="card flex items-center text-center border-curve-md ">
+            <article class="card flex items-center text-center border-curve-md  shadow">
                 <img src="../images/ic_total-order.svg" alt="total order" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>15</h2>
                     <p>Total Orders</p>
                 </div>
             </article>
-            <article class="card flex items-center text-center border-curve-md">
+            <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-customer.svg" alt="total customer" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>15</h2>
                     <p>Total Customers</p>
                 </div>
             </article>
-            <article class="card flex items-center text-center border-curve-md">
+            <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-category.svg" alt="total category" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>5</h2>
                     <p>Total Categories</p>
                 </div>
             </article>
-            <article class="card flex items-center text-center border-curve-md">
+            <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_order-cancel.svg" alt="order cancel" aria-hidden="true" class="card_icon">
                 <div>
                     <h2>3</h2>

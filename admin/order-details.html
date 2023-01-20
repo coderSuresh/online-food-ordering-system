@@ -200,7 +200,7 @@
                     </div>
                     <!-- filter using custom date range end -->
 
-                    <button type="submit" class="no_outline border-curve-lg w-full button">Filter</button>
+                    <button type="submit" class="no_outline border-curve-md w-full button mt-20">Filter</button>
 
                 </form>
 
@@ -230,108 +230,282 @@
             </div>
         </div>
 
-        <!-- food cards -->
-        <div>
-
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>Order Id</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Location</th>
-                    <th>Item</th>
-                    <th>Amount</th>
-                    <th>Order Status</th>
-                    <th>Action</th>
-                </tr>
-                <tr class="shadow">
-                    <td>1</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td><span class="delivered border-curve-lg p_7-20">Delivered</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>2</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td><span class="accepted border-curve-lg p_7-20">Accepted</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>3</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td><span class="to-deliver border-curve-lg p_7-20">To Deliver</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>4</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>5</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Chinese Fried Momo</td>
-                    <td>123</td>
-                    <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>6</td>
-                    <td>
-                        2023-01-07
-                    </td>
-                    <td>Bibek Mahat</td>
-                    <td>Panauti</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-
+        <table class="mt-20">
+            <tr class="shadow">
+                <th>Order Id</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Location</th>
+                <th>Item</th>
+                <th>Amount</th>
+                <th>Order Status</th>
+                <th>Action</th>
+            </tr>
+            <tr class="shadow">
+                <td>1</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td><span class="delivered border-curve-lg p_7-20">Delivered</span></td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images//ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                    <p>Accept</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_reject.svg" alt="reject icon">
+                                    <p>Reject</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                    <p>Prepared</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>2</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td><span class="accepted border-curve-lg p_7-20">Accepted</span></td>
+            <td class="table_action_container">
+                <!-- action menu -->
+                <button class="no_bg no_outline table_option-menu">
+                    <img src="../images//ic_options.svg" alt="options menu">
+                </button>
+                <!-- options -->
+                <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                    <div>
+                        <a href="#">
+                            <div class="flex items-center justify-start">
+                                <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                <p>Accept</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <div class="flex items-center justify-start">
+                                <img src="../../images/ic_reject.svg" alt="reject icon">
+                                <p>Reject</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <div class="flex items-center justify-start">
+                                <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                <p>Prepared</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </td>
+            </tr>
+            <tr class="shadow">
+                <td>3</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td><span class="to-deliver border-curve-lg p_7-20">To Deliver</span></td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images//ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                    <p>Accept</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_reject.svg" alt="reject icon">
+                                    <p>Reject</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                    <p>Prepared</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>4</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images//ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                    <p>Accept</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_reject.svg" alt="reject icon">
+                                    <p>Reject</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                    <p>Prepared</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>5</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Chinese Fried Momo</td>
+                <td>123</td>
+                <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images//ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                    <p>Accept</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_reject.svg" alt="reject icon">
+                                    <p>Reject</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                    <p>Prepared</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>6</td>
+                <td>
+                    2023-01-07
+                </td>
+                <td>Bibek Mahat</td>
+                <td>Panauti</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images//ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_accept.svg" alt="accpet icon">
+                                    <p>Accept</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_reject.svg" alt="reject icon">
+                                    <p>Reject</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../../images/ic_prepared.svg" alt="prepared icon">
+                                    <p>Prepared</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </main>
 
 </body>

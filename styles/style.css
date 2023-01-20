@@ -561,11 +561,6 @@ input[type=submit]:active {
 }
 
 /* ======================= for admin ===================== */
-.admin_dashboard_body {
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
 .menu__for-sidebar {
     height: 30px;
     width: 30px;
@@ -738,15 +733,6 @@ input[type=submit]:active {
     margin-bottom: 30px;
 }
 
-/* filter by date */
-.date_filter_modal_form button {
-    background-color: var(--primary-color);
-    outline: 2px solid var(--primary-color);
-    margin: 20px auto;
-    padding: 7px 20px;
-    font-size: 1.2rem;
-}
-
 .small-modal {
     max-width: 400px !important;
 }
@@ -873,6 +859,10 @@ input[type=submit]:active {
     top: 0;
     right: 100px;
     z-index: 10;
+}
+
+.table_action_options.r_70 {
+    right: 70px !important;
 }
 
 .table_option-menu.visible~.table_action_options {
