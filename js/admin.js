@@ -114,3 +114,18 @@ const showPassword = () => {
 const hidePassword = () => {
     passwordToggleBtn && passwordToggleBtn.setAttribute("src", "../../images/ic_eye-off.svg")
 }
+
+// show preview of uploaded image
+const uploadedImg = document.querySelector(".upload-img")
+const imgUploadInput = document.querySelector(".img_upload-input")
+
+imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
+
+    const url = window.URL.createObjectURL(e.target.files[0])
+    uploadedImg && uploadedImg.setAttribute("src", url)
+
+    uploadedImg.onload = () => {
+        URL.revokeObjectURL(uploadedImg.src)
+    }
+
+})
