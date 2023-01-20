@@ -85,22 +85,23 @@ google && google.addEventListener('click', (e) => {
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
                 if (user !== null) {
-                    if (document.cookie = "user=" + user) {
-                        user.providerData.forEach((profile) => {
-                            let sign_in_provider = profile.providerId;
-                            document.cookie = "sign_in_provider=" + sign_in_provider;
-                            let profile_name = profile.displayName;
-                            document.cookie = "profile_name=" + profile_name;
-                            let email = profile.email;
-                            document.cookie = "email=" + email;
-                            let image = profile.photoURL;
-                            document.cookie = "image=" + image;
-                        });
+                    document.cookie = "user=" + user
+                    user.providerData.forEach((profile) => {
+                        let sign_in_provider = profile.providerId;
+                        document.cookie = "sign_in_provider=" + sign_in_provider;
+                        let profile_name = profile.displayName;
+                        document.cookie = "profile_name=" + profile_name;
+                        let email = profile.email;
+                        document.cookie = "email=" + email;
+                        let image = profile.photoURL;
+                        document.cookie = "image=" + image;
+                        location.reload();
+                    });
+                }                    
+                else {
+                        alert("user not found");
                     }
-                    else {
-                        alert("user not found")
-                    }
-                }
+                
 
             });
             // ...

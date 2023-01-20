@@ -41,7 +41,7 @@ if (isset($_POST['register'])) {
             header("Location:./register.php");
         } else {
            
-            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider')";
+            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL)";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";
