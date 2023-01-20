@@ -224,10 +224,6 @@ body {
     outline: 2px solid var(--black);
 }
 
-main {
-    overflow: auto;
-}
-
 /* ============== for index.html =================== */
 
 /* logo */
@@ -729,23 +725,12 @@ input[type=submit]:active {
 }
 
 .admin_dashboard_body {
-    padding: 5%;
-    padding-top: 50px;
+    padding: 40px 40px 40px 140px;
     max-width: 1440px;
-    margin: 0 100px;
 }
 
 .dashboard_inner-head {
     margin-bottom: 30px;
-}
-
-/* filter by date */
-.date_filter_modal_form button {
-    background-color: var(--primary-color);
-    outline: 2px solid var(--primary-color);
-    margin: 20px auto;
-    padding: 7px 20px;
-    font-size: 1.2rem;
 }
 
 .small-modal {
@@ -862,7 +847,39 @@ input[type=submit]:active {
     }
 }
 
-/* ===================== for admin add-food.html ===================== */
+/* ===================== for admin manage food.html ===================== */
+.table_action_container {
+    position: relative;
+}
+
+.table_action_options {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    top: 0;
+    right: 100px;
+    z-index: 10;
+}
+
+.table_action_options.r_70 {
+    right: 70px !important;
+}
+
+.table_option-menu.visible~.table_action_options {
+    display: block;
+}
+
+.table_action_options div {
+    margin: 20px 0;
+}
+
+.table_action_options div img {
+    margin-right: 10px;
+    width: 24px;
+    height: 20px;
+}
+
+/* resuable modal */
 .modal {
     display: none;
     height: 100vh;
@@ -948,6 +965,8 @@ textarea {
 
 .upload-img {
     width: 100px;
+    height: 85px;
+    object-fit: contain;
 }
 
 /* ==================== for employees.html ======================= */

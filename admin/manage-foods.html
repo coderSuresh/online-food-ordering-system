@@ -40,8 +40,8 @@
                     <ul class="admin_profile p-20 shadow ">
                         <li>
                             <div class="admin_profile_info flex items-center">
-                                <img src="../images/profile.jpg" class="admin_profile_img"
-                                    alt="admin profile picture" aria-hidden="true">
+                                <img src="../images/profile.jpg" class="admin_profile_img" alt="admin profile picture"
+                                    aria-hidden="true">
                                 <div>
                                     <h4>Admin Kumar</h4>
                                     <p class="body-text">adminkumar@yandex.ru</p>
@@ -151,7 +151,6 @@
             <h2>Manage Food Items</h2>
         </section>
 
-
         <section class="modal items-center justify-center">
             <div class="modal_form-container border-curve-md p-20 shadow ">
 
@@ -195,7 +194,7 @@
 
                             <div class="col">
                                 <label for="image">Select an image:</label>
-                                <input type="file" name="image" id="image">
+                                <input type="file" name="image" class="img_upload-input" id="image">
                             </div>
                         </div>
 
@@ -276,101 +275,323 @@
             </div>
         </div>
 
-        <!-- food cards -->
-        <div>
-
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>SN</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Sold</th>
-                    <th>Action</th>
-                </tr>
-                <tr class="shadow">
-                    <td>1</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>2</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>3</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>4</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>5</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-                <tr class="shadow">
-                    <td>6</td>
-                    <td>
-                        <img src="../images/food.png" alt="food image" class="table_food-img">
-                    </td>
-                    <td>Chinese Momo</td>
-                    <td>160</td>
-                    <td>Momo</td>
-                    <td>123</td>
-                    <td>
-                        <img src="../images//ic_options.svg" alt="options menu" class="table_option-menu">
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-
+        <table class="mt-20">
+            <tr class="shadow">
+                <th>SN</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Sold</th>
+                <th>Action</th>
+            </tr>
+            <tr class="shadow">
+                <td>1</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>2</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>3</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>4</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>5</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="shadow">
+                <td>6</td>
+                <td>
+                    <img src="../images/food.png" alt="food image" class="table_food-img">
+                </td>
+                <td>Chinese Momo</td>
+                <td>160</td>
+                <td>Momo</td>
+                <td>123</td>
+                <td class="table_action_container">
+                    <!-- action menu -->
+                    <button class="no_bg no_outline table_option-menu">
+                        <img src="../images/ic_options.svg" alt="options menu">
+                    </button>
+                    <!-- options -->
+                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_edit.svg" alt="edit icon">
+                                    <p>Edit</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_view.svg" alt="view icon">
+                                    <p>View</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_delete.svg" alt="delete icon">
+                                    <p>Delete</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <div class="flex items-center justify-start">
+                                    <img src="../images/ic_disable.svg" alt="disable icon">
+                                    <p>Disable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </main>
 
 </body>

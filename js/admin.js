@@ -83,13 +83,15 @@ const sidebarSubMenuOpener = document.querySelectorAll(".sidebar_accordion")
 sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
     item.addEventListener("click", () => {
 
-        // sidebarSubMenuOpener.forEach(subMenu => {
-        //     subMenu.classList.remove("active")
-        // })
-
+        const arr = Object.values(sidebarSubMenuOpener) //covert objects to array
+        const otherItems = arr.filter(otherItem => otherItem !== item) //filter currently clicked element
+        //remove class from all other elements
+        otherItems.forEach(oItem => {
+            oItem.classList.remove("active")
+        })
+        // toggle class from clicked element
         item.classList.toggle("active")
     })
-
 })
 
 // to toggle employee card option menu
@@ -103,6 +105,7 @@ empOptionMenu && empOptionMenu.forEach(item => {
 
 // toggle password icon
 const passwordToggleBtn = document.querySelector(".password_toggle_btn")
+
 passwordToggleBtn && passwordToggleBtn.addEventListener("click", () => {
     passwordToggleBtn.getAttribute("src") == "../../images/ic_eye-off.svg" ? showPassword() : hidePassword()
 })
@@ -114,3 +117,34 @@ const showPassword = () => {
 const hidePassword = () => {
     passwordToggleBtn && passwordToggleBtn.setAttribute("src", "../../images/ic_eye-off.svg")
 }
+
+// show preview of uploaded image
+const uploadedImg = document.querySelector(".upload-img")
+const imgUploadInput = document.querySelector(".img_upload-input")
+
+imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
+
+    const url = URL.createObjectURL(e.target.files[0])
+    uploadedImg && uploadedImg.setAttribute("src", url)
+
+    uploadedImg && (
+        uploadedImg.onload = () => {
+            URL.revokeObjectURL(uploadedImg.src)
+        }
+    )
+})
+
+// for action menu of any table
+const actionMenus = document.querySelectorAll(".table_option-menu")
+const actionOptions = document.querySelectorAll(".table_action_options")
+
+actionMenus && actionMenus.forEach((actionMenu) => {
+    actionMenu.addEventListener("click", () => {
+        const arr = Object.values(actionMenus)
+        const otherActionMenus = arr.filter(otherActionMenu => otherActionMenu !== actionMenu)
+        otherActionMenus.forEach(menu => {
+            menu.classList.remove("visible")
+        })
+        actionMenu.classList.toggle("visible")
+    })
+})
