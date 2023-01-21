@@ -895,7 +895,8 @@ input[type=submit]:active {
     position: absolute;
     background-color: var(--white);
     top: 0;
-    right: 100px;
+    right: 105px;
+    width: 150px;
     z-index: 10;
 }
 
