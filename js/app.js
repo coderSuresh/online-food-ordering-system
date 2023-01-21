@@ -202,3 +202,6 @@ function toggleCategories() {
     })
 }
 
+// display current year on footer
+const year = document.querySelector(".footer_year")
+year && (year.textContent = new Date().getFullYear())

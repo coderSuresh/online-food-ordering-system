@@ -315,26 +315,16 @@ header {
     margin-bottom: 40px;
 }
 
+.main {
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
 .underline {
     margin-top: 3px;
     height: 3px;
     background-color: var(--black);
     width: 90%;
-}
-
-/* food container */
-.card__container {
-    margin: 20px 40px;
-    z-index: 0;
-}
-
-/* individual food container card */
-.food_card {
-    background-color: var(--white);
-    width: 320px !important;
-    padding-bottom: 15px;
-    position: relative;
-    overflow: hidden;
 }
 
 .card__food-img {
@@ -399,6 +389,52 @@ header {
     top: 10px;
 }
 
+/* footer for customers */
+.footer {
+    margin-top: 40px;
+    background-color: var(--trans-black);
+    padding: 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.footer .footer_title {
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.footer ul li {
+    margin-top: 10px;
+}
+
+.footer .social img {
+    margin: 0 15px;
+    width: 30px;
+}
+
+.footer .copyright {
+    font-size: 0.8rem;
+}
+
+.footer_map {
+    grid-area: 1 / 3 / span 2 / span 1;
+}
+
+.footer_map img {
+    width: 100%;
+}
+
+.icon_with_text {
+    margin: 0 10px;
+    width: 20px;
+}
+
+.lower_footer {
+    flex-grow: 100vw;
+}
+
 /* =============== for menu.html ===================*/
 .menu_sidebar {
     width: 150px !important;
@@ -438,7 +474,9 @@ header {
 }
 
 .menu_food-card {
-    width: 200px;
+    min-width: 200px;
+    max-width: 300px;
+    flex: 0 1 23%;
     position: relative;
     padding-bottom: 10px;
     background-color: var(--white);
