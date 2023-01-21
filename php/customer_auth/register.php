@@ -67,6 +67,18 @@ session_start();
             ?>
 
             <?php
+            if (isset($_SESSION["username_already_exit"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["username_already_exit"]; ?>
+                </p>
+            <?php
+                unset($_SESSION["username_already_exit"]);
+            }
+            ?>
+
+            <?php
             if (isset($_SESSION["invalid_email"])) {
             ?>
                 <!-- to show error alert -->
@@ -75,6 +87,18 @@ session_start();
                 </p>
             <?php
                 unset($_SESSION["invalid_email"]);
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION["email_already_exit"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["email_already_exit"]; ?>
+                </p>
+            <?php
+                unset($_SESSION["email_already_exit"]);
             }
             ?>
 
@@ -102,29 +126,6 @@ session_start();
             }
             ?>
 
-            <?php
-            if (isset($_SESSION["email_already_exit"])) {
-            ?>
-                <!-- to show error alert -->
-                <p class="error-container p_7-20">
-                    <?php echo $_SESSION["email_already_exit"]; ?>
-                </p>
-            <?php
-                unset($_SESSION["email_already_exit"]);
-            }
-            ?>
-
-            <?php
-            if (isset($_SESSION["username_already_exit"])) {
-            ?>
-                <!-- to show error alert -->
-                <p class="error-container p_7-20">
-                    <?php echo $_SESSION["username_already_exit"]; ?>
-                </p>
-            <?php
-                unset($_SESSION["username_already_exit"]);
-            }
-            ?>
             </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="name" required autofocus>

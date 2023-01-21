@@ -12,11 +12,11 @@ if (isset($_POST['login'])) {
             if ($username != $data['username']) {
                   $_SESSION['username'] = "Invalid username";
                   header("Location:./login.php");
-            } elseif ($password != $data['password']) {
+            } else if ($password != $data['password']) {
                   $_SESSION['pass'] = "Invalid password";
                   header("Location:./login.php");
             } else {
-                  $_SESSION['success'] = "login success";
+                  $_SESSION['success'] = "Login success";
                   header("Location:../../index.php");
             }
       }

@@ -73,7 +73,7 @@ session_start();
                 <label>Password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
-            <a href="./forgot_password.php" class="forget_password">Forgot password?</a>
+            <a href="./reset-password.php" class="forget_password">Forgot password?</a>
             <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
 
             <div class="flex items-center or justify-center mt-20">
@@ -116,6 +116,7 @@ if (isset($_COOKIE['user'])) {
 ?>
 
 </html>
+
 <?php
 session_unset();
 ?>
