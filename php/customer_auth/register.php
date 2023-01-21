@@ -157,8 +157,8 @@ session_start();
                 }
                 ?>
             </p>
-            <p class="signup_link text-center">
-                Already have an account?<a href="../customer_auth/login.php"> Sign in</a>
+            <p class="text-center mt-20">
+                Already have an account? <a href="./login.php"> <span class="cta">Sign in</span></a>
             </p>
         </form>
     </div>
