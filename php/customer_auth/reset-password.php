@@ -12,7 +12,6 @@
     <script type="module" src="../../js/app.js" defer></script>
 </head>
 
-
 <body>
     <header>
         <nav class="top_nav flex items-center">

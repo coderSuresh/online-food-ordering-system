@@ -15,7 +15,6 @@ session_start();
     <script type="module" src="../../js/app.js" defer></script>
 </head>
 
-
 <body>
     <header>
         <nav class="top_nav flex items-center">
@@ -97,7 +96,7 @@ session_start();
 if (isset($_COOKIE['user'])) {
     include('../../config.php');
     $signin_provider = $_COOKIE['sign_in_provider'];
-    $names  =   $_COOKIE['profile_name'];
+    $names  = $_COOKIE['profile_name'];
     $email = $_COOKIE['email'];
     $images = $_COOKIE['image'];
 
