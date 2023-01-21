@@ -8,8 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Are you hungry? You are at the right place. We offer mouth watering foods at your doorstep. Click now and order food online.">
+    <meta name="description" content="Are you hungry? You are at the right place. We offer mouth watering foods at your doorstep. Click now and order food online.">
     <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <title>RestroHub | Order Food Online</title>
@@ -29,19 +28,15 @@ session_start();
                 <!-- nav search form -->
                 <li>
                     <form action="#" method="post" class="search_form flex items-center border-curve-lg">
-                        <input type="search" name="search" placeholder="search..." id="search"
-                            class="search no_outline">
-                        <button type="submit" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg"
-                                alt="search icon" class="icon_search"></button>
+                        <input type="search" name="search" placeholder="search..." id="search" class="search no_outline">
+                        <button type="submit" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
                     </form>
                 </li>
 
-                <li class="flex direction-col"><a href="./php/customer_auth/login.php"><img src="./images/ic_acc.svg"
-                            alt="account"></a>
+                <li class="flex direction-col"><a href="./php/customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="./images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="./images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
 
@@ -95,7 +90,6 @@ session_start();
                 <div class="card__btns flex">
                     <a href="#" class="card__btn flex justify-center border-curve">
                         <img src="./images/ic_eye.svg" alt="view">
-
                     </a>
                     <a href="#" class="card__btn flex justify-center border-curve">
                         <img src="./images/ic_add-cart.svg" alt="add to cart">
