@@ -501,7 +501,12 @@ header {
     max-width: 400px;
     margin: 40px auto;
     background: white;
-    padding: 10px;
+    padding: 20px;
+}
+
+/* decorate "login instead" text */
+.cta {
+    color: var(--primary-color);
 }
 
 .center h1 {
