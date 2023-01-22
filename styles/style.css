@@ -87,6 +87,11 @@ a:hover {
     width: 90px !important;
 }
 
+/* set width to fit content */
+.w-fit {
+    width: fit-content;
+}
+
 /* set width to 100% */
 .w-full {
     width: 100% !important;
@@ -117,7 +122,8 @@ a:hover {
 
 /* set margin auto from left and right */
 .ml-auto {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* use border-curve class to set border-radius 5px */
@@ -576,6 +582,10 @@ input[type="submit"] {
     background: var(--primary-color);
     font-size: 18px;
     color: var(--black);
+}
+
+input[type="submit"],
+button[type="submit"] {
     font-weight: 700;
 }
 

@@ -19,7 +19,7 @@ session_start();
 
     <header>
         <nav class="top_nav flex items-center">
-            <a href="./index.html" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
+            <a href="#" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
                 <span>Hub</span></a>
 
             <ul class="flex items-center">
@@ -226,6 +226,10 @@ session_start();
             </div>
         </div>
         <!-- card end -->
+
+        <div class="button w-fit border-curve mt-20 ml-auto">
+            <a href="./menu.html">View All Foods</a>
+        </div>
     </main>
 
     <footer class="footer">
