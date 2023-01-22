@@ -40,14 +40,14 @@
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Reset Password</h1>
 
-        <form action="#" method="post">
+        <form action="./reset-otp-verify.php" method="post">
 
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="johndoe@gmail.com" name="email" required
                     autofocus>
                 <label>Email</label>
             </div>
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="reset_password" value="Send OTP">
+            <input type="submit" class="no_outline border-curve-lg mt-20" name="send_otp" value="Send OTP">
             <p class="mt-20 text-center">Remember password? <a href="./login.php" class="cta">Login</a></p>
         </form>
     </main>

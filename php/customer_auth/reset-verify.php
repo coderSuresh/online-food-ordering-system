@@ -40,7 +40,7 @@
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Verify Account</h1>
 
-        <form action="./otp-verify.php" method="post">
+        <form action="./verify-reset-otp.php" method="post">
 
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required

@@ -10,8 +10,8 @@ if (isset($_POST['register'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = md5(mysqli_real_escape_string($conn, $_POST['password']));
-    $confirmpassword = md5(mysqli_real_escape_string($conn, $_POST['confirm_password']));
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $confirmpassword = mysqli_real_escape_string($conn, $_POST['confirm_password']);
     $signin_provider = "email";
 
     if (!preg_match("/^[A-Z a-z]{2,30}$/", $name)) {
@@ -52,7 +52,7 @@ if (isset($_POST['register'])) {
             if (mysqli_num_rows($res_code) > 0) {
                 $code = rand(999999, 111111);
             }
-            
+            $password = md5($password);
             $status = "not verified";
             $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL,'$status','$code')";
             $res = mysqli_query($conn, $sql) or die("Error");
@@ -94,7 +94,7 @@ if (isset($_POST['register'])) {
                     header("Location:./verify.php");   
                     
                 } catch (Exception $e) {
-                    $_SESSION['email'] = "$e";
+                    $_SESSION['error'] = "$e";
                 }
                       
             }        

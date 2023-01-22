@@ -116,7 +116,8 @@ if (isset($_COOKIE['user'])) {
     $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
     if (!(mysqli_num_rows($res_email) > 0)) {
-        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images')";
+        $status = "verified";
+        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images','$status',NULL)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         header("location: ../../index.php");
     } else {

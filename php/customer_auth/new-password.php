@@ -39,7 +39,7 @@
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Create New Account</h1>
 
-        <form action="#" method="post">
+        <form action="./create-new-password.php" method="post">
 
             <div class="text_field">
                 <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="new-password" required
@@ -54,7 +54,7 @@
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
 
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="new-password"
+            <input type="submit" class="no_outline border-curve-lg mt-20" name="create-new-password"
                 value="Create New Password">
         </form>
     </main>
