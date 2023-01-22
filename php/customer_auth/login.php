@@ -63,6 +63,19 @@ session_start();
                 unset($_SESSION["pass"]);
             }
             ?>
+            
+            <?php
+            if (isset($_SESSION["invalid"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["invalid"]; ?>
+                </p>
+            <?php
+            }
+            ?>
+
+
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>
