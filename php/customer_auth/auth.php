@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
         while ($data = mysqli_fetch_array($result)) {
             if ($password != $data['password']) {
                 $_SESSION['pass'] = "Invalid password";
-                header("Location:./login.php");
+                header("Location:./login.php"); 
             }else{
                 $_SESSION['success'] = "Login success";
                   header("Location:../../index.php");

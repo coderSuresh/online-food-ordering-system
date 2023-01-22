@@ -44,10 +44,17 @@ if (isset($_POST['register'])) {
             $_SESSION["email_already_exit"] = "email already exist";
             header("Location:./register.php");
         } else {
-          
+            
             $code = rand(999999, 111111);
-            $status = "notverified";
-            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL,'$status')";
+            $sql_code = "select otp from customer where otp = $code";
+            $res_code = mysqli_query($conn, $sql_code) or die("Error");
+
+            if (mysqli_num_rows($res_code) > 0) {
+                $code = rand(999999, 111111);
+            }
+            
+            $status = "not verified";
+            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL,'$status','$code')";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";
@@ -66,7 +73,7 @@ if (isset($_POST['register'])) {
                     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                     $mail->Username   = 'testperpose56@gmail.com';                     //SMTP username
-                    $mail->Password   = 'testperpose5612';                               //SMTP password
+                    $mail->Password   = 'difxmcqvovolbafy';                               //SMTP password
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -74,7 +81,7 @@ if (isset($_POST['register'])) {
                     $mail->setFrom('testperpose56@gmail.com', 'Restro Hub');
                     $mail->addAddress($email, $username);     //Add a recipient
                     $mail->addReplyTo('testperpose56@gmail.com', 'Restro Hub');
-
+                   
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
                     $mail->Subject = 'Email Verification Code';
@@ -82,12 +89,14 @@ if (isset($_POST['register'])) {
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
   
                     $mail->send();
-
-                    $_SESSION['email'] = "sucessfull";
+                    
+                    $_SESSION['username'] = $username;
+                    header("Location:./verify.php");   
+                    
                 } catch (Exception $e) {
                     $_SESSION['email'] = "$e";
                 }
-                header("Location:./register.php");          
+                      
             }        
         }
     }
