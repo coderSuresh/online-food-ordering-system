@@ -82,7 +82,7 @@ const sidebarSubMenuOpener = document.querySelectorAll(".sidebar_accordion")
 sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
     item.addEventListener("click", () => {
 
-        const arr = Object.values(sidebarSubMenuOpener) //covert objects to array
+        const arr = Object.values(sidebarSubMenuOpener) //convert objects to array
         const otherItems = arr.filter(otherItem => otherItem !== item) //filter currently clicked element
         //remove class from all other elements
         otherItems.forEach(oItem => {
