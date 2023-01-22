@@ -12,7 +12,6 @@ session_start();
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Login | RestroHub</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <script type="module" src="../../js/app.js" defer></script>
 </head>
 
 <body>
@@ -63,7 +62,7 @@ session_start();
                 unset($_SESSION["pass"]);
             }
             ?>
-            
+
             <?php
             if (isset($_SESSION["invalid"])) {
             ?>
@@ -74,7 +73,6 @@ session_start();
             <?php
             }
             ?>
-
 
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
@@ -104,6 +102,7 @@ session_start();
             </div>
         </form>
     </main>
+    <script type="module" src="../../js/app.js"></script>
 </body>
 <?php
 if (isset($_COOKIE['user'])) {

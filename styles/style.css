@@ -1058,12 +1058,8 @@ textarea {
 }
 
 .emp_card_options {
-    display: none;
-    position: absolute;
-    right: 0;
-    transform: translateX(130px);
+    right: 50px;
     top: 0;
-    background-color: var(--white);
     z-index: 10;
 }
 
