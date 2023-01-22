@@ -93,15 +93,6 @@ sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
     })
 })
 
-// to toggle employee card option menu
-const empOptionMenu = document.querySelectorAll(".emp_card_option-menu")
-
-empOptionMenu && empOptionMenu.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("open")
-    })
-})
-
 // toggle password icon
 const passwordToggleBtn = document.querySelector(".password_toggle_btn")
 
