@@ -47,12 +47,6 @@
                     autofocus>
                 <label>Email</label>
             </div>
-            <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx"
-                    name="last_password" required>
-                <label>Last Password</label>
-                <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
-            </div>
             <input type="submit" class="no_outline border-curve-lg mt-20" name="reset_password" value="Reset Password">
             <p class="mt-20 text-center">Remember password? <a href="./login.php" class="cta">Login</a></p>
         </form>

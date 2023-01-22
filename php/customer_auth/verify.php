@@ -40,7 +40,7 @@
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Verify Account</h1>
 
-        <form action="./auth.php" method="post">
+        <form action="./otp-verify.php" method="post">
 
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required
@@ -48,7 +48,7 @@
                 <label>OTP</label>
             </div>
 
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
+            <input type="submit" class="no_outline border-curve-lg mt-20" name="verify" value="verify">
         </form>
     </main>
 </body>
