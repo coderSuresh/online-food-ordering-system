@@ -125,7 +125,15 @@ session_start();
                 unset($_SESSION["password_not_match"]);
             }
             ?>
-
+            <?php
+            if (isset($_SESSION["email"])) {
+            
+                
+                echo $_SESSION["email"]; 
+        
+            }
+                
+            ?>
             </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="name" required autofocus>

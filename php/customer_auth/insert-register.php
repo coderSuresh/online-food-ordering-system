@@ -2,6 +2,10 @@
 session_start();
 include('../../config.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 if (isset($_POST['register'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -40,16 +44,51 @@ if (isset($_POST['register'])) {
             $_SESSION["email_already_exit"] = "email already exist";
             header("Location:./register.php");
         } else {
-           
-            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL)";
+          
+            $code = rand(999999, 111111);
+            $status = "notverified";
+            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL,'$status')";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";
-                header("Location:./register.php");
-                if (!$res) {
-                    echo "error";
+              
+
+                //Load Composer's autoloader
+                require '../../vendor/autoload.php';
+
+                //Create an instance; passing `true` enables exceptions
+                $mail = new PHPMailer(true);
+
+                try {
+                    
+                    //Server settings
+                    $mail->isSMTP();                                            //Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                    $mail->Username   = 'testperpose56@gmail.com';                     //SMTP username
+                    $mail->Password   = 'testperpose5612';                               //SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                    //Recipients
+                    $mail->setFrom('testperpose56@gmail.com', 'Restro Hub');
+                    $mail->addAddress($email, $username);     //Add a recipient
+                    $mail->addReplyTo('testperpose56@gmail.com', 'Restro Hub');
+
+                    //Content
+                    $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->Subject = 'Email Verification Code';
+                    $mail->Body    = "Your verification code is $code";
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+  
+                    $mail->send();
+
+                    $_SESSION['email'] = "sucessfull";
+                } catch (Exception $e) {
+                    $_SESSION['email'] = "$e";
                 }
-            }
+                header("Location:./register.php");          
+            }        
         }
     }
 } else {
