@@ -47,7 +47,7 @@
                     autofocus>
                 <label>Email</label>
             </div>
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="reset_password" value="Reset Password">
+            <input type="submit" class="no_outline border-curve-lg mt-20" name="reset_password" value="Send OTP">
             <p class="mt-20 text-center">Remember password? <a href="./login.php" class="cta">Login</a></p>
         </form>
     </main>
