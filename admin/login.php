@@ -26,7 +26,7 @@
                     <label>Password</label>
                 </div>
                 <a href="#" class="forget_password">Forgot password?</a>
-                <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="login">
+                <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="Login">
 
             </form>
         </div>
