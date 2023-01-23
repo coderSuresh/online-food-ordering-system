@@ -138,3 +138,12 @@ actionMenus && actionMenus.forEach((actionMenu) => {
         actionMenu.classList.toggle("visible")
     })
 })
+
+// for closing action menu when clicked outside
+window.addEventListener("click", (e) => {
+    if (!e.target.closest(".table_option-menu")) {
+        actionMenus && actionMenus.forEach(menu => {
+            menu.classList.remove("visible")
+        })
+    }
+})
