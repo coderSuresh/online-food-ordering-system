@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header('location: ../invalid.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,17 +156,6 @@
                 </div>
 
                 <form action="./backend/add-category.php" method="post" name="modal_form" enctype="multipart/form-data" class="form_add-category modal_form">
-
-                    <?php
-                    if (isset($_SESSION["success"])) {
-                    ?>
-                        <!-- to show error alert -->
-                        <p class="error-container p_7-20">
-                            <?php echo $_SESSION["success"]; ?>
-                        </p>
-                    <?php
-                    }
-                    ?>
 
                     <div class="row">
                         <div class="col">
@@ -443,5 +437,3 @@
 </body>
 
 </html>
-
-<?php session_unset(); ?>
