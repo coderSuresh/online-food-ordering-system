@@ -1,6 +1,6 @@
 <?php
     session_start();
-     include("../../config.php");
+     include("../../../../config.php");
      if(isset($_POST['verify'])){
                         $otp = mysqli_real_escape_string($conn,$_POST['otp']); 
                         $user = $_SESSION['username'];
@@ -16,7 +16,7 @@
                             $res_update = mysqli_query($conn, $sql_update) or die("Error");
                             if($res_update){
                                 $_SESSION['verification'] = "sucessful";
-                                header("Location:./login.php");
+                                header("Location:../login.php");
                             }
                          }
 
@@ -25,7 +25,7 @@
 
                 }
             else{
-                header("Location:./login.php");
+                header("Location:../login.php");
             }
 
 ?>

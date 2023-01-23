@@ -91,7 +91,7 @@ if (isset($_POST['register'])) {
                     $mail->send();
                     
                     $_SESSION['username'] = $username;
-                    header("Location:./verify.php");   
+                    header("Location:../customer_auth/verify/verify.php");   
                     
                 } catch (Exception $e) {
                     $_SESSION['error'] = "$e";

@@ -12,7 +12,7 @@ if (isset($_POST['reset_password'])){
               $email = $data['email'];     
 
                 //Load Composer's autoloader
-                require '../../vendor/autoload.php';
+                require '../../../vendor/autoload.php';
 
                 //Create an instance; passing `true` enables exceptions
                 $mail = new PHPMailer(true);
@@ -42,7 +42,7 @@ if (isset($_POST['reset_password'])){
                     $mail->send();
                     
                     $_SESSION['username'] = $username;
-                    header("Location:./verify.php");   
+                    header("Location:../reset-verify.php");   
                     
                 } catch (Exception $e) {
                     $_SESSION['email'] = "$e";

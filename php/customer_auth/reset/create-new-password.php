@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    include("../../config.php");
+    include("../../../config.php");
     if(isset($_POST['create-new-password'])) {
         $password = mysqli_real_escape_string($conn,$_POST['new-password']);
         $confirm_password = mysqli_real_escape_string($conn,$_POST['confirm-password']);
@@ -18,7 +18,7 @@
             $res = mysqli_query($conn, $sql) or die("Error");
             if($res){
                 $_SESSION['password'] = "sucessful";
-                header("Location:./login.php");
+                header("Location:../login.php");
             }
         }
         else{
@@ -30,7 +30,7 @@
 
     }
     else{
-        header("Location:./login.php");
+        header("Location:../login.php");
     }
 
 
