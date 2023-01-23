@@ -6,10 +6,9 @@ include '../../config.php';
 // response holder
 $response = array();
 
-if (!isset($_SESSION['admin'])) {
+if (!isset($_SESSION['success'])) {
     $response['status'] = "error";
-    // $response['msg'] = "You are not logged in";
-    array_push($response["msg"], "You are not logged in");
+    $response['msg'] = "You are not logged in";
     echo json_encode($response);
 } else {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -29,20 +28,26 @@ if (!isset($_SESSION['admin'])) {
             $response["status"] = "error";
             $response["msg"] = "File is not an image.";
             $uploadOk = 0;
+            echo json_encode($response);
+            exit();
         }
 
         // Check for existing file
         if (file_exists($target_file)) {
             $response["status"] = "error";
             $response["msg"] = "Sorry, file with same name already exists.";
+            echo json_encode($response);
             $uploadOk = 0;
+            exit();
         }
 
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 200000) {
             $response["status"] = "error";
             $response["msg"] = "Sorry, file should be less than 200KB.";
-            $uploadOk = 0;      
+            $uploadOk = 0;
+            echo json_encode($response);
+            exit();
         }
 
         $category = mysqli_real_escape_string($conn, $_POST['category']);
@@ -50,14 +55,15 @@ if (!isset($_SESSION['admin'])) {
         if (!preg_match("/^[A-Z a-z]{2,30}$/", $category)) {
             $response['status'] = "error";
             $response['msg'] = "Name should contain alphabet only";
+            echo json_encode($response);
+            exit();
         } else {
 
             if ($uploadOk == 0) {
                 $response["status"] = "error";
-                // $response["msg"] = "Sorry, your file was not uploaded.";
-
-                array_push($response, "Sorry, your file was not uploaded.");
-
+                $response["msg"] = "Sorry, your file was not uploaded.";
+                echo json_encode($response);
+                exit();
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
                     $response["status"] = "success";
@@ -69,16 +75,20 @@ if (!isset($_SESSION['admin'])) {
                 } else {
                     $response["status"] = "error";
                     $response["msg"] = "Sorry, there was an error uploading your file.";
+                    echo json_encode($response);
+                    exit();
                 }
             }
 
-            // if ($result) {
-            //     $response['status'] = "success";
-            //     $response['msg'] = "Category added successfully";
-            // } else {
-            //     $response['status'] = "error";
-            //     $response['msg'] = "Failed to add category";
-            // }
+            if ($result) {
+                $response['status'] = "success";
+                $response['msg'] = "Category added successfully";
+            } else {
+                $response['status'] = "error";
+                $response['msg'] = "Failed to add category";
+                echo json_encode($response);
+                exit();
+            }
         }
 
         echo json_encode($response);
