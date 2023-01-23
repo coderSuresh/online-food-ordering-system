@@ -17,6 +17,7 @@ const popperBtn = document.querySelector(".popper-btn")
 closeBtn && (
     closeBtn.addEventListener("click", () => {
         modal.style.display = "none"
+        location.reload()
     })
 )
 

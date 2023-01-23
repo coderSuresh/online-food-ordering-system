@@ -211,227 +211,81 @@ if (!isset($_SESSION['success'])) {
             </div>
         </div>
 
-        <table class="mt-20">
-            <tr class="shadow">
-                <th>SN</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Total Items</th>
-                <th>Sold</th>
-                <th>Action</th>
-            </tr>
-            <tr class="shadow">
-                <td>1</td>
-                <td>
-                    <img src="../images/food.png" alt="food image" class="table_food-img">
-                </td>
-                <td>Chinese Momo</td>
-                <td>160</td>
-                <td>123</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images/ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_edit.svg" alt="edit icon">
-                                    <p>Edit</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_view.svg" alt="view icon">
-                                    <p>View</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_delete.svg" alt="delete icon">
-                                    <p>Delete</p>
-                                </div>
-                            </a>
-                        </div>
+        <?php
+        include("../config.php");
+        $sql = "select * from category order by cat_id desc";
+        $res = mysqli_query($conn, $sql);
 
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>2</td>
-                <td>
-                    <img src="../images/food.png" alt="food image" class="table_food-img">
-                </td>
-                <td>Chinese Momo</td>
-                <td>160</td>
-                <td>123</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images/ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_edit.svg" alt="edit icon">
-                                    <p>Edit</p>
+        if (mysqli_num_rows($res) > 0) {
+        ?>
+            <table class="mt-20">
+                <tr class="shadow">
+                    <th>SN</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Total Items</th>
+                    <th>Sold</th>
+                    <th>Action</th>
+                </tr>
+
+                <?php
+                $i = 0;
+                while ($data = mysqli_fetch_assoc($res)) {
+                    $i++;
+                ?>
+                    <tr class="shadow">
+                        <td> <?php echo $i; ?> </td>
+                        <td>
+                            <img src="../uploads/category/<?php echo $data["image"]; ?>" alt="food image" class="table_food-img">
+                        </td>
+                        <td> <?php echo $data["name"]; ?> </td>
+                        <td>160</td>
+                        <td>123</td>
+                        <td class="table_action_container">
+                            <!-- action menu -->
+                            <button class="no_bg no_outline table_option-menu">
+                                <img src="../images/ic_options.svg" alt="options menu">
+                            </button>
+                            <!-- options -->
+                            <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                                <div>
+                                    <a href="#">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../images/ic_edit.svg" alt="edit icon">
+                                            <p>Edit</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_view.svg" alt="view icon">
-                                    <p>View</p>
+                                <div>
+                                    <a href="#">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../images/ic_view.svg" alt="view icon">
+                                            <p>View</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_delete.svg" alt="delete icon">
-                                    <p>Delete</p>
+                                <div>
+                                    <a href="#">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../images/ic_delete.svg" alt="delete icon">
+                                            <p>Delete</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>3</td>
-                <td>
-                    <img src="../images/food.png" alt="food image" class="table_food-img">
-                </td>
-                <td>Chinese Momo</td>
-                <td>160</td>
-                <td>123</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images/ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_edit.svg" alt="edit icon">
-                                    <p>Edit</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_view.svg" alt="view icon">
-                                    <p>View</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_delete.svg" alt="delete icon">
-                                    <p>Delete</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>4</td>
-                <td>
-                    <img src="../images/food.png" alt="food image" class="table_food-img">
-                </td>
-                <td>Chinese Momo</td>
-                <td>160</td>
-                <td>123</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images/ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_edit.svg" alt="edit icon">
-                                    <p>Edit</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_view.svg" alt="view icon">
-                                    <p>View</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_delete.svg" alt="delete icon">
-                                    <p>Delete</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>5</td>
-                <td>
-                    <img src="../images/food.png" alt="food image" class="table_food-img">
-                </td>
-                <td>Chinese Momo</td>
-                <td>160</td>
-                <td>123</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images/ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_edit.svg" alt="edit icon">
-                                    <p>Edit</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_view.svg" alt="view icon">
-                                    <p>View</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_delete.svg" alt="delete icon">
-                                    <p>Delete</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        <?php
+        } else {
+        ?>
+            <p class="mt-20 text-center">
+            <?php
+            echo "No data found";
+        }
+            ?>
+            </p>
     </main>
 
 </body>
