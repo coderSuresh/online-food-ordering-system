@@ -70,7 +70,9 @@ session_start();
                 <p class="error-container p_7-20">
                     <?php echo $_SESSION["invalid"]; ?>
                 </p>
+                
             <?php
+                unset($_SESSION["invalid"]);
             }
             ?>
 
