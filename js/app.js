@@ -13,19 +13,25 @@ if (history.length > 1 && navBackBtn !== null) {
 const passwordToggleBtn = document.querySelectorAll(".password_toggle_btn")
 const passwordInput = document.querySelectorAll(".password_input")
 
+let extraPath = "/"
+
 passwordToggleBtn && passwordToggleBtn.forEach((btn, i) => {
     btn.addEventListener("click", () => {
-        btn.getAttribute("src") == "../../images/ic_eye-off.svg" ? showPassword(i) : hidePassword(i)
+        const attr = btn.getAttribute("src")
+        // handle path
+        attr.includes("../../../images") ? extraPath = "/../" : extraPath = "/"
+        // handle toggle
+        attr.includes("ic_eye-off.svg") ? showPassword(i, extraPath) : hidePassword(i, extraPath)
     })
 })
 
-const showPassword = (i) => {
-    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", "../../images/ic_eye.svg")
+const showPassword = (i, extra_path) => {
+    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../..${extra_path}images/ic_eye.svg`)
     passwordInput && passwordInput[i].setAttribute("type", "text")
 }
 
-const hidePassword = (i) => {
-    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", "../../images/ic_eye-off.svg")
+const hidePassword = (i, extra_path) => {
+    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../..${extra_path}images/ic_eye-off.svg`)
     passwordInput && passwordInput[i].setAttribute("type", "password")
 }
 

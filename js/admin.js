@@ -180,6 +180,9 @@ function submitForm(backendAPI) {
                 form.reset()
             }
         })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 // show alert message for modal form

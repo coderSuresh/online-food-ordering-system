@@ -1,8 +1,8 @@
 <?php
-
 session_start();
-@include('../config.php');
-if(isset($_POST['login'])){   
+include('../config.php');
+
+if(isset($_POST['login'])) {   
   
     $username = mysqli_real_escape_string($conn,$_POST['username']);
     $password = md5(mysqli_real_escape_string($conn,$_POST['password']));    
@@ -20,7 +20,7 @@ if(isset($_POST['login'])){
               header("Location:Location:./login.php");
       }
       else {
-            $_SESSION['success'] = "login success";
+            $_SESSION['admin'] = "login success";
             header("Location:./dashboard.php");            
       }           
     }
@@ -28,4 +28,3 @@ if(isset($_POST['login'])){
 else {
       header("Location:Location:./login.php");
 }
-?>
