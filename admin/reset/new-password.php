@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['verification-sucess'])){
     header("Location:../login.php");
 }
@@ -69,4 +70,3 @@ if(!isset($_SESSION['verification-sucess'])){
 
 </html>
 
-?>
