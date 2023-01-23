@@ -147,3 +147,62 @@ window.addEventListener("click", (e) => {
         })
     }
 })
+
+// to prevent default action of form submit
+const form = document.querySelector(".modal_form")
+const submitBtn = document.querySelector(".add-category")
+
+form && form.addEventListener("submit", (e) => {
+
+    e.preventDefault()
+
+    //validate for empty fields
+    const name = document.forms["modal_form"]["name"].value
+    const img = document.querySelector(".img_upload-input").files
+
+    if (name && img.length) {
+        submitForm("../admin/backend/add-category.php")
+    }
+})
+
+// submit form
+function submitForm(backendAPI) {
+    const formData = new FormData(form)
+    fetch(backendAPI, {
+        method: "POST",
+        body: formData
+    })
+        .then(res => res.json())
+        .then(data => {
+            showAlert(data["msg"], data["status"])
+            if (data['status'] == "success") {
+                // reset form if success
+                form.reset()
+            }
+        })
+}
+
+// show alert message for modal form
+function showAlert(msg, level) {
+    const modalAlert = document.createElement("p")
+    const body = document.querySelector("body")
+
+    modalAlert.setAttribute("class", `error-container ${level} p_7-20`)
+
+    // for animation
+    setInterval(() => {
+        modalAlert.classList.add("active")
+    }, 100)
+
+    setInterval(() => {
+        modalAlert.classList.remove("active")
+    }, 2900);
+
+    modalAlert.textContent = msg
+
+    setTimeout(() => {
+        body.removeChild(modalAlert)
+    }, 3000)
+
+    body.appendChild(modalAlert)
+}

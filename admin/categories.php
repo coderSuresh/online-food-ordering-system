@@ -150,7 +150,7 @@
                     <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
                 </div>
 
-                <form action="./backend/add-category.php" method="post" class="form_add-category modal_form">
+                <form action="./backend/add-category.php" method="post" name="modal_form" enctype="multipart/form-data" class="form_add-category modal_form">
 
                     <?php
                     if (isset($_SESSION["success"])) {
@@ -166,14 +166,13 @@
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" autofocus>
+                            <input type="text" class="category_name" name="category" id="name" required>
                         </div>
-
                     </div>
 
                     <div class="col items-center">
                         <div class="uploaded-img-preview text-center">
-                            <img src="../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                            <img src="../images/ic_cloud.svg" name="upload-img" class="upload-img" alt="uploaded image">
                         </div>
                         <p class="warning warning-no_margin">Image should be less than 200 KB</p>
                     </div>
@@ -181,7 +180,7 @@
                     <div class="row mt-20">
                         <div class="col">
                             <label for="image">Select an image:</label>
-                            <input type="file" name="image" class="img_upload-input" id="image">
+                            <input type="file" name="image" class="img_upload-input" id="image" required>
                         </div>
                     </div>
 

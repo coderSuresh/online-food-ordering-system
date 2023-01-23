@@ -1161,6 +1161,17 @@ table tr th {
     right: -100%;
     top: 100px;
     transition: 0.3s all;
+    z-index: 1001;
+}
+
+.error-container.error {
+    background-color: rgb(160, 10, 10);
+    color: var(--white);
+}
+
+.error-container.success {
+    background-color: rgb(10, 160, 10);
+    color: var(--white);
 }
 
 .error-container.active {
