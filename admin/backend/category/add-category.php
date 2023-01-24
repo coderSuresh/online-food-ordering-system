@@ -34,15 +34,13 @@ if (!isset($_SESSION['success'])) {
 
         // Check for existing file
         if (file_exists($target_file)) {
-            $response["status"] = "error";
-            $response["msg"] = "Sorry, file with same name already exists.";
-            echo json_encode($response);
-            $uploadOk = 0;
-            exit();
+            // $response["msg"] = "Sorry, file with same name already exists.";
+            $file_name = time() . $file_name;
+            $target_file = $target_dir . $file_name;
         }
 
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 200000) {
+        if ($_FILES["image"]["size"] > 200000) {
             $response["status"] = "error";
             $response["msg"] = "Sorry, file should be less than 200KB.";
             $uploadOk = 0;
