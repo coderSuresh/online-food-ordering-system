@@ -935,6 +935,10 @@ input[type=submit]:active {
     overflow: auto;
 }
 
+.modal.flex {
+    display: flex;
+}
+
 /* just for styling */
 .not-required {
     visibility: hidden;
@@ -1126,6 +1130,7 @@ table tr th {
 .table_food-img {
     width: 50px;
     height: 40px;
+    object-fit: contain;
     vertical-align: middle;
 }
 

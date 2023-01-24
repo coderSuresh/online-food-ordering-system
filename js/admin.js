@@ -161,8 +161,11 @@ form && form.addEventListener("submit", (e) => {
     const name = document.forms["modal_form"]["name"].value
     const img = document.querySelector(".img_upload-input").files
 
+    // get name attribute
+    const btnName = submitBtn.getAttribute("name")
+
     if (name && img.length) {
-        submitForm("../admin/backend/add-category.php")
+        btnName == "add" ? submitForm("../admin/backend/category/add-category.php") : submitForm("../admin/backend/category/update.php")
     }
 })
 
@@ -214,7 +217,7 @@ function showAlert(msg, level) {
 // warn before delete
 const deleteBtn = document.querySelectorAll(".delete_btn")
 
-deleteBtn.forEach(btn => {
+deleteBtn && deleteBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         const confirm = window.confirm("Are you sure to delete?")
         if (!confirm) {

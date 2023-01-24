@@ -147,26 +147,40 @@ if (!isset($_SESSION['success'])) {
             <h2>Manage Categories</h2>
         </section>
 
-        <section class="modal items-center justify-center">
+        <section class="modal <?php if (isset($_SESSION['cat-name'])) echo "flex"; ?> items-center justify-center">
 
             <div class="modal_form-container small-modal p-20 shadow border-curve-md">
                 <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Add Category</h2>
-                    <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
+                    <h2 class="modal-title">
+                        <?php
+                        if (isset($_SESSION['cat-name']))
+                            echo "Update Category";
+                        else
+                            echo "Add Category";
+                        ?>
+                    </h2>
+                    <a href="./backend/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
                 </div>
 
-                <form action="./backend/add-category.php" method="post" name="modal_form" enctype="multipart/form-data" class="form_add-category modal_form">
+                <form action="<?php if (isset($_SESSION['cat-name'])) {
+                                    echo "./backend/category/update.php";
+                                } else {
+                                    echo "./backend/category/add-category.php";
+                                } ?>" method="post" name="modal_form" enctype="multipart/form-data" class="form_add-category modal_form">
 
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" class="category_name" name="category" id="name" required>
+                            <input type="text" class="category_name" value="<?php if (isset($_SESSION['cat-name'])) echo $_SESSION['cat-name']; ?>" name="category" id="name" required>
                         </div>
                     </div>
 
                     <div class="col items-center">
                         <div class="uploaded-img-preview text-center">
-                            <img src="../images/ic_cloud.svg" name="upload-img" class="upload-img" alt="uploaded image">
+                            <img src="<?php if (isset($_SESSION['cat-img'])) {
+                                            echo "../uploads/category/" . $_SESSION['cat-img'];
+                                        } else
+                                            echo "../images/ic_cloud.svg"; ?>" name="upload-img" class="upload-img" alt="uploaded image">
                         </div>
                         <p class="warning warning-no_margin">Image should be less than 200 KB</p>
                     </div>
@@ -178,8 +192,24 @@ if (!isset($_SESSION['success'])) {
                         </div>
                     </div>
 
+                    <?php
+                    if (isset($_SESSION['cat-name'])) {
+                        echo "<input type='hidden' name='cat-id' value='2'>";
+                    }
+
+                    ?>
+
                     <div class="row">
-                        <button type="submit" class="button" name="add-category">Add Category</button>
+                        <button type="submit" class="button add-category" name="<?php if (isset($_SESSION['cat-name']))
+                                                                                    echo "update";
+                                                                                else echo "add" ?>">
+                            <?php
+                            if (isset($_SESSION['cat-name']))
+                                echo "Update Category";
+                            else
+                                echo "Add Category";
+                            ?>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -271,12 +301,17 @@ if (!isset($_SESSION['success'])) {
                             <!-- options -->
                             <div class="table_action_options shadow border-curve p-20 flex direction-col">
                                 <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../images/ic_edit.svg" alt="edit icon">
-                                            <p>Edit</p>
-                                        </div>
-                                    </a>
+                                    <form action="./backend/category/edit.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $data["cat_id"]; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $data["name"]; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $data["image"]; ?>">
+                                        <button type="submit" name="edit" class="no_bg no_outline">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_edit.svg" alt="edit icon">
+                                                <p>Edit</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div>
                                     <a href="#">
