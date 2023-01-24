@@ -11,8 +11,8 @@ session_start();
     <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
     <link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon">
     <title>Register | RestroHub</title>
-    <link rel="stylesheet" href="../../styles/style.css">
-    <script type="module" src="../../js/app.js" defer></script>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script type="module" src="../js/app.js" defer></script>
 </head>
 
 <body>
@@ -20,8 +20,8 @@ session_start();
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- test back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
-                <a href="#" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
+                <a href="#" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -30,10 +30,10 @@ session_start();
             <ul class="flex items-center">
                 <li class="flex direction-col"><a href="menu.html">Menu</li>
 
-                <li class="flex direction-col"><a href="login.html"><img src="../../images/ic_acc.svg" alt="account"></a>
+                <li class="flex direction-col"><a href="login.html"><img src="../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
@@ -151,12 +151,12 @@ session_start();
             <div class="text_field">
                 <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx" name="password" required>
                 <label>Password</label>
-                <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
+                <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <div class="text_field">
                 <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxxx" name="confirm_password" required>
                 <label>Confirm Password</label>
-                <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
+                <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <input type="submit" class="no_outline border-curve-lg" name="register" value="Register">
             <p>

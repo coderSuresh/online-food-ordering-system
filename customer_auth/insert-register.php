@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../config.php');
+include('../config.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -61,7 +61,7 @@ if (isset($_POST['register'])) {
               
 
                 //Load Composer's autoloader
-                require '../../vendor/autoload.php';
+                require '../vendor/autoload.php';
 
                 //Create an instance; passing `true` enables exceptions
                 $mail = new PHPMailer(true);

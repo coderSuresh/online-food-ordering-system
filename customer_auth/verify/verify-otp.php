@@ -1,6 +1,6 @@
 <?php
     session_start();
-     include("../../../config.php");
+     include("../../config.php");
      if(isset($_POST['verify'])){
                         $otp = mysqli_real_escape_string($conn,$_POST['otp']); 
                         $user = $_SESSION['username'];

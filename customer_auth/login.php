@@ -11,7 +11,7 @@ session_start();
     <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Login | RestroHub</title>
-    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 
 <body>
@@ -19,8 +19,8 @@ session_start();
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -28,10 +28,10 @@ session_start();
             <ul class="flex items-center">
                 <li class="flex direction-col"><a href="menu.html">Menu</li>
 
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
+                <li class="flex direction-col"><a href="#"><img src="../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
@@ -52,14 +52,14 @@ session_start();
             ?>
 
             <?php
-            if (isset($_SESSION["pass"])) {
+            if (isset($_SESSION["password"])) {
             ?>
                 <!-- to show error alert -->
                 <p class="error-container p_7-20">
-                    <?php echo $_SESSION["pass"]; ?>
+                    <?php echo $_SESSION["password"]; ?>
                 </p>
             <?php
-                unset($_SESSION["pass"]);
+                unset($_SESSION["password"]);
             }
             ?>
 
@@ -83,7 +83,7 @@ session_start();
             <div class="text_field">
                 <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxx" name="password" required>
                 <label>Password</label>
-                <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
+                <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <a href="../customer_auth/reset/reset-password.php" class="forget_password">Forgot password?</a>
             <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="Login">
@@ -96,15 +96,15 @@ session_start();
 
             <div class="flex items-center mt-20">
 
-                <img src="../../images/ic_google.svg" class="icons pointer shadow google" alt="sign in with google" id="google">
+                <img src="../images/ic_google.svg" class="icons pointer shadow google" alt="sign in with google" id="google">
 
-                <img src="../../images/ic_facebook.svg" class="icons pointer shadow facebook" alt="sign in with facebook">
+                <img src="../images/ic_facebook.svg" class="icons pointer shadow facebook" alt="sign in with facebook">
 
-                <a href="./register.php"><img src="../../images/ic_mail.svg" class="icons pointer shadow" alt="sign in with email"></a>
+                <a href="./register.php"><img src="../images/ic_mail.svg" class="icons pointer shadow" alt="sign in with email"></a>
             </div>
         </form>
     </main>
-    <script type="module" src="../../js/app.js"></script>
+    <script type="module" src="../js/app.js"></script>
 </body>
 <?php
 if (isset($_COOKIE['user'])) {
@@ -121,9 +121,9 @@ if (isset($_COOKIE['user'])) {
         $status = "verified";
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images','$status',NULL)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        header("location: ../../index.php");
+        header("location: ../index.php");
     } else {
-        header("location: ../../index.php");
+        header("location: ../index.php");
     }
 }
 // var_dump($_COOKIE);

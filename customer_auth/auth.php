@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../config.php');
+include('../config.php');
 
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
                 header("Location:./login.php"); 
             }else{
                 $_SESSION['success'] = "Login success";
-                  header("Location:../../index.php");
+                  header("Location:../index.php");
             }
         }
     } else {

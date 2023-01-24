@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-     include("../../../config.php");
+     include("../../config.php");
      if(isset($_POST['send_otp'])){
         
             $input_email = mysqli_real_escape_string($conn,$_POST['email']);
@@ -16,7 +16,7 @@ use PHPMailer\PHPMailer\Exception;
             $email = $input_email;
             $username = $data_name['names'];
                  //Load Composer's autoloader
-                require '../../../vendor/autoload.php';
+                require '../../vendor/autoload.php';
 
                 //Create an instance; passing `true` enables exceptions
                 $mail = new PHPMailer(true);
