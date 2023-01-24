@@ -269,9 +269,23 @@ header {
     font-weight: 600;
 }
 
-.top_nav ul li a img {
+.top_nav ul li a img,
+.top_nav ul li img {
     width: 2rem;
     cursor: pointer;
+}
+
+/* user profile and logout button */
+.logout-dropdown {
+    position: absolute;
+    top: 60px;
+    background-color: var(--white);
+    display: none;
+    z-index: 999;
+}
+
+.logout-dropdown.visible {
+    display: block;
 }
 
 /* search form */

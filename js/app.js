@@ -211,3 +211,11 @@ function toggleCategories() {
 // display current year on footer
 const year = document.querySelector(".footer_year")
 year && (year.textContent = new Date().getFullYear())
+
+// to toggle user logout dropdown
+const userProfileIcon = document.querySelector(".user_profile_icon")
+const userLogoutDropdown = document.querySelector(".logout-dropdown")
+
+userProfileIcon && userProfileIcon.addEventListener("click", () => {
+    userLogoutDropdown.classList.toggle("visible")
+})
