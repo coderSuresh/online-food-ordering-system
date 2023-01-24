@@ -19,19 +19,19 @@ passwordToggleBtn && passwordToggleBtn.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         const attr = btn.getAttribute("src")
         // handle path
-        attr.includes("../../../images") ? extraPath = "/../" : extraPath = "/"
+        attr.includes("../../images") ? extraPath = "/../" : extraPath = "/"
         // handle toggle
         attr.includes("ic_eye-off.svg") ? showPassword(i, extraPath) : hidePassword(i, extraPath)
     })
 })
 
 const showPassword = (i, extra_path) => {
-    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../..${extra_path}images/ic_eye.svg`)
+    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `..${extra_path}images/ic_eye.svg`)
     passwordInput && passwordInput[i].setAttribute("type", "text")
 }
 
 const hidePassword = (i, extra_path) => {
-    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../..${extra_path}images/ic_eye-off.svg`)
+    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../${extra_path}images/ic_eye-off.svg`)
     passwordInput && passwordInput[i].setAttribute("type", "password")
 }
 
