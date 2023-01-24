@@ -210,3 +210,29 @@ function showAlert(msg, level) {
 
     body.appendChild(modalAlert)
 }
+
+// warn before delete
+const deleteBtn = document.querySelectorAll(".delete_btn")
+
+deleteBtn.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const confirm = window.confirm("Are you sure to delete?")
+        if (!confirm) {
+            e.preventDefault()
+        }
+    })
+})
+
+// show alert on delete
+const errorContainer = document.querySelectorAll(".error-container")
+
+const showErrorAlert = () => {
+    errorContainer && errorContainer.forEach((container) => {
+        setTimeout(() => {
+            container.classList.remove("active")
+        }, 3000)
+        container.classList.add("active")
+    })
+}
+
+showErrorAlert()

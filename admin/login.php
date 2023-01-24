@@ -34,7 +34,6 @@ session_start();
             }
             ?>
 
-
           <?php
             if (isset($_SESSION['password'])) {
             ?>
@@ -62,7 +61,7 @@ session_start();
             </form>
         </div>
     </main>
-<script type ="module" src="../js/app.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 
 </html>

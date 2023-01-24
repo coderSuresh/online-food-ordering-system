@@ -148,8 +148,8 @@ if (!isset($_SESSION['success'])) {
         </section>
 
         <section class="modal items-center justify-center">
-            <div class="modal_form-container small-modal p-20 shadow border-curve-md">
 
+            <div class="modal_form-container small-modal p-20 shadow border-curve-md">
                 <div class="modal_title-container flex items-center">
                     <h2 class="modal-title">Add Category</h2>
                     <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
@@ -181,9 +181,8 @@ if (!isset($_SESSION['success'])) {
                     <div class="row">
                         <button type="submit" class="button" name="add-category">Add Category</button>
                     </div>
+                </form>
             </div>
-
-            </form>
 
         </section>
 
@@ -215,6 +214,29 @@ if (!isset($_SESSION['success'])) {
         include("../config.php");
         $sql = "select * from category order by cat_id desc";
         $res = mysqli_query($conn, $sql);
+
+        if (isset($_SESSION['delete_success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['delete_success'];
+                unset($_SESSION['delete_success']);
+                ?>
+            </p>
+        <?php
+        }
+        if (isset($_SESSION['delete_error'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['delete_error'];
+                unset($_SESSION['delete_error']);
+                ?>
+            </p>
+        <?php
+        }
 
         if (mysqli_num_rows($res) > 0) {
         ?>
@@ -265,12 +287,16 @@ if (!isset($_SESSION['success'])) {
                                     </a>
                                 </div>
                                 <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../images/ic_delete.svg" alt="delete icon">
-                                            <p>Delete</p>
-                                        </div>
-                                    </a>
+                                    <form action="./backend/category/delete.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $data["cat_id"]; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $data["image"]; ?>">
+                                        <button type="submit" name="delete" class="no_bg no_outline delete_btn">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_delete.svg" alt="delete icon">
+                                                <p>Delete</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>

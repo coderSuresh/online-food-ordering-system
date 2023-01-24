@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../../config.php';
+include '../../../config.php';
 
 // response holder
 $response = array();
@@ -14,7 +14,7 @@ if (!isset($_SESSION['success'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // upload image to server 
-        $target_dir = "../../uploads/category/";
+        $target_dir = "../../../uploads/category/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $temp_file = $_FILES["image"]["tmp_name"];
         $file_name = basename($_FILES["image"]["name"]);
@@ -93,6 +93,6 @@ if (!isset($_SESSION['success'])) {
 
         echo json_encode($response);
     } else {
-        header('location: ../../invalid.html');
+        header('location: ../../../invalid.html');
     }
 }

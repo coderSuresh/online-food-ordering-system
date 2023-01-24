@@ -908,8 +908,12 @@ input[type=submit]:active {
     display: block;
 }
 
-.table_action_options div {
+.table_action_options>div {
     margin: 20px 0;
+}
+
+.table_action_options div p {
+    font-size: 1rem;
 }
 
 .table_action_options div img {
