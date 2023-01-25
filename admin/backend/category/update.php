@@ -14,12 +14,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $file_name = basename($_FILES["image"]["name"]);
     $uploadOk = 1;
 
-    // $response['status'] = "success";
-    // $response['msg'] = $id . " " . $name . " " . $file_name;
+    $isDuplicate = false;
 
-    // update category name
-    $sql = "UPDATE category SET name = '$name' WHERE cat_id = $id";
-    $res = mysqli_query($conn, $sql);
+    // get image name from db
+    $sql_img = "select image from category where cat_id = $id";
+    $res_img = mysqli_query($conn, $sql_img);
+
+    if ($res_img) {
+        $row = mysqli_fetch_assoc($res_img);
+        $imgName = $row['image'];
+
+        if ($imgName != $file_name) {
+            require('../validate-img.php');
+        } else
+            $isDuplicate = true;
+    } else {
+        $response['status'] = "error";
+        $response['msg'] = "Could not get image from database";
+
+        echo json_encode($response);
+        exit();
+    }
+
+    if ($uploadOk == 0) {
+        $response["status"] = "error";
+        $response["msg"] = "Sorry, your file was not uploaded.";
+        echo json_encode($response);
+        exit();
+    } else {
+        if (move_uploaded_file($temp_file, $target_file)) {
+            // update category name
+            $query_string = $isDuplicate ? "" : ", image='$file_name'";
+            $sql = "UPDATE category SET name = '$name', image = '$file_name' WHERE cat_id = $id";
+            $res = mysqli_query($conn, $sql);
+        } else {
+            $response["status"] = "error";
+            $response["msg"] = "Sorry, there was an error uploading your file.";
+            echo json_encode($response);
+            exit();
+        }
+    }
 
     if ($res) {
         $response['status'] = "success";
