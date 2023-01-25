@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['success'])) {
+if (!isset($_SESSION['admin-success'])) {
     header('location: ../invalid.html');
 }
 ?>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['success'])) {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="./logout.php">
                                 <div class="flex items-center justify-start">
                                     <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon" aria-hidden="true">
                                     <p>Logout</p>

@@ -39,12 +39,13 @@ session_start();
                     echo '<li class="flex direction-col">
                             <img src="./images/logo.png" class="user_profile_icon" alt="account">
                             <div class="logout-dropdown border-curve shadow p-20">
-                                <a href="./customer_auth/logout.php">Logout</a>                            
+                                <a href="./customer_auth/logout.php">Logout</a>   
+                            </div>                         
                           </li>
                           ';
                 } else {
                     echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account"></a>
-                    <span class="nav__tooltip">Account</span>';
+                    <span class="nav__tooltip">Login</span>';
                 }
                 ?>
 

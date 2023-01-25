@@ -712,22 +712,27 @@ input[type=submit]:active {
 
 .sidebar.open .dashboard_sidebar_content,
 .sidebar_sub-menu li {
-    justify-content: flex-start;
-    padding: 5px 10px;
+    justify-content: space-between;
+    padding: 5px;
     width: 90%;
 }
 
+.sidebar_sub-menu li {
+    width: 100%;
+}
+
+.sidebar_sub-menu li a {
+    padding: 5px 12px;
+}
+
 .sidebar .dashboard_sidebar_content:hover,
-.sidebar_sub-menu li:hover {
+.sidebar_sub-menu li:hover,
+.sidebar.open .dashboard_sidebar_content:hover {
     background-color: var(--trans-black);
 }
 
 .sidebar.open .sidebar_accordion.active .dashboard_sidebar_content {
     background-color: var(--trans-primary);
-}
-
-.sidebar.open .dashboard_sidebar_content:hover {
-    background-color: var(--trans-black);
 }
 
 .sidebar.open .hide-on-close {
@@ -736,7 +741,6 @@ input[type=submit]:active {
 }
 
 /* ============== for admin dashboard.html ================== */
-
 .admin_profile {
     display: none;
     position: absolute;

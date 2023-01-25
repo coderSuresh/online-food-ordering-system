@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['password'] = "Incorrect password";
                 header("Location:./login.php"); 
             }else{
-                $_SESSION['success'] = "Login success";
+                $_SESSION['admin-success'] = "Login success";
                   header("Location:./dashboard.php");
             }
         }

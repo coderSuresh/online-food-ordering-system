@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin-success'])) {
+    header('location: ../invalid.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +47,7 @@
                     <ul class="admin_profile p-20 shadow ">
                         <li>
                             <div class="admin_profile_info flex items-center">
-                                <img src="../images/profile.jpg" class="admin_profile_img" alt="admin profile picture"
-                                    aria-hidden="true">
+                                <img src="../images/profile.jpg" class="admin_profile_img" alt="admin profile picture" aria-hidden="true">
                                 <div>
                                     <h4>Admin Kumar</h4>
                                     <p class="body-text">adminkumar@yandex.ru</p>
@@ -55,8 +60,7 @@
                         <li>
                             <a href="#">
                                 <div class="flex items-center justify-start">
-                                    <img class="admin_profile_icon" alt="manage account"
-                                        src="../images/ic_manage_account.svg" aria-hidden="true">
+                                    <img class="admin_profile_icon" alt="manage account" src="../images/ic_manage_account.svg" aria-hidden="true">
                                     <p>Manage account</p>
                                 </div>
                             </a>
@@ -64,8 +68,7 @@
                         <li>
                             <a href="#">
                                 <div class="flex items-center justify-start">
-                                    <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon"
-                                        aria-hidden="true">
+                                    <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon" aria-hidden="true">
                                     <p>Logout</p>
                                 </div>
                             </a>
@@ -83,12 +86,10 @@
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" alt="dashboard"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_dashboard.svg" alt="dashboard" aria-hidden="true">
                         <div class="flex items-center">
                             <h4 class="dashboard_sidebar_content_text hide-on-close">Dashboard</h4>
-                            <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                                aria-hidden="true" alt="accordion arrow">
+                            <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                         </div>
                     </article>
                 </a>
@@ -112,33 +113,27 @@
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" alt="view"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_view.svg" alt="view" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Food Items</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" alt="category"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_category.svg" alt="category" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Category</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
             <li class="sidebar_accordion">
                 <a href="#">
                     <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
-                        <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" alt="edit user"
-                            aria-hidden="true">
+                        <img class="dashboard_sidebar_content_img" src="../images/ic_user_edit.svg" alt="edit user" aria-hidden="true">
                         <h4 class="dashboard_sidebar_content_text hide-on-close">Users</h4>
-                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close"
-                            aria-hidden="true" alt="accordion arrow">
+                        <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                     </article>
                 </a>
             </li>
@@ -254,10 +249,8 @@
                 <!-- search form for employee -->
                 <form action="#" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee"
-                            name="search-employee" id="search-employee">
-                        <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg"
-                                alt="search icon"></button>
+                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
                 <!-- 
