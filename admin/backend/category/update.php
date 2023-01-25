@@ -36,31 +36,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    if ($uploadOk == 0) {
-        $response["status"] = "error";
-        $response["msg"] = "Sorry, your file was not uploaded.";
+    if (!preg_match("/^[A-Z a-z]{2,30}$/", $name)) {
+        $response['status'] = "error";
+        $response['msg'] = "Name should contain alphabet only";
         echo json_encode($response);
         exit();
     } else {
-        if (move_uploaded_file($temp_file, $target_file)) {
-            // update category name
-            $query_string = $isDuplicate ? "" : ", image='$file_name'";
-            $sql = "UPDATE category SET name = '$name', image = '$file_name' WHERE cat_id = $id";
-            $res = mysqli_query($conn, $sql);
-        } else {
+        if ($uploadOk == 0) {
             $response["status"] = "error";
-            $response["msg"] = "Sorry, there was an error uploading your file.";
+            $response["msg"] = "Sorry, your file was not uploaded.";
             echo json_encode($response);
             exit();
+        } else {
+            if ($isDuplicate) {
+                // update name only
+                $sql = "update category set name = '$name' where cat_id = $id";
+                $res = mysqli_query($conn, $sql) or die("Could not update category name");
+            } else {
+                // update name only
+                $sql = "update category set name = '$name', image = '$file_name' where cat_id = $id";
+                $res = mysqli_query($conn, $sql) or die("Could not update category");
+            }
         }
-    }
 
-    if ($res) {
-        $response['status'] = "success";
-        $response['msg'] = "Category updated successfully";
-    } else {
-        $response['status'] = "error";
-        $response['msg'] = "Could not update category";
+        if ($res) {
+            $response['status'] = "success";
+            $response['msg'] = "Category updated successfully";
+        } else {
+            $response['status'] = "error";
+            $response['msg'] = "Could not update category";
+        }
     }
 
     echo json_encode($response);
