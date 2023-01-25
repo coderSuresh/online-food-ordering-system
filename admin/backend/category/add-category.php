@@ -6,7 +6,7 @@ include '../../../config.php';
 // response holder
 $response = array();
 
-if (!isset($_SESSION['success'])) {
+if (!isset($_SESSION['admin-success'])) {
     $response['status'] = "error";
     $response['msg'] = "You are not logged in";
     echo json_encode($response);

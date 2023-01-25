@@ -147,6 +147,12 @@ window.addEventListener("click", (e) => {
             menu.classList.remove("visible")
         })
     }
+
+    if (!e.target.closest(".sidebar_accordion")) {
+        sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
+            item.classList.remove("active")
+        })
+    }
 })
 
 // to prevent default action of form submit

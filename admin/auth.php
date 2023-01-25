@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
                 header("Location:./login.php"); 
             }else{
                 $_SESSION['admin-success'] = "Login success";
-                  header("Location:./dashboard.php");
+                  header("Location:./index.php");
             }
         }
     } else {

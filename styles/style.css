@@ -721,10 +721,6 @@ input[type=submit]:active {
     width: 100%;
 }
 
-.sidebar_sub-menu li a {
-    padding: 5px 12px;
-}
-
 .sidebar .dashboard_sidebar_content:hover,
 .sidebar_sub-menu li:hover,
 .sidebar.open .dashboard_sidebar_content:hover {
@@ -1148,7 +1144,6 @@ table tr th {
 .table_food-img {
     width: 50px;
     height: 40px;
-    object-fit: contain;
     vertical-align: middle;
 }
 
