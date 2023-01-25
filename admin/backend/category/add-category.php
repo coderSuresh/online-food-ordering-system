@@ -53,7 +53,7 @@ if (!isset($_SESSION['admin-success'])) {
             }
 
             if ($result) {
-                $response['status'] = "success";
+                $response['status'] = "success reset";
                 $response['msg'] = "Category added successfully";
             } else {
                 $response['status'] = "error";
@@ -64,6 +64,7 @@ if (!isset($_SESSION['admin-success'])) {
         }
 
         echo json_encode($response);
+
     } else {
         header('location: ../../../invalid.html');
     }

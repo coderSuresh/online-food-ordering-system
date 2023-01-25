@@ -1,7 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['cat-name'])) {
-    unset($_SESSION['cat-name'], $_SESSION['cat-img']);
-}
+
+unset($_SESSION['cat-name'], $_SESSION['cat-img'], $_SESSION['cat-id']);
+
 header("Location: ../categories.php");
-?>

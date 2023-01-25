@@ -125,15 +125,6 @@ imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
     )
 })
 
-// set uploaded image to input field
-const imgURL = uploadedImg && uploadedImg.getAttribute("src")
-
-const imgInput = document.querySelector(".img_upload-input")
-const dt = new DataTransfer()
-const img = imgURL.split("/")[3]
-dt.items.add(new File([img], img))
-imgInput.files = dt.files
-
 // for action menu of any table
 const actionMenus = document.querySelectorAll(".table_option-menu")
 const actionOptions = document.querySelectorAll(".table_action_options")
@@ -168,6 +159,19 @@ window.addEventListener("click", (e) => {
 const form = document.querySelector(".modal_form")
 const submitBtn = document.querySelector(".add-category")
 
+// get name attribute
+const btnName = submitBtn.getAttribute("name")
+if (btnName == "update") {
+    // set uploaded image to input field
+    const imgURL = uploadedImg && uploadedImg.getAttribute("src")
+
+    const imgInput = document.querySelector(".img_upload-input")
+    const dt = new DataTransfer()
+    const img = imgURL && imgURL.split("/")[3]
+    dt.items.add(new File([img], img))
+    imgInput && (imgInput.files = dt.files)
+}
+
 form && form.addEventListener("submit", (e) => {
 
     e.preventDefault()
@@ -175,9 +179,6 @@ form && form.addEventListener("submit", (e) => {
     //validate for empty fields
     const name = document.forms["modal_form"]["name"].value
     const img = document.querySelector(".img_upload-input").files
-
-    // get name attribute
-    const btnName = submitBtn.getAttribute("name")
 
     if (name && img.length) {
         btnName == "add" ? submitForm("../admin/backend/category/add-category.php") : submitForm("../admin/backend/category/update.php")
@@ -193,10 +194,13 @@ function submitForm(backendAPI) {
     })
         .then(res => res.json())
         .then(data => {
-            showAlert(data["msg"], data["status"])
-            if (data['status'] == "success") {
+            showAlert(data["msg"], data["status"].split(" ")[0])
+            if (data['status'].includes("reset")) {
                 // reset form if success
                 form.reset()
+                // set updated name to input field
+                const nameInput = document.querySelector(".name_input")
+                nameInput && nameInput.setAttribute("value", data["name"])
             }
         })
         .catch(err => {
