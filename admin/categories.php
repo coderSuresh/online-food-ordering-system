@@ -65,13 +65,15 @@
                     <div class="row mt-20">
                         <div class="col">
                             <label for="image">Select an image:</label>
-                            <input type="file" name="image" class="img_upload-input" id="image" <?php if(!isset($_SESSION['cat-img'])) echo "required;" ?>>
+                            <input type="file" name="image" class="img_upload-input" id="image" required>
                         </div>
                     </div>
 
                     <?php
                     if (isset($_SESSION['cat-name'])) {
-                        echo "<input type='hidden' name='cat-id' value='2'>";
+                    ?>
+                        <input type="hidden" name="cat-id" value="<?php echo $_SESSION['cat-id']; ?>">
+                    <?php
                     }
 
                     ?>

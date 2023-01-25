@@ -125,6 +125,15 @@ imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
     )
 })
 
+// set uploaded image to input field
+const imgURL = uploadedImg && uploadedImg.getAttribute("src")
+
+const imgInput = document.querySelector(".img_upload-input")
+const dt = new DataTransfer()
+const img = imgURL.split("/")[3]
+dt.items.add(new File([img], img))
+imgInput.files = dt.files
+
 // for action menu of any table
 const actionMenus = document.querySelectorAll(".table_option-menu")
 const actionOptions = document.querySelectorAll(".table_action_options")
