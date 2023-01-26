@@ -32,7 +32,7 @@
                     <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
                 </div>
 
-                <form action="./backend/foods/add-food.php" method="post" class="date_filter_modal_form">
+                <form action="#" method="post" class="date_filter_modal_form">
 
                     <div class="date_filter_form_options flex justify-start items-center wrap">
                         <div class="flex justify-start items-center">

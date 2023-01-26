@@ -901,6 +901,10 @@ input[type=submit]:active {
 }
 
 /* ===================== for admin manage food.html ===================== */
+.filter-form {
+    margin-right: 30px;
+}
+
 .table_action_container {
     position: relative;
 }

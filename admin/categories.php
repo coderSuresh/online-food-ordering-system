@@ -117,9 +117,19 @@
 
             </div>
             <!-- TODO: make filter here -->
-            <div class="filter button">
-                place for filter
+            <div class="filter flex items-center">
+                <form action="#" method="post" class="filter-form">
+                    <select name="cat-filter" class="p_7-20 border-curve" id="cat-filter">
+                        <option value="name">Sort by name</option>
+                        <option value="most-selling">Most selling</option>
+                        <option value="least-selling">Least selling</option>
+                        <option value="last-added" selected>Last added</option>
+                        <option value="first-added">First added</option>
+                    </select>
+                </form>
+                <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
             </div>
+
         </div>
 
         <?php
@@ -235,4 +245,6 @@
 
 </html>
 
-<?php unset($_SESSION['cat-name']); ?>
+<?php
+// unset($_SESSION['cat-name']); 
+?>

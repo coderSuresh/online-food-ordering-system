@@ -198,11 +198,13 @@ function submitForm(backendAPI) {
         .then(data => {
             showAlert(data["msg"], data["status"].split(" ")[0])
             if (data['status'].includes("reset")) {
-                // reset form if success
+                // reset form
                 form.reset()
-                // set updated name to input field
-                const nameInput = document.querySelector(".name_input")
-                nameInput && nameInput.setAttribute("value", data["name"])
+                if (btnName == "update") {
+                    // set updated name to input field
+                    const nameInput = document.querySelector(".name_input")
+                    nameInput && nameInput.setAttribute("value", data["name"])
+                }
             }
         })
         .catch(err => {
