@@ -67,7 +67,7 @@
 
                     <div class="row mt-20">
                         <div class="col">
-                            <!-- <label for="image">Select an image:</label> -->
+                            <label for="image">Select an image:</label>
                             <input type="file" name="image" class="img_upload-input" id="image" required>
                         </div>
                     </div>
