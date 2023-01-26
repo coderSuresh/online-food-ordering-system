@@ -54,17 +54,20 @@
 
                     <div class="col items-center">
                         <div class="uploaded-img-preview text-center">
-                            <img src="<?php if (isset($_SESSION['cat-img'])) {
-                                            echo "../uploads/category/" . $_SESSION['cat-img'];
-                                        } else
-                                            echo "../images/ic_cloud.svg"; ?>" name="upload-img" class="upload-img" alt="uploaded image">
+                            <label for="image">
+                                <img src="<?php if (isset($_SESSION['cat-img'])) {
+                                                echo "../uploads/category/" . $_SESSION['cat-img'];
+                                            } else
+                                                echo "../images/ic_cloud.svg"; ?>" name="upload-img" class="upload-img" alt="uploaded image">
+
+                            </label>
                         </div>
                         <p class="warning warning-no_margin">Image should be less than 200 KB</p>
                     </div>
 
                     <div class="row mt-20">
                         <div class="col">
-                            <label for="image">Select an image:</label>
+                            <!-- <label for="image">Select an image:</label> -->
                             <input type="file" name="image" class="img_upload-input" id="image" required>
                         </div>
                     </div>
