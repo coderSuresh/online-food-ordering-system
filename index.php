@@ -44,8 +44,8 @@ session_start();
                           </li>
                           ';
                 } else {
-                    echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account"></a>
-                    <span class="nav__tooltip">Login</span>';
+                    echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account">
+                    <span class="nav__tooltip shadow p-20">Login</span></a>';
                 }
                 ?>
 
