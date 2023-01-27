@@ -309,7 +309,7 @@ header {
 /* nav items tooltip */
 .nav__tooltip {
     display: none;
-    background-color: var(--trans-black);
+    background-color: var(--white);
     padding: 3px 5px;
     border-radius: 3px;
     position: absolute;

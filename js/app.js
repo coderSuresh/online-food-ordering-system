@@ -31,7 +31,7 @@ const showPassword = (i, extra_path) => {
 }
 
 const hidePassword = (i, extra_path) => {
-    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `../${extra_path}images/ic_eye-off.svg`)
+    passwordToggleBtn && passwordToggleBtn[i].setAttribute("src", `..${extra_path}images/ic_eye-off.svg`)
     passwordInput && passwordInput[i].setAttribute("type", "password")
 }
 
@@ -39,7 +39,6 @@ const hidePassword = (i, extra_path) => {
 const errorContainer = document.querySelectorAll(".error-container")
 
 const showErrorAlert = () => {
-
     errorContainer && errorContainer.forEach((container) => {
 
         setTimeout(() => {

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,26 +12,8 @@ session_start();
 </head>
 
 <body>
-    <header>
-        <nav class="top_nav flex items-center">
-            <div class="logo__back-btn flex items-center">
-                <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
 
-                    <span>Hub</span>
-                </a>
-            </div>
-            <ul class="flex items-center">
-                <li class="flex direction-col"><a href="menu.html">Menu</li>
-
-                <li class="flex direction-col"><a href="#"><img src="../images/ic_acc.svg" alt="account"></a>
-                    <span class="nav__tooltip">Account</span>
-                </li>
-                <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
-            </ul>
-        </nav>
-    </header>
+    <?php require("./components/header.php"); ?>
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Login</h1>
@@ -70,7 +49,7 @@ session_start();
                 <p class="error-container p_7-20">
                     <?php echo $_SESSION["invalid"]; ?>
                 </p>
-                
+
             <?php
                 unset($_SESSION["invalid"]);
             }

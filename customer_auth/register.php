@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,29 +13,10 @@ session_start();
 </head>
 
 <body>
-    <header>
-        <nav class="top_nav flex items-center">
-            <div class="logo__back-btn flex items-center">
-                <!-- test back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
-                <a href="#" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
 
-                    <span>Hub</span>
-                </a>
-            </div>
+    <?php require("./components/header.php"); ?>
 
-            <ul class="flex items-center">
-                <li class="flex direction-col"><a href="menu.html">Menu</li>
-
-                <li class="flex direction-col"><a href="login.html"><img src="../images/ic_acc.svg" alt="account"></a>
-                    <span class="nav__tooltip">Account</span>
-                </li>
-                <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="center border-curve-lg shadow">
+    <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Register</h1>
         <form method="post" class="form" action="./insert-register.php">
 
@@ -127,12 +105,11 @@ session_start();
             ?>
             <?php
             if (isset($_SESSION["email"])) {
-            
-                
-                echo $_SESSION["email"]; 
-        
+
+
+                echo $_SESSION["email"];
             }
-                
+
             ?>
             </p>
             <div class="text_field">
@@ -170,7 +147,7 @@ session_start();
                 Already have an account? <a href="./login.php"> <span class="cta">Sign in</span></a>
             </p>
         </form>
-    </div>
+    </main>
 
 </body>
 
