@@ -38,9 +38,6 @@ if (!isset($_SESSION['admin-success'])) {
                 exit();
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
-                    $response["status"] = "success";
-                    $response["msg"] = "The file has been uploaded.";
-
                     // insert into database
                     $sql = "INSERT INTO category VALUES (DEFAULT, '$file_name', '$category')";
                     $result = mysqli_query($conn, $sql);

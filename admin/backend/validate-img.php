@@ -12,6 +12,15 @@ if ($check !== false) {
     exit();
 }
 
+// check file name 
+if (!preg_match("/^[A-Za-z0-9 .]+$/", $file_name)) {
+    $response["status"] = "error";
+    $response["msg"] = "Sorry, file name should be alphanumeric.";
+    $uploadOk = 0;
+    echo json_encode($response);
+    exit();
+}
+
 // Check for existing file
 if (file_exists($target_file)) {
     $file_name = time() . $file_name;

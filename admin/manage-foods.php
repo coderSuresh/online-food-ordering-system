@@ -29,7 +29,7 @@
 
                 <div class="modal_title-container flex items-center">
                     <h2 class="modal-title">Add Food Item</h2>
-                    <button class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></button>
+                    <a href="./backend/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
                 </div>
 
                 <form action="#" method="post" class="form_add-food modal_form">

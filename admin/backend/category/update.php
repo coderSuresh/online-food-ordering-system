@@ -32,7 +32,7 @@ if (!isset($_SESSION['admin-success'])) {
             $row = mysqli_fetch_assoc($res_img);
             $imgName = $row['image'];
 
-            if ($imgName != $file_name) {
+            if (!preg_match("/^[0-9]{10}[$file_name]+$/", $imgName)) {
                 require('../validate-img.php');
             } else
                 $isDuplicate = true;
@@ -62,6 +62,8 @@ if (!isset($_SESSION['admin-success'])) {
                     $res = mysqli_query($conn, $sql) or die("Could not update category name");
                 } else {
                     if (move_uploaded_file($temp_file, $target_file)) {
+                        // remove previous image
+                        unlink($target_dir . $imgName);
                         // update name and image
                         $sql = "update category set name = '$name', image = '$file_name' where cat_id = $id";
                         $res = mysqli_query($conn, $sql) or die("Could not update category");
