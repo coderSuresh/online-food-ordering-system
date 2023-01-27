@@ -1,7 +1,7 @@
 <?php
 session_start();
-
 include '../../../config.php';
+header("Content-Type: application/json; charset=UTF-8");
 
 // response holder
 $response = array();
@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin-success'])) {
 } else {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        // upload image to server 
+        // get image info
         $target_dir = "../../../uploads/category/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $temp_file = $_FILES["image"]["tmp_name"];
@@ -30,6 +30,16 @@ if (!isset($_SESSION['admin-success'])) {
             echo json_encode($response);
             exit();
         } else {
+
+            // Check if category already exists
+            $sql = "SELECT name FROM category WHERE category = '$category'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $response['status'] = "error";
+                $response['msg'] = "Category already exists";
+                echo json_encode($response);
+                exit();
+            }
 
             if ($uploadOk == 0) {
                 $response["status"] = "error";
@@ -61,7 +71,6 @@ if (!isset($_SESSION['admin-success'])) {
         }
 
         echo json_encode($response);
-
     } else {
         header('location: ../../../invalid.html');
     }

@@ -29,10 +29,10 @@
 
                 <div class="modal_title-container flex items-center">
                     <h2 class="modal-title">Add Food Item</h2>
-                    <a href="./backend/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
+                    <a href="#" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
                 </div>
 
-                <form action="#" method="post" class="form_add-food modal_form">
+                <form action="./backend/foods/add-food.php" method="post" name="modal_form" class="form_add-food modal_form">
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
@@ -58,8 +58,7 @@
                         <div class="col">
                             <div class="col">
                                 <label for="category">Category:</label>
-                                <select name="category" id="category">
-
+                                <select name="cat_id" id="category" required>
                                     <!-- fetch categories from db -->
                                     <?php
                                     include("../config.php");
@@ -124,7 +123,7 @@
                             </div>
 
                             <div class="col">
-                                <button type="submit" class="button">Add Food Item</button>
+                                <button type="submit" class="button modal_form-submit-btn" name="add">Add Food Item</button>
                             </div>
                         </div>
                     </div>

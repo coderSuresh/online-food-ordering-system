@@ -36,7 +36,7 @@
                             echo "Add Category";
                         ?>
                     </h2>
-                    <a href="./backend/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
+                    <a href="./backend/category/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
                 </div>
 
                 <form action="<?php if (isset($_SESSION['cat-name'])) {
@@ -82,9 +82,9 @@
                     ?>
 
                     <div class="row">
-                        <button type="submit" class="button add-category" name="<?php if (isset($_SESSION['cat-name']))
-                                                                                    echo "update";
-                                                                                else echo "add" ?>">
+                        <button type="submit" class="button modal_form-submit-btn" name="<?php if (isset($_SESSION['cat-name']))
+                                                                                                echo "update";
+                                                                                            else echo "add" ?>">
                             <?php
                             if (isset($_SESSION['cat-name']))
                                 echo "Update Category";

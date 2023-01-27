@@ -159,7 +159,12 @@ window.addEventListener("click", (e) => {
 
 // to prevent default action of form submit
 const form = document.querySelector(".modal_form")
-const submitBtn = document.querySelector(".add-category")
+
+// check if form is for add food
+const isForFood = form && form.getAttribute("class").includes("form_add-food")
+const isForCategory = form && form.getAttribute("class").includes("form_add-category")
+
+const submitBtn = document.querySelector(".modal_form-submit-btn")
 
 // get name attribute
 const btnName = submitBtn.getAttribute("name")
@@ -179,12 +184,28 @@ form && form.addEventListener("submit", (e) => {
     e.preventDefault()
 
     //validate for empty fields
-    const name = document.forms["modal_form"]["name"].value
+    const itemName = document.forms["modal_form"]["name"].value
     const img = document.querySelector(".img_upload-input").files
 
-    if (name && img.length) {
-        btnName == "add" ? submitForm("../admin/backend/category/add-category.php") : submitForm("../admin/backend/category/update.php")
+    if (isForFood) {
+        const price = document.forms["modal_form"]["price"].value
+        const cost = document.forms["modal_form"]["cost"].value
+        const desc = document.forms["modal_form"]["description"].value
+        const category = document.forms["modal_form"]["cat_id"].value
+        const productId = document.forms["modal_form"]["product-id"].value
+        const estimatedCookingTime = document.forms["modal_form"]["estimated-cooking-time"].value
+        const vegNonVeg = document.forms["modal_form"]["veg-non-veg"].value
+
+        if (itemName && price && cost && desc && category && productId && estimatedCookingTime && vegNonVeg && img.length) {
+            btnName == "add" ? submitForm("../admin/backend/foods/add-food.php") : submitForm("../admin/backend/foods/update.php")
+        }
     }
+    else if (isForCategory) {
+        if (itemName && img.length) {
+            btnName == "add" ? submitForm("../admin/backend/category/add-category.php") : submitForm("../admin/backend/category/update.php")
+        }
+    }
+
 })
 
 // submit form
@@ -202,8 +223,7 @@ function submitForm(backendAPI) {
                 form.reset()
                 if (btnName == "update") {
                     // set updated name to input field
-                    const nameInput = document.querySelector(".name_input")
-                    nameInput && nameInput.setAttribute("value", data["name"])
+                    itemName && itemName.setAttribute("value", data["name"])
                 }
             }
         })

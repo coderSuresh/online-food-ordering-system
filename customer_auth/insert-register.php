@@ -59,7 +59,6 @@ if (isset($_POST['register'])) {
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";
               
-
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';
 
