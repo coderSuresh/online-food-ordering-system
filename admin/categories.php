@@ -133,7 +133,7 @@
         </div>
 
         <?php
-        include("../config.php");
+        require("../config.php");
         $sql = "select * from category order by cat_id desc";
         $res = mysqli_query($conn, $sql);
 

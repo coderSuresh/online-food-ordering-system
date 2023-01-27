@@ -61,7 +61,7 @@
                                 <select name="cat_id" id="category" required>
                                     <!-- fetch categories from db -->
                                     <?php
-                                    include("../config.php");
+                                    require("../config.php");
 
                                     $sql = "select * from category";
                                     $res = mysqli_query($conn, $sql) or die("Could not fetch categories from database");
@@ -172,7 +172,6 @@
         </div>
 
         <?php
-        include("../config.php");
         $sql = "select * from food order by f_id desc";
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
 

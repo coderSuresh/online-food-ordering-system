@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../../config.php');
+require('../../../config.php');
 if (isset($_POST["delete"])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $img_name = mysqli_real_escape_string($conn, $_POST['img']);
