@@ -36,18 +36,18 @@
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" autofocus>
+                            <input type="text" name="name" id="name" autofocus required>
                         </div>
 
                         <div class="col">
                             <div class="row">
                                 <div class="col">
                                     <label for="price">Price:</label>
-                                    <input type="number" class="w-90" name="price" id="price">
+                                    <input type="number" class="w-90" name="price" id="price" required>
                                 </div>
                                 <div class="col">
                                     <label for="cost">Cost:</label>
-                                    <input type="number" class="w-90" name="cost" id="cost">
+                                    <input type="number" class="w-90" name="cost" id="cost" required>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
 
                             <div class="col">
                                 <label for="image">Select an image:</label>
-                                <input type="file" name="image" class="img_upload-input" id="image">
+                                <input type="file" name="image" class="img_upload-input" id="image" required>
                             </div>
                         </div>
 
@@ -97,25 +97,25 @@
                     <div class="row">
                         <div class="col">
                             <label for="estimated-cooking-time">Estimated Cooking Time:</label>
-                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" id="estimated-cooking-time">
+                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" id="estimated-cooking-time" required>
                         </div>
 
                         <div class="col">
                             <label for="product-id">Product Id:</label>
-                            <input type="text" name="product-id" id="product-id">
+                            <input type="text" name="product-id" id="product-id" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="description">Description: </label>
-                            <textarea name="description" id="description" rows="5"></textarea>
+                            <textarea name="description" id="description" rows="5" required></textarea>
                         </div>
 
                         <div class="col">
                             <div class="col">
                                 <label for="veg-non-veg">Veg or Non-veg: </label>
-                                <select name="veg-non-veg" id="veg-non-veg">
+                                <select name="veg-non-veg" id="veg-non-veg" required>
                                     <option value="">Select one</option>
                                     <option value="veg">Veg</option>
                                     <option value="non-veg">Non-veg</option>
@@ -132,7 +132,6 @@
 
             </div>
         </section>
-
 
         <div class="flex items-center">
             <!-- buttons for food management -->
@@ -156,8 +155,19 @@
 
             </div>
             <!-- TODO: make filter here -->
-            <div class="filter button">
-                place for filter
+            <div class="filter flex items-center">
+                <form action="#" method="post" class="filter-form">
+                    <select name="cat-filter" class="p_7-20 border-curve pointer" id="cat-filter">
+                        <option value="name" class="pointer">Sort by name</option>
+                        <option value="expensive" class="pointer">Expensive first</option>
+                        <option value="cheap" class="pointer">Cheapest first</option>
+                        <option value="most-selling" class="pointer">Most selling</option>
+                        <option value="least-selling" class="pointer">Least selling</option>
+                        <option value="last-added" class="pointer" selected>Last added</option>
+                        <option value="first-added" class="pointer">First added</option>
+                    </select>
+                </form>
+                <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
             </div>
         </div>
 
@@ -165,6 +175,28 @@
         include("../config.php");
         $sql = "select * from food order by f_id desc";
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
+
+        if (isset($_SESSION['delete_success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['delete_success'];
+                unset($_SESSION['delete_success']);
+                ?>
+            </p>
+        <?php
+        }
+        if (isset($_SESSION['delete_error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['delete_error'];
+                unset($_SESSION['delete_error']);
+                ?>
+            </p>
+        <?php
+        }
 
         if (mysqli_num_rows($res) > 0) {
         ?>
@@ -207,7 +239,7 @@
                                 <img src="../images/ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <div class="table_action_options shadow border-curve p-20 flex direction-col">
+                            <div class="table_action_options shadow border-curve r_80 p-20 flex direction-col">
                                 <div>
                                     <a href="#">
                                         <div class="flex items-center justify-start">
@@ -225,12 +257,16 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../images/ic_delete.svg" alt="delete icon">
-                                            <p>Delete</p>
-                                        </div>
-                                    </a>
+                                    <form action="./backend/foods/delete.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $row["image"]; ?>">
+                                        <button type="submit" name="delete" class="no_bg no_outline delete_btn">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_delete.svg" alt="delete icon">
+                                                <p>Delete</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div>
                                     <a href="#">

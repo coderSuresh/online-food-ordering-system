@@ -918,6 +918,9 @@ input[type=submit]:active {
     width: 150px;
     z-index: 10;
 }
+.table_action_options.r_80 {
+    right: 80px !important;
+}
 
 .table_action_options.r_70 {
     right: 70px !important;

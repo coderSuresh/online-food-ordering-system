@@ -30,7 +30,7 @@ if (file_exists($target_file)) {
 // Check file size
 if ($_FILES["image"]["size"] > 200000) {
     $response["status"] = "error";
-    $response["msg"] = "Sorry, file should be less than 200KB.";
+    $response["msg"] = "Sorry, image should be less than 200KB.";
     $uploadOk = 0;
     echo json_encode($response);
     exit();

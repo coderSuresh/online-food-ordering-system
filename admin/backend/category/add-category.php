@@ -32,7 +32,7 @@ if (!isset($_SESSION['admin-success'])) {
         } else {
 
             // Check if category already exists
-            $sql = "SELECT name FROM category WHERE category = '$category'";
+            $sql = "SELECT name FROM category WHERE name = '$category'";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 $response['status'] = "error";

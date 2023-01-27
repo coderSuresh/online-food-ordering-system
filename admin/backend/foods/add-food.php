@@ -81,7 +81,7 @@ if (!isset($_SESSION['admin-success'])) {
 
             if ($result) {
                 $response['status'] = "success reset";
-                $response['msg'] = "Category added successfully";
+                $response['msg'] = $name . " has been added successfully";
             } else {
                 updateResponse("error", "Something went wrong");
             }
