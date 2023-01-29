@@ -202,6 +202,10 @@ p {
     font-family: 'Oswald', sans-serif;
 }
 
+.relative {
+    position: relative;
+}
+
 /* set font-family poppins for normal text */
 body {
     font-family: 'Poppins', sans-serif;
@@ -230,7 +234,7 @@ body {
     outline: 2px solid var(--black);
 }
 
-/* ============== for index.html =================== */
+/* ============== for index.php =================== */
 
 /* logo */
 
@@ -456,7 +460,7 @@ header {
     flex-grow: 100vw;
 }
 
-/* =============== for menu.html ===================*/
+/* =============== for menu.php ===================*/
 .menu_sidebar {
     width: 150px !important;
     text-align: left !important;
@@ -477,6 +481,20 @@ header {
 .menu_container {
     padding: 20px 40px;
     margin-left: 150px;
+}
+
+/* go to top icon */
+.go_top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.go_top img {
+    width: 40px;
+    opacity: 0.7;
 }
 
 .food_categories {
@@ -520,7 +538,7 @@ header {
     display: none;
 }
 
-/*  ================== for login.html =======================*/
+/*  ================== for login.php =======================*/
 .center {
     width: 90%;
     max-width: 400px;
@@ -741,7 +759,7 @@ input[type=submit]:active {
     margin-left: 10px;
 }
 
-/* ============== for admin dashboard.html ================== */
+/* ============== for admin dashboard index.php ================== */
 .admin_profile {
     display: none;
     position: absolute;
@@ -904,7 +922,7 @@ input[type=submit]:active {
     }
 }
 
-/* ===================== for admin manage food.html ===================== */
+/* ===================== for admin manage food.php ===================== */
 .filter-form {
     margin-right: 30px;
 }
@@ -951,6 +969,18 @@ input[type=submit]:active {
     margin-right: 10px;
     width: 24px;
     height: 20px;
+}
+
+.count-top {
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    background-color: var(--white);
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    min-height: 1.5rem;
+    min-width: 1.5rem;
 }
 
 /* resuable modal */
@@ -1047,7 +1077,7 @@ textarea {
     object-fit: contain;
 }
 
-/* ==================== for employees.html ======================= */
+/* ==================== for employees.php ======================= */
 .emp_button-container button {
     margin: 0 5px;
 }
@@ -1130,7 +1160,7 @@ textarea {
     width: 20px;
 }
 
-/* for kitchen's orderpagelist.html */
+/* for kitchen's orders.php */
 
 /* reusable css for table */
 table {
@@ -1231,17 +1261,4 @@ table tr th {
     height: 2px;
     background-color: var(--black);
     margin: 0 5px;
-}
-
-/* go to top icon */
-.go_top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    cursor: pointer;
-}
-.go_top img {
-    width: 40px;
-    opacity: 0.7;
 }

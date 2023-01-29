@@ -201,10 +201,52 @@
                         // controlled from admin.js
                     -->
                 <button class="button ml-35 border-curve-lg popper-btn">Add Food</button>
-                <button class="button ml-35 border-curve-lg">All</button>
-                <button class="button ml-35 border-curve-lg">Enabled</button>
-                <button class="button ml-35 border-curve-lg">Disabled</button>
-                <button class="button ml-35 border-curve-lg">Special</button>
+
+                <?php
+                $sql = "SELECT * FROM food where disabled = 0";
+                $result = mysqli_query($conn, $sql);
+                $count = mysqli_num_rows($result);
+                ?>
+
+                <button class="button ml-35 border-curve-lg relative">All
+                    <div class="count-top shadow"><?php
+                                                    $sql = "SELECT * FROM food";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $count = mysqli_num_rows($result);
+                                                    echo $count;
+                                                    ?>
+                    </div>
+                </button>
+                <button class="button ml-35 border-curve-lg relative">Enabled
+                    <div class="count-top shadow"><?php
+                                                    $sql = "SELECT * FROM food where disabled = 0";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $count = mysqli_num_rows($result);
+                                                    echo $count;
+                                                    ?>
+
+                    </div>
+                </button>
+                <button class="button ml-35 border-curve-lg relative">Disabled
+                    <div class="count-top shadow"><?php
+                                                    $sql = "SELECT * FROM food where disabled = 1";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $count = mysqli_num_rows($result);
+                                                    echo $count;
+                                                    ?>
+
+                    </div>
+                </button>
+                <button class="button ml-35 border-curve-lg relative">Special
+                    <div class="count-top shadow"><?php
+                                                    $sql = "SELECT * FROM food where special = 1";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    $count = mysqli_num_rows($result);
+                                                    echo $count;
+                                                    ?>
+
+                    </div>
+                </button>
 
             </div>
             <!-- TODO: make filter here -->
