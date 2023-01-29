@@ -69,7 +69,7 @@
                                     if (mysqli_num_rows($res) > 0) {
                                         while ($row = mysqli_fetch_assoc($res)) {
                                             $id = $row['cat_id'];
-                                            $cat_name = $row['name'];
+                                            $cat_name = $row['cat_name'];
                                             echo "<option value='$id'>$cat_name</option>";
                                         }
                                     } else {
@@ -236,10 +236,10 @@
 
                     // fetch category name
                     $cat_id = $row['category'];
-                    $sql_cat = "select name from category where cat_id = $cat_id";
+                    $sql_cat = "select cat_name from category where cat_id = $cat_id";
                     $res_cat = mysqli_query($conn, $sql_cat) or die("Could not fetch category name from database");
                     $row_cat = mysqli_fetch_assoc($res_cat);
-                    $cat_name = $row_cat['name'];
+                    $cat_name = $row_cat['cat_name'];
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
@@ -287,12 +287,25 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <form action="./backend/foods/disable.php" method="post" class="flex items-center justify-start">
+                                    <form action="./backend/foods/<?php if ($row['disabled'] == 0)
+                                                                        echo "disable";
+                                                                    else
+                                                                        echo "enable"; ?>.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
                                         <button type="submit" name="disable" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
-                                                <img src="../images/ic_disable.svg" alt="disable icon">
-                                                <p>Disable</p>
+                                                <img src="../images/<?php if ($row['disabled'] == 0)
+                                                                        echo "ic_disable.svg";
+                                                                    else
+                                                                        echo "ic_enable.svg"; ?>" alt="enable disable icon">
+                                                <p>
+                                                    <?php
+                                                    if ($row['disabled'] == 0)
+                                                        echo "Disable";
+                                                    else
+                                                        echo "Enable";
+                                                    ?>
+                                                </p>
                                             </div>
                                         </button>
                                     </form>

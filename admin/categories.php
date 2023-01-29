@@ -182,7 +182,7 @@
                         <td>
                             <img src="../uploads/category/<?php echo $data["image"]; ?>" alt="food image" class="table_food-img">
                         </td>
-                        <td> <?php echo $data["name"]; ?> </td>
+                        <td> <?php echo $data["cat_name"]; ?> </td>
                         <td>160</td>
                         <td>123</td>
                         <td class="table_action_container">

@@ -65,14 +65,14 @@
                 <!-- fetch categories from db -->
                 <?php
                 require("./config.php");
-                $sql = "SELECT image, name FROM category";
+                $sql = "SELECT image, cat_name FROM category";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                         <div class="food_category text-center">
                             <img src="./uploads/category/<?php echo $row['image']; ?>" class="food_category-img" alt="food category">
-                            <p class="food_category-name"><?php echo $row['name']; ?></p>
+                            <p class="food_category-name"><?php echo $row['cat_name']; ?></p>
                         </div>
                 <?php
                     }
@@ -86,16 +86,16 @@
 
             <!-- fetch categories from db -->
             <?php
-            $sql = "SELECT name FROM category";
+            $sql = "SELECT cat_name FROM category";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
                     <section class="menu_food-card-container mt-20">
-                        <h2 class="heading"><?php echo $row['name']; ?></h2>
+                        <h2 class="heading"><?php echo $row['cat_name']; ?></h2>
 
                         <?php
-                        $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.name = '$row[name]' and disabled = 0 ";
+                        $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0";
                         $res = mysqli_query($conn, $sql_food);
                         if (mysqli_num_rows($res) > 0) {
                         ?>

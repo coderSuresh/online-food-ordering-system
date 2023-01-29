@@ -58,14 +58,14 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if ($isDuplicate) {
                     // update name only
-                    $sql = "update category set name = '$name' where cat_id = $id";
+                    $sql = "update category set cat_name = '$name' where cat_id = $id";
                     $res = mysqli_query($conn, $sql) or die("Could not update category name");
                 } else {
                     if (move_uploaded_file($temp_file, $target_file)) {
                         // remove previous image
                         unlink($target_dir . $imgName);
                         // update name and image
-                        $sql = "update category set name = '$name', image = '$file_name' where cat_id = $id";
+                        $sql = "update category set cat_name = '$name', image = '$file_name' where cat_id = $id";
                         $res = mysqli_query($conn, $sql) or die("Could not update category");
                     } else {
                         $response["status"] = "error";
