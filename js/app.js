@@ -217,3 +217,20 @@ const userLogoutDropdown = document.querySelector(".logout-dropdown")
 userProfileIcon && userProfileIcon.addEventListener("click", () => {
     userLogoutDropdown.classList.toggle("visible")
 })
+
+// go to top 
+const goToTopBtn = document.querySelector(".go_top")
+
+// show btn on scroll
+window.onscroll = () => {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        goToTopBtn.style.display = "block";
+    } else {
+        goToTopBtn.style.display = "none";
+    }
+}
+
+goToTopBtn.addEventListener("click", () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+})

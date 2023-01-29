@@ -25,7 +25,6 @@
                  <a href="#">
                      <img src="../../images/ic_dark_mode.svg" class="dark-mode-icon" alt="toggle night mode">
                  </a>
-
              </li>
 
              <li>

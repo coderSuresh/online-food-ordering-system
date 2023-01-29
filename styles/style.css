@@ -1232,3 +1232,16 @@ table tr th {
     background-color: var(--black);
     margin: 0 5px;
 }
+
+/* go to top icon */
+.go_top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+}
+.go_top img {
+    width: 40px;
+    opacity: 0.7;
+}

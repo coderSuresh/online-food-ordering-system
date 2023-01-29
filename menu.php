@@ -53,6 +53,8 @@
 
     <main class="menu_container">
 
+    <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+
         <section class="food_categories">
 
             <div class="flex items-center">
@@ -137,7 +139,9 @@
                 echo "No food items found";
             ?>
         </div>
+        <?php require("./components/footer.php"); ?>
     </main>
+
 
     <script type="module" src="./js/app.js"></script>
 
