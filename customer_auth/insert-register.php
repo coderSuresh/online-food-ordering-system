@@ -36,7 +36,6 @@ if (isset($_POST['register'])) {
         $sql_email = "SELECT email FROM customer WHERE email='$email'";
         $res_email = mysqli_query($conn, $sql_email) or die("Error");        
        
-
         if (mysqli_num_rows($res_username) > 0) {
             $_SESSION["username_already_exit"] = "username already exist";
             header("Location:./register.php");
@@ -54,7 +53,7 @@ if (isset($_POST['register'])) {
             }
             $password = md5($password);
             $status = "not verified";
-            $sql = "Insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NULL,'$status','$code')";
+            $sql = "insert into customer values (default,'$name','$username','$email', '$password','$status','$code')";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";

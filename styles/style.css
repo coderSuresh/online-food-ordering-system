@@ -504,6 +504,10 @@ header {
     overflow: hidden;
 }
 
+.card__food-img {
+    height: 200px;
+}
+
 .menu_food-card h2 {
     font-size: 1rem;
 }
@@ -918,6 +922,7 @@ input[type=submit]:active {
     width: 150px;
     z-index: 10;
 }
+
 .table_action_options.long {
     width: 200px !important;
 }

@@ -195,7 +195,7 @@
                                 <div>
                                     <form action="./backend/category/edit.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $data["cat_id"]; ?>">
-                                        <input type="hidden" name="name" value="<?php echo $data["name"]; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $data["cat_name"]; ?>">
                                         <input type="hidden" name="img" value="<?php echo $data["image"]; ?>">
                                         <button type="submit" name="edit" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
