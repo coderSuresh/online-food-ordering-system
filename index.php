@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +31,7 @@ session_start();
 
             <?php
             include('./config.php');
-            $sql = "SELECT * FROM food where special = 1";
+            $sql = "SELECT * FROM food where special = 1 and disabled = 0";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($data = mysqli_fetch_assoc($result)) {

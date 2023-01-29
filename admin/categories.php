@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" class="category_name name_input" value="<?php if (isset($_SESSION['cat-name'])) echo $_SESSION['cat-name']; ?>" name="category" id="name" required>
+                            <input type="text" class="category_name name_input" value="<?php if (isset($_SESSION['cat-name'])) echo $_SESSION['cat-name']; ?>" name="category" id="name" autofocus required>
                         </div>
                     </div>
 

@@ -142,7 +142,6 @@
         <?php require("./components/footer.php"); ?>
     </main>
 
-
     <script type="module" src="./js/app.js"></script>
 
 </body>

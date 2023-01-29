@@ -24,30 +24,47 @@
             <h2>Manage Food Items</h2>
         </section>
 
-        <section class="modal items-center justify-center">
+        <section class="modal <?php if (isset($_SESSION['f-id']))
+                                    echo "flex"; ?> items-center justify-center">
             <div class="modal_form-container border-curve-md p-20 shadow ">
 
                 <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Add Food Item</h2>
-                    <a href="#" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
+                    <h2 class="modal-title">
+                        <?php
+                        if (isset($_SESSION['f-id']))
+                            echo "Update Food Item";
+                        else
+                            echo "Add Food Item";
+                        ?>
+                    </h2>
+                    <a href="./backend/foods/session-delete.php" class="close-icon no_bg no_outline"><img src="../images/ic_cross.svg" alt="close"></a>
                 </div>
 
-                <form action="./backend/foods/add-food.php" method="post" name="modal_form" class="form_add-food modal_form">
+                <form action="<?php if (isset($_SESSION['f-id']))
+                                    echo "./backend/foods/update.php";
+                                else echo "./backend/foods/add-food.php" ?>" method="post" name="modal_form" class="form_add-food modal_form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" autofocus required>
+                            <input type="text" name="name" value="<?php if (isset($_SESSION['f-name']))
+                                                                        echo $_SESSION['f-name'];
+                                                                    else
+                                                                        echo ""; ?>" id="name" autofocus required>
                         </div>
 
                         <div class="col">
                             <div class="row">
                                 <div class="col">
                                     <label for="price">Price:</label>
-                                    <input type="number" class="w-90" name="price" id="price" required>
+                                    <input type="number" class="w-90" name="price" value="<?php if (isset($_SESSION['f-price']))
+                                                                                                echo $_SESSION['f-price'];
+                                                                                            else
+                                                                                                echo ""; ?>" id="price" required>
                                 </div>
                                 <div class="col">
                                     <label for="cost">Cost:</label>
-                                    <input type="number" class="w-90" name="cost" id="cost" required>
+                                    <input type="number" class="w-90" name="cost" value="<?php if (isset($_SESSION['f-cost']))
+                                                                                                echo $_SESSION['f-cost']; ?>" id="cost" required>
                                 </div>
                             </div>
                         </div>
@@ -66,11 +83,18 @@
                                     $sql = "select * from category";
                                     $res = mysqli_query($conn, $sql) or die("Could not fetch categories from database");
 
+                                    if (isset($_SESSION['f-category']))
+                                        $selected_cat = $_SESSION['f-category'];
+                                    else
+                                        $selected_cat = "";
+
                                     if (mysqli_num_rows($res) > 0) {
                                         while ($row = mysqli_fetch_assoc($res)) {
                                             $id = $row['cat_id'];
                                             $cat_name = $row['cat_name'];
-                                            echo "<option value='$id'>$cat_name</option>";
+                                    ?>
+                                            <option value="<?php echo $id; ?>" <?php if ($selected_cat == $cat_name) echo "selected"; ?>><?php echo $cat_name; ?></option>
+                                    <?php
                                         }
                                     } else {
                                         echo "<option value=''>No categories found</option>";
@@ -88,7 +112,9 @@
 
                         <div class="col text-center flex justify-center">
                             <div class="uploaded-img-preview">
-                                <img src="../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                                <img src="<?php if (isset($_SESSION['f-img']))
+                                                echo "../uploads/foods/" . $_SESSION['f-img'];
+                                            else echo '../images/ic_cloud.svg'; ?>" class="upload-img" alt="uploaded image">
                             </div>
                             <p class="warning">Image should be less than 200 KB</p>
                         </div>
@@ -97,33 +123,59 @@
                     <div class="row">
                         <div class="col">
                             <label for="estimated-cooking-time">Estimated Cooking Time:</label>
-                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" id="estimated-cooking-time" required>
+                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" value="<?php if (isset($_SESSION['f-cooking-time']))
+                                                                                                                    echo $_SESSION['f-cooking-time']; ?>" id="estimated-cooking-time" required>
                         </div>
 
                         <div class="col">
                             <label for="product-id">Product Id:</label>
-                            <input type="text" name="product-id" id="product-id" required>
+                            <input type="text" name="product-id" value="<?php if (isset($_SESSION['f-product-id']))
+                                                                            echo $_SESSION['f-product-id']; ?>" id="product-id" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="description">Description: </label>
-                            <textarea name="description" id="description" rows="5" required></textarea>
+                            <textarea name="description" id="description" rows="5" required><?php if (isset($_SESSION['f-description']))
+                                                                                                echo $_SESSION['f-description']; ?></textarea>
                         </div>
 
                         <div class="col">
                             <div class="col">
                                 <label for="veg-non-veg">Veg or Non-veg: </label>
                                 <select name="veg-non-veg" id="veg-non-veg" required>
+                                    <?php
+                                    $isVeg = false;
+                                    if (isset($_SESSION['veg'])) {
+                                        if ($_SESSION['veg'] == 0) {
+                                            $isVeg = false;
+                                        } else {
+                                            $isVeg = true;
+                                        }
+                                    }
+                                    ?>
                                     <option value="">Select one</option>
-                                    <option value="veg">Veg</option>
-                                    <option value="non-veg">Non-veg</option>
+                                    <option value="veg" <?php if ($isVeg)
+                                                            echo "selected"; ?>>Veg</option>
+                                    <option value="non-veg" <?php if (!$isVeg)
+                                                                echo "selected"; ?>>Non-veg</option>
                                 </select>
                             </div>
 
+                            <?php
+                            if (isset($_SESSION['f-id'])) {
+                                echo "<input type='hidden' name='f-id' value='" . $_SESSION['f-id'] . "'>";
+                            }
+                            ?>
+
                             <div class="col">
-                                <button type="submit" class="button modal_form-submit-btn" name="add">Add Food Item</button>
+                                <button type="submit" class="button modal_form-submit-btn" name="<?php if (isset($_SESSION['f-id']))
+                                                                                                        echo "update";
+                                                                                                    else
+                                                                                                        echo "add"; ?>"><?php if (isset($_SESSION['f-id']))
+                                                                                                                            echo "Update";
+                                                                                                                        else echo "Add" ?> Food Item</button>
                             </div>
                         </div>
                     </div>
@@ -260,12 +312,24 @@
                             <!-- options -->
                             <div class="table_action_options shadow border-curve long r_80 p-20 flex direction-col">
                                 <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../images/ic_edit.svg" alt="edit icon">
-                                            <p>Edit</p>
-                                        </div>
-                                    </a>
+                                    <form action="./backend/foods/edit.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $row["name"]; ?>">
+                                        <input type="hidden" name="price" value="<?php echo $row["price"]; ?>">
+                                        <input type="hidden" name="cost" value="<?php echo $row["cost"]; ?>">
+                                        <input type="hidden" name="category" value="<?php echo $row["category"]; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $row["img"]; ?>">
+                                        <input type="hidden" name="cooking-time" value="<?php echo $row["cooking_time"]; ?>">
+                                        <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>">
+                                        <input type="hidden" name="desc" value="<?php echo $row["description"]; ?>">
+                                        <input type="hidden" name="veg" value="<?php echo $row["veg"]; ?>">
+                                        <button type="submit" name="edit" class="no_bg no_outline">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_edit.svg" alt="edit icon">
+                                                <p>Edit</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div>
                                     <a href="#">
