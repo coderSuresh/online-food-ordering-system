@@ -152,6 +152,7 @@
                 <button class="button ml-35 border-curve-lg">All</button>
                 <button class="button ml-35 border-curve-lg">Enabled</button>
                 <button class="button ml-35 border-curve-lg">Disabled</button>
+                <button class="button ml-35 border-curve-lg">Special</button>
 
             </div>
             <!-- TODO: make filter here -->
@@ -257,7 +258,7 @@
                                 <img src="../images/ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <div class="table_action_options shadow border-curve r_80 p-20 flex direction-col">
+                            <div class="table_action_options shadow border-curve long r_80 p-20 flex direction-col">
                                 <div>
                                     <a href="#">
                                         <div class="flex items-center justify-start">
@@ -274,10 +275,39 @@
                                         </div>
                                     </a>
                                 </div>
+                                <!-- add to special food -->
+                                <div>
+                                    <form action="./backend/foods/<?php
+                                                                    if ($row['special'] == 0)
+                                                                        echo "add-to-special";
+                                                                    else
+                                                                        echo "remove-from-special";
+                                                                    ?>.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
+                                        <button type="submit" name="add-to-special" class="no_bg no_outline">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/<?php
+                                                                    if ($row['special'] == 0)
+                                                                        echo "ic_add.svg";
+                                                                    else
+                                                                        echo "ic_remove.svg";
+                                                                    ?>" alt="toggle special food">
+                                                <p>
+                                                    <?php
+                                                    if ($row['special'] == 0)
+                                                        echo "Add to special";
+                                                    else
+                                                        echo "Remove special";
+                                                    ?>
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
                                 <div>
                                     <form action="./backend/foods/delete.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
-                                        <input type="hidden" name="img" value="<?php echo $row["image"]; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $row["img"]; ?>">
                                         <button type="submit" name="delete" class="no_bg no_outline delete_btn">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_delete.svg" alt="delete icon">

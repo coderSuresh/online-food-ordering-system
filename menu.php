@@ -92,13 +92,12 @@
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
                     <section class="menu_food-card-container mt-20">
-                        <h2 class="heading"><?php echo $row['cat_name']; ?></h2>
-
                         <?php
                         $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0";
                         $res = mysqli_query($conn, $sql_food);
                         if (mysqli_num_rows($res) > 0) {
                         ?>
+                            <h2 class="heading"><?php echo $row['cat_name']; ?></h2>
                             <div class="food_cards mt-20 flex gap wrap justify-start">
                                 <?php while ($data = mysqli_fetch_assoc($res)) {
                                 ?>
@@ -114,7 +113,7 @@
                                         </p>
 
                                         <div class="card__food-img">
-                                            <img src="./images/food.png" class="food_img w-full" alt="food">
+                                            <img src="./uploads/foods/<?php echo $data['img'];?>" class="food_img w-full" alt="food">
                                         </div>
                                         <article class="card__food-info flex items-center">
                                             <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
@@ -128,8 +127,7 @@
                                     </div>
 
                             <?php   }
-                            } else
-                                echo "No food items found";
+                            }
                             ?>
                             </div>
                     </section>

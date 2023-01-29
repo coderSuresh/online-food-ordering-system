@@ -113,8 +113,6 @@ const hidePassword = () => {
 const uploadedImg = document.querySelector(".upload-img")
 const imgUploadInput = document.querySelector(".img_upload-input")
 
-// imgUploadInput.style.display = "none";
-
 imgUploadInput && imgUploadInput.addEventListener("change", (e) => {
 
     const url = URL.createObjectURL(e.target.files[0])

@@ -205,7 +205,7 @@ session_start();
         <!-- card end -->
 
         <div class="button w-fit border-curve mt-20 ml-auto">
-            <a href="./menu.html">View All Foods</a>
+            <a href="./menu.php">View All Foods</a>
         </div>
     </main>
 
