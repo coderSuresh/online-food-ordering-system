@@ -196,7 +196,26 @@
             </p>
         <?php
         }
-
+        if (isset($_SESSION['disable_success'])) {
+        ?>
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['disable_success'];
+                unset($_SESSION['disable_success']);
+                ?>
+            </p>
+        <?php
+        }
+        if (isset($_SESSION['disable_error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['disable_error'];
+                unset($_SESSION['disable_error']);
+                ?>
+            </p>
+        <?php
+        }
         if (mysqli_num_rows($res) > 0) {
         ?>
             <table class="mt-20">
@@ -268,12 +287,15 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../images/ic_disable.svg" alt="disable icon">
-                                            <p>Disable</p>
-                                        </div>
-                                    </a>
+                                    <form action="./backend/foods/disable.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
+                                        <button type="submit" name="disable" class="no_bg no_outline">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_disable.svg" alt="disable icon">
+                                                <p>Disable</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>

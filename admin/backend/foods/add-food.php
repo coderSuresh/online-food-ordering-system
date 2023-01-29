@@ -72,7 +72,7 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
                     // insert into database
-                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $cost, $estimated_cooking_time, '$desc', $isVeg, '$product_id', $cat_id)";
+                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $cost, $estimated_cooking_time, '$desc', $isVeg, '$product_id', 0, $cat_id)";
                     $result = mysqli_query($conn, $sql);
                 } else {
                     updateResponse("error", "Sorry, there was an error uploading your file.");

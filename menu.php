@@ -84,122 +84,61 @@
 
         <div class="menu_food-card-category-container">
 
-            <section class="menu_food-card-container mt-20">
-                <h2 class="heading">Fries</h2>
-                <div class="food_cards mt-20 flex gap wrap justify-start">
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">veg</p>
+            <!-- fetch categories from db -->
+            <?php
+            $sql = "SELECT name FROM category";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+                    <section class="menu_food-card-container mt-20">
+                        <h2 class="heading"><?php echo $row['name']; ?></h2>
 
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chinese MoMo</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        <?php
+                        $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.name = '$row[name]' and disabled = 0 ";
+                        $res = mysqli_query($conn, $sql_food);
+                        if (mysqli_num_rows($res) > 0) {
+                        ?>
+                            <div class="food_cards mt-20 flex gap wrap justify-start">
+                                <?php while ($data = mysqli_fetch_assoc($res)) {
+                                ?>
+                                    <div class="menu_food-card border-curve shadow">
+                                        <!-- testing badge or something for card -->
+                                        <p class="card__tag text-center heading">
+                                            <?php
+                                            if ($data['veg'] == 1)
+                                                echo "Veg";
+                                            else
+                                                echo "Non-veg";
+                                            ?>
+                                        </p>
 
-            <section class="menu_food-card-container mt-20">
-                <h2 class="heading">Pizza</h2>
-                <div class="food_cards mt-20 flex gap wrap justify-start">
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">veg</p>
+                                        <div class="card__food-img">
+                                            <img src="./images/food.png" class="food_img w-full" alt="food">
+                                        </div>
+                                        <article class="card__food-info flex items-center">
+                                            <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
+                                            <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
+                                        </article>
+                                        <p class="card__food-desc"><?php echo $data['description']; ?></p>
+                                        <div class="card__btns flex">
+                                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
+                                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
+                                        </div>
+                                    </div>
 
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chinese MoMo</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">veg</p>
+                            <?php   }
+                            } else
+                                echo "No food items found";
+                            ?>
+                            </div>
+                    </section>
 
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chinese MoMo</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">Non-veg</p>
-
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chicken Fried Burger</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">Non-veg</p>
-
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chicken Fried Burger</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-                    <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading">Non-veg</p>
-
-                        <div class="card__food-img">
-                            <img src="./images/food.png" class="food_img w-full" alt="food">
-                        </div>
-                        <article class="card__food-info flex items-center">
-                            <h2 class="card__food-title heading">Chicken Fried Burger</h2>
-                            <p class="card__food-price heading">Rs. 185</p>
-                        </article>
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
-                        <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <?php  }
+            } else
+                echo "No food items found";
+            ?>
         </div>
-
     </main>
 
     <script type="module" src="./js/app.js"></script>
