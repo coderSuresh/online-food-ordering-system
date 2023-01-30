@@ -1275,7 +1275,7 @@ table tr th {
 /* ==================== for details.php (customers) ================= */
 
 .details_container {
-    margin: 100px 0;
+    margin: 100px 0 50px;
 }
 
 .details_img-container,
@@ -1294,6 +1294,10 @@ table tr th {
 
 .details_short-desc {
     opacity: 0.8;
+}
+
+.ingredients-font {
+    font-size: 1rem;
 }
 
 .details_quantity {

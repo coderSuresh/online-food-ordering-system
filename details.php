@@ -17,18 +17,37 @@
     <?php require('./components/header.php'); ?>
     <main class="main">
 
+        <?php
+        require('./config.php');
+        if (isset($_SESSION['details-id'])) {
+            $id = $_SESSION['details-id'];
+        }
+
+        $sql = "select * from food where f_id = $id";
+        $res = mysqli_query($conn, $sql) or die("could not fetch from database");
+
+        $row = mysqli_fetch_assoc($res);
+
+        $cat_id = $row['category'];
+
+        $sql_cat = "select cat_name from category where cat_id = $cat_id";
+        $res_cat = mysqli_query($conn, $sql_cat) or die("could not fetch from database");
+        $data = mysqli_fetch_assoc($res_cat);
+
+        $category = $data['cat_name'];
+        ?>
+
         <section class="details_container flex justify-center">
             <div class="details_img-container">
-                <img src="./images/food.png" class="details_img border-curve-md" alt="food image">
+                <img src="./uploads/foods/<?php echo $row['img']; ?>" class="details_img border-curve-md" alt="food image">
             </div>
 
             <section class="details_right-container">
-                <p class="details_category">Burger</p>
-                <h1 class="details_title heading">Cheese Burger</h1>
-                <p class="details_short-desc mt-20">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam,
-                    quod.</p>
-                <p class="details_price mt-20"><b>Rs. 200</b></p>
+
+                <p class="details_category"><?php echo $category; ?></p>
+                <h1 class="details_title heading"><?php echo $row['name']; ?></h1>
+                <p class="details_short-desc mt-20"><?php echo $row['short_desc']; ?></p>
+                <p class="details_price mt-20"><b>Rs. <?php echo $row['price']; ?></b></p>
 
                 <div class="details_add-to-cart flex items-center justify-start">
                     <div class="details_quantity-container flex items-center justify-center mt-20">
@@ -44,22 +63,10 @@
         <section class="details_description">
             <h2 class="description heading">Description</h2>
             <p class="mt-20">
-                These dumplings are packed with healthy veggies like carrots and cabbage sauteed with onion, garlic, soya sauce, vinegar and black pepper. The perfect homemade vegetarian snack to serve for evening snacks.
+                <?php echo $row['description']; ?>
             </p>
             <h3 class="heading mt-20">Ingredients</h3>
-            <ul class="mt-20">
-                <li>Maida</li>
-                <li>Salt</li>
-                <li>Baking powderFor filling</li>
-                <li>Carrot, grated</li>
-                <li>Cabbage, grated</li>
-                <li>Oil</li>
-                <li>Onion, finely chopped</li>
-                <li>Garlic, chopped</li>
-                <li>Soya sauceto taste Salt</li>
-                <li>Vinegar</li>
-                <li>Black pepper</li>
-            </ul>
+            <pre class="ingredients-font mt-20"><?php echo $row['ingredients']; ?></pre>
         </section>
     </main>
 

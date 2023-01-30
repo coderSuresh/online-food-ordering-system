@@ -142,8 +142,16 @@
                         </div>
                         <div class="col">
                             <label for="ingredients">ingredients: </label>
-                            <textarea name="ingredients" id="ingredients" rows="3" required><?php if (isset($_SESSION['f-ingredients']))
-                                                                                                echo $_SESSION['f-ingredients']; ?></textarea>
+                            <textarea name="ingredients" id="ingredients" rows="3" required>
+                                <?php
+                                if (isset($_SESSION['f-ingredients'])) {
+                                    // $list = $_SESSION['f-ingredients'];
+                                    $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again";
+                                    $list = str_replace(array("\r\n", "\r", "\n"), "<br />", $list);
+                                    echo $list;
+                                }
+                                ?>
+                            </textarea>
                         </div>
                     </div>
 

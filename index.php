@@ -38,7 +38,7 @@
             ?>
                     <div class="menu_food-card border-curve shadow">
                         <!-- testing badge or something for card -->
-                        <p class="card__tag text-center heading"><?php if ($data['veg'] == 0)
+                        <p class="card__tag text-center heading"><?php if ($data['veg'] == 1)
                                                                         echo "Veg";
                                                                     else
                                                                         echo "Non-veg"; ?></p>
@@ -53,12 +53,15 @@
                         <!-- TODO: replace with short desc -->
                         <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
                         <div class="card__btns flex">
-                            <a href="#" class="card__btn flex justify-center border-curve">
-                                <img src="./images/ic_eye.svg" alt="view">
-                            </a>
-                            <a href="#" class="card__btn flex justify-center border-curve">
-                                <img src="./images/ic_add-cart.svg" alt="add to cart">
-                            </a>
+                            <form action="./backend/details.php" class="mr-10" method="post">
+                                <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
+                            </form>
+
+                            <form action="#" method="post">
+                                <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                <button type="submit" class="button card__btn flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                            </form>
                         </div>
                     </div>
             <?php
@@ -73,7 +76,7 @@
         </div>
     </main>
 
-   <?php require("./components/footer.php"); ?>
+    <?php require("./components/footer.php"); ?>
     <script type="module" src="./js/app.js"></script>
 </body>
 
