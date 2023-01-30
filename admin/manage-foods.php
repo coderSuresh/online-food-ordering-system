@@ -142,15 +142,14 @@
                         </div>
                         <div class="col">
                             <label for="ingredients">ingredients: </label>
-                            <textarea name="ingredients" id="ingredients" rows="3" required>
-                                <?php
-                                if (isset($_SESSION['f-ingredients'])) {
-                                    // $list = $_SESSION['f-ingredients'];
-                                    $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again";
-                                    $list = str_replace(array("\r\n", "\r", "\n"), "<br />", $list);
-                                    echo $list;
-                                }
-                                ?>
+                            <textarea name="ingredients" id="ingredients" rows="3" required><?php
+                                                                                            // TODO: fix this
+                                                                                            if (isset($_SESSION['f-ingredients'])) {
+                                                                                                $list = $_SESSION['f-ingredients'];
+                                                                                                // $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again";
+                                                                                                // $list = str_replace(array("\r\n", "\r", "\n"), " ", $list);
+                                                                                                echo "$list";
+                                                                                            } ?>
                             </textarea>
                         </div>
                     </div>
@@ -224,51 +223,61 @@
                 <button class="button ml-35 border-curve-lg popper-btn">Add Food</button>
 
                 <?php
-                $sql = "SELECT * FROM food where disabled = 0";
+                $sql = "SELECT * FROM food";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
+
+                $sql_enabled = "SELECT * FROM food where disabled = 0";
+                $result_enabled = mysqli_query($conn, $sql_enabled);
+                $count_enabled = mysqli_num_rows($result_enabled);
+
+                $sql_disabled = "SELECT * FROM food where disabled = 1";
+                $result_disabled = mysqli_query($conn, $sql_disabled);
+                $count_disabled = mysqli_num_rows($result_disabled);
+
+                $sql_special = "SELECT * FROM food where special = 1";
+                $result_special = mysqli_query($conn, $sql_special);
+                $count_special = mysqli_num_rows($result_special);
                 ?>
 
-                <button class="button ml-35 border-curve-lg relative">All
-                    <div class="count-top shadow"><?php
-                                                    $sql = "SELECT * FROM food";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    $count = mysqli_num_rows($result);
-                                                    echo $count;
-                                                    ?>
-                    </div>
-                </button>
-                <button class="button ml-35 border-curve-lg relative">Enabled
-                    <div class="count-top shadow"><?php
-                                                    $sql = "SELECT * FROM food where disabled = 0";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    $count = mysqli_num_rows($result);
-                                                    echo $count;
-                                                    ?>
+                <form action="./backend/foods/specific-food.php" method="post">
+                    <input type="hidden" name="filter-by" value="all">
+                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">All
+                        <div class="count-top shadow"><?php
+                                                        echo $count;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
 
-                    </div>
-                </button>
-                <button class="button ml-35 border-curve-lg relative">Disabled
-                    <div class="count-top shadow"><?php
-                                                    $sql = "SELECT * FROM food where disabled = 1";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    $count = mysqli_num_rows($result);
-                                                    echo $count;
-                                                    ?>
+                <form action="./backend/foods/specific-food.php" method="post">
+                    <input type="hidden" name="filter-by" value="enabled">
+                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Enabled
+                        <div class="count-top shadow"><?php
+                                                        echo $count_enabled;
+                                                        ?>
+                        </div>
+                </form>
 
-                    </div>
-                </button>
-                <button class="button ml-35 border-curve-lg relative">Special
-                    <div class="count-top shadow"><?php
-                                                    $sql = "SELECT * FROM food where special = 1";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    $count = mysqli_num_rows($result);
-                                                    echo $count;
-                                                    ?>
+                <form action="./backend/foods/specific-food.php" method="post">
+                    <input type="hidden" name="filter-by" value="disabled">
+                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Disabled
+                        <div class="count-top shadow"><?php
+                                                        echo $count_disabled;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
 
-                    </div>
-                </button>
-
+                <form action="./backend/foods/specific-food.php" method="post">
+                    <input type="hidden" name="filter-by" value="special">
+                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Special
+                        <div class="count-top shadow"><?php
+                                                        echo $count_special;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
             </div>
             <!-- TODO: make filter here -->
             <div class="filter flex items-center">
@@ -288,7 +297,24 @@
         </div>
 
         <?php
-        $sql = "select * from food order by f_id desc";
+
+        // filter content by sessions
+        if (isset($_SESSION['filter-by'])) {
+            $filter_by = $_SESSION['filter-by'];
+            unset($_SESSION['filter-by']);
+            if ($filter_by == 'all') {
+                $sql = "SELECT * FROM food";
+            } else if ($filter_by == 'enabled') {
+                $sql = "SELECT * FROM food where disabled = 0";
+            } else if ($filter_by == 'disabled') {
+                $sql = "SELECT * FROM food where disabled = 1";
+            } else if ($filter_by == 'special') {
+                $sql = "SELECT * FROM food where special = 1";
+            }
+        } else {
+            $sql = "SELECT * FROM food";
+        }
+
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
 
         if (isset($_SESSION['delete_success'])) {

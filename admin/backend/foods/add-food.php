@@ -41,7 +41,8 @@ if (!isset($_SESSION['admin-success'])) {
         $estimated_cooking_time = mysqli_real_escape_string($conn, $_POST['estimated-cooking-time']);
         $product_id = mysqli_real_escape_string($conn, $_POST['product-id']);
         $short_desc = mysqli_real_escape_string($conn, $_POST['short-desc']);
-        $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+        // $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+        $ingredients = $_POST['ingredients'];
         $veg_non_veg = mysqli_real_escape_string($conn, $_POST['veg-non-veg']);
 
         if (isset($_POST['veg-non-veg'])) {

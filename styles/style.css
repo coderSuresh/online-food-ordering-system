@@ -631,7 +631,7 @@ input[type="submit"] {
 }
 
 input[type="submit"],
-button[type="submit"] {
+.modal button[type="submit"] {
     font-weight: 700;
 }
 
@@ -1002,7 +1002,6 @@ input[type=submit]:active {
     right: 0;
     background-color: var(--trans-black);
     z-index: 1000;
-    overflow: auto;
 }
 
 .modal.flex {
