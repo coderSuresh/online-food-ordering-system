@@ -286,8 +286,9 @@ header {
     cursor: pointer;
 }
 
-/* user profile and logout button */
-.logout-dropdown {
+/* user profile logout button and cart drop down */
+.logout-dropdown, 
+.cart_dropdown {
     position: absolute;
     top: 60px;
     background-color: var(--white);
@@ -295,7 +296,12 @@ header {
     z-index: 999;
 }
 
-.logout-dropdown.visible {
+.cart_dropdown {
+    right: 20px;
+}
+
+.logout-dropdown.visible,
+.cart_dropdown.visible {
     display: block;
 }
 
@@ -490,6 +496,30 @@ header {
 .menu_container {
     padding: 20px 40px;
     margin-left: 150px;
+}
+
+/* ===================== for cart ==================== */
+.cart_img {
+    height: 50px;
+    width: 60px !important;
+    margin-right: 10px;
+}
+
+.cart_content {
+    margin: 15px 0;
+}
+
+.cart_content .title {
+    font-size: 1rem;
+}
+
+.cart_content .price, 
+.cart_content .qty {
+    font-size: 0.85rem;
+}
+
+.close_icon {
+    width: 15px !important;
 }
 
 /* go to top icon */

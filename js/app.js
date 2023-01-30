@@ -283,3 +283,21 @@ function validateQuantity() {
         showAlert("Minimum order quantity is 1 item", "error")
     }
 }
+
+// for cart drop down
+const cartIcon = document.querySelector(".cart")
+const cartDropdown = document.querySelector(".cart_dropdown")
+
+cartIcon && cartIcon.addEventListener("click", () => {
+    cartDropdown.classList.toggle("visible")
+})
+
+// hide dropdown on click outside
+window.addEventListener("click", (e) => {
+    if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
+        cartDropdown && cartDropdown.classList.remove("visible")
+    }
+    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
+        userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
+    }
+})

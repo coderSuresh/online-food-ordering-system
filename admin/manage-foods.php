@@ -146,7 +146,7 @@
                                                                                                 $list = $_SESSION['f-ingredients'];
                                                                                                 // $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again                     ";
                                                                                                 $newList = $list;
-                                                                                                $newList = str_replace(array("\r\n"), "\n", $newList);
+                                                                                                $newList = str_replace("\r\n", "\n", $newList);
                                                                                                 echo $newList;
                                                                                             } ?>
                             </textarea>
