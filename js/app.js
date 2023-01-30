@@ -223,14 +223,68 @@ const goToTopBtn = document.querySelector(".go_top")
 
 // show btn on scroll
 window.onscroll = () => {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        goToTopBtn.style.display = "block";
-    } else {
-        goToTopBtn.style.display = "none";
-    }
+    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? goToTopBtn.classList.add("visible") : goToTopBtn.classList.remove("visible")
 }
 
-goToTopBtn.addEventListener("click", () => {
+goToTopBtn && goToTopBtn.addEventListener("click", () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 })
+
+// show alert message for modal form
+function showAlert(msg, level) {
+    const modalAlert = document.createElement("p")
+    const body = document.querySelector("body")
+
+    modalAlert.setAttribute("class", `error-container ${level} p_7-20`)
+
+    // for animation
+    setInterval(() => {
+        modalAlert.classList.add("active")
+    }, 100)
+
+    setInterval(() => {
+        modalAlert.classList.remove("active")
+    }, 2900);
+
+    modalAlert.textContent = msg
+
+    setTimeout(() => {
+        body.removeChild(modalAlert)
+    }, 3000)
+
+    body.appendChild(modalAlert)
+}
+
+
+// details page increment or decrement
+const incrementBtn = document.querySelector(".details_quantity-btn-inc")
+const decrementBtn = document.querySelector(".details_quantity-btn-dec")
+const quantity = document.querySelector(".details_quantity")
+
+incrementBtn && incrementBtn.addEventListener("click", () => {
+    quantity.value = parseInt(quantity.value) + 1
+    validateQuantity()
+})
+
+decrementBtn && decrementBtn.addEventListener("click", () => {
+    quantity.value = parseInt(quantity.value) - 1
+    validateQuantity()
+})
+
+quantity && quantity.addEventListener("change", () => {
+    validateQuantity()
+})
+
+//validate quantity
+function validateQuantity() {
+    if (quantity.value < 1) {
+        quantity.value = 1
+        showAlert("Minimum order quantity is 1 item", "error")
+    }
+    else if (quantity.value > 10) {
+        quantity.value = 10
+        showAlert("Maximum order quantity is 10 items", "error")
+    }
+    console.log(quantity.value)
+}

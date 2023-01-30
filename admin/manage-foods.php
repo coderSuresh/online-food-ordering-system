@@ -325,7 +325,7 @@
                     <th>Action</th>
                 </tr>
                 <?php
-                $i = 1;
+                $i = 0;
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
 

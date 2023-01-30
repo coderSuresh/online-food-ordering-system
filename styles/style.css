@@ -4,6 +4,7 @@
 :root {
     --black: #000000;
     --gray: #afafaf;
+    --light-gray: #f5f5f5;
     --primary-color: #F7922F;
     --trans-black: #00000030;
     --trans-green: #DCFFD380;
@@ -225,6 +226,11 @@ body {
     outline: 2px solid var(--primary-color);
 }
 
+.button.gray {
+    background-color: var(--light-gray);
+    outline-color: var(--light-gray);
+}
+
 .button:hover,
 .button:focus {
     outline: 1px solid var(--black);
@@ -417,7 +423,7 @@ header {
 /* footer for customers */
 .footer {
     margin-top: 40px;
-    background-color: var(--trans-black);
+    background-color: var(--light-gray);
     padding: 20px 40px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1231,16 +1237,15 @@ table tr th {
     top: 100px;
     transition: 0.3s all;
     z-index: 1001;
+    color: var(--white);
 }
 
 .error-container.error {
     background-color: rgb(160, 10, 10);
-    color: var(--white);
 }
 
 .error-container.success {
     background-color: rgb(10, 160, 10);
-    color: var(--white);
 }
 
 .error-container.active {
@@ -1261,4 +1266,48 @@ table tr th {
     height: 2px;
     background-color: var(--black);
     margin: 0 5px;
+}
+
+/* ==================== for details.php (customers) ================= */
+
+.details_container {
+    margin: 100px 0;
+}
+
+.details_img-container,
+.details_right-container {
+    width: 40%;
+}
+
+.details_img-container img {
+    width: 80%;
+    object-fit: contain;
+}
+
+.details_category {
+    color: var(--primary-color);
+}
+
+.details_short-desc {
+    opacity: 0.8;
+}
+
+.details_quantity {
+    min-width: 50px;
+    max-width: 80px;
+    margin: 0 10px;
+    font-size: 1rem;
+}
+
+.details_add-to-cart button img {
+    vertical-align: middle;
+}
+
+.details_description {
+    width: 80%;
+    margin: auto;
+}
+
+.details_title {
+    font-size: 2rem;
 }
