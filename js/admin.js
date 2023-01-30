@@ -142,13 +142,13 @@ actionMenus && actionMenus.forEach((actionMenu) => {
 
 // for closing action menu when clicked outside
 window.addEventListener("click", (e) => {
-    if (!e.target.closest(".table_option-menu")) {
+    if (!e.target.closest(".table_option-menu") && !e.target.closest(".table_action_options")) {
         actionMenus && actionMenus.forEach(menu => {
             menu.classList.remove("visible")
         })
     }
 
-    if (!e.target.closest(".sidebar_accordion")) {
+    if (!e.target.closest(".sidebar_accordion") && !e.target.closest(".sidebar_sub-menu")) {
         sidebarSubMenuOpener && sidebarSubMenuOpener.forEach(item => {
             item.classList.remove("active")
         })
@@ -284,7 +284,7 @@ showErrorAlert()
 // show alert on max short description
 const shortDesc = document.querySelector("#short-desc")
 shortDesc && shortDesc.addEventListener("input", () => {
-    if (shortDesc.value.length > 50) {
+    if (shortDesc.value.length >=50) {
         shortDesc.setAttribute("maxlength", "50")
         alert("Max 50 characters allowed")
     }

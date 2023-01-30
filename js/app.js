@@ -223,7 +223,7 @@ const goToTopBtn = document.querySelector(".go_top")
 
 // show btn on scroll
 window.onscroll = () => {
-    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? goToTopBtn.classList.add("visible") : goToTopBtn.classList.remove("visible")
+    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? (goToTopBtn.style.display = "block") : (goToTopBtn.style.display = "none")
 }
 
 goToTopBtn && goToTopBtn.addEventListener("click", () => {
@@ -257,7 +257,7 @@ function showAlert(msg, level) {
 }
 
 
-// details page increment or decrement
+// details page increment or decrement quantity
 const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
 const quantity = document.querySelector(".details_quantity")
@@ -283,3 +283,21 @@ function validateQuantity() {
         showAlert("Minimum order quantity is 1 item", "error")
     }
 }
+
+// for cart drop down
+const cartIcon = document.querySelector(".cart")
+const cartDropdown = document.querySelector(".cart_dropdown")
+
+cartIcon && cartIcon.addEventListener("click", () => {
+    cartDropdown.classList.toggle("visible")
+})
+
+// hide dropdown on click outside
+window.addEventListener("click", (e) => {
+    if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
+        cartDropdown && cartDropdown.classList.remove("visible")
+    }
+    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
+        userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
+    }
+})

@@ -316,7 +316,11 @@
                 $sql = "SELECT * FROM food where special = 1";
             }
         } else {
+<<<<<<< HEAD
                 $sql = "SELECT * FROM food";
+=======
+            $sql = "SELECT * FROM food order by f_id desc";
+>>>>>>> bb40b0817fa4a434a57c208d880e89ab5345a8ea
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");

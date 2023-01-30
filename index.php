@@ -50,8 +50,7 @@
                             <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
                             <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
                         </article>
-                        <!-- TODO: replace with short desc -->
-                        <p class="card__food-desc">This is very delicious chinese momo full of corona virus.</p>
+                        <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
                         <div class="card__btns flex">
                             <form action="./backend/details.php" class="mr-10" method="post">
                                 <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">

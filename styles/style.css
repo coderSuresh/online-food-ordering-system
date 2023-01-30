@@ -286,8 +286,9 @@ header {
     cursor: pointer;
 }
 
-/* user profile and logout button */
-.logout-dropdown {
+/* user profile logout button and cart drop down */
+.logout-dropdown, 
+.cart_dropdown {
     position: absolute;
     top: 60px;
     background-color: var(--white);
@@ -295,7 +296,12 @@ header {
     z-index: 999;
 }
 
-.logout-dropdown.visible {
+.cart_dropdown {
+    right: 20px;
+}
+
+.logout-dropdown.visible,
+.cart_dropdown.visible {
     display: block;
 }
 
@@ -492,8 +498,33 @@ header {
     margin-left: 150px;
 }
 
+/* ===================== for cart ==================== */
+.cart_img {
+    height: 50px;
+    width: 60px !important;
+    margin-right: 10px;
+}
+
+.cart_content {
+    margin: 15px 0;
+}
+
+.cart_content .title {
+    font-size: 1rem;
+}
+
+.cart_content .price, 
+.cart_content .qty {
+    font-size: 0.85rem;
+}
+
+.close_icon {
+    width: 15px !important;
+}
+
 /* go to top icon */
 .go_top {
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -524,15 +555,20 @@ header {
 .menu_food-card {
     min-width: 200px;
     max-width: 300px;
+    height: 350px;
     flex: 0 1 23%;
     position: relative;
     padding-bottom: 10px;
     background-color: var(--white);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card__food-img {
     height: 200px;
+    width: 100%;
 }
 
 .menu_food-card h2 {

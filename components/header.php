@@ -31,8 +31,65 @@
                 }
                 ?>
 
-             <li class="flex direction-col"><a href="#"><img src="./images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
+             <li class="flex direction-col">
+                 <button class="cart no_bg no_outline"><img src="./images/ic_cart.svg" alt="cart"></button>
+             </li>
          </ul>
+         <!-- cart drop down -->
+         <div class="cart_dropdown border-curve shadow p-20">
+             <!-- <p>Cart is empty</p> -->
+             <div class="cart_content flex items-center">
+                 <img src="./images/food.png" class="cart_img" alt="food image">
+                 <div class="flex items-center">
+                     <div>
+                         <h3 class="title">Food Name</h3>
+                         <p class="qty">Qty: 1</p>
+                     </div>
+                     <p class="price ml-35">Rs. 100</p>
+                 </div>
+                 <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
+             </div>
+             <hr>
+             <div class="cart_content flex items-center">
+                 <img src="./images/food.png" class="cart_img" alt="food image">
+                 <div class="flex items-center">
+                     <div>
+                         <h3 class="title">Food Name</h3>
+                         <p class="qty">Qty: 1</p>
+                     </div>
+                     <p class="price ml-35">Rs. 100</p>
+                 </div>
+                 <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
+             </div>
+             <hr>
+             <div class="cart_content flex items-center">
+                 <img src="./images/food.png" class="cart_img" alt="food image">
+                 <div class="flex items-center">
+                     <div>
+                         <h3 class="title">Food Name</h3>
+                         <p class="qty">Qty: 1</p>
+                     </div>
+                     <p class="price ml-35">Rs. 100</p>
+                 </div>
+                 <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
+             </div>
+             <hr>
+             <div class="cart_content flex items-center">
+                 <img src="./images/food.png" class="cart_img" alt="food image">
+                 <div class="flex items-center">
+                     <div>
+                         <h3 class="title">Food Name</h3>
+                         <p class="qty">Qty: 1</p>
+                     </div>
+                     <p class="price ml-35">Rs. 100</p>
+                 </div>
+                 <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
+             </div>
+             <hr>
+             <div class="flex items-center mt-20">
+                 <p class="total">Total: Rs. 400</p>
+                 <a href="#" class="button border-curve checkout-btn">Checkout</a>
+             </div>
      </nav>
 
  </header>
