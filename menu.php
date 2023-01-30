@@ -93,7 +93,7 @@
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
-                    <section class="menu_food-card-container mt-20">
+                    <section class="menu_food-card-container mt-20 flex direction-col">
                         <?php
                         $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0";
                         $res = mysqli_query($conn, $sql_food);
@@ -121,7 +121,7 @@
                                             <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
                                             <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
                                         </article>
-                                        <p class="card__food-desc"><?php echo $data['description']; ?></p>
+                                        <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
                                         <div class="card__btns flex">
                                             <form action="./backend/details.php" class="mr-10" method="post">
                                                 <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">

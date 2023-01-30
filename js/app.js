@@ -223,7 +223,7 @@ const goToTopBtn = document.querySelector(".go_top")
 
 // show btn on scroll
 window.onscroll = () => {
-    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? goToTopBtn.classList.add("visible") : goToTopBtn.classList.remove("visible")
+    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? (goToTopBtn.style.display = "block") : (goToTopBtn.style.display = "none")
 }
 
 goToTopBtn && goToTopBtn.addEventListener("click", () => {
@@ -257,7 +257,7 @@ function showAlert(msg, level) {
 }
 
 
-// details page increment or decrement
+// details page increment or decrement quantity
 const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
 const quantity = document.querySelector(".details_quantity")

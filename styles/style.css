@@ -494,6 +494,7 @@ header {
 
 /* go to top icon */
 .go_top {
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -524,15 +525,20 @@ header {
 .menu_food-card {
     min-width: 200px;
     max-width: 300px;
+    height: 350px;
     flex: 0 1 23%;
     position: relative;
     padding-bottom: 10px;
     background-color: var(--white);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card__food-img {
     height: 200px;
+    width: 100%;
 }
 
 .menu_food-card h2 {

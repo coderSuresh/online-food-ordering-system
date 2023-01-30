@@ -142,13 +142,12 @@
                         </div>
                         <div class="col">
                             <label for="ingredients">ingredients: </label>
-                            <textarea name="ingredients" id="ingredients" rows="3" required><?php
-                                                                                            // TODO: fix this
-                                                                                            if (isset($_SESSION['f-ingredients'])) {
+                            <textarea name="ingredients" id="ingredients" rows="3" required><?php if (isset($_SESSION['f-ingredients'])) {
                                                                                                 $list = $_SESSION['f-ingredients'];
-                                                                                                // $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again";
-                                                                                                // $list = str_replace(array("\r\n", "\r", "\n"), " ", $list);
-                                                                                                echo "$list";
+                                                                                                // $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again                     ";
+                                                                                                $newList = $list;
+                                                                                                $newList = str_replace(array("\r\n"), "\n", $newList);
+                                                                                                echo $newList;
                                                                                             } ?>
                             </textarea>
                         </div>
@@ -312,7 +311,7 @@
                 $sql = "SELECT * FROM food where special = 1";
             }
         } else {
-            $sql = "SELECT * FROM food";
+            $sql = "SELECT * FROM food order by f_id desc";
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
