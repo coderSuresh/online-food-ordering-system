@@ -144,11 +144,15 @@
                             <label for="ingredients">ingredients: </label>
                             <textarea name="ingredients" id="ingredients" rows="3" required><?php
                                                                                             // TODO: fix this
+                                                                                           
                                                                                             if (isset($_SESSION['f-ingredients'])) {
-                                                                                                $list = $_SESSION['f-ingredients'];
-                                                                                                // $list = "coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again";
-                                                                                                // $list = str_replace(array("\r\n", "\r", "\n"), " ", $list);
-                                                                                                echo "$list";
+                                                                                                $id  = $_SESSION['f-id'];
+                                                                                                $sqli = "select ingredients from food where f_id = $id";
+                                                                                                $res = mysqli_query($conn, $sqli) or die("Could not fetch ingredients from database");
+                                                                                                $row = mysqli_fetch_assoc($res);
+                                                                                                echo $ingredients = $row['ingredients'];     
+                                                                                                //thalako sabi input type lai hata uune
+                                                                                                // id set vako xa vane tehe id vata cahi data haru fetch garea form ma deka                                                                //   
                                                                                             } ?>
                             </textarea>
                         </div>
@@ -312,10 +316,12 @@
                 $sql = "SELECT * FROM food where special = 1";
             }
         } else {
-            $sql = "SELECT * FROM food";
+                $sql = "SELECT * FROM food";
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
+        $data1 =  mysqli_fetch_assoc($res);
+
 
         if (isset($_SESSION['delete_success'])) {
         ?>
@@ -384,8 +390,9 @@
                     $cat_name = $row_cat['cat_name'];
                 ?>
                     <tr class="shadow">
-                        <td><?php echo $i; ?></td>
+                        <td><?php echo $i;?></td>
                         <td>
+                                    
                             <img src="../uploads/foods/<?php echo $row['img']; ?>" alt="food image" class="table_food-img">
                         </td>
                         <td><?php echo $row['name']; ?></td>
