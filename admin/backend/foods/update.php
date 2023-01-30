@@ -31,6 +31,8 @@ if (!isset($_SESSION['admin-success'])) {
         $desc = mysqli_real_escape_string($conn, $_POST['description']);
         $estimated_cooking_time = mysqli_real_escape_string($conn, $_POST['estimated-cooking-time']);
         $product_id = mysqli_real_escape_string($conn, $_POST['product-id']);
+        $short_desc = mysqli_real_escape_string($conn, $_POST['short-desc']);
+        $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
         $veg_non_veg = mysqli_real_escape_string($conn, $_POST['veg-non-veg']);
 
         if (isset($_POST['veg-non-veg'])) {
@@ -115,14 +117,14 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if ($isDuplicate) {
                     // don't update image
-                    $sql = "update food set name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
+                    $sql = "update food set name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
                     $res = mysqli_query($conn, $sql) or die("Could not update category name");
                 } else {
                     if (move_uploaded_file($temp_file, $target_file)) {
                         // remove previous image
                         unlink($target_dir . $imgName);
                         // update name and image
-                        $sql = "update food set img = '$file_name', name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
+                        $sql = "update food set img = '$file_name', name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
                         $res = mysqli_query($conn, $sql) or die("Could not update category");
                     } else {
                         $response["status"] = "error";

@@ -136,6 +136,19 @@
 
                     <div class="row">
                         <div class="col">
+                            <label for="short-desc">Short Description: </label>
+                            <textarea name="short-desc" id="short-desc" rows="3" required><?php if (isset($_SESSION['f-short-desc']))
+                                                                                                echo $_SESSION['f-short-desc']; ?></textarea>
+                        </div>
+                        <div class="col">
+                            <label for="ingredients">ingredients: </label>
+                            <textarea name="ingredients" id="ingredients" rows="3" required><?php if (isset($_SESSION['f-ingredients']))
+                                                                                                echo $_SESSION['f-ingredients']; ?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
                             <label for="description">Description: </label>
                             <textarea name="description" id="description" rows="5" required><?php if (isset($_SESSION['f-description']))
                                                                                                 echo $_SESSION['f-description']; ?></textarea>
@@ -364,6 +377,8 @@
                                         <input type="hidden" name="cooking-time" value="<?php echo $row["cooking_time"]; ?>">
                                         <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>">
                                         <input type="hidden" name="desc" value="<?php echo $row["description"]; ?>">
+                                        <input type="hidden" name="short-desc" value="<?php echo $row["short_desc"]; ?>">
+                                        <input type="hidden" name="ingredients" value="<?php echo $row["ingredients"]; ?>">
                                         <input type="hidden" name="veg" value="<?php echo $row["veg"]; ?>">
                                         <button type="submit" name="edit" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">

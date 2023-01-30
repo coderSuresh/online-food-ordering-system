@@ -280,3 +280,12 @@ const showErrorAlert = () => {
 }
 
 showErrorAlert()
+
+// show alert on max short description
+const shortDesc = document.querySelector("#short-desc")
+shortDesc && shortDesc.addEventListener("input", () => {
+    if (shortDesc.value.length > 50) {
+        shortDesc.setAttribute("maxlength", "50")
+        alert("Max 50 characters allowed")
+    }
+})

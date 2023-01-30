@@ -40,6 +40,8 @@ if (!isset($_SESSION['admin-success'])) {
         $desc = mysqli_real_escape_string($conn, $_POST['description']);
         $estimated_cooking_time = mysqli_real_escape_string($conn, $_POST['estimated-cooking-time']);
         $product_id = mysqli_real_escape_string($conn, $_POST['product-id']);
+        $short_desc = mysqli_real_escape_string($conn, $_POST['short-desc']);
+        $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
         $veg_non_veg = mysqli_real_escape_string($conn, $_POST['veg-non-veg']);
 
         if (isset($_POST['veg-non-veg'])) {
@@ -72,7 +74,7 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
                     // insert into database
-                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $cost, $estimated_cooking_time, '$desc', $isVeg, '$product_id', 0, 0, $cat_id)";
+                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $cost, $estimated_cooking_time, '$desc', $isVeg, '$product_id', '$short_desc', '$ingredients', 0, 0, $cat_id)";
                     $result = mysqli_query($conn, $sql);
                 } else {
                     updateResponse("error", "Sorry, there was an error uploading your file.");

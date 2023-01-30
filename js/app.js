@@ -282,9 +282,4 @@ function validateQuantity() {
         quantity.value = 1
         showAlert("Minimum order quantity is 1 item", "error")
     }
-    else if (quantity.value > 10) {
-        quantity.value = 10
-        showAlert("Maximum order quantity is 10 items", "error")
-    }
-    console.log(quantity.value)
 }

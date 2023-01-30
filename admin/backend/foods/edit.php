@@ -12,6 +12,8 @@ if (isset($_POST['edit'])) {
     $cooking_time = mysqli_real_escape_string($conn, $_POST['cooking-time']);
     $product_id = mysqli_real_escape_string($conn, $_POST['product-id']);
     $description = mysqli_real_escape_string($conn, $_POST['desc']);
+    $short_desc = mysqli_real_escape_string($conn, $_POST['short-desc']);
+    $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
     $veg = mysqli_real_escape_string($conn, $_POST['veg']);
 
     $_SESSION['f-id'] = $id;
@@ -23,6 +25,8 @@ if (isset($_POST['edit'])) {
     $_SESSION['f-cooking-time'] = $cooking_time;
     $_SESSION['f-product-id'] = $product_id;
     $_SESSION['f-description'] = $description;
+    $_SESSION['f-short-desc'] = $short_desc;
+    $_SESSION['f-ingredients'] = $ingredients;
     $_SESSION['f-veg'] = $veg;
 
     header("Location: ../../manage-foods.php");

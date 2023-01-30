@@ -53,7 +53,7 @@
 
     <main class="menu_container">
 
-    <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+        <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
 
         <section class="food_categories">
 
@@ -115,7 +115,7 @@
                                         </p>
 
                                         <div class="card__food-img">
-                                            <img src="./uploads/foods/<?php echo $data['img'];?>" class="food_img w-full" alt="food">
+                                            <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food">
                                         </div>
                                         <article class="card__food-info flex items-center">
                                             <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
@@ -123,8 +123,15 @@
                                         </article>
                                         <p class="card__food-desc"><?php echo $data['description']; ?></p>
                                         <div class="card__btns flex">
-                                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_eye.svg" alt="view"></a>
-                                            <a href="#" class="card__btn flex justify-center border-curve"><img src="./images/ic_add-cart.svg" alt="add to cart"></a>
+                                            <form action="./backend/details.php" class="mr-10" method="post">
+                                                <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                                <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
+                                            </form>
+
+                                            <form action="#" method="post">
+                                                <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                                <button type="submit" class="button card__btn flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                                            </form>
                                         </div>
                                     </div>
 

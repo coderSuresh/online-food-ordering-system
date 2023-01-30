@@ -378,15 +378,18 @@ header {
     margin: 10px;
 }
 
-.card__btn:first-child {
-    margin-right: 5px;
+.card__btns form {
+    flex: 1;
+}
+
+.mr-10 {
+    margin-right: 10px;
 }
 
 /* individual buttons on card */
 .card__btn {
-    background-color: var(--primary-color);
-    color: var(--black);
     flex: 1;
+    width: 100% !important;
 }
 
 .card__food-desc,
@@ -1017,8 +1020,9 @@ input[type=submit]:active {
 
 .modal_form-container {
     width: 90%;
+    height: 90%;
     max-width: 550px;
-    margin-top: 20px;
+    margin: 40px 0;
     overflow: auto;
     background-color: var(--white);
 }
