@@ -534,6 +534,7 @@ header {
 
 .cart_qty {
     width: 20px;
+    text-align: center;
 }
 
 .qty {

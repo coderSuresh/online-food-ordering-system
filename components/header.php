@@ -47,13 +47,13 @@
                          <h3 class="title">Food Name</h3>
                          <div class="flex items-center">
                              <button class="cart_item-btn no_outline shadow cart_inc">
-                                 <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
+                                 <img src="./images/ic_add-yellow.svg" alt="plus icon" class="cart_item-icon">
                              </button>
 
                              <p class="qty">Qty: <input class="cart_qty no_outline" value="1"></p>
 
                              <button class="cart_item-btn no_outline shadow cart_dec">
-                                 <img src="./images/ic_remove.svg" alt="minus icon" class="cart_item-icon">
+                                 <img src="./images/ic_remove-yellow.svg" alt="minus icon" class="cart_item-icon">
                              </button>
                          </div>
                      </div>

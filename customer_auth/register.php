@@ -111,7 +111,7 @@
             }
 
             ?>
-                        <?php
+            <?php
             if (isset($_SESSION["otp-failed"])) {
             ?>
                 <!-- to show error alert -->
@@ -147,7 +147,9 @@
                 <label>Confirm Password</label>
                 <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
-            <input type="submit" class="no_outline border-curve-lg" name="register" value="Register">
+            <div>
+                <input type="submit" class="button w-full no_outline border-curve-lg" name="register" value="Register">
+            </div>
             <p>
                 <?php
                 if (isset($_SESSION['register-insert'])) {
