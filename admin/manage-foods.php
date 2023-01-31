@@ -46,8 +46,18 @@
                     <div class="row">
                         <div class="col">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" value="<?php if (isset($_SESSION['f-name']))
-                                                                        echo $_SESSION['f-name'];
+
+                            <?php
+                            require("../config.php");
+                            if (isset($_SESSION['f-id'])) {
+                                $sql = "SELECT * FROM food WHERE f_id = {$_SESSION['f-id']}";
+                                $result = mysqli_query($conn, $sql);
+                                $data = mysqli_fetch_assoc($result);
+                            }
+                            ?>
+
+                            <input type="text" name="name" value="<?php if (isset($_SESSION['f-id']))
+                                                                        echo $data['name'];
                                                                     else
                                                                         echo ""; ?>" id="name" autofocus required>
                         </div>
@@ -56,15 +66,15 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="price">Price:</label>
-                                    <input type="number" class="w-90" name="price" value="<?php if (isset($_SESSION['f-price']))
-                                                                                                echo $_SESSION['f-price'];
+                                    <input type="number" class="w-90" name="price" value="<?php if (isset($_SESSION['f-id']))
+                                                                                                echo $data['price'];
                                                                                             else
                                                                                                 echo ""; ?>" id="price" required>
                                 </div>
                                 <div class="col">
                                     <label for="cost">Cost:</label>
-                                    <input type="number" class="w-90" name="cost" value="<?php if (isset($_SESSION['f-cost']))
-                                                                                                echo $_SESSION['f-cost']; ?>" id="cost" required>
+                                    <input type="number" class="w-90" name="cost" value="<?php if (isset($_SESSION['f-id']))
+                                                                                                echo $data['cost']; ?>" id="cost" required>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +88,6 @@
                                 <select name="cat_id" id="category" required>
                                     <!-- fetch categories from db -->
                                     <?php
-                                    require("../config.php");
-
                                     $sql = "select * from category";
                                     $res = mysqli_query($conn, $sql) or die("Could not fetch categories from database");
 
@@ -112,8 +120,8 @@
 
                         <div class="col text-center flex justify-center">
                             <div class="uploaded-img-preview">
-                                <img src="<?php if (isset($_SESSION['f-img']))
-                                                echo "../uploads/foods/" . $_SESSION['f-img'];
+                                <img src="<?php if (isset($_SESSION['f-id']))
+                                                echo "../uploads/foods/" . $data['img'];
                                             else echo '../images/ic_cloud.svg'; ?>" class="upload-img" alt="uploaded image">
                             </div>
                             <p class="warning">Image should be less than 200 KB</p>
@@ -123,36 +131,28 @@
                     <div class="row">
                         <div class="col">
                             <label for="estimated-cooking-time">Estimated Cooking Time:</label>
-                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" value="<?php if (isset($_SESSION['f-cooking-time']))
-                                                                                                                    echo $_SESSION['f-cooking-time']; ?>" id="estimated-cooking-time" required>
+                            <input type="number" placeholder="in minutes" name="estimated-cooking-time" value="<?php if (isset($_SESSION['f-id']))
+                                                                                                                    echo $data['cooking_time']; ?>" id="estimated-cooking-time" required>
                         </div>
 
                         <div class="col">
                             <label for="product-id">Product Id:</label>
-                            <input type="text" name="product-id" value="<?php if (isset($_SESSION['f-product-id']))
-                                                                            echo $_SESSION['f-product-id']; ?>" id="product-id" required>
+                            <input type="text" name="product-id" value="<?php if (isset($_SESSION['f-id']))
+                                                                            echo $data['product_id']; ?>" id="product-id" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="short-desc">Short Description: </label>
-                            <textarea name="short-desc" id="short-desc" rows="3" required><?php if (isset($_SESSION['f-short-desc']))
-                                                                                                echo $_SESSION['f-short-desc']; ?></textarea>
+                            <textarea name="short-desc" id="short-desc" rows="3" required><?php if (isset($_SESSION['f-id']))
+                                                                                                echo $data['short_desc']; ?></textarea>
                         </div>
                         <div class="col">
                             <label for="ingredients">ingredients: </label>
                             <textarea name="ingredients" id="ingredients" rows="3" required><?php
-                                                                                            // TODO: fix this
-                                                                                           
-                                                                                            if (isset($_SESSION['f-ingredients'])) {
-                                                                                                $id  = $_SESSION['f-id'];
-                                                                                                $sqli = "select ingredients from food where f_id = $id";
-                                                                                                $res = mysqli_query($conn, $sqli) or die("Could not fetch ingredients from database");
-                                                                                                $row = mysqli_fetch_assoc($res);
-                                                                                                echo $ingredients = $row['ingredients'];     
-                                                                                                //thalako sabi input type lai hata uune
-                                                                                                // id set vako xa vane tehe id vata cahi data haru fetch garea form ma deka                                                                //   
+                                                                                            if (isset($_SESSION['f-id'])) {
+                                                                                                echo $data['ingredients'];
                                                                                             } ?>
                             </textarea>
                         </div>
@@ -161,8 +161,8 @@
                     <div class="row">
                         <div class="col">
                             <label for="description">Description: </label>
-                            <textarea name="description" id="description" rows="5" required><?php if (isset($_SESSION['f-description']))
-                                                                                                echo $_SESSION['f-description']; ?></textarea>
+                            <textarea name="description" id="description" rows="5" required><?php if (isset($_SESSION['f-id']))
+                                                                                                echo $data['description']; ?></textarea>
                         </div>
 
                         <div class="col">
@@ -320,8 +320,6 @@
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
-        $data1 =  mysqli_fetch_assoc($res);
-
 
         if (isset($_SESSION['delete_success'])) {
         ?>
@@ -390,9 +388,9 @@
                     $cat_name = $row_cat['cat_name'];
                 ?>
                     <tr class="shadow">
-                        <td><?php echo $i;?></td>
+                        <td><?php echo $i; ?></td>
                         <td>
-                                    
+
                             <img src="../uploads/foods/<?php echo $row['img']; ?>" alt="food image" class="table_food-img">
                         </td>
                         <td><?php echo $row['name']; ?></td>
@@ -410,16 +408,7 @@
                                 <div>
                                     <form action="./backend/foods/edit.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
-                                        <input type="hidden" name="name" value="<?php echo $row["name"]; ?>">
-                                        <input type="hidden" name="price" value="<?php echo $row["price"]; ?>">
-                                        <input type="hidden" name="cost" value="<?php echo $row["cost"]; ?>">
                                         <input type="hidden" name="category" value="<?php echo $row["category"]; ?>">
-                                        <input type="hidden" name="img" value="<?php echo $row["img"]; ?>">
-                                        <input type="hidden" name="cooking-time" value="<?php echo $row["cooking_time"]; ?>">
-                                        <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>">
-                                        <input type="hidden" name="desc" value="<?php echo $row["description"]; ?>">
-                                        <input type="hidden" name="short-desc" value="<?php echo $row["short_desc"]; ?>">
-                                        <input type="hidden" name="ingredients" value="<?php echo $row["ingredients"]; ?>">
                                         <input type="hidden" name="veg" value="<?php echo $row["veg"]; ?>">
                                         <button type="submit" name="edit" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">

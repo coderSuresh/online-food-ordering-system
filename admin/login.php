@@ -39,7 +39,6 @@ session_start();
 
           <?php
             if (isset($_SESSION['password'])) {
-                echo $_SESSION['password'];
             ?>
                 <!-- to show error alert -->
                 <p class="error-container error p_7-20">
