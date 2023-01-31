@@ -1,8 +1,13 @@
  <?php session_start(); ?>
  <header>
      <nav class="top_nav flex items-center">
-         <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
-             <span>Hub</span></a>
+         <div class="logo__back-btn flex items-center">
+             <!-- back btn -->
+             <button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>
+             <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
+                 <span>Hub</span>
+             </a>
+         </div>
 
          <ul class="flex items-center">
              <li class="flex direction-col"><a href="menu.php">Menu</a></li>
@@ -45,25 +50,25 @@
                  <div class="flex items-center">
                      <div>
                          <h3 class="title">Food Name</h3>
-                         <div class="flex items-center">
+                         <div class="flex items-center justify-start">
                              <button class="cart_item-btn no_outline shadow cart_inc">
-                                 <img src="./images/ic_add-yellow.svg" alt="plus icon" class="cart_item-icon">
+                                 <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
                              </button>
 
                              <p class="qty">Qty: <input class="cart_qty no_outline" value="1"></p>
 
                              <button class="cart_item-btn no_outline shadow cart_dec">
-                                 <img src="./images/ic_remove-yellow.svg" alt="minus icon" class="cart_item-icon">
+                                 <img src="./images/ic_remove.svg" alt="minus icon" class="cart_item-icon">
                              </button>
                          </div>
                      </div>
-                     <p class="price ml-35">Rs. 100</p>
+                     <p class="cart_price ml-35">Rs. 100</p>
                  </div>
                  <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
              </div>
              <hr>
-              <div class="flex items-center mt-20">
-                 <p class="total">Total: Rs. 400</p>
+             <div class="flex items-center mt-20">
+                 <p class="cart_total">Total: Rs. 400</p>
                  <a href="#" class="button border-curve checkout-btn">Checkout</a>
              </div>
      </nav>

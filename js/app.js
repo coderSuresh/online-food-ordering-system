@@ -296,10 +296,27 @@ cartIcon && cartIcon.addEventListener("click", () => {
 const cartIncrementBtn = document.querySelectorAll(".cart_inc")
 const cartDecrementBtn = document.querySelectorAll(".cart_dec")
 const cartQuantity = document.querySelectorAll(".cart_qty")
+const cartItemPrice = document.querySelectorAll(".cart_price")
+const cartTotal = document.querySelector(".cart_total")
+
+// calculate total price
+function calculateCartTotal() {
+    let total = 0
+    cartItemPrice && cartItemPrice.forEach((price) => {
+        total += parseInt(price.textContent.split("Rs. ")[1])
+    })
+    cartTotal.textContent = "Rs. " + total
+}
+
+calculateCartTotal()
+
+const price = document.querySelector(".cart_price").textContent.split("Rs. ")[1]
 
 cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
+        cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
+        calculateCartTotal()
     })
 })
 
@@ -307,6 +324,8 @@ cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
         cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
+        cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
+        calculateCartTotal()
     })
 })
 
