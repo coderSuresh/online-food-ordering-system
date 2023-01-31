@@ -54,7 +54,7 @@
                 unset($_SESSION["invalid"]);
             }
             ?>
-            
+
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>
@@ -65,7 +65,10 @@
                 <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <a href="../customer_auth/reset/reset-password.php" class="forget_password">Forgot password?</a>
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="Login">
+
+            <div>
+                <input type="submit" class="button w-full h-40 no_outline border-curve-lg mt-20" name="login" value="Login">
+            </div>
 
             <div class="flex items-center or justify-center mt-20">
                 <siv class="bar"></siv>
@@ -103,15 +106,11 @@ if (isset($_COOKIE['user'])) {
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         header("location: ../index.php");
         $_SESSION['success'] = "success";
-        
-
     } else {
         header("location: ../index.php");
         $_SESSION['success'] = "success";
     }
 }
-// var_dump($_COOKIE);
 ?>
 
 </html>
-

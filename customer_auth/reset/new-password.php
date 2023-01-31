@@ -16,11 +16,8 @@
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
-                        alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
-                        alt="logo">Restro
-
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
                     <span>Hub</span>
                 </a>
             </div>
@@ -30,8 +27,7 @@
                 <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
@@ -42,20 +38,19 @@
         <form action="./create-new-password.php" method="post">
 
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="new-password" required
-                    autofocus>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="new-password" required autofocus>
                 <label>New password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="confirm-password" required
-                    autofocus>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="confirm-password" required autofocus>
                 <label>Confirm password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
 
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="create-new-password"
-                value="Create New Password">
+            <div>
+                <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="create-new-password" value="Create New Password">
+            </div>
         </form>
     </main>
 

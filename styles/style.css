@@ -217,9 +217,13 @@ body {
     min-height: 100vh;
 }
 
+.h-40 {
+    height: 40px !important;
+}
+
 .button {
     background-color: var(--primary-color);
-    padding: 7px 20px;
+    padding: 7px 25px;
     font-size: 1rem;
     min-width: fit-content;
     border: none !important;
@@ -534,6 +538,7 @@ header {
 
 .cart_qty {
     width: 20px;
+    text-align: center;
 }
 
 .qty {

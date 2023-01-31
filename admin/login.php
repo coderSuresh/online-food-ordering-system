@@ -21,35 +21,35 @@ session_start();
     <main class=" flex direction-col h-100 border-curve-lg shadow">
         <div class="center shadow border-curve-md">
             <h1 class="heading text-center">Admin Login</h1>
-     
-            <form action="./auth.php" method="post">      
-            <?php
-           
-            if (isset($_SESSION['username'])) {
-            ?>
-                <!-- to show error alert -->
-                <p class="error-container error p_7-20">
-                    <?php echo $_SESSION['username']; ?>
-                </p>
-                
-            <?php
-                unset($_SESSION['username']);
-            }
-            ?>
 
-          <?php
-            if (isset($_SESSION['password'])) {
-            ?>
-                <!-- to show error alert -->
-                <p class="error-container error p_7-20">
-                    <?php echo $_SESSION['password']; ?>
-                </p>
-                
-            <?php
-                unset($_SESSION['password']);
-            }
-            ?>
-                
+            <form action="./auth.php" method="post">
+                <?php
+
+                if (isset($_SESSION['username'])) {
+                ?>
+                    <!-- to show error alert -->
+                    <p class="error-container error p_7-20">
+                        <?php echo $_SESSION['username']; ?>
+                    </p>
+
+                <?php
+                    unset($_SESSION['username']);
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION['password'])) {
+                ?>
+                    <!-- to show error alert -->
+                    <p class="error-container error p_7-20">
+                        <?php echo $_SESSION['password']; ?>
+                    </p>
+
+                <?php
+                    unset($_SESSION['password']);
+                }
+                ?>
+
                 <div class="text_field">
                     <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                     <label>Username</label>
@@ -59,8 +59,10 @@ session_start();
                     <label>Password</label>
                 </div>
                 <a href="./reset/reset-password.php" class="forget_password">Forgot password?</a>
-                <input type="submit" class="no_outline border-curve-lg mt-20" name="login" value="Login">
 
+                <div>
+                    <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="login" value="Login">
+                </div>
             </form>
         </div>
     </main>
