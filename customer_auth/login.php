@@ -67,7 +67,7 @@
             <a href="../customer_auth/reset/reset-password.php" class="forget_password">Forgot password?</a>
 
             <div>
-                <input type="submit" class="button w-full no_outline border-curve-lg mt-20" name="login" value="Login">
+                <input type="submit" class="button w-full h-40 no_outline border-curve-lg mt-20" name="login" value="Login">
             </div>
 
             <div class="flex items-center or justify-center mt-20">

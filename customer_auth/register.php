@@ -148,7 +148,7 @@
                 <img src="../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <div>
-                <input type="submit" class="button w-full no_outline border-curve-lg" name="register" value="Register">
+                <input type="submit" class="button h-40 w-full no_outline border-curve-lg" name="register" value="Register">
             </div>
             <p>
                 <?php
