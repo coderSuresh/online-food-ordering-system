@@ -140,7 +140,6 @@
                             ?>
                             </div>
                     </section>
-
             <?php  }
             } else
                 echo "No food items found";

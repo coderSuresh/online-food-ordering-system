@@ -553,10 +553,8 @@ header {
 }
 
 .menu_food-card {
-    min-width: 200px;
-    max-width: 300px;
+    width: 250px;
     height: 350px;
-    flex: 0 0 23%;
     position: relative;
     padding-bottom: 10px;
     background-color: var(--white);
