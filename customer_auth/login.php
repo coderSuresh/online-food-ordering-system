@@ -22,7 +22,7 @@
             if (isset($_SESSION["username"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["username"]; ?>
                 </p>
             <?php
@@ -34,7 +34,7 @@
             if (isset($_SESSION["password"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["password"]; ?>
                 </p>
             <?php
@@ -46,7 +46,7 @@
             if (isset($_SESSION["invalid"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["invalid"]; ?>
                 </p>
 
@@ -87,22 +87,26 @@
 </body>
 <?php
 if (isset($_COOKIE['user'])) {
-    include('../../config.php');
+    include('../config.php');
     $signin_provider = $_COOKIE['sign_in_provider'];
     $names  = $_COOKIE['profile_name'];
     $email = $_COOKIE['email'];
-    $images = $_COOKIE['image'];
+    $image = $_COOKIE['image'];
 
     $sql_email = "SELECT email FROM customer WHERE email='$email'";
     $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
     if (!(mysqli_num_rows($res_email) > 0)) {
         $status = "verified";
-        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$images','$status',NULL)";
+        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$status','$image')";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         header("location: ../index.php");
+        $_SESSION['success'] = "success";
+        
+
     } else {
         header("location: ../index.php");
+        $_SESSION['success'] = "success";
     }
 }
 // var_dump($_COOKIE);
@@ -110,6 +114,3 @@ if (isset($_COOKIE['user'])) {
 
 </html>
 
-<?php
-session_unset();
-?>

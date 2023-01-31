@@ -165,7 +165,7 @@ const isForCategory = form && form.getAttribute("class").includes("form_add-cate
 const submitBtn = document.querySelector(".modal_form-submit-btn")
 
 // get name attribute
-const btnName = submitBtn.getAttribute("name")
+const btnName = submitBtn && submitBtn.getAttribute("name")
 if (btnName == "update") {
     // set uploaded image to input field
     const imgURL = uploadedImg && uploadedImg.getAttribute("src")
@@ -267,7 +267,7 @@ deleteBtn && deleteBtn.forEach(btn => {
     })
 })
 
-// show alert on delete
+// show error alert
 const errorContainer = document.querySelectorAll(".error-container")
 
 const showErrorAlert = () => {

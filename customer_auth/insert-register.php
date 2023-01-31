@@ -53,7 +53,7 @@ if (isset($_POST['register'])) {
             }
             $password = md5($password);
             $status = "not verified";
-            $sql = "insert into customer values (default,'$name','$username','$email', '$password','$status','$code')";
+            $sql = "insert into customer values (default,'$name','$username','$email', '$password','$status','$code',NULL)";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";

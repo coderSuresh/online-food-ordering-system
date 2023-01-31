@@ -23,5 +23,5 @@ if (isset($_POST['login'])) {
         header("Location:./login.php");
     }
 } else {
-    header("Location:Location:./login.php");
+    header("Location:./login.php");
 }

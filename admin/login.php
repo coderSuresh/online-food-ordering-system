@@ -12,6 +12,8 @@ session_start();
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Admin Login | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="../js/admin.js" defer></script>
+
 </head>
 
 <body>
@@ -22,10 +24,11 @@ session_start();
      
             <form action="./auth.php" method="post">      
             <?php
+           
             if (isset($_SESSION['username'])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION['username']; ?>
                 </p>
                 
@@ -36,9 +39,10 @@ session_start();
 
           <?php
             if (isset($_SESSION['password'])) {
+                echo $_SESSION['password'];
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION['password']; ?>
                 </p>
                 
@@ -61,7 +65,6 @@ session_start();
             </form>
         </div>
     </main>
-<script src="../js/admin.js"></script>
 </body>
 
 </html>
