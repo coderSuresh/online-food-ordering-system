@@ -57,6 +57,7 @@
                     </div>
                     <button class="button border-curve mt-20 ml-35">Add to Cart</button>
                 </div>
+                <button class="button border-curve mt-20">Buy now</button>
             </section>
         </section>
 

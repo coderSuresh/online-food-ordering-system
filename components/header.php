@@ -50,7 +50,7 @@
                  <div class="flex items-center">
                      <div>
                          <h3 class="title">Food Name</h3>
-                         <div class="flex items-center justify-start">
+                         <div class="flex items-center">
                              <button class="cart_item-btn no_outline shadow cart_inc">
                                  <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
                              </button>

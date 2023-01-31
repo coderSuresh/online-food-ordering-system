@@ -292,7 +292,7 @@ cartIcon && cartIcon.addEventListener("click", () => {
     cartDropdown.classList.toggle("visible")
 })
 
-// increment or decrement quantity in cart
+// increment or decrement quantity in cart and update price
 const cartIncrementBtn = document.querySelectorAll(".cart_inc")
 const cartDecrementBtn = document.querySelectorAll(".cart_dec")
 const cartQuantity = document.querySelectorAll(".cart_qty")
