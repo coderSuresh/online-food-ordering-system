@@ -47,13 +47,13 @@ if (isset($_POST['register'])) {
             $code = rand(999999, 111111);
             $sql_code = "select otp from customer where otp = $code";
             $res_code = mysqli_query($conn, $sql_code) or die("Error");
-
+            $count = 0;
             if (mysqli_num_rows($res_code) > 0) {
                 $code = rand(999999, 111111);
             }
             $password = md5($password);
             $status = "not verified";
-            $sql = "insert into customer values (default,'$name','$username','$email', '$password','$status','$code',NULL)";
+            $sql = "insert into customer values (default,'$name','$username','$email', '$password','$signin_provider','$status',$code,NULL,$count)";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
                 $_SESSION['register-insert'] = "Inserted succesfully";

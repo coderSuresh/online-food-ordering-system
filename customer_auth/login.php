@@ -54,7 +54,7 @@
                 unset($_SESSION["invalid"]);
             }
             ?>
-
+            
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
                 <label>Username</label>
@@ -92,13 +92,14 @@ if (isset($_COOKIE['user'])) {
     $names  = $_COOKIE['profile_name'];
     $email = $_COOKIE['email'];
     $image = $_COOKIE['image'];
+    $count = 0;
 
     $sql_email = "SELECT email FROM customer WHERE email='$email'";
     $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
     if (!(mysqli_num_rows($res_email) > 0)) {
         $status = "verified";
-        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$status','$image')";
+        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$status',NULL,'$image',$count)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         header("location: ../index.php");
         $_SESSION['success'] = "success";

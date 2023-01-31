@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +41,17 @@
         <h1 class="heading text-center">Verify Account</h1>
 
         <form action="./verify-otp.php" method="post">
+            <?php  if (isset($_SESSION["otp-count"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container error p_7-20">
+                    <?php echo $_SESSION["otp-count"]; ?>
+                </p>
 
+            <?php
+                unset($_SESSION["otp-count"]);
+            }
+            ?>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required autofocus>
                 <label>OTP</label>
@@ -51,5 +64,4 @@
         </form>
     </main>
 </body>
-
 </html>
