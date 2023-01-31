@@ -111,6 +111,18 @@
             }
 
             ?>
+                        <?php
+            if (isset($_SESSION["otp-failed"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container error p_7-20">
+                    <?php echo $_SESSION["otp-failed"]; ?>
+                </p>
+
+            <?php
+                unset($_SESSION["otp-failed"]);
+            }
+            ?>
             </p>
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="name" required autofocus>
