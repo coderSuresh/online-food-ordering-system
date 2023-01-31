@@ -1,12 +1,11 @@
 <?php
 session_start();
-
+include("../config.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-include("../../config.php");
-if (isset($_POST['send_otp'])) {
+if (isset($_POST['resend_otp'])) {
 
     $input_email = mysqli_real_escape_string($conn, $_POST['email']);
     $sql_name = "select names from customer where email = '$input_email'";

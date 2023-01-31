@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("../../config.php");
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -8,7 +9,7 @@
     $sql_code = "select otp name from customer where otp = $code";
     $res_code = mysqli_query($conn, $sql_code) or die("Error");
 
-    $sql_code = "select email from customer where username = $user";
+    $sql_code = "select email from customer where username = '$user'";
     $res_code = mysqli_query($conn, $sql_code) or die("Error");
     $row = mysqli_fetch_assoc($res_code);
     $email = $row['email'];
@@ -17,9 +18,11 @@
         {
             $code = rand(999999, 111111);
         }
-
+        
+        $sql_code_update = "Update customer set otp = $code";
+        $res_code_update = mysqli_query($conn, $sql_code_update) or die("Error");
             //Load Composer's autoloader
-            require '../vendor/autoload.php';
+            require '../../vendor/autoload.php';
 
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
@@ -48,9 +51,11 @@
   
                     $mail->send();                    
                     
-                    header("Location:../customer_auth/verify/verify.php");   
+                    header("Location:./verify.php");
+
                     
                 } catch (Exception $e) {
                     $_SESSION['error'] = "$e";
             }
+           
 ?>

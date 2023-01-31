@@ -56,7 +56,6 @@ if (isset($_POST['register'])) {
             $sql = "insert into customer values (default,'$name','$username','$email', '$password','$signin_provider','$status',$code,NULL,$count)";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
-                $_SESSION['register-insert'] = "Inserted succesfully";
               
                 //Load Composer's autoloader
                 require '../vendor/autoload.php';

@@ -58,7 +58,7 @@ session_start();
             </div>
 
             <div class="verify_resend flex items-center mt-20">
-                <a href="./resend-otp.php" class="resend_otp button gray border-curve-lg">Resend</a>
+                <a href="./resend-otp.php" class="resend_otp button gray border-curve-lg" name = "resend_otp">Resend</a>
                 <button type="submit" class="button no_outline border-curve-lg" name="verify">Verify</button> 
             </div>
         </form>
