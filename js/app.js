@@ -338,3 +338,31 @@ window.addEventListener("click", (e) => {
         userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
     }
 })
+
+// add to cart
+const formFoodCard = document.querySelectorAll(".form_food-card")
+const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
+
+btnAddToCart && btnAddToCart.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(formFoodCard[i])
+        submitForm(formData, './backend/add-to-cart.php')
+    })
+})
+
+function submitForm(formData, backendAPI) {
+    fetch(backendAPI, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data['status'] == "success") {
+                showAlert(data['message'], "success")
+            } else {
+                showAlert(data['message'], "error")
+            }
+        })
+        .catch((e) => showAlert("third Something went wrong " + e, "error"))
+}

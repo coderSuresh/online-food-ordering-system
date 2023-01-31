@@ -55,7 +55,7 @@
                         <input type="text" class="details_quantity p-20 no_outline text-center" value="1">
                         <button class="details_quantity-btn-inc button gray border-curve"><img src="./images/ic_add-yellow.svg" alt="increment"></button>
                     </div>
-                    <button class="button border-curve mt-20 ml-35">Add to Cart</button>
+                    <button class="button btn_add-to-cart border-curve mt-20 ml-35">Add to Cart</button>
                 </div>
                 <button class="button border-curve mt-20">Buy now</button>
             </section>

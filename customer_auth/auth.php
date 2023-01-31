@@ -15,6 +15,7 @@ if (isset($_POST['login'])) {
                 header("Location:./login.php"); 
             }else{
                 $_SESSION['success'] = "Login success";
+                $_SESSION['user'] = $username;
                   header("Location:../index.php");
             }
         }
