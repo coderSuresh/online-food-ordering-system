@@ -1,27 +1,30 @@
 <?php
     session_start();
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-     include("../../config.php");
-     if(isset($_POST['send_otp'])){
-        
-            $input_email = mysqli_real_escape_string($conn,$_POST['email']);
-            $sql_name = "select names from customer where email = '$input_email'";
-            $res_name = mysqli_query($conn, $sql_name) or die("Error");
-            $data_name = mysqli_fetch_array($res_name);
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+    $user = $_SESSION['username'];   
+    $code = rand(999999, 111111);
+    $sql_code = "select otp name from customer where otp = $code";
+    $res_code = mysqli_query($conn, $sql_code) or die("Error");
 
-        if(mysqli_num_rows($res_name) > 0){   
-            $code = rand(100000,999999);  
-            $email = $input_email;
-            $username = $data_name['names'];
-                 //Load Composer's autoloader
-                require '../../vendor/autoload.php';
+    $sql_code = "select email from customer where username = $user";
+    $res_code = mysqli_query($conn, $sql_code) or die("Error");
+    $row = mysqli_fetch_assoc($res_code);
+    $email = $row['email'];
 
-                //Create an instance; passing `true` enables exceptions
-                $mail = new PHPMailer(true);
+    if (mysqli_num_rows($res_code) > 0)
+        {
+            $code = rand(999999, 111111);
+        }
 
-                try {
+            //Load Composer's autoloader
+            require '../vendor/autoload.php';
+
+            //Create an instance; passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+
+            try {
                     
                     //Server settings
                     $mail->isSMTP();                                            //Send using SMTP
@@ -34,7 +37,7 @@ use PHPMailer\PHPMailer\Exception;
 
                     //Recipients
                     $mail->setFrom('testperpose56@gmail.com', 'Restro Hub');
-                    $mail->addAddress($email, $username);     //Add a recipient
+                    $mail->addAddress($email, $name);     //Add a recipient
                     $mail->addReplyTo('testperpose56@gmail.com', 'Restro Hub');
                    
                     //Content
@@ -43,24 +46,11 @@ use PHPMailer\PHPMailer\Exception;
                     $mail->Body    = "Your verification code is $code";
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
   
-                    $mail->send();
-                    $_SESSION['code'] = $code;
-                    header("Location:./reset-verify.php");   
-                    $_SESSION['email'] = $email;
+                    $mail->send();                    
+                    
+                    header("Location:../customer_auth/verify/verify.php");   
+                    
                 } catch (Exception $e) {
                     $_SESSION['error'] = "$e";
-                }
-                      
-            }    
-            
-            else{
-                $_SESSION['email_error'] = "Email not found";
-                header("Location:./reset-password.php");
             }
-     }
-
-            else{
-                header("Location:./login.php");
-            }
-
 ?>

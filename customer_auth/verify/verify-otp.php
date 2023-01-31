@@ -15,6 +15,8 @@
                             $res_update = mysqli_query($conn, $sql_update) or die("Error");
                             if($res_update){
                                 $_SESSION['verification'] = "sucessful";
+                                $remove_opt = "Update customer set otp = 0 where username = '$user'";
+                                mysqli_query($conn, $remove_opt) or die("could not remove otp");
                                 header("Location:../login.php");
                             }
                          }

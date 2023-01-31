@@ -77,7 +77,7 @@ if (isset($_POST['register'])) {
 
                     //Recipients
                     $mail->setFrom('testperpose56@gmail.com', 'Restro Hub');
-                    $mail->addAddress($email, $username);     //Add a recipient
+                    $mail->addAddress($email, $name);     //Add a recipient
                     $mail->addReplyTo('testperpose56@gmail.com', 'Restro Hub');
                    
                     //Content
