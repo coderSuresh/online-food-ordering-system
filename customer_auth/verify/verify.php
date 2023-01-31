@@ -17,10 +17,8 @@
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
-                        alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
-                        alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -31,8 +29,7 @@
                 <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
@@ -43,12 +40,14 @@
         <form action="./verify-otp.php" method="post">
 
             <div class="text_field">
-                <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required
-                    autofocus>
+                <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required autofocus>
                 <label>OTP</label>
             </div>
 
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="verify" value="verify">
+            <div class="verify_resend flex items-center mt-20">
+                <a href="#" class="resend_otp button gray border-curve-lg">Resend</a>
+                <button type="submit" class="button no_outline border-curve-lg" name="verify">Verify</button> 
+            </div>
         </form>
     </main>
 </body>

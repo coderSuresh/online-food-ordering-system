@@ -264,24 +264,24 @@ const quantity = document.querySelector(".details_quantity")
 
 incrementBtn && incrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) + 1
-    validateQuantity()
+    quantity.value = validateQuantity(quantity.value)
 })
 
 decrementBtn && decrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) - 1
-    validateQuantity()
+    quantity.value = validateQuantity(quantity.value)
 })
 
 quantity && quantity.addEventListener("change", () => {
-    validateQuantity()
+    validateQuantity(quantity.value)
 })
 
 //validate quantity
-function validateQuantity() {
-    if (quantity.value < 1) {
-        quantity.value = 1
+function validateQuantity(val) {
+    if (val < 1) {
         showAlert("Minimum order quantity is 1 item", "error")
-    }
+        return parseInt(val = 1)
+    } else return parseInt(val)
 }
 
 // for cart drop down
@@ -290,6 +290,24 @@ const cartDropdown = document.querySelector(".cart_dropdown")
 
 cartIcon && cartIcon.addEventListener("click", () => {
     cartDropdown.classList.toggle("visible")
+})
+
+// increment or decrement quantity in cart
+const cartIncrementBtn = document.querySelectorAll(".cart_inc")
+const cartDecrementBtn = document.querySelectorAll(".cart_dec")
+const cartQuantity = document.querySelectorAll(".cart_qty")
+
+cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
+    })
+})
+
+cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
+        cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
+    })
 })
 
 // hide dropdown on click outside

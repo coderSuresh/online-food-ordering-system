@@ -505,6 +505,20 @@ header {
     margin-right: 10px;
 }
 
+.cart_item-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--white);
+    margin: 0 10px 0;
+}
+
+
+.cart_item-icon {
+    width: 12px;
+    vertical-align: middle;
+}
+
 .cart_content {
     margin: 15px 0;
 }
@@ -516,6 +530,14 @@ header {
 .cart_content .price, 
 .cart_content .qty {
     font-size: 0.85rem;
+}
+
+.cart_qty {
+    width: 20px;
+}
+
+.qty {
+    margin: 0 !important;
 }
 
 .close_icon {
@@ -656,26 +678,16 @@ form .text_field {
     text-decoration: underline;
 }
 
-input[type="submit"] {
-    width: 100%;
-    height: 50px;
-    background: var(--primary-color);
-    font-size: 18px;
-    color: var(--black);
+.verify_resend > * {
+    flex: 1;
+    margin: 0 10px;
+    padding: 0;
+    height: 40px;
 }
 
-input[type="submit"],
-.modal button[type="submit"] {
-    font-weight: 700;
-}
-
-input[type=submit]:focus,
-input[type="submit"]:hover {
-    outline: 1px solid var(--black);
-}
-
-input[type=submit]:active {
-    outline: 2px solid var(--black);
+.resend_otp {
+    line-height: 40px;
+    text-align: center;
 }
 
 /* ======================= for admin ===================== */

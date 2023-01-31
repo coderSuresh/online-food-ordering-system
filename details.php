@@ -52,7 +52,7 @@
                 <div class="details_add-to-cart flex items-center justify-start">
                     <div class="details_quantity-container flex items-center justify-center mt-20">
                         <button class="details_quantity-btn-dec button gray border-curve"><img src="./images/ic_remove-yellow.svg" alt="decrement"></button>
-                        <input type="text" min="1" max="10" class="details_quantity p-20 no_outline text-center" value="1">
+                        <input type="text" class="details_quantity p-20 no_outline text-center" value="1">
                         <button class="details_quantity-btn-inc button gray border-curve"><img src="./images/ic_add-yellow.svg" alt="increment"></button>
                     </div>
                     <button class="button border-curve mt-20 ml-35">Add to Cart</button>
