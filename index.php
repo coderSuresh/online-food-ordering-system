@@ -57,9 +57,9 @@
                                 <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
                             </form>
 
-                            <form action="#" method="post">
+                            <form action="#" method="post" class="form_food-card" name="form_food-card">
                                 <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
-                                <button type="submit" class="button card__btn flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                                <button type="submit" class="button card__btn btn_add-to-cart flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
                             </form>
                         </div>
                     </div>

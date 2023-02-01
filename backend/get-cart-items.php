@@ -26,8 +26,9 @@ if (isset($_SESSION['user'])) {
 
             $data[] = $row;
         }
-
         echo json_encode($data);
     }
+} else {
+    echo json_encode(array('status' => 'error', 'message' => 'Please login to continue'));
 }
 ?>
