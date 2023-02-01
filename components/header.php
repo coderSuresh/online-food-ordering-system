@@ -79,7 +79,7 @@
                          <img src="./uploads/foods/<?php echo $food_img; ?>" class="cart_img" alt="food image">
                          <div class="flex items-center">
                              <div>
-                                 <h3 class="title"><?php echo $food_name ?></h3>
+                                 <h3 class="title cart_title"><?php echo $food_name ?></h3>
                                  <div class="qty_container flex items-center">
                                      <button class="cart_item-btn no_outline shadow cart_inc">
                                          <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
@@ -92,6 +92,7 @@
                                      </button>
                                  </div>
                              </div>
+                             <p class="cart_hidden-price"><?php echo $food_price; ?></p>
                              <p class="cart_price ml-35">Rs. <?php echo $food_price; ?></p>
                          </div>
                          <form action="./backend/remove-from-cart.php" class="cart_content-form" method="post">

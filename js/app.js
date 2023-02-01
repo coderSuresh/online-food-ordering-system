@@ -74,7 +74,7 @@ const google_auth = getAuth(app);
 const googel_provider = new GoogleAuthProvider(app);
 
 const google = document.querySelector(".google")
-google && google.addEventListener('click', (e) => {
+google && google.addEventListener('click', (_e) => {
 
     signInWithPopup(google_auth, googel_provider)
         .then((result) => {
@@ -125,7 +125,7 @@ const facebook_provider = new FacebookAuthProvider(app);
 const facebook_auth = getAuth(app);
 const facebook = document.querySelector(".facebook")
 
-facebook && facebook.addEventListener('click', (e) => {
+facebook && facebook.addEventListener('click', (_e) => {
     signInWithPopup(facebook_auth, facebook_provider)
         .then((result) => {
             // The signed-in user info.
@@ -299,9 +299,15 @@ const cartQuantity = document.querySelectorAll(".cart_qty")
 const cartItemPrice = document.querySelectorAll(".cart_price")
 const cartTotal = document.querySelector(".cart_total")
 
+const hiddenPrice = document.querySelectorAll(".cart_hidden-price")
+
+hiddenPrice && hiddenPrice.forEach((price) => {
+    price.style.display = "none"
+})
+
 // initially display correct price
 cartItemPrice && cartItemPrice.forEach((price, i) => {
-    price.textContent = "Rs. " + parseInt(price.textContent.split("Rs. ")[1]) * parseInt(cartQuantity[i].value)
+    price.textContent = "Rs. " + parseInt(hiddenPrice[i].textContent) * parseInt(cartQuantity[i].value)
 })
 
 // calculate total price
@@ -316,7 +322,7 @@ function calculateCartTotal() {
 calculateCartTotal()
 
 cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
-    const price = parseInt(cartItemPrice[i].textContent.split("Rs. ")[1])
+    const price = parseInt(hiddenPrice[i].textContent)
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
         cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
@@ -325,7 +331,7 @@ cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
 })
 
 cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
-    const price = parseInt(cartItemPrice[i].textContent.split("Rs. ")[1])
+    const price = parseInt(hiddenPrice[i].textContent)
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
         cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
@@ -369,23 +375,33 @@ btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
 })
 
 // update cart on delete / update quantity
-const cartContent = document.querySelector(".cart_content")
+const cartContent = document.querySelectorAll(".cart_content")
+
+// get cart item details container (quantity and price are above)
+const cartTitle = document.querySelectorAll(".cart_title")
+const cartImg = document.querySelectorAll(".cart_img")
 
 function updateCartContent() {
-    cartContent && cartContent.forEach((content) => {
-        getData('./backend/get-cart-content.php', content)
+    cartContent && cartContent.forEach((_content) => {
+        getData('./backend/get-cart-items.php')
     })
 }
 
-function getData() {
-    fetch('./backend/get-cart-content.php')
+updateCartContent()
+
+function getData(backendAPI) {
+    fetch(backendAPI)
         .then(response => response.json())
         .then(data => {
-            cartContent.innerHTML = data
+            data.forEach((item, i) => {
+                cartTitle[i].textContent = item['food_name']
+                cartImg[i].src = "./uploads/foods/" + item['food_image']
+                cartQuantity[i].value = item['quantity']
+                cartItemPrice[i].textContent = "Rs. " + parseInt(item['food_price']) * parseInt(item['quantity'])
+            })
         })
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
-
 
 function submitForm(formData, backendAPI) {
     fetch(backendAPI, {
