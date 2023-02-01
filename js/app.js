@@ -299,20 +299,24 @@ const cartQuantity = document.querySelectorAll(".cart_qty")
 const cartItemPrice = document.querySelectorAll(".cart_price")
 const cartTotal = document.querySelector(".cart_total")
 
+// initially display correct price
+cartItemPrice && cartItemPrice.forEach((price, i) => {
+    price.textContent = "Rs. " + parseInt(price.textContent.split("Rs. ")[1]) * parseInt(cartQuantity[i].value)
+})
+
 // calculate total price
 function calculateCartTotal() {
     let total = 0
     cartItemPrice && cartItemPrice.forEach((price) => {
         total += parseInt(price.textContent.split("Rs. ")[1])
     })
-    cartTotal.textContent = "Rs. " + total
+    cartTotal.textContent = "Total: Rs. " + total
 }
 
 calculateCartTotal()
 
-const price = document.querySelector(".cart_price").textContent.split("Rs. ")[1]
-
 cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
+    const price = parseInt(cartItemPrice[i].textContent.split("Rs. ")[1])
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
         cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
@@ -321,6 +325,7 @@ cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
 })
 
 cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
+    const price = parseInt(cartItemPrice[i].textContent.split("Rs. ")[1])
     btn.addEventListener("click", () => {
         cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
         cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
@@ -360,9 +365,10 @@ function submitForm(formData, backendAPI) {
         .then(data => {
             if (data['status'] == "success") {
                 showAlert(data['message'], "success")
+                location.reload()
             } else {
                 showAlert(data['message'], "error")
             }
         })
-        .catch((e) => showAlert("third Something went wrong " + e, "error"))
+        .catch((e) => showAlert("Something went wrong " + e, "error"))
 }

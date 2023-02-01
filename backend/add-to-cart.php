@@ -5,9 +5,8 @@ require('../config.php');
 $response = array();
 
 if (isset($_SESSION['success'])) {
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $food_id = $_POST['f_id'];
-        // $food_id = 20;
         $username = $_SESSION['user'];
 
         // get user id
@@ -31,7 +30,7 @@ if (isset($_SESSION['success'])) {
                 exit();
             } else {
                 $response['status'] = 'error';
-                $response['message'] = 'first Something went wrong';
+                $response['message'] = 'Something went wrong';
                 echo json_encode($response);
                 exit();
             }
@@ -45,7 +44,7 @@ if (isset($_SESSION['success'])) {
                 exit();
             } else {
                 $response['status'] = 'error';
-                $response['message'] = 'next Something went wrong';
+                $response['message'] = 'Something went wrong';
                 echo json_encode($response);
                 exit();
             }
@@ -53,8 +52,9 @@ if (isset($_SESSION['success'])) {
     } else {
         header('location: ../invalid.html');
     }
-// } else {
-//     $response['status'] = 'error';
-//     $response['message'] = 'Please login to continue';
-//     echo json_encode($response);
-// }
+} else {
+    $response['status'] = 'error';
+    $response['message'] = 'Please login to continue';
+    echo json_encode($response);
+    exit();
+}

@@ -302,6 +302,8 @@ header {
 
 .cart_dropdown {
     right: 20px;
+    max-height: 70vh;
+    overflow: auto;
 }
 
 .logout-dropdown.visible,
@@ -530,8 +532,16 @@ header {
     margin: 15px 0;
 }
 
+.qty_container {
+    margin-top: 10px;
+}
+
 .cart_content .title {
     font-size: 1rem;
+}
+
+.cart_total {
+    font-weight: 700;
 }
 
 .cart_content .cart_price,

@@ -38,39 +38,77 @@
 
              <li class="flex direction-col">
                  <button class="cart no_bg no_outline relative"><img src="./images/ic_cart.svg" alt="cart">
-                     <div class="count-top shadow">4</div>
+                     <?php
+                        require('./config.php');
+                        if (isset($_SESSION['user'])) {
+                            $username = $_SESSION['user'];
+                            $sql_uid = "select id from customer where username = '$username'";
+                            $result_uid = mysqli_query($conn, $sql_uid);
+                            $row_uid = mysqli_fetch_assoc($result_uid) or die(mysqli_error($conn));
+                            $uid = $row_uid['id'];
+
+                            $sql = "SELECT * FROM cart where customer_id = $uid";
+                            $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                            $count = mysqli_num_rows($result);
+
+                            if ($count > 0) {
+                                echo '<div class="count-top shadow">' . $count . '</div>';
+                            }
+
+                        ?>
                  </button>
              </li>
          </ul>
          <!-- cart drop down -->
          <div class="cart_dropdown border-curve shadow p-20">
-             <!-- <p>Cart is empty</p> -->
-             <div class="cart_content flex items-center">
-                 <img src="./images/food.png" class="cart_img" alt="food image">
-                 <div class="flex items-center">
-                     <div>
-                         <h3 class="title">Food Name</h3>
+
+             <?php
+                            if ($count > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $food_id = $row['food_id'];
+                                    $quantity = $row['quantity'];
+                                    $sql_food = "SELECT name,price,img FROM food where f_id = $food_id";
+                                    $result_food = mysqli_query($conn, $sql_food) or die(mysqli_error($conn));
+                                    $row_food = mysqli_fetch_assoc($result_food);
+                                    $food_name = $row_food['name'];
+                                    $food_price = $row_food['price'];
+                                    $food_img = $row_food['img'];
+                ?>
+                     <div class="cart_content flex items-center">
+                         <img src="./uploads/foods/<?php echo $food_img; ?>" class="cart_img" alt="food image">
                          <div class="flex items-center">
-                             <button class="cart_item-btn no_outline shadow cart_inc">
-                                 <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
-                             </button>
+                             <div>
+                                 <h3 class="title"><?php echo $food_name ?></h3>
+                                 <div class="qty_container flex items-center">
+                                     <button class="cart_item-btn no_outline shadow cart_inc">
+                                         <img src="./images/ic_add.svg" alt="plus icon" class="cart_item-icon">
+                                     </button>
 
-                             <p class="qty">Qty: <input class="cart_qty no_outline" value="1"></p>
+                                     <p class="qty">Qty: <input class="cart_qty no_outline" value="<?php echo $quantity; ?>"></p>
 
-                             <button class="cart_item-btn no_outline shadow cart_dec">
-                                 <img src="./images/ic_remove.svg" alt="minus icon" class="cart_item-icon">
-                             </button>
+                                     <button class="cart_item-btn no_outline shadow cart_dec">
+                                         <img src="./images/ic_remove.svg" alt="minus icon" class="cart_item-icon">
+                                     </button>
+                                 </div>
+                             </div>
+                             <p class="cart_price ml-35">Rs. <?php echo $food_price; ?></p>
                          </div>
+                         <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
                      </div>
-                     <p class="cart_price ml-35">Rs. 100</p>
+                     <hr>
+                 <?php
+                                }
+                    ?>
+                 <div class="flex items-center mt-20">
+                     <p class="cart_total">Total: Rs. 400</p>
+                     <a href="#" class="button border-curve checkout-btn">Checkout</a>
                  </div>
-                 <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
-             </div>
-             <hr>
-             <div class="flex items-center mt-20">
-                 <p class="cart_total">Total: Rs. 400</p>
-                 <a href="#" class="button border-curve checkout-btn">Checkout</a>
-             </div>
+         <?php
+                            }
+                        }
+            ?>
+         </div>
+
      </nav>
 
  </header>
