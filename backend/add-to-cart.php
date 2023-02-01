@@ -7,6 +7,11 @@ $response = array();
 if (isset($_SESSION['success'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $food_id = $_POST['f_id'];
+        if(isset($_POST['quantity'])) {
+            $quantity = $_POST['quantity'];
+        } else {
+            $quantity = 1;
+        }
         $username = $_SESSION['user'];
 
         // get user id
@@ -20,7 +25,7 @@ if (isset($_SESSION['success'])) {
 
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
-            $qty = $row['quantity'] + 1;
+            $qty = $row['quantity'] + $quantity;
             $sql = "UPDATE cart SET quantity = $qty WHERE food_id = $food_id AND customer_id = $customer_id";
             $result = mysqli_query($conn, $sql);
             if ($result) {
@@ -35,7 +40,7 @@ if (isset($_SESSION['success'])) {
                 exit();
             }
         } else {
-            $sql = "INSERT INTO cart VALUES (DEFAULT, $customer_id, $food_id, 1)";
+            $sql = "INSERT INTO cart VALUES (DEFAULT, $customer_id, $food_id, $quantity)";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 $response['status'] = 'success';

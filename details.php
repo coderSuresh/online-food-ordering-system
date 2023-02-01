@@ -49,13 +49,16 @@
                 <p class="details_short-desc mt-20"><?php echo $row['short_desc']; ?></p>
                 <p class="details_price mt-20"><b>Rs. <?php echo $row['price']; ?></b></p>
 
-                <div class="details_add-to-cart flex items-center justify-start">
-                    <div class="details_quantity-container flex items-center justify-center mt-20">
-                        <button class="details_quantity-btn-dec button gray border-curve"><img src="./images/ic_remove-yellow.svg" alt="decrement"></button>
-                        <input type="text" class="details_quantity p-20 no_outline text-center" value="1">
-                        <button class="details_quantity-btn-inc button gray border-curve"><img src="./images/ic_add-yellow.svg" alt="increment"></button>
-                    </div>
-                    <button class="button btn_add-to-cart border-curve mt-20 ml-35">Add to Cart</button>
+                <div class="details_add-to-cart  ">
+                    <form action="./backend/add-to-cart.php" method="post" class="form_food-card flex items-center justify-start" name="form_food-card">
+                        <div class="details_quantity-container flex items-center justify-center mt-20">
+                            <img src="./images/ic_remove-yellow.svg" class="details_quantity-btn-dec" alt="decrement">
+                            <input type="text" class="details_quantity p-20 no_outline text-center" value="1">
+                            <img src="./images/ic_add-yellow.svg" class="details_quantity-btn-inc" alt="increment">
+                        </div>
+                        <input type="hidden" name="f_id" value="<?php echo $row['f_id']; ?>">
+                        <button class="button btn_add-to-cart details border-curve mt-20 ml-35">Add to Cart</button>
+                    </form>
                 </div>
                 <button class="button border-curve mt-20">Buy now</button>
             </section>

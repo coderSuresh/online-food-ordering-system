@@ -316,7 +316,7 @@ function calculateCartTotal() {
     cartItemPrice && cartItemPrice.forEach((price) => {
         total += parseInt(price.textContent.split("Rs. ")[1])
     })
-    cartTotal.textContent = "Total: Rs. " + total
+    cartTotal && (cartTotal.textContent = "Total: Rs. " + total)
 }
 
 calculateCartTotal()
@@ -355,9 +355,11 @@ const formFoodCard = document.querySelectorAll(".form_food-card")
 const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
 
 btnAddToCart && btnAddToCart.forEach((btn, i) => {
+
     btn.addEventListener("click", (e) => {
         e.preventDefault()
         const formData = new FormData(formFoodCard[i])
+        quantity && formData.append("quantity", quantity.value)
         submitForm(formData, './backend/add-to-cart.php')
     })
 })
