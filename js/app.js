@@ -411,7 +411,7 @@ function submitForm(formData, backendAPI) {
         .then(response => response.json())
         .then(data => {
             if (data['status'] == "success") {
-                showAlert(data['message'], "success")
+                showAlert(data['message'], "success")    
             } else {
                 showAlert(data['message'], "error")
             }
