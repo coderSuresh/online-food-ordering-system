@@ -52,7 +52,7 @@
                             $count = mysqli_num_rows($result);
 
                             if ($count > 0) {
-                                echo '<div class="count-top shadow">' . $count . '</div>';
+                                echo '<div class="count-top cart_count-top shadow">' . $count . '</div>';
                             }
 
                         ?>
@@ -66,6 +66,7 @@
                             if ($count > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $food_id = $row['food_id'];
+                                    $cart_id = $row['id'];
                                     $quantity = $row['quantity'];
                                     $sql_food = "SELECT name,price,img FROM food where f_id = $food_id";
                                     $result_food = mysqli_query($conn, $sql_food) or die(mysqli_error($conn));
@@ -93,7 +94,10 @@
                              </div>
                              <p class="cart_price ml-35">Rs. <?php echo $food_price; ?></p>
                          </div>
-                         <button class="no_bg no_outline ml-35"><img src="./images/ic_cross.svg" class="close_icon" alt="remove from cart"></button>
+                         <form action="./backend/remove-from-cart.php" class="cart_content-form" method="post">
+                             <input type="hidden" name="id" value="<?php echo $cart_id; ?>">
+                             <button type="submit" class="no_bg no_outline ml-35 btn_remove-from-cart"><img src="./images/ic_cross.svg" alt="remove from cart"></button>
+                         </form>
                      </div>
                      <hr>
                  <?php

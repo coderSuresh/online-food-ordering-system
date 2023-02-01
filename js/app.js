@@ -356,6 +356,37 @@ btnAddToCart && btnAddToCart.forEach((btn, i) => {
     })
 })
 
+// remove from cart
+const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
+const cartContentForm = document.querySelectorAll(".cart_content-form")
+
+btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(cartContentForm[i])
+        submitForm(formData, './backend/remove-from-cart.php')
+    })
+})
+
+// update cart on delete / update quantity
+const cartContent = document.querySelector(".cart_content")
+
+function updateCartContent() {
+    cartContent && cartContent.forEach((content) => {
+        getData('./backend/get-cart-content.php', content)
+    })
+}
+
+function getData() {
+    fetch('./backend/get-cart-content.php')
+        .then(response => response.json())
+        .then(data => {
+            cartContent.innerHTML = data
+        })
+        .catch((e) => showAlert("Something went wrong " + e, "error"))
+}
+
+
 function submitForm(formData, backendAPI) {
     fetch(backendAPI, {
         method: 'POST',
@@ -365,7 +396,6 @@ function submitForm(formData, backendAPI) {
         .then(data => {
             if (data['status'] == "success") {
                 showAlert(data['message'], "success")
-                location.reload()
             } else {
                 showAlert(data['message'], "error")
             }
