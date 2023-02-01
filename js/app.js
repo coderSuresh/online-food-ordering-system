@@ -353,6 +353,7 @@ window.addEventListener("click", (e) => {
 // add to cart
 const formFoodCard = document.querySelectorAll(".form_food-card")
 const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
+const cartCountTop = document.querySelector(".cart_count-top")
 
 btnAddToCart && btnAddToCart.forEach((btn, i) => {
 
@@ -396,6 +397,7 @@ function getData(backendAPI) {
         .then(response => response.json())
         .then(data => {
             data.forEach((item, i) => {
+                cartCountTop && (cartCountTop.textContent = data.length)
                 cartTitle[i].textContent = item['food_name']
                 cartImg[i].src = "./uploads/foods/" + item['food_image']
                 cartQuantity[i].value = item['quantity']
@@ -414,6 +416,7 @@ function submitForm(formData, backendAPI) {
         .then(data => {
             if (data['status'] == "success") {
                 showAlert(data['message'], "success")
+                updateCartContent()
             } else {
                 showAlert(data['message'], "error")
             }

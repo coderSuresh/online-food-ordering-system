@@ -22,8 +22,7 @@ if (isset($_SESSION['user'])) {
             $row_food = mysqli_fetch_assoc($result_food);
             $row['food_name'] = $row_food['name'];
             $row['food_price'] = $row_food['price'];
-            $row['food_image'] = $row_food['img'];            
-
+            $row['food_image'] = $row_food['img'];
             $data[] = $row;
         }
         echo json_encode($data);
@@ -31,4 +30,3 @@ if (isset($_SESSION['user'])) {
 } else {
     echo json_encode(array('status' => 'error', 'message' => 'Please login to continue'));
 }
-?>
