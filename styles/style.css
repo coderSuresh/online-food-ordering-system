@@ -291,6 +291,27 @@ header {
 }
 
 /* user profile logout button and cart drop down */
+
+.checkout_form {
+    width: 400px;
+}
+
+.checkout_form input,
+.checkout_form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+}
+
+.checkout_info h5 {
+    margin: 10px 0;
+}
+
+.cart_hidden-price {
+    display: none;
+}
 .logout-dropdown,
 .cart_dropdown {
     position: absolute;

@@ -19,7 +19,7 @@ if (isset($_SESSION['success'])) {
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $response['status'] = 'success';
-            $response['message'] = 'Item removed to cart';
+            $response['message'] = 'Item removed from cart';
             echo json_encode($response);
             exit();
         } else {
@@ -35,6 +35,5 @@ if (isset($_SESSION['success'])) {
     $response['status'] = 'error';
     $response['message'] = 'Please login to continue';
     echo json_encode($response);
-    exit();
 }
 ?>

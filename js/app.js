@@ -223,7 +223,7 @@ const goToTopBtn = document.querySelector(".go_top")
 
 // show btn on scroll
 window.onscroll = () => {
-    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? (goToTopBtn.style.display = "block") : (goToTopBtn.style.display = "none")
+    goToTopBtn && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) ? (goToTopBtn && (goToTopBtn.style.display = "block")) : (goToTopBtn && (goToTopBtn.style.display = "none"))
 }
 
 goToTopBtn && goToTopBtn.addEventListener("click", () => {
@@ -299,12 +299,6 @@ const cartQuantity = document.querySelectorAll(".cart_qty")
 const cartItemPrice = document.querySelectorAll(".cart_price")
 const cartTotal = document.querySelector(".cart_total")
 
-const hiddenPrice = document.querySelectorAll(".cart_hidden-price")
-
-hiddenPrice && hiddenPrice.forEach((price) => {
-    price.style.display = "none"
-})
-
 // initially display correct price
 cartItemPrice && cartItemPrice.forEach((price, i) => {
     price.textContent = "Rs. " + parseInt(hiddenPrice[i].textContent) * parseInt(cartQuantity[i].value)
@@ -316,6 +310,8 @@ function calculateCartTotal() {
     cartItemPrice && cartItemPrice.forEach((price) => {
         total += parseInt(price.textContent.split("Rs. ")[1])
     })
+
+    console.log(cartTotal)
     cartTotal && (cartTotal.textContent = "Total: Rs. " + total)
 }
 
@@ -377,17 +373,8 @@ btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
     })
 })
 
-// update cart on delete / update quantity
-const cartContent = document.querySelectorAll(".cart_content")
-
-// get cart item details container (quantity and price are above)
-const cartTitle = document.querySelectorAll(".cart_title")
-const cartImg = document.querySelectorAll(".cart_img")
-
 function updateCartContent() {
-    cartContent && cartContent.forEach((_content) => {
-        getData('./backend/get-cart-items.php')
-    })
+    getData('./backend/get-cart-items.php')
 }
 
 updateCartContent()
@@ -396,13 +383,30 @@ function getData(backendAPI) {
     fetch(backendAPI)
         .then(response => response.json())
         .then(data => {
-            data.forEach((item, i) => {
-                cartCountTop && (cartCountTop.textContent = data.length)
-                cartTitle[i].textContent = item['food_name']
-                cartImg[i].src = "./uploads/foods/" + item['food_image']
-                cartQuantity[i].value = item['quantity']
-                cartItemPrice[i].textContent = "Rs. " + parseInt(item['food_price']) * parseInt(item['quantity'])
+            cartCountTop && (cartCountTop.textContent = data.length)
+            data.forEach((item) => {
+                const cartItem = createCartItemContainer(item['food_id'], item['food_name'], item['food_image'], item['food_price'], item['quantity'])
+                const hr = document.createElement("hr")
+                cartDropdown && cartDropdown.appendChild(cartItem)
+                cartDropdown && cartDropdown.appendChild(hr)
             })
+
+            // for total price and checkout button
+            const cartTotalContainer = document.createElement("div")
+            cartTotalContainer.setAttribute("class", "flex items-center cart_total_checkout mt-20")
+
+            const divCartTotal = document.createElement("p")
+            divCartTotal.setAttribute("class", "cart_total")
+            divCartTotal.textContent = "Total: Rs. " + 200
+
+            const btnCheckout = document.createElement("a")
+            btnCheckout.setAttribute("class", "button border-curve checkout-btn")
+            btnCheckout.textContent = "Checkout"
+
+            cartTotalContainer.appendChild(divCartTotal)
+            cartTotalContainer.appendChild(btnCheckout)
+
+            cartDropdown && cartDropdown.appendChild(cartTotalContainer)
         })
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
@@ -423,3 +427,94 @@ function submitForm(formData, backendAPI) {
         })
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
+
+// create cart item container
+function createCartItemContainer(id, name, img, price, quantity) {
+    const divCartContent = document.createElement("div")
+    divCartContent.setAttribute("class", "cart_content flex items-center")
+
+    const cartImg = document.createElement("img")
+    cartImg.setAttribute("class", "cart_img")
+    cartImg.setAttribute("src", "./uploads/foods/" + img)
+    divCartContent.appendChild(cartImg)
+
+    const div1 = document.createElement("div")
+    div1.setAttribute("class", "flex items-center")
+    divCartContent.appendChild(div1)
+
+    const div2 = document.createElement("div")
+    div1.appendChild(div2)
+
+    const cartTitle = document.createElement("h3")
+    cartTitle.setAttribute("class", "title cart_title")
+    cartTitle.textContent = name
+    div2.appendChild(cartTitle)
+
+    const divCartQty = document.createElement("div")
+    divCartQty.setAttribute("class", "qty_container flex items-center")
+    div2.appendChild(divCartQty)
+
+    const divCartQtyBtnInc = document.createElement("button")
+    divCartQtyBtnInc.setAttribute("class", "cart_item-btn no_outline shadow cart_inc")
+    divCartQty.appendChild(divCartQtyBtnInc)
+
+    const cartItemIconPlus = document.createElement("img")
+    cartItemIconPlus.setAttribute("class", "cart_item-icon")
+    cartItemIconPlus.setAttribute("src", "./images/ic_add.svg")
+    divCartQtyBtnInc.appendChild(cartItemIconPlus)
+
+    const cartQuantityContainer = document.createElement("p")
+    cartQuantityContainer.setAttribute("class", "qty")
+    cartQuantityContainer.textContent = "Qty: "
+    divCartQty.appendChild(cartQuantityContainer)
+
+    const cartQuantity = document.createElement("input")
+    cartQuantity.setAttribute("class", "cart_qty no_outline")
+    cartQuantity.setAttribute("type", "text")
+    cartQuantity.setAttribute("value", quantity)
+    cartQuantityContainer.appendChild(cartQuantity)
+
+    const divCartQtyBtnDec = document.createElement("button")
+    divCartQtyBtnDec.setAttribute("class", "cart_item-btn no_outline shadow cart_dec")
+    divCartQty.appendChild(divCartQtyBtnDec)
+
+    const cartItemIconMinus = document.createElement("img")
+    cartItemIconMinus.setAttribute("class", "cart_item-icon")
+    cartItemIconMinus.setAttribute("src", "./images/ic_remove.svg")
+    divCartQtyBtnDec.appendChild(cartItemIconMinus)
+
+    const cartHiddenPrice = document.createElement("p")
+    cartHiddenPrice.setAttribute("class", "cart_hidden-price")
+    cartHiddenPrice.textContent = price
+    div1.appendChild(cartHiddenPrice)
+
+    const cartItemPrice = document.createElement("p")
+    cartItemPrice.setAttribute("class", "cart_price ml-35")
+    cartItemPrice.textContent = "Rs. " + (parseInt(price) * parseInt(quantity))
+    div1.appendChild(cartItemPrice)
+
+    const cartContentForm = document.createElement("form")
+    cartContentForm.setAttribute("class", "cart_content-form")
+    cartContentForm.setAttribute("action", "./backend/remove-from-cart.php")
+    cartContentForm.setAttribute("method", "POST")
+    divCartContent.appendChild(cartContentForm)
+
+    const cartHiddenId = document.createElement("input")
+    cartHiddenId.setAttribute("name", "id")
+    cartHiddenId.setAttribute("type", "hidden")
+    cartHiddenId.setAttribute("value", id)
+    cartContentForm.appendChild(cartHiddenId)
+
+    const cartSubmitBtn = document.createElement("button")
+    cartSubmitBtn.setAttribute("class", "no_bg no_outline ml-35 btn_remove-from-cart")
+    cartSubmitBtn.setAttribute("type", "submit")
+    cartContentForm.appendChild(cartSubmitBtn)
+
+    const cartItemIconRemove = document.createElement("img")
+    cartItemIconRemove.setAttribute("alt", "cart_item-icon")
+    cartItemIconRemove.setAttribute("src", "./images/ic_cross.svg")
+    cartSubmitBtn.appendChild(cartItemIconRemove)  
+
+    return divCartContent
+}
+

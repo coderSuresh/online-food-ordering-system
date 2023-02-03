@@ -61,5 +61,4 @@ if (isset($_SESSION['success'])) {
     $response['status'] = 'error';
     $response['message'] = 'Please login to continue';
     echo json_encode($response);
-    exit();
 }
