@@ -333,8 +333,6 @@ function updateCartContent() {
     getData('./backend/get-cart-items.php')
 }
 
-updateCartContent()
-
 window.onload = () => {
     // increment or decrement quantity in cart and update price
     const cartIncrementBtn = document.querySelectorAll(".cart_inc")
