@@ -284,8 +284,60 @@ showErrorAlert()
 // show alert on max short description
 const shortDesc = document.querySelector("#short-desc")
 shortDesc && shortDesc.addEventListener("input", () => {
-    if (shortDesc.value.length >=50) {
+    if (shortDesc.value.length >= 50) {
         shortDesc.setAttribute("maxlength", "50")
         alert("Max 50 characters allowed")
+    }
+})
+
+// add food options
+const btnAddFoodOptions = document.querySelector(".btn_add-food-options")
+const foodOptionsForm = document.querySelector(".form_add-food-options")
+const foodOptionsContainer = document.querySelector(".food-options_container")
+
+btnAddFoodOptions && btnAddFoodOptions.addEventListener("click", () => {
+
+    if (foodOptionsForm.innerHTML == "") {
+        foodOptionsForm.innerHTML = `
+        <label for="food-option-title">Option: </label>
+        <input type="text" id="food-option-title" name="food-option[]" class="input_food-option">
+        <label for="food-option-price">Price:</label>
+        <input type="number" id="food-option-price" name="food-option-price[]" class="input_food-option-price">
+        <button type="button" class="button border-curve btn_add-food-option">Add</button>
+    `
+        addOptions()
+    }
+    else {
+        foodOptionsForm.innerHTML = ""
+    }
+})
+
+function addOptions() {
+    const btnAddFoodOption = document.querySelector(".btn_add-food-option")
+
+    foodOptionsContainer && (foodOptionsContainer.style.visibility = "hidden")
+
+    btnAddFoodOption && btnAddFoodOption.addEventListener("click", () => {
+
+        const foodOptionTitle = document.querySelector(".input_food-option").value
+        const foodOptionPrice = document.querySelector(".input_food-option-price").value
+
+        foodOptionsContainer.innerHTML == "" ? foodOptionsContainer.style.visibility = "hidden" : foodOptionsContainer.style.visibility = "visible"
+
+        foodOptionsContainer.innerHTML += `
+        <li>
+            <div class="flex items-center food-options border-curve">
+                <input type="text" name="list_food-options" class="p_7-20" value='${foodOptionTitle} : ${foodOptionPrice}' disabled>
+                <img src="../images/ic_cross.svg" class="btn_remove-food-option" alt="remove">
+            </div>
+        </li>
+    `
+    })
+}
+
+// remove food option
+foodOptionsContainer && foodOptionsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn_remove-food-option")) {
+        e.target.parentElement.parentElement.remove()
     }
 })

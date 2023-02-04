@@ -227,6 +227,7 @@ body {
     font-size: 1rem;
     min-width: fit-content;
     border: none !important;
+    vertical-align: middle;
     outline: 2px solid var(--primary-color);
 }
 
@@ -312,6 +313,7 @@ header {
 .cart_hidden-price {
     display: none;
 }
+
 .logout-dropdown,
 .cart_dropdown {
     position: absolute;
@@ -1061,6 +1063,43 @@ form .text_field {
     height: 20px;
 }
 
+#food-options {
+    padding-right: 45px;
+}
+
+.food-options {
+    width: 200px !important;
+    margin: 0 20px 20px 0;
+}
+
+.food-options input {
+    width: 80% !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+.btn_remove-food-option {
+    background-color: var(--primary-color);
+    width: 40px !important;
+    outline: none !important;
+    margin: 0 !important;
+}
+
+.btn_remove-food-option img {
+    pointer-events: none;
+}
+
+.btn_remove-food-option {
+    background-color: var(--primary-color);
+    width: 40px;
+    padding: 15px 10px 10px 10px;
+    height: 40px;
+}
+
+.food-options {
+    background-color: var(--light-gray);
+}
+
 .count-top {
     position: absolute;
     top: -12px;
@@ -1075,7 +1114,7 @@ form .text_field {
 
 /* resuable modal */
 .modal {
-    display: none;
+    display: flex;
     height: 100vh;
     position: fixed;
     top: 0;

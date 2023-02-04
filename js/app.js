@@ -522,4 +522,3 @@ function createCartItemContainer(id, name, img, price, quantity) {
 
     return divCartContent
 }
-

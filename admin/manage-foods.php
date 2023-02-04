@@ -187,24 +187,43 @@
                                 </select>
                             </div>
 
+                            <div class="col">
+                                <label for="food-options">Food options:</label>
+                                <button type="button" class="btn_add-food-options">Add food options</button>
+                            </div>
+
                             <?php
                             if (isset($_SESSION['f-id'])) {
                                 echo "<input type='hidden' name='f-id' value='" . $_SESSION['f-id'] . "'>";
                             }
                             ?>
-
-                            <div class="col">
-                                <button type="submit" class="button modal_form-submit-btn" name="<?php if (isset($_SESSION['f-id']))
-                                                                                                        echo "update";
-                                                                                                    else
-                                                                                                        echo "add"; ?>"><?php if (isset($_SESSION['f-id']))
-                                                                                                                            echo "Update";
-                                                                                                                        else echo "Add" ?> Food Item</button>
-                            </div>
                         </div>
                     </div>
 
-                </form>
+                    <div class="row">
+                        <div class="col form_add-food-options"></div>
+                        <div class="col">
+                            <ul class="food-options_container">
+                                    <input type="text" name="list_food-options" class="p_7-20 not-required" value="Test Food Options" disabled>
+                                    <button type="button" class="button w-fit btn_remove-food-option not-required border-curve">
+                                        <img src="../images/ic_remove.svg" alt="remove">
+                                    </button>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="row mt-20">
+                        <div class="col">
+                            <button type="submit" class="button modal_form-submit-btn" name="<?php if (isset($_SESSION['f-id']))
+                                                                                                    echo "update";
+                                                                                                else
+                                                                                                    echo "add"; ?>"><?php if (isset($_SESSION['f-id']))
+                                                                                                                        echo "Update";
+                                                                                                                    else echo "Add" ?> Food Item</button>
+                        </div>
+                    </div>
+            </div>
+            </form>
 
             </div>
         </section>
