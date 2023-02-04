@@ -122,6 +122,7 @@
                     <th>SN</th>
                     <th>Image</th>
                     <th>Name</th>
+                    <th>Options</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
@@ -158,6 +159,12 @@
                         <td>
                             <?php echo $foodName; ?>
                         </td>
+                        <td>
+                           <select name="options" class="p_7-20" id="options">
+                                 <option value="1">Option 1</option>
+                                 <option value="2">Option 2</option>
+                                 <option value="3">Option 3</option>
+                           </select>
                         <td>
                             <?php echo $foodPrice; ?>
                         </td>

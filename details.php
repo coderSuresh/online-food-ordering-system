@@ -49,6 +49,12 @@
                 <p class="details_short-desc mt-20"><?php echo $row['short_desc']; ?></p>
                 <p class="details_price mt-20"><b>Rs. <?php echo $row['price']; ?></b></p>
 
+                <select name="options" class="mt-20 p_7-20" id="options">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+
                 <div class="details_add-to-cart  ">
                     <form action="./backend/add-to-cart.php" method="post" class="form_food-card flex items-center justify-start" name="form_food-card">
                         <div class="details_quantity-container flex items-center justify-center mt-20">
