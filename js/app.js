@@ -292,102 +292,20 @@ cartIcon && cartIcon.addEventListener("click", () => {
     cartDropdown.classList.toggle("visible")
 })
 
-// increment or decrement quantity in cart and update price
-const cartIncrementBtn = document.querySelectorAll(".cart_inc")
-const cartDecrementBtn = document.querySelectorAll(".cart_dec")
-const cartQuantity = document.querySelectorAll(".cart_qty")
-const cartItemPrice = document.querySelectorAll(".cart_price")
-const cartTotal = document.querySelector(".cart_total")
-
-// initially display correct price
-cartItemPrice && cartItemPrice.forEach((price, i) => {
-    price.textContent = "Rs. " + parseInt(hiddenPrice[i].textContent) * parseInt(cartQuantity[i].value)
-})
-
-// calculate total price
-function calculateCartTotal() {
-    let total = 0
-    cartItemPrice && cartItemPrice.forEach((price) => {
-        total += parseInt(price.textContent.split("Rs. ")[1])
-    })
-
-    console.log(cartTotal)
-    cartTotal && (cartTotal.textContent = "Total: Rs. " + total)
-}
-
-calculateCartTotal()
-
-cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
-    const price = parseInt(hiddenPrice[i].textContent)
-    btn.addEventListener("click", () => {
-        cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
-        cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
-        calculateCartTotal()
-    })
-})
-
-cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
-    const price = parseInt(hiddenPrice[i].textContent)
-    btn.addEventListener("click", () => {
-        cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
-        cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
-        cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
-        calculateCartTotal()
-    })
-})
-
-// hide dropdown on click outside
-window.addEventListener("click", (e) => {
-    if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
-        cartDropdown && cartDropdown.classList.remove("visible")
-    }
-    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
-        userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
-    }
-})
-
-// add to cart
-const formFoodCard = document.querySelectorAll(".form_food-card")
-const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
 const cartCountTop = document.querySelector(".cart_count-top")
-
-btnAddToCart && btnAddToCart.forEach((btn, i) => {
-
-    btn.addEventListener("click", (e) => {
-        e.preventDefault()
-        const formData = new FormData(formFoodCard[i])
-        quantity && formData.append("quantity", quantity.value)
-        submitForm(formData, './backend/add-to-cart.php')
-    })
-})
-
-// remove from cart
-const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
-const cartContentForm = document.querySelectorAll(".cart_content-form")
-
-btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
-    btn.addEventListener("click", (e) => {
-        e.preventDefault()
-        const formData = new FormData(cartContentForm[i])
-        submitForm(formData, './backend/remove-from-cart.php')
-    })
-})
-
-function updateCartContent() {
-    getData('./backend/get-cart-items.php')
-}
-
-updateCartContent()
 
 function getData(backendAPI) {
     fetch(backendAPI)
         .then(response => response.json())
         .then(data => {
             cartCountTop && (cartCountTop.textContent = data.length)
+            cartDropdown && (cartDropdown.innerHTML = "")
+            let totalPrice = 0;
             data.forEach((item) => {
+                totalPrice += parseInt(item['food_price'])
                 const cartItem = createCartItemContainer(item['food_id'], item['food_name'], item['food_image'], item['food_price'], item['quantity'])
-                const hr = document.createElement("hr")
                 cartDropdown && cartDropdown.appendChild(cartItem)
+                const hr = document.createElement("hr")
                 cartDropdown && cartDropdown.appendChild(hr)
             })
 
@@ -397,7 +315,7 @@ function getData(backendAPI) {
 
             const divCartTotal = document.createElement("p")
             divCartTotal.setAttribute("class", "cart_total")
-            divCartTotal.textContent = "Total: Rs. " + 200
+            divCartTotal.textContent = "Total: Rs. " + totalPrice
 
             const btnCheckout = document.createElement("a")
             btnCheckout.setAttribute("class", "button border-curve checkout-btn")
@@ -411,23 +329,110 @@ function getData(backendAPI) {
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
 
-function submitForm(formData, backendAPI) {
-    fetch(backendAPI, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data['status'] == "success") {
-                showAlert(data['message'], "success")
-                updateCartContent()
-            } else {
-                showAlert(data['message'], "error")
-            }
-        })
-        .catch((e) => showAlert("Something went wrong " + e, "error"))
+function updateCartContent() {
+    getData('./backend/get-cart-items.php')
 }
 
+updateCartContent()
+
+window.onload = () => {
+    // increment or decrement quantity in cart and update price
+    const cartIncrementBtn = document.querySelectorAll(".cart_inc")
+    const cartDecrementBtn = document.querySelectorAll(".cart_dec")
+    const cartQuantity = document.querySelectorAll(".cart_qty")
+    const cartItemPrice = document.querySelectorAll(".cart_price")
+    const cartTotal = document.querySelector(".cart_total")
+    const hiddenPrice = document.querySelectorAll(".cart_hidden-price")
+
+    // initially display correct price
+    cartItemPrice && cartItemPrice.forEach((price, i) => {
+        price.textContent = "Rs. " + parseInt(hiddenPrice[i].textContent) * parseInt(cartQuantity[i].value)
+    })
+
+    // calculate total price
+    function calculateCartTotal() {
+        let total = 0
+        cartItemPrice && cartItemPrice.forEach((price) => {
+            total += parseInt(price.textContent.split("Rs. ")[1])
+        })
+
+        cartTotal && (cartTotal.textContent = "Total: Rs. " + total)
+    }
+
+    calculateCartTotal()
+
+    cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
+        const price = parseInt(hiddenPrice[i].textContent)
+        btn.addEventListener("click", () => {
+            cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
+            cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
+            calculateCartTotal()
+        })
+    })
+
+    cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
+        const price = parseInt(hiddenPrice[i].textContent)
+        btn.addEventListener("click", () => {
+            cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
+            cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
+            cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
+            calculateCartTotal()
+        })
+    })
+
+    // hide dropdown on click outside
+    window.addEventListener("click", (e) => {
+        if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
+            cartDropdown && cartDropdown.classList.remove("visible")
+        }
+        if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
+            userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
+        }
+    })
+
+    // add to cart
+    const formFoodCard = document.querySelectorAll(".form_food-card")
+    const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
+
+    btnAddToCart && btnAddToCart.forEach((btn, i) => {
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            const formData = new FormData(formFoodCard[i])
+            quantity && formData.append("quantity", quantity.value)
+            submitForm(formData, './backend/add-to-cart.php')
+        })
+    })
+
+    // remove from cart
+    const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
+    const cartContentForm = document.querySelectorAll(".cart_content-form")
+
+    btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            const formData = new FormData(cartContentForm[i])
+            submitForm(formData, './backend/remove-from-cart.php')
+        })
+    })
+
+    function submitForm(formData, backendAPI) {
+        fetch(backendAPI, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data['status'] == "success") {
+                    showAlert(data['message'], "success")
+                    updateCartContent()
+                } else {
+                    showAlert(data['message'], "error")
+                }
+            })
+            .catch((e) => showAlert("Something went wrong " + e, "error"))
+    }
+}
 // create cart item container
 function createCartItemContainer(id, name, img, price, quantity) {
     const divCartContent = document.createElement("div")
@@ -513,7 +518,7 @@ function createCartItemContainer(id, name, img, price, quantity) {
     const cartItemIconRemove = document.createElement("img")
     cartItemIconRemove.setAttribute("alt", "cart_item-icon")
     cartItemIconRemove.setAttribute("src", "./images/ic_cross.svg")
-    cartSubmitBtn.appendChild(cartItemIconRemove)  
+    cartSubmitBtn.appendChild(cartItemIconRemove)
 
     return divCartContent
 }

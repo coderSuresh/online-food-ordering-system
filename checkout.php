@@ -54,7 +54,7 @@
     <main style="margin: 0 40px 40px;">
 
         <section class="mt-20">
-            <h2>Checkout</h2>
+            <h2 class="heading">Checkout</h2>
         </section>
 
         <?php
@@ -208,7 +208,7 @@
 
     <?php require('./components/footer.php') ?>
 
-    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="./js/app.js"></script>
 </body>
 
 </html>
