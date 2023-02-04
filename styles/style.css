@@ -1114,7 +1114,7 @@ form .text_field {
 
 /* resuable modal */
 .modal {
-    display: flex;
+    display: none;
     height: 100vh;
     position: fixed;
     top: 0;
