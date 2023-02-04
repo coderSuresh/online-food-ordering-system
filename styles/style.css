@@ -1100,7 +1100,7 @@ form .text_field {
 
 .modal_form-container {
     width: 90%;
-    height: 90%;
+    max-height: 90%;
     max-width: 550px;
     margin: 40px 0;
     overflow: auto;
