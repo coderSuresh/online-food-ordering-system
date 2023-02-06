@@ -1,3 +1,9 @@
+<?php 
+session_start(); 
+if(!isset($_SESSION['success'])) {
+    header('Location: ./index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +54,6 @@
                 }
                 ?>
         </nav>
-
     </header>
 
     <main style="margin: 0 40px 40px;">
@@ -58,14 +63,10 @@
         </section>
 
         <?php
-        session_start();
-        // include config file
         require('./config.php');
 
         $uid = $_SESSION['user'];
-
         $sql = "select * from cart where customer_id = $uid";
-
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
 
         if (isset($_SESSION['delete_success'])) {
@@ -187,10 +188,10 @@
                         <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
                         <label for="note">Note:</label>
                         <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
-                        <p>Payment Method</p>
+                        <p style="font-weight: 700;">Payment Method</p>
                         <div class="flex items-center justify-start">
-                            <input type="radio" name="payment-method" id="payment-method">
-                            <label for="payment-method">Cash on Delivery</label>
+                            <input type="radio" name="payment-method" id="payment-method" checked>
+                            <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
                         <button type="submit" class="button mt-20 w-full border-curve">Place Order</a>
                     </form>

@@ -15,7 +15,7 @@
 <body>
 
     <?php require('./components/header.php'); ?>
-    <main class="main">
+    <main class="details_main">
 
         <?php
         require('./config.php');

@@ -100,11 +100,10 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "email=" + email;
                         let image = profile.photoURL;
                         document.cookie = "image=" + image;
-                        location.reload();//
+                        location.reload();
                     });
                 }
             });
-            // ...
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -113,7 +112,6 @@ google && google.addEventListener('click', (_e) => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
             alert(errorMessage);
         });
 });
@@ -191,7 +189,7 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 900);
+    }, 900); 
 
     modalAlert.textContent = msg
 
@@ -273,6 +271,7 @@ function getData(backendAPI) {
 
                 const btnCheckout = document.createElement("a")
                 btnCheckout.setAttribute("class", "button border-curve checkout-btn")
+                btnCheckout.setAttribute("href", "./checkout.php")
                 btnCheckout.textContent = "Checkout"
 
                 cartTotalContainer.appendChild(divCartTotal)

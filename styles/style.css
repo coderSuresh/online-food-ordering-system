@@ -298,7 +298,8 @@ header {
 }
 
 .checkout_form input,
-.checkout_form button {
+.checkout_form button
+.checkout_form div {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -318,6 +319,8 @@ header {
 .cart_dropdown {
     position: absolute;
     top: 60px;
+    right: 20px;
+    max-width: fit-content;
     background-color: var(--white);
     display: none;
     z-index: 999;
@@ -1392,7 +1395,9 @@ table tr th {
 }
 
 /* ==================== for details.php (customers) ================= */
-
+.details_main {
+    overflow-x: hidden;
+}
 .details_container {
     margin: 100px 0 50px;
 }
@@ -1432,4 +1437,9 @@ table tr th {
 
 .details_title {
     font-size: 2rem;
+}
+
+.details_description {
+    width: 80%;
+    margin: auto;
 }
