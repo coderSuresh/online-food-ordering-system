@@ -27,6 +27,9 @@ if (isset($_SESSION['user'])) {
         }
         echo json_encode($data);
     }
+    else {
+        echo json_encode(array('status' => 'error', 'message' => 'No items in cart'));
+    }
 } else {
     echo json_encode(array('status' => 'error', 'message' => 'Please login to continue'));
 }

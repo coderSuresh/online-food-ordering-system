@@ -2,6 +2,8 @@
 session_start();
 require('../config.php');
 
+header('Content-Type: application/json');
+
 $response = array();
 
 if (isset($_SESSION['success'])) {
@@ -20,13 +22,14 @@ if (isset($_SESSION['success'])) {
         if ($result) {
             $response['status'] = 'success';
             $response['message'] = 'Item removed from cart';
+            echo json_encode($response);
+            exit();
         } else {
             $response['status'] = 'error';
             $response['message'] = 'Something went wrong';
             echo json_encode($response);
             exit();
         }
-        echo json_encode($response);
     } else {
         header('location: ../invalid.html');
     }

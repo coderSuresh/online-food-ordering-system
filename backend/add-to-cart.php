@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('../config.php');
+header('Content-Type: application/json');
 
 $response = array();
 

@@ -294,36 +294,54 @@ cartIcon && cartIcon.addEventListener("click", () => {
 
 const cartCountTop = document.querySelector(".cart_count-top")
 
+function checkCartCount() {
+    cartCountTop && (
+        parseInt(cartCountTop.textContent) > 0 ? (cartCountTop.style.display = "block") : (cartCountTop.style.display = "none")
+    )
+}
+
 function getData(backendAPI) {
     fetch(backendAPI)
         .then(response => response.json())
         .then(data => {
             cartCountTop && (cartCountTop.textContent = data.length)
+            checkCartCount()
             cartDropdown && (cartDropdown.innerHTML = "")
             let totalPrice = 0;
-            data.forEach((item) => {
-                totalPrice += parseInt(item['food_price'])
-                const cartItem = createCartItemContainer(item['food_id'], item['food_name'], item['food_image'], item['food_price'], item['quantity'])
-                cartDropdown && cartDropdown.appendChild(cartItem)
-                const hr = document.createElement("hr")
-                cartDropdown && cartDropdown.appendChild(hr)
-            })
-            // for total price and checkout button
-            const cartTotalContainer = document.createElement("div")
-            cartTotalContainer.setAttribute("class", "flex items-center cart_total_checkout mt-20")
 
-            const divCartTotal = document.createElement("p")
-            divCartTotal.setAttribute("class", "cart_total")
-            divCartTotal.textContent = "Total: Rs. " + totalPrice
+            if (data.length > 0) {
 
-            const btnCheckout = document.createElement("a")
-            btnCheckout.setAttribute("class", "button border-curve checkout-btn")
-            btnCheckout.textContent = "Checkout"
+                data.forEach((item) => {
+                    totalPrice += parseInt(item['food_price'])
+                    const cartItem = createCartItemContainer(item['id'], item['food_name'], item['food_image'], item['food_price'], item['quantity'])
+                    cartDropdown && cartDropdown.appendChild(cartItem)
+                    const hr = document.createElement("hr")
+                    cartDropdown && cartDropdown.appendChild(hr)
+                })
+                // for total price and checkout button
+                const cartTotalContainer = document.createElement("div")
+                cartTotalContainer.setAttribute("class", "flex items-center cart_total_checkout mt-20")
 
-            cartTotalContainer.appendChild(divCartTotal)
-            cartTotalContainer.appendChild(btnCheckout)
+                const divCartTotal = document.createElement("p")
+                divCartTotal.setAttribute("class", "cart_total")
+                divCartTotal.textContent = "Total: Rs. " + totalPrice
 
-            cartDropdown && cartDropdown.appendChild(cartTotalContainer)
+                const btnCheckout = document.createElement("a")
+                btnCheckout.setAttribute("class", "button border-curve checkout-btn")
+                btnCheckout.textContent = "Checkout"
+
+                cartTotalContainer.appendChild(divCartTotal)
+                cartTotalContainer.appendChild(btnCheckout)
+
+                cartDropdown && cartDropdown.appendChild(cartTotalContainer)
+
+                getElem()
+            } else {
+                const cartEmpty = document.createElement("p")
+                cartEmpty.setAttribute("class", "cart_empty")
+                cartEmpty.textContent = "Cart is empty"
+                cartDropdown && cartDropdown.appendChild(cartEmpty)
+            }
         })
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
@@ -332,7 +350,9 @@ function updateCartContent() {
     getData('./backend/get-cart-items.php')
 }
 
-window.onload = () => {
+updateCartContent()
+
+function getElem() {
     // increment or decrement quantity in cart and update price
     const cartIncrementBtn = document.querySelectorAll(".cart_inc")
     const cartDecrementBtn = document.querySelectorAll(".cart_dec")
@@ -377,58 +397,59 @@ window.onload = () => {
         })
     })
 
-    // hide dropdown on click outside
-    window.addEventListener("click", (e) => {
-        if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
-            cartDropdown && cartDropdown.classList.remove("visible")
-        }
-        if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
-            userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
-        }
-    })
+}
 
-    // add to cart
-    const formFoodCard = document.querySelectorAll(".form_food-card")
-    const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
-
-    btnAddToCart && btnAddToCart.forEach((btn, i) => {
-
-        btn.addEventListener("click", (e) => {
-            e.preventDefault()
-            const formData = new FormData(formFoodCard[i])
-            quantity && formData.append("quantity", quantity.value)
-            submitForm(formData, './backend/add-to-cart.php')
-        })
-    })
-
-    // remove from cart
-    const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
-    const cartContentForm = document.querySelectorAll(".cart_content-form")
-
-    btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault()
-            const formData = new FormData(cartContentForm[i])
-            submitForm(formData, './backend/remove-from-cart.php')
-        })
-    })
-
-    function submitForm(formData, backendAPI) {
-        fetch(backendAPI, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data['status'] == "success") {
-                    showAlert(data['message'], "success")
-                    updateCartContent()
-                } else {
-                    showAlert(data['message'], "error")
-                }
-            })
-            .catch((e) => showAlert("Something went wrong " + e, "error"))
+// hide dropdown on click outside
+window.addEventListener("click", (e) => {
+    if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
+        cartDropdown && cartDropdown.classList.remove("visible")
     }
+    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
+        userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
+    }
+})
+
+// add to cart
+const formFoodCard = document.querySelectorAll(".form_food-card")
+const btnAddToCart = document.querySelectorAll(".btn_add-to-cart")
+
+btnAddToCart && btnAddToCart.forEach((btn, i) => {
+
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(formFoodCard[i])
+        quantity && formData.append("quantity", quantity.value)
+        submitForm(formData, './backend/add-to-cart.php')
+    })
+})
+
+// remove from cart
+const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
+const cartContentForm = document.querySelectorAll(".cart_content-form")
+
+btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(cartContentForm[i])
+        submitForm(formData, './backend/remove-from-cart.php')
+    })
+})
+
+function submitForm(formData, backendAPI) {
+    fetch(backendAPI, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data['status'] == "success") {
+                showAlert(data['message'], "success")
+                updateCartContent()
+            } else {
+                showAlert(data['message'], "error")
+            }
+        })
+        .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
 // create cart item container
 function createCartItemContainer(id, name, img, price, quantity) {
