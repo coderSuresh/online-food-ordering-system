@@ -397,6 +397,17 @@ function getElem() {
         })
     })
 
+    // remove from cart
+    const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
+    const cartContentForm = document.querySelectorAll(".cart_content-form")
+
+    btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            const formData = new FormData(cartContentForm[i])
+            submitForm(formData, './backend/remove-from-cart.php')
+        })
+    })
 }
 
 // hide dropdown on click outside
@@ -420,18 +431,6 @@ btnAddToCart && btnAddToCart.forEach((btn, i) => {
         const formData = new FormData(formFoodCard[i])
         quantity && formData.append("quantity", quantity.value)
         submitForm(formData, './backend/add-to-cart.php')
-    })
-})
-
-// remove from cart
-const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
-const cartContentForm = document.querySelectorAll(".cart_content-form")
-
-btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
-    btn.addEventListener("click", (e) => {
-        e.preventDefault()
-        const formData = new FormData(cartContentForm[i])
-        submitForm(formData, './backend/remove-from-cart.php')
     })
 })
 
@@ -519,7 +518,6 @@ function createCartItemContainer(id, name, img, price, quantity) {
 
     const cartContentForm = document.createElement("form")
     cartContentForm.setAttribute("class", "cart_content-form")
-    cartContentForm.setAttribute("action", "./backend/remove-from-cart.php")
     cartContentForm.setAttribute("method", "POST")
     divCartContent.appendChild(cartContentForm)
  
