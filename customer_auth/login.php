@@ -97,17 +97,21 @@ if (isset($_COOKIE['user'])) {
     $image = $_COOKIE['image'];
     $count = 0;
 
-    $sql_email = "SELECT email FROM customer WHERE email='$email'";
+    $sql_email = "SELECT email,id FROM customer WHERE email='$email'";
     $res_email = mysqli_query($conn, $sql_email) or die("Error");
 
     if (!(mysqli_num_rows($res_email) > 0)) {
         $status = "verified";
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$status',NULL,'$image',$count)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
+        $data = mysqli_fetch_assoc($res_email);
         $_SESSION['success'] = "success";
+        $_SESSION['user'] = $data['id'];        
         header("location: ../index.php");
-    } else {        
+    } else {
+        $data = mysqli_fetch_assoc($res_email);        
         $_SESSION['success'] = "success";
+        $_SESSION['user'] = $data['id'];   
         header("location: ../index.php");
     }
 }
