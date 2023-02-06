@@ -204,20 +204,30 @@ function showAlert(msg, level) {
 const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
 const quantity = document.querySelector(".details_quantity")
+const price = document.querySelector(".details_price")
+const detailsPrice = price.textContent.split("Rs. ")[1]
 
 incrementBtn && incrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) + 1
     quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
 
 decrementBtn && decrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) - 1
     quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
 
 quantity && quantity.addEventListener("change", () => {
-    validateQuantity(quantity.value)
+    quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
+
+function updateDetailsPrice() {
+    price.textContent = `Rs. ${detailsPrice * quantity.value}`
+    price.style.fontWeight = "bold"
+}
 
 //validate quantity
 function validateQuantity(val) {

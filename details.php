@@ -55,12 +55,16 @@
                     <option value="3">Option 3</option>
                 </select>
 
-                <div class="details_add-to-cart  ">
+                <div class="details_add-to-cart">
                     <form action="./backend/add-to-cart.php" method="post" class="form_food-card flex items-center justify-start" name="form_food-card">
                         <div class="details_quantity-container flex items-center justify-center mt-20">
-                            <img src="./images/ic_remove-yellow.svg" class="details_quantity-btn-dec" alt="decrement">
+                            <button type="button" class="no_bg no_outline details_quantity-btn-dec">
+                                <img src="./images/ic_remove-yellow.svg" alt="decrement">
+                            </button>
                             <input type="text" class="details_quantity p-20 no_outline text-center" value="1">
-                            <img src="./images/ic_add-yellow.svg" class="details_quantity-btn-inc" alt="increment">
+                            <button type="button" class="no_bg no_outline details_quantity-btn-inc">
+                                <img src=" ./images/ic_add-yellow.svg" alt="increment">
+                            </button>
                         </div>
                         <input type="hidden" name="f_id" value="<?php echo $row['f_id']; ?>">
                         <button class="button btn_add-to-cart details border-curve mt-20 ml-35">Add to Cart</button>
