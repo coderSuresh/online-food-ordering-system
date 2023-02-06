@@ -104,11 +104,11 @@ if (isset($_COOKIE['user'])) {
         $status = "verified";
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider','$status',NULL,'$image',$count)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        header("location: ../index.php");
         $_SESSION['success'] = "success";
-    } else {
         header("location: ../index.php");
+    } else {        
         $_SESSION['success'] = "success";
+        header("location: ../index.php");
     }
 }
 ?>

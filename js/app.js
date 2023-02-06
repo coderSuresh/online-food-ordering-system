@@ -89,7 +89,7 @@ google && google.addEventListener('click', (_e) => {
             // window.location.assign("../../index.php ")
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
-                if (user !== null) {
+                if (user) {
                     document.cookie = "user=" + user
                     user.providerData.forEach((profile) => {
                         let sign_in_provider = profile.providerId;
@@ -102,9 +102,6 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "image=" + image;
                         location.reload();//
                     });
-                }
-                else {
-                    alert("user not found");
                 }
             });
             // ...
@@ -139,7 +136,7 @@ facebook && facebook.addEventListener('click', (_e) => {
 
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
-                if (user !== null) {
+                if (user) {
                     document.cookie = "user=" + user
                     user.providerData.forEach((profile) => {
                         let sign_in_provider = profile.providerId;
@@ -153,9 +150,6 @@ facebook && facebook.addEventListener('click', (_e) => {
                         location.reload();
                         window.location("../index.php");
                     });
-                }
-                else {
-                    alert("user not found");
                 }
             });
         })
@@ -347,7 +341,7 @@ function getData(backendAPI) {
 }
 
 function updateCartContent() {
-    getData('./backend/get-cart-items.php')
+  getData('./backend/get-cart-items.php')
 }
 
 updateCartContent()
