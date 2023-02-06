@@ -55,7 +55,7 @@ showErrorAlert()
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -115,54 +115,6 @@ google && google.addEventListener('click', (_e) => {
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
             alert(errorMessage);
-        });
-});
-
-const facebook_provider = new FacebookAuthProvider(app);
-const facebook_auth = getAuth(app);
-const facebook = document.querySelector(".facebook")
-
-facebook && facebook.addEventListener('click', (_e) => {
-    signInWithPopup(facebook_auth, facebook_provider)
-        .then((result) => {
-            // The signed-in user info.
-            const user = result.user;
-
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential = FacebookAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
-            alert(user.displayName);
-            // ...
-
-            const auth = getAuth();
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    document.cookie = "user=" + user
-                    user.providerData.forEach((profile) => {
-                        let sign_in_provider = profile.providerId;
-                        document.cookie = "sign_in_provider=" + sign_in_provider;
-                        let profile_name = profile.displayName;
-                        document.cookie = "profile_name=" + profile_name;
-                        let email = profile.email;
-                        document.cookie = "email=" + email;
-                        let image = profile.photoURL;
-                        document.cookie = "image=" + image;
-                        location.reload();
-                        window.location("../index.php");
-                    });
-                }
-            });
-        })
-        .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = FacebookAuthProvider.credentialFromError(error);
-            alert(errorMessage);
-            // ...
         });
 });
 
