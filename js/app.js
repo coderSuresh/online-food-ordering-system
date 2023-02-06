@@ -308,7 +308,6 @@ function getData(backendAPI) {
                 const hr = document.createElement("hr")
                 cartDropdown && cartDropdown.appendChild(hr)
             })
-
             // for total price and checkout button
             const cartTotalContainer = document.createElement("div")
             cartTotalContainer.setAttribute("class", "flex items-center cart_total_checkout mt-20")

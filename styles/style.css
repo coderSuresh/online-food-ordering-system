@@ -1430,11 +1430,6 @@ table tr th {
     vertical-align: middle;
 }
 
-.details_description {
-    width: 80%;
-    margin: auto;
-}
-
 .details_title {
     font-size: 2rem;
 }
