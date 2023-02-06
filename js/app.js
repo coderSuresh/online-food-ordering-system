@@ -309,7 +309,7 @@ function getData(backendAPI) {
             cartDropdown && (cartDropdown.innerHTML = "")
             let totalPrice = 0;
 
-            if (data.length > 0) {
+            if (data.length >= 0) {
 
                 data.forEach((item) => {
                     totalPrice += parseInt(item['food_price'])
@@ -451,6 +451,7 @@ function submitForm(formData, backendAPI) {
         })
         .catch((e) => showAlert("Something went wrong " + e, "error"))
 }
+
 // create cart item container
 function createCartItemContainer(id, name, img, price, quantity) {
     const divCartContent = document.createElement("div")

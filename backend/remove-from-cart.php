@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('../config.php');
-
 header('Content-Type: application/json');
 
 $response = array();
@@ -39,3 +38,4 @@ if (isset($_SESSION['success'])) {
     echo json_encode($response);
     exit();
 }
+?>
