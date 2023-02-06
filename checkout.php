@@ -1,6 +1,6 @@
-<?php 
-session_start(); 
-if(!isset($_SESSION['success'])) {
+<?php
+session_start();
+if (!isset($_SESSION['success'])) {
     header('Location: ./index.php');
 }
 ?>
@@ -129,7 +129,6 @@ if(!isset($_SESSION['success'])) {
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
 
-                    // fetch category name
                     $food_id = $row['food_id'];
                     $sql_food = "select * from food where f_id = $food_id";
                     $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
@@ -138,9 +137,7 @@ if(!isset($_SESSION['success'])) {
                     $foodName = $row_food['name'];
                     $foodPrice = $row_food['price'];
                     $quantity = $row['quantity'];
-
                     $totalPrice += $foodPrice * $row['quantity'];
-
                     $foodImg = $row_food['img'];
                 ?>
                     <tr class="shadow">
@@ -169,7 +166,12 @@ if(!isset($_SESSION['success'])) {
                             <?php echo $foodPrice * $quantity; ?>
                         </td>
                         <td>
-                            <img src="./images/ic_delete.svg" class="pointer" alt="remove from cart">
+                            <form action="./backend/remove-from-cart.php" method="post" class="checkout_content-form">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" class="no_bg no_outline btn_remove-from-checkout">
+                                    <img src="./images/ic_delete.svg" alt="remove from cart">
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 <?php
@@ -188,7 +190,7 @@ if(!isset($_SESSION['success'])) {
                         <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
                         <label for="note">Note:</label>
                         <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
-                        <p style="font-weight: 700;">Payment Method</p>
+                        <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
                         <div class="flex items-center justify-start">
                             <input type="radio" name="payment-method" id="payment-method" checked>
                             <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>

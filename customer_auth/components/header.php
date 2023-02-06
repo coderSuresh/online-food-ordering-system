@@ -10,7 +10,7 @@
          </div>
 
          <ul class="flex items-center">
-             <li class="flex direction-col"><a href="menu.php">Menu</a></li>
+             <li class="flex direction-col"><a href="../menu.php">Menu</a></li>
 
              <!-- nav search form -->
              <li>

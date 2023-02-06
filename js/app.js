@@ -189,7 +189,7 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 900); 
+    }, 900);
 
     modalAlert.textContent = msg
 
@@ -347,12 +347,31 @@ function getElem() {
 
     btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
         btn.addEventListener("click", (e) => {
+            console.log("clicked")
             e.preventDefault()
             const formData = new FormData(cartContentForm[i])
             submitForm(formData, './backend/remove-from-cart.php')
         })
     })
 }
+
+// remove from checkout page
+const btnRemoveFromCheckout = document.querySelectorAll(".btn_remove-from-checkout")
+const checkoutContentForm = document.querySelectorAll(".checkout_content-form")
+
+btnRemoveFromCheckout && btnRemoveFromCheckout.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(checkoutContentForm[i])
+        const remove = confirm("Are you sure you want to remove this item from cart?")
+        if (!remove) {
+            e.preventDefault()
+        } else {
+            submitForm(formData, './backend/remove-from-cart.php')
+            location.reload()
+        }
+    })
+})
 
 // hide dropdown on click outside
 window.addEventListener("click", (e) => {
