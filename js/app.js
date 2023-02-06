@@ -191,13 +191,13 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 1400);
+    }, 900);
 
     modalAlert.textContent = msg
 
     setTimeout(() => {
         body.removeChild(modalAlert)
-    }, 1500)
+    }, 1000)
 
     body.appendChild(modalAlert)
 }
