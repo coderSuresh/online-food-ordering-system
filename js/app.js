@@ -205,7 +205,7 @@ const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
 const quantity = document.querySelector(".details_quantity")
 const price = document.querySelector(".details_price")
-const detailsPrice = price.textContent.split("Rs. ")[1]
+const detailsPrice = price && price.textContent.split("Rs. ")[1]
 
 incrementBtn && incrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) + 1

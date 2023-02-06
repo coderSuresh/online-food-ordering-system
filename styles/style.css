@@ -320,7 +320,7 @@ header {
     position: absolute;
     top: 60px;
     right: 20px;
-    max-width: fit-content;
+    min-width: 200px;
     background-color: var(--white);
     display: none;
     z-index: 999;
