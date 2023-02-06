@@ -23,21 +23,14 @@ if (isset($_SESSION['success'])) {
             $response['status'] = 'success';
             $response['message'] = 'Item removed from cart';
             echo json_encode($response);
-            return;
-            // exit();
+            exit();
         } else {
             $response['status'] = 'error';
             $response['message'] = 'Something went wrong';
             echo json_encode($response);
-            return;
-            // exit();
+            exit();
         }
-    } else {
-        header('location: ../invalid.html');
-    }
-
-    // header("location:" .$_SERVER['HTTP_REFERER']);
-    // header("location: ../index.php");
+    } 
 } else {
     $response['status'] = 'error';
     $response['message'] = 'Please login to continue';

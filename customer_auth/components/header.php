@@ -1,11 +1,16 @@
  <?php session_start(); ?>
  <header>
      <nav class="top_nav flex items-center">
-         <a href="../index.php" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
-             <span>Hub</span></a>
+         <div class="logo__back-btn flex items-center">
+             <!-- back btn -->
+             <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
+             <a href="../index.php" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
+                 <span>Hub</span>
+             </a>
+         </div>
 
          <ul class="flex items-center">
-             <li class="flex direction-col"><a href="../menu.php">Menu</a></li>
+             <li class="flex direction-col"><a href="menu.php">Menu</a></li>
 
              <!-- nav search form -->
              <li>
@@ -31,8 +36,14 @@
                 }
                 ?>
 
-             <li class="flex direction-col"><a href="#"><img src="../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
+             <li class="flex direction-col"><img src="../images/ic_cart.svg" alt="cart">
+             </li>
          </ul>
+         <!-- cart drop down -->
+         <div class="cart_dropdown border-curve shadow p-20">
+
+         </div>
+
      </nav>
 
  </header>

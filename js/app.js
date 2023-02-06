@@ -250,7 +250,6 @@ function showAlert(msg, level) {
     body.appendChild(modalAlert)
 }
 
-
 // details page increment or decrement quantity
 const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
@@ -341,10 +340,10 @@ function getData(backendAPI) {
 }
 
 function updateCartContent() {
-  getData('./backend/get-cart-items.php')
+    getData('./backend/get-cart-items.php')
 }
 
-updateCartContent()
+cartCountTop && updateCartContent()
 
 function getElem() {
     // increment or decrement quantity in cart and update price
@@ -514,7 +513,7 @@ function createCartItemContainer(id, name, img, price, quantity) {
     cartContentForm.setAttribute("class", "cart_content-form")
     cartContentForm.setAttribute("method", "POST")
     divCartContent.appendChild(cartContentForm)
- 
+
     const cartHiddenId = document.createElement("input")
     cartHiddenId.setAttribute("name", "id")
     cartHiddenId.setAttribute("type", "hidden")

@@ -38,7 +38,7 @@
 
              <li class="flex direction-col">
                  <button class="cart no_bg no_outline relative"><img src="./images/ic_cart.svg" alt="cart">
-                     <div class="count-top cart_count-top shadow">0</div>
+                     <div class="count-top cart_count-top shadow"></div>
                  </button>
              </li>
          </ul>
