@@ -153,18 +153,17 @@
                             <?php echo $i; ?>
                         </td>
                         <td>
-
                             <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
                         </td>
                         <td>
                             <?php echo $foodName; ?>
                         </td>
                         <td>
-                           <select name="options" class="p_7-20" id="options">
-                                 <option value="1">Option 1</option>
-                                 <option value="2">Option 2</option>
-                                 <option value="3">Option 3</option>
-                           </select>
+                            <select name="options" class="p_7-20" id="options">
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
                         <td>
                             <?php echo $foodPrice; ?>
                         </td>
@@ -189,11 +188,16 @@
                         <label for="name">Name:*</label>
                         <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
                         <label for="phone">Phone:*</label>
-                        <input type="tel" name="phone"placeholder="9800000000" class="p_7-20" id="phone" required>
+                        <input type="tel" name="phone" placeholder="9800000000" class="p_7-20" id="phone" required>
                         <label for="address">Address:*</label>
                         <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
                         <label for="note">Note:</label>
                         <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
+                        <p>Payment Method</p>
+                        <div class="flex items-center justify-start">
+                            <input type="radio" name="payment-method" id="payment-method">
+                            <label for="payment-method">Cash on Delivery</label>
+                        </div>
                         <button type="submit" class="button mt-20 w-full border-curve">Place Order</a>
                     </form>
                 </div>
