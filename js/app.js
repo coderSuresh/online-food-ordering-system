@@ -43,7 +43,7 @@ const showErrorAlert = () => {
 
         setTimeout(() => {
             container.classList.remove("active")
-        }, 3000)
+        }, 1500)
 
         container.classList.add("active")
     })
@@ -191,13 +191,13 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 2900);
+    }, 1400);
 
     modalAlert.textContent = msg
 
     setTimeout(() => {
         body.removeChild(modalAlert)
-    }, 3000)
+    }, 1500)
 
     body.appendChild(modalAlert)
 }
