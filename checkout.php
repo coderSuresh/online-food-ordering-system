@@ -62,13 +62,7 @@
         // include config file
         require('./config.php');
 
-        $username = $_SESSION['user'];
-
-        // get user id
-        $sql_uid = "SELECT id FROM customer WHERE username = '$username'";
-        $result_uid = mysqli_query($conn, $sql_uid) or die("Couldn't fetch user id");
-        $row_uid = mysqli_fetch_assoc($result_uid);
-        $uid = $row_uid['id'];
+        $uid = $_SESSION['user'];
 
         $sql = "select * from cart where customer_id = $uid";
 
