@@ -522,7 +522,7 @@ function createCartItemContainer(id, name, img, price, quantity) {
     cartContentForm.setAttribute("action", "./backend/remove-from-cart.php")
     cartContentForm.setAttribute("method", "POST")
     divCartContent.appendChild(cartContentForm)
-
+ 
     const cartHiddenId = document.createElement("input")
     cartHiddenId.setAttribute("name", "id")
     cartHiddenId.setAttribute("type", "hidden")
