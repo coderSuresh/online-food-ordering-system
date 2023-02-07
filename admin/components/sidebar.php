@@ -32,7 +32,7 @@
              <a href="#">
                  <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
                      <div class="flex items-center justify-start">
-                         <img class="dashboard_sidebar_content_img" src="../images/ic_manage_food.svg" alt="manage food" aria-hidden="true">
+                         <img class="dashboard_sidebar_content_img" src="../images/ic_manage_food.svg" alt="managefood" aria-hidden="true">
                          <h4 class="dashboard_sidebar_content_text hide-on-close">Food Items</h4>
                      </div>
                      <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
@@ -80,7 +80,7 @@
                      <a href="./users/employees.php">Employees</a>
                  </li>
                  <li class="border-curve-lg">
-                     <a href="#">Cutomers</a>
+                     <a href="./users/customer.php">Customers  </a>
                  </li>
              </ul>
          </li>

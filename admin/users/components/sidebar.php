@@ -55,7 +55,6 @@
                      <img src="../../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
                  </article>
              </a>
-
              <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
                  <li class="border-curve-lg">
                      <a href="../categories.php">Manage Category</a>
@@ -78,7 +77,7 @@
                      <a href="./employees.php">Employees</a>
                  </li>
                  <li class="border-curve-lg">
-                     <a href="#">Cutomers</a>
+                     <a href=".././users/customer.php">Customers</a>
                  </li>
              </ul>
          </li>
