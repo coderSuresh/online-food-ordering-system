@@ -144,7 +144,7 @@
                                                                                                 echo $data['short_desc']; ?></textarea>
                         </div>
                         <div class="col">
-                            <label for="ingredients">ingredients: </label>
+                            <label for="ingredients">Ingredients: </label>
                             <textarea name="ingredients" id="ingredients" rows="3" required><?php
                                                                                             if (isset($_SESSION['f-id'])) {
                                                                                                 echo $data['ingredients'];
