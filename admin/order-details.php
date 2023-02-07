@@ -116,7 +116,7 @@
                     2023-01-07
                 </td>
                 <td>Bibek Mahat</td>
-                <td>Panauti</td>
+                <td>Panautiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiii</td>
                 <td>Momo</td>
                 <td>123</td>
                 <td><span class="delivered border-curve-lg p_7-20">Delivered</span></td>
