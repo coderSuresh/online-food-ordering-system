@@ -64,7 +64,13 @@
                         <button class="button btn_add-to-cart details border-curve mt-20 ml-35">Add to Cart</button>
                     </form>
                 </div>
-                <button class="button border-curve mt-20">Buy now</button>
+
+                <form action="./buy.php" method="post">
+                    <input type="hidden" class="buy_qty" name="quantity" value="1">
+                    <input type="hidden" name="f_id" value="<?php echo $row['f_id']; ?>">
+                    <button class="button btn_buy-now border-curve mt-20" name="buy-now">Buy now</button>
+                </form>
+
             </section>
         </section>
 

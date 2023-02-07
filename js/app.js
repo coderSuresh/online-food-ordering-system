@@ -512,3 +512,11 @@ function createCartItemContainer(id, name, img, price, quantity) {
 
     return divCartContent
 }
+
+// details page handle buy now btn
+const btnBuyNow = document.querySelector(".btn_buy-now")
+const buyQty = document.querySelector(".buy_qty")
+
+btnBuyNow && btnBuyNow.addEventListener("click", (e) => {
+    buyQty && (buyQty.value = quantity.value)
+})

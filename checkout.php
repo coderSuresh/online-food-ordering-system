@@ -90,26 +90,7 @@ if (!isset($_SESSION['success'])) {
             </p>
         <?php
         }
-        if (isset($_SESSION['disable_success'])) {
-        ?>
-            <p class="error-container success p_7-20">
-                <?php
-                echo $_SESSION['disable_success'];
-                unset($_SESSION['disable_success']);
-                ?>
-            </p>
-        <?php
-        }
-        if (isset($_SESSION['disable_error'])) {
-        ?>
-            <p class="error-container error p_7-20">
-                <?php
-                echo $_SESSION['disable_error'];
-                unset($_SESSION['disable_error']);
-                ?>
-            </p>
-        <?php
-        }
+        
         if (mysqli_num_rows($res) > 0) {
         ?>
             <table class="mt-20">
