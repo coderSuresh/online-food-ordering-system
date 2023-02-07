@@ -100,11 +100,10 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "email=" + email;
                         let image = profile.photoURL;
                         document.cookie = "image=" + image;
-                        location.reload();//
+                        location.reload();
                     });
                 }
             });
-            // ...
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -113,7 +112,6 @@ google && google.addEventListener('click', (_e) => {
             const email = error.customData.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
             alert(errorMessage);
         });
 });
@@ -206,20 +204,30 @@ function showAlert(msg, level) {
 const incrementBtn = document.querySelector(".details_quantity-btn-inc")
 const decrementBtn = document.querySelector(".details_quantity-btn-dec")
 const quantity = document.querySelector(".details_quantity")
+const price = document.querySelector(".details_price")
+const detailsPrice = price && price.textContent.split("Rs. ")[1]
 
 incrementBtn && incrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) + 1
     quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
 
 decrementBtn && decrementBtn.addEventListener("click", () => {
     quantity.value = parseInt(quantity.value) - 1
     quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
 
 quantity && quantity.addEventListener("change", () => {
-    validateQuantity(quantity.value)
+    quantity.value = validateQuantity(quantity.value)
+    updateDetailsPrice()
 })
+
+function updateDetailsPrice() {
+    price.textContent = `Rs. ${detailsPrice * quantity.value}`
+    price.style.fontWeight = "bold"
+}
 
 //validate quantity
 function validateQuantity(val) {
@@ -273,6 +281,7 @@ function getData(backendAPI) {
 
                 const btnCheckout = document.createElement("a")
                 btnCheckout.setAttribute("class", "button border-curve checkout-btn")
+                btnCheckout.setAttribute("href", "./checkout.php")
                 btnCheckout.textContent = "Checkout"
 
                 cartTotalContainer.appendChild(divCartTotal)
@@ -348,12 +357,31 @@ function getElem() {
 
     btnRemoveFromCart && btnRemoveFromCart.forEach((btn, i) => {
         btn.addEventListener("click", (e) => {
+            console.log("clicked")
             e.preventDefault()
             const formData = new FormData(cartContentForm[i])
             submitForm(formData, './backend/remove-from-cart.php')
         })
     })
 }
+
+// remove from checkout page
+const btnRemoveFromCheckout = document.querySelectorAll(".btn_remove-from-checkout")
+const checkoutContentForm = document.querySelectorAll(".checkout_content-form")
+
+btnRemoveFromCheckout && btnRemoveFromCheckout.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const formData = new FormData(checkoutContentForm[i])
+        const remove = confirm("Are you sure you want to remove this item from cart?")
+        if (!remove) {
+            e.preventDefault()
+        } else {
+            submitForm(formData, './backend/remove-from-cart.php')
+            location.reload()
+        }
+    })
+})
 
 // hide dropdown on click outside
 window.addEventListener("click", (e) => {

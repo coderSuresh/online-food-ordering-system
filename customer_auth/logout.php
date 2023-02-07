@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["success"])){
-    unset($_SESSION["success"]);
+    unset($_SESSION["success"], $_SESSION['user']);
 }
 if (isset($_COOKIE["user"])){
     setcookie("email", "", time() - 3600);    
@@ -11,3 +11,4 @@ if (isset($_COOKIE["user"])){
     setcookie("user", "", time() - 3600);
 }
 header("Location:./login.php");
+?>

@@ -24,7 +24,7 @@
              <?php
                 if (isset($_SESSION['success'])) {
                     echo '<li class="flex direction-col">
-                            <img src="./images/logo.png" class="user_profile_icon" alt="account">
+                            <img src="./images/logo.png" class="user_profile_icon relative" alt="account">
                             <div class="logout-dropdown border-curve shadow p-20">
                                 <a href="./customer_auth/logout.php">Logout</a>   
                             </div>                         
