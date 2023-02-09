@@ -79,10 +79,8 @@
         </section>
 
         <div class="flex items-center">
-            <!-- buttons for order management -->
             <div class="flex items-center">
 
-                <!-- search form for order -->
                 <form action="#" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
                         <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
@@ -91,202 +89,83 @@
                 </form>
 
                 <button class="button ml-35 border-curve-lg">All</button>
-                <button class="button ml-35 border-curve-lg">Activate</button>
-                <button class="button ml-35 border-curve-lg">Deactivate</button>
+                <button class="button ml-35 border-curve-lg">Active</button>
+                <button class="button ml-35 border-curve-lg">Inactive</button>
+                <button class="button ml-35 border-curve-lg">Verified</button>
+                <button class="button ml-35 border-curve-lg">Not verified</button>
             </div>
         </div>
 
-        <table class="mt-20">
-            <tr class="shadow">
-                <th>Sn</th>
-                <th>image</th>       
-                <th>Customer</th>
-                <th>Location</th>
-                <th>Item</th>
-                <th>Email</th>
-                <th>Date</th>
-            </tr>
-            <tr class="shadow">
-                <td>1</td>
-                <td>
-                     <img src="../../images/logo.png"  class="table_food-img">
-                </td>
-                <td>Bibek</td>
-                <td>Panauti</td>
-                <td>60</td>
-                <td>iampanutiman@gmail.com</td>
-                <td>2077/03/20</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                    <p>Activate</p>
+        <?php
+        require("../../config.php");
+        $sql = "SELECT names,username,email,date,status FROM customer";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+
+        ?>
+            <table class="mt-20">
+                <tr class="shadow">
+                    <th>SN</th>
+                    <th>Image</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Item</th>
+                    <th>Email</th>
+                    <th>Joined On</th>
+                    <th>Action</th>
+                </tr>
+
+                <?php
+                $i = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $i++;
+                ?>
+                    <tr class="shadow">
+                        <td><?php echo $i; ?></td>
+                        <td>
+                            <img src="../../images/logo.png" class="table_food-img">
+                        </td>
+                        <td><?php echo $row['names']; ?></td>
+                        <td><?php echo $row['status']; ?></td>
+                        <td>60</td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['date']; ?></td>
+                        <td class="table_action_container">
+                            <!-- action menu -->
+                            <button class="no_bg no_outline table_option-menu">
+                                <img src="../../images//ic_options.svg" alt="options menu">
+                            </button>
+                            <!-- options -->
+                            <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                                <div>
+                                    <a href="#">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_enable.svg" alt="accpet icon">
+                                            <p>Activate</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_disable.svg" alt="reject icon">
-                                    <p>Deactivate</p>
+                                <div>
+                                    <a href="#">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_disable.svg" alt="reject icon">
+                                            <p>Deactivate</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>2</td>
-                <td>
-                     <img src="../../images/logo.png"  class="table_food-img">
-                </td>
-                <td>Bibek</td>
-                <td>Panauti</td>
-                <td>60</td>
-                <td>iampanutiman@gmail.com</td>
-                <td>2077/03/20</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                    <p>Activate</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_disable.svg" alt="reject icon">
-                                    <p>Deactivate</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-                        <tr class="shadow">
-                <td>2</td>
-                <td>
-                     <img src="../../images/logo.png"  class="table_food-img">
-                </td>
-                <td>Bibek</td>
-                <td>Panauti</td>
-                <td>60</td>
-                <td>iampanutiman@gmail.com</td>
-                <td>2077/03/20</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                    <p>Activate</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_disable.svg" alt="reject icon">
-                                    <p>Deactivate</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-                        <tr class="shadow">
-                <td>2</td>
-                <td>
-                     <img src="../../images/logo.png"  class="table_food-img">
-                </td>
-                <td>Bibek</td>
-                <td>Panauti</td>
-                <td>60</td>
-                <td>iampanutiman@gmail.com</td>
-                <td>2077/03/20</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                    <p>Activate</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_disable.svg" alt="reject icon">
-                                    <p>Deactivate</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-                        <tr class="shadow">
-                <td>2</td>
-                <td>
-                     <img src="../../images/logo.png"  class="table_food-img">
-                </td>
-                <td>Bibek</td>
-                <td>Panauti</td>
-                <td>60</td>
-                <td>iampanutiman@gmail.com</td>
-                <td>2077/03/20</td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                    <p>Activate</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../../images/ic_disable.svg" alt="reject icon">
-                                    <p>Deactivate</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                            </div>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </table>
+        <?php
+        } else {
+            echo "No data found";
+        }
+        ?>
     </main>
 
 </body>
