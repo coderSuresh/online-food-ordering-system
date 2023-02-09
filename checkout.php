@@ -58,6 +58,49 @@ if (!isset($_SESSION['success'])) {
 
     <main style="margin: 0 40px 40px;">
 
+        <?php
+        if (isset($_SESSION["name_error"])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["name_error"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["name_error"]);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION["phone_error"])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["phone_error"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["phone_error"]);
+        }
+
+        if (isset($_SESSION["address_error"])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["address_error"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["address_error"]);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['note_error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION['note_error']; ?>
+            </p>
+            }
+        <?php
+            unset($_SESSION['note_error']);
+        }
+        ?>
+
         <section class="mt-20">
             <h2 class="heading">Checkout</h2>
         </section>

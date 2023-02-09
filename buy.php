@@ -177,7 +177,7 @@ require('./config.php');
                     <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
                     <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
                     <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
-                    <button type="submit" name="place-order" class="button mt-20 w-full border-curve">Place Order</a>
+                    <button type="submit" name="place-order-buy" class="button mt-20 w-full border-curve">Place Order</a>
                 </form>
             </div>
             <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
