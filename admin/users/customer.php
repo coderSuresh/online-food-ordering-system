@@ -201,6 +201,7 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
+                    $username = $row['username'];
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
@@ -223,24 +224,20 @@
                                 if ($row['active'] == 1) {
                                 ?>
                                     <form action="#" method="post">
-                                        <input type="hidden" name="username" value="<?php echo $row['username']; ?>">
-                                        <div>
-                                            <button type="submit" name="deactivate" class="button no_bg no_outline">
-                                                <img src="../../images/ic_disable.svg" alt="deactivate">
-                                                <span>Deactivate</span>
-                                            </button>
+                                        <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_disable.svg" alt="activate">
+                                            <button type="submit" name="block" class="no_bg no_outline" style="font-size: 1rem;">Block</button>
                                         </div>
                                     </form>
-                                <?
+                                <?php
                                 } else {
                                 ?>
                                     <form action="#" method="post">
-                                        <input type="hidden" name="username" value="<?php echo $row['username']; ?>">
-                                        <div>
-                                            <button type="submit" name="activate" class="button no_bg no_outline">
-                                                <img src="../../images/ic_enable.svg" alt="activate">
-                                                <span>Activate</span>
-                                            </button>
+                                        <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_enable.svg" alt="activate">
+                                            <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
                                         </div>
                                     </form>
                                 <?php
