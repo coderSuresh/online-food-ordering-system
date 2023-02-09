@@ -104,9 +104,9 @@ if (isset($_COOKIE['user'])) {
         $status = "verified";
         $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider',NOW(),'$status',1,NULL,'$image',$count)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        $data = mysqli_fetch_assoc($res_email);
+        $id = mysqli_insert_id($conn);
         $_SESSION['success'] = "success";
-        $_SESSION['user'] = $data['id'];        
+        $_SESSION['user'] = $id;        
         header("location: ../index.php");
     } else {
         $data = mysqli_fetch_assoc($res_email);        
