@@ -102,7 +102,7 @@ if (isset($_COOKIE['user'])) {
 
     if (!(mysqli_num_rows($res_email) > 0)) {
         $status = "verified";
-        $sql = "insert into customer values (default,'$name','$username','$email', '$password','$signin_provider',NOW(),'$status',1,$code,NULL,$count)";
+        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider',NOW(),'$status',1,NULL,'$image',$count)";
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $data = mysqli_fetch_assoc($res_email);
         $_SESSION['success'] = "success";
