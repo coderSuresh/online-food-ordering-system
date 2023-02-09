@@ -11,10 +11,10 @@
 </head>
 
 <body>
-
     <?php
     require("./components/header.php");
     require("./components/sidebar.php");
+    require("../../config.php");
     ?>
 
     <main class="admin_dashboard_body">
@@ -88,21 +88,101 @@
                     </div>
                 </form>
 
-                <button class="button ml-35 border-curve-lg">All</button>
-                <button class="button ml-35 border-curve-lg">Active</button>
-                <button class="button ml-35 border-curve-lg">Inactive</button>
-                <button class="button ml-35 border-curve-lg">Verified</button>
-                <button class="button ml-35 border-curve-lg">Not verified</button>
+                <!-- filter customers through buttons -->
+                <?php
+                $sql_all = "SELECT names,username,email,date,status FROM customer";
+                $result_all = mysqli_query($conn, $sql_all);
+                $count_all = mysqli_num_rows($result_all);
+
+                $sql_active = "SELECT names,username,email,date,status FROM customer WHERE active = 1";
+                $result_active = mysqli_query($conn, $sql_active);
+                $count_active = mysqli_num_rows($result_active);
+
+                $sql_inactive = "SELECT names,username,email,date,status FROM customer WHERE active = 0";
+                $result_inactive = mysqli_query($conn, $sql_inactive);
+                $count_inactive = mysqli_num_rows($result_inactive);
+
+                $sql_verified = "SELECT names,username,email,date,status FROM customer WHERE status = 'verified'";
+                $result_verified = mysqli_query($conn, $sql_verified);
+                $count_verified = mysqli_num_rows($result_verified);
+
+                $sql_not_verified = "SELECT names,username,email,date,status FROM customer WHERE status = 'not verified'";
+                $result_not_verified = mysqli_query($conn, $sql_not_verified);
+                $count_not_verified = mysqli_num_rows($result_not_verified);
+                ?>
+
+                <form action="./backend/specific-users.php" method="post">
+                    <input type="hidden" name="filter-by" value="all">
+                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">All
+                        <div class="count-top shadow"><?php
+                                                        echo $count_all;
+                                                        ?>
+                        </div>
+                </form>
+
+                <form action="./backend/specific-users.php" method="post">
+                    <input type="hidden" name="filter-by" value="active">
+                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Active
+                        <div class="count-top shadow"><?php
+                                                        echo $count_active;
+                                                        ?>
+                        </div>
+                </form>
+
+                <form action="./backend/specific-users.php" method="post">
+                    <input type="hidden" name="filter-by" value="inactive">
+                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Inactive
+                        <div class="count-top shadow"><?php
+                                                        echo $count_inactive;
+                                                        ?>
+                        </div>
+                </form>
+
+                <form action="./backend/specific-users.php" method="post">
+                    <input type="hidden" name="filter-by" value="verified">
+                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Verified
+                        <div class="count-top shadow"><?php
+                                                        echo $count_verified;
+                                                        ?>
+                        </div>
+                </form>
+
+                <form action="./backend/specific-users.php" method="post">
+                    <input type="hidden" name="filter-by" value="not verified">
+                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Not verified
+                        <div class="count-top shadow"><?php
+                                                        echo $count_not_verified;
+                                                        ?>
+                        </div>
+                </form>
+
             </div>
         </div>
 
         <?php
         require("../../config.php");
-        $sql = "SELECT names,username,email,date,status FROM customer";
+
+        // filter by session
+        if (isset($_SESSION['filter-by'])) {
+            $filter_by = $_SESSION['filter-by'];
+            if ($filter_by == 'all') {
+                $sql = "SELECT names,username,email,date,status,active FROM customer";
+            } else if ($filter_by == 'active') {
+                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE active = 1";
+            } else if ($filter_by == 'inactive') {
+                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE active = 0";
+            } else if ($filter_by == 'verified') {
+                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+            } else if ($filter_by == 'not verified') {
+                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
+            }
+        } else {
+            $sql = "SELECT names,username,email,date,status,active FROM customer";
+        }
+
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-
         ?>
             <table class="mt-20">
                 <tr class="shadow">
@@ -120,6 +200,7 @@
                 $i = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
+                    $isActive = $row['active'] == 1 ? "Active" : "Inactive";
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
@@ -127,7 +208,7 @@
                             <img src="../../images/logo.png" class="table_food-img">
                         </td>
                         <td><?php echo $row['names']; ?></td>
-                        <td><?php echo $row['status']; ?></td>
+                        <td><?php echo $row['status'] . " | " . $isActive; ?></td>
                         <td>60</td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['date']; ?></td>
@@ -138,22 +219,33 @@
                             </button>
                             <!-- options -->
                             <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                                <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../../images/ic_enable.svg" alt="accpet icon">
-                                            <p>Activate</p>
+                                <?php
+                                if ($row['active'] == 1) {
+                                ?>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="username" value="<?php echo $row['username']; ?>">
+                                        <div>
+                                            <button type="submit" name="deactivate" class="button no_bg no_outline">
+                                                <img src="../../images/ic_disable.svg" alt="deactivate">
+                                                <span>Deactivate</span>
+                                            </button>
                                         </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="#">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../../images/ic_disable.svg" alt="reject icon">
-                                            <p>Deactivate</p>
+                                    </form>
+                                <?
+                                } else {
+                                ?>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="username" value="<?php echo $row['username']; ?>">
+                                        <div>
+                                            <button type="submit" name="activate" class="button no_bg no_outline">
+                                                <img src="../../images/ic_enable.svg" alt="activate">
+                                                <span>Activate</span>
+                                            </button>
                                         </div>
-                                    </a>
-                                </div>
+                                    </form>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </td>
                     </tr>
