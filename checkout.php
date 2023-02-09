@@ -90,7 +90,7 @@ if (!isset($_SESSION['success'])) {
             </p>
         <?php
         }
-        
+
         if (mysqli_num_rows($res) > 0) {
         ?>
             <table class="mt-20">
@@ -155,7 +155,7 @@ if (!isset($_SESSION['success'])) {
 
             <div class="mt-20 flex justify-center">
                 <div>
-                    <form action="#" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
+                    <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
                         <label for="name">Name:*</label>
                         <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
                         <label for="phone">Phone:*</label>
@@ -169,7 +169,10 @@ if (!isset($_SESSION['success'])) {
                             <input type="radio" name="payment-method" id="payment-method" checked>
                             <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
-                        <button type="submit" class="button mt-20 w-full border-curve">Place Order</a>
+                        <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
+                        <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
+                        <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+                        <button type="submit" class="button mt-20 w-full border-curve" name="place-order">Place Order</a>
                     </form>
                 </div>
                 <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
