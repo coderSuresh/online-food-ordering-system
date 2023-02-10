@@ -189,13 +189,13 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 900);
+    }, 1400);
 
     modalAlert.textContent = msg
 
     setTimeout(() => {
         body.removeChild(modalAlert)
-    }, 1000)
+    }, 1500)
 
     body.appendChild(modalAlert)
 }
@@ -314,6 +314,28 @@ function getElem() {
     const cartItemPrice = document.querySelectorAll(".cart_price")
     const cartTotal = document.querySelector(".cart_total")
     const hiddenPrice = document.querySelectorAll(".cart_hidden-price")
+    const cartForm = document.querySelectorAll(".cart_content-form")
+
+    // increment or decrement quantity in cart and update price
+    cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            const formData = new FormData(cartForm[i])
+            quantity && formData.append("quantity", parseInt(cartQuantity[i].value))
+            submitForm(formData, "./backend/inc-cart-item-quantity.php")
+            updateCartContent()
+            calculateCartTotal()
+        })
+    })
+
+    cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+            const formData = new FormData(cartForm[i])
+            quantity && formData.append("quantity", parseInt(cartQuantity[i].value))
+            submitForm(formData, "./backend/dec-cart-item-quantity.php")
+            updateCartContent()
+            calculateCartTotal()
+        })
+    })
 
     // initially display correct price
     cartItemPrice && cartItemPrice.forEach((price, i) => {
@@ -331,25 +353,6 @@ function getElem() {
     }
 
     calculateCartTotal()
-
-    cartIncrementBtn && cartIncrementBtn.forEach((btn, i) => {
-        const price = parseInt(hiddenPrice[i].textContent)
-        btn.addEventListener("click", () => {
-            cartQuantity[i].value = parseInt(cartQuantity[i].value) + 1
-            cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
-            calculateCartTotal()
-        })
-    })
-
-    cartDecrementBtn && cartDecrementBtn.forEach((btn, i) => {
-        const price = parseInt(hiddenPrice[i].textContent)
-        btn.addEventListener("click", () => {
-            cartQuantity[i].value = parseInt(cartQuantity[i].value) - 1
-            cartQuantity[i].value = validateQuantity(cartQuantity[i].value)
-            cartItemPrice[i].textContent = "Rs. " + parseInt(price) * parseInt(cartQuantity[i].value)
-            calculateCartTotal()
-        })
-    })
 
     // remove from cart
     const btnRemoveFromCart = document.querySelectorAll(".btn_remove-from-cart")
@@ -417,7 +420,11 @@ function submitForm(formData, backendAPI) {
             if (data['status'] == "success") {
                 showAlert(data['message'], "success")
                 updateCartContent()
-            } else {
+            }
+            else if (data['status'] == "hidden") {
+                showAlert(data['message'], "hidden")
+            }
+            else {
                 showAlert(data['message'], "error")
             }
         })
@@ -452,6 +459,8 @@ function createCartItemContainer(id, name, img, price, quantity) {
 
     const divCartQtyBtnInc = document.createElement("button")
     divCartQtyBtnInc.setAttribute("class", "cart_item-btn no_outline shadow cart_inc")
+    divCartQtyBtnInc.setAttribute("type", "button")
+    divCartQtyBtnInc.setAttribute("name", "cart_inc")
     divCartQty.appendChild(divCartQtyBtnInc)
 
     const cartItemIconPlus = document.createElement("img")
@@ -472,6 +481,8 @@ function createCartItemContainer(id, name, img, price, quantity) {
 
     const divCartQtyBtnDec = document.createElement("button")
     divCartQtyBtnDec.setAttribute("class", "cart_item-btn no_outline shadow cart_dec")
+    divCartQtyBtnInc.setAttribute("type", "button")
+    divCartQtyBtnInc.setAttribute("name", "cart_dec")
     divCartQty.appendChild(divCartQtyBtnDec)
 
     const cartItemIconMinus = document.createElement("img")

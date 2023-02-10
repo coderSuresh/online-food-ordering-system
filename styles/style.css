@@ -1374,6 +1374,10 @@ table tr th {
     background-color: rgb(10, 160, 10);
 }
 
+.error-container.hidden {
+    right: -100% !important;
+}
+
 .error-container.active {
     right: 40px;
 }
