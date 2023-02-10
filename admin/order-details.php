@@ -137,12 +137,6 @@
                     $result_food = mysqli_query($conn, $sql_food) or die("Query Failed");
                     $row_food = mysqli_fetch_assoc($result_food);
                     $food_name = $row_food['name'];
-
-                    $cus_id = $row['c_id'];
-                    $sql_cus = "select names from customer where id = {$cus_id}";
-                    $result_cus = mysqli_query($conn, $sql_cus) or die("Query Failed");
-                    $row_cus = mysqli_fetch_assoc($result_cus);
-                    $cus_name = $row_cus['names'];
                 ?>
 
                     <tr class="shadow">
@@ -150,7 +144,7 @@
                         <td>
                             <?php echo $row['date']; ?>
                         </td>
-                        <td><?php echo $cus_name; ?></td>
+                        <td><?php echo $row['c_name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
                         <td><?php echo $food_name . " x " . $row['qty']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
@@ -193,7 +187,7 @@
             </table>
         <?php
         } else {
-            echo "<h2>No Record Found</h2>";
+            echo "No Record Found";
         }
         ?>
     </main>

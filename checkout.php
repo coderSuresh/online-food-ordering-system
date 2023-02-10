@@ -162,6 +162,7 @@ if (!isset($_SESSION['success'])) {
                     $quantity = $row['quantity'];
                     $totalPrice += $foodPrice * $row['quantity'];
                     $foodImg = $row_food['img'];
+                    $vat = ($totalPrice * 13) / 100;
                 ?>
                     <tr class="shadow">
                         <td>
@@ -214,14 +215,14 @@ if (!isset($_SESSION['success'])) {
                         </div>
                         <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
                         <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                        <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+                        <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
                         <button type="submit" class="button mt-20 w-full border-curve" name="place-order">Place Order</a>
                     </form>
                 </div>
                 <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
                     <div class="checkout_info">
                         <h5>Total: <?php echo $totalPrice; ?></h5>
-                        <h5>Vat (13%): <?php echo $vat = ($totalPrice * 13) / 100; ?> </h5>
+                        <h5>Vat (13%): <?php echo $vat; ?> </h5>
                         <h5>Grand Total: Rs. <?php echo $totalPrice + $vat; ?></h5>
                     </div>
                     <div class="mt-20 flex direction-col">

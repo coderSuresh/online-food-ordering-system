@@ -30,7 +30,7 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
     } else if (!preg_match("/^[0-9]{10}$/", $phone)) {
         $_SESSION['phone_error'] = "Phone number must contain only 10 digits";
         redirect();
-    } else if (!preg_match("/^[a-z A-z,-0-9]{5,}$/", $address)) {
+    } else if (!preg_match("/^[a-zA-z,0-9 -]{5,}$/", $address)) {
         $_SESSION['address_error'] = "Address must contain only letters, numbers, commas and must be at least 5 characters long";
         redirect();
     } else if (!preg_match("/^[a-z A-z\/0-9]{5,}$/", $note)) {
