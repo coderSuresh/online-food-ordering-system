@@ -41,7 +41,6 @@ if (!isset($_SESSION['admin-success'])) {
                 echo json_encode($response);
                 exit();
             }
-
             if ($uploadOk == 0) {
                 $response["status"] = "error";
                 $response["msg"] = "Sorry, your file was not uploaded.";
@@ -49,9 +48,8 @@ if (!isset($_SESSION['admin-success'])) {
                 exit();
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
-                    // insert into database
                     $sql = "INSERT INTO category VALUES (DEFAULT, '$file_name', '$category')";
-                    $result = mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                 } else {
                     $response["status"] = "error";
                     $response["msg"] = "Sorry, there was an error uploading your file.";
@@ -59,15 +57,12 @@ if (!isset($_SESSION['admin-success'])) {
                     exit();
                 }
             }
-
             if ($result) {
                 $response['status'] = "success reset";
                 $response['msg'] = "Category added successfully";
             } else {
                 $response['status'] = "error";
                 $response['msg'] = "Failed to add category";
-                echo json_encode($response);
-                exit();
             }
         }
 

@@ -195,15 +195,14 @@ form && form.addEventListener("submit", (e) => {
         const vegNonVeg = document.forms["modal_form"]["veg-non-veg"].value
 
         if (itemName && price && cost && desc && category && productId && estimatedCookingTime && vegNonVeg && img.length) {
-            btnName == "add" ? submitForm("../admin/backend/foods/add-food.php") : submitForm("../admin/backend/foods/update.php")
+            btnName == "add" ? submitForm("./backend/foods/add-food.php") : submitForm("./backend/foods/update.php")
         }
     }
     else if (isForCategory) {
         if (itemName && img.length) {
-            btnName == "add" ? submitForm("../admin/backend/category/add-category.php") : submitForm("../admin/backend/category/update.php")
+            btnName == "add" ? submitForm("./backend/category/add-category.php") : submitForm("./backend/category/update.php")
         }
     }
-
 })
 
 // submit form
@@ -217,7 +216,6 @@ function submitForm(backendAPI) {
         .then(data => {
             showAlert(data["msg"], data["status"].split(" ")[0])
             if (data['status'].includes("reset")) {
-                // reset form
                 form.reset()
                 if (btnName == "update") {
                     // set updated name to input field
@@ -244,13 +242,13 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 2900);
+    }, 1900);
 
     modalAlert.textContent = msg
 
     setTimeout(() => {
         body.removeChild(modalAlert)
-    }, 3000)
+    }, 2000)
 
     body.appendChild(modalAlert)
 }

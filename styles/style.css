@@ -611,6 +611,9 @@ header {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    object-fit: contain;
+    padding: 3px;
+    cursor: pointer;
     outline: 1px solid var(--primary-color);
 }
 

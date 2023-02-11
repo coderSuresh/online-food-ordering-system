@@ -39,7 +39,6 @@ if (!isset($_SESSION['admin-success'])) {
         } else {
             $response['status'] = "error";
             $response['msg'] = "Could not get image from database";
-
             echo json_encode($response);
             exit();
         }
