@@ -477,6 +477,7 @@ function createCartItemContainer(id, name, img, price, quantity) {
     cartQuantity.setAttribute("class", "cart_qty no_outline")
     cartQuantity.setAttribute("type", "text")
     cartQuantity.setAttribute("value", quantity)
+    cartQuantity.disabled = true
     cartQuantityContainer.appendChild(cartQuantity)
 
     const divCartQtyBtnDec = document.createElement("button")

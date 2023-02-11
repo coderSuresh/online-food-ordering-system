@@ -92,7 +92,6 @@
                 <button class="button ml-35 border-curve-lg">Accepted</button>
                 <button class="button ml-35 border-curve-lg">To Deliver</button>
                 <button class="button ml-35 border-curve-lg">Delivered</button>
-
             </div>
         </div>
 
@@ -114,10 +113,9 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-
             <table class="mt-20">
                 <tr class="shadow">
-                    <th>Order Id</th>
+                    <th>SN</th>
                     <th>Date</th>
                     <th>Customer</th>
                     <th>Location</th>
