@@ -97,17 +97,21 @@
 
         <?php
         require("../config.php");
-        $sql = "select orders.id,
-                orders.c_id,
-                orders.qty,
-                orders.total_price,
-                orders.note,
-                orders.date,
-                orders.f_id,
-                order_contact_details.address,
-                order_contact_details.phone,
-                order_contact_details.c_name
-                from orders inner join order_contact_details on orders.id = order_contact_details.o_id";
+        $sql = "    select orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    aos.status
+                    from orders 
+                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join aos on orders.id = aos.order_id
+                    ";
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
 
@@ -146,7 +150,7 @@
                         <td><?php echo $row['address']; ?></td>
                         <td><?php echo $food_name . " x " . $row['qty']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
-                        <td><span class="accepted border-curve-lg p_7-20">Accepted</span></td>
+                        <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status'];?></span></td>
                         <td class="table_action_container">
                             <!-- action menu -->
                             <button class="no_bg no_outline table_option-menu">

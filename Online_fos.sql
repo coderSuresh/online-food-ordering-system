@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 10, 2023 at 01:34 PM
+-- Generation Time: Feb 11, 2023 at 06:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -44,6 +44,27 @@ INSERT INTO `admin` (`id`, `name`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `aos`
+--
+
+CREATE TABLE `aos` (
+  `aos_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `status` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `aos`
+--
+
+INSERT INTO `aos` (`aos_id`, `order_id`, `status`) VALUES
+(1, 9, 'pending'),
+(2, 10, 'pending'),
+(3, 11, 'pending');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cart`
 --
 
@@ -65,10 +86,9 @@ INSERT INTO `cart` (`id`, `customer_id`, `food_id`, `quantity`) VALUES
 (134, 40, 22, 1),
 (136, 40, 23, 1),
 (138, 40, 20, 4),
-(140, 38, 26, 5),
+(140, 38, 26, 3),
 (147, 41, 24, 1),
-(150, 41, 20, 1),
-(151, 41, 26, 1);
+(151, 41, 26, 2);
 
 -- --------------------------------------------------------
 
@@ -164,6 +184,18 @@ INSERT INTO `food` (`f_id`, `img`, `name`, `price`, `cost`, `cooking_time`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kos`
+--
+
+CREATE TABLE `kos` (
+  `kos_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `status` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -182,8 +214,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(7, 40, 4, 20, 800, 'No note', '2023-02-07 22:50:45'),
-(8, 41, 1, 22, 1060, 'No note', '2023-02-09 18:26:10');
+(9, 38, 4, 20, 800, 'No note', '2023-02-10 19:40:58'),
+(10, 38, 4, 20, 800, 'No note', '2023-02-10 19:42:06'),
+(11, 38, 2, 26, 452, 'with extra sugar', '2023-02-10 19:48:02');
 
 -- --------------------------------------------------------
 
@@ -204,8 +237,9 @@ CREATE TABLE `order_contact_details` (
 --
 
 INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
-(1, 7, 'Chardobato, Banepa Near Check Post', '9815423654', 'Jessica Thapa'),
-(2, 8, 'Mangsebung, Ilam', '9814253215', 'Alisha Bista');
+(3, 9, 'Mangsebung, Ilam', '9814256535', 'Alisha Bista'),
+(4, 10, 'Chautari-2, Ilam', '9842635145', 'Jessica Thapa'),
+(5, 11, 'Badame-3, Ilam', '9815254536', 'Nilima Karki');
 
 --
 -- Indexes for dumped tables
@@ -216,6 +250,13 @@ INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_na
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `aos`
+--
+ALTER TABLE `aos`
+  ADD PRIMARY KEY (`aos_id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `cart`
@@ -242,7 +283,14 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `food`
   ADD PRIMARY KEY (`f_id`),
-  ADD KEY `category` (`category`);
+  ADD KEY `cat_id` (`category`);
+
+--
+-- Indexes for table `kos`
+--
+ALTER TABLE `kos`
+  ADD PRIMARY KEY (`kos_id`),
+  ADD KEY `order_id_k` (`order_id`);
 
 --
 -- Indexes for table `orders`
@@ -270,6 +318,12 @@ ALTER TABLE `admin`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `aos`
+--
+ALTER TABLE `aos`
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
@@ -294,20 +348,32 @@ ALTER TABLE `food`
   MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT for table `kos`
+--
+ALTER TABLE `kos`
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `aos`
+--
+ALTER TABLE `aos`
+  ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cart`
@@ -315,6 +381,18 @@ ALTER TABLE `order_contact_details`
 ALTER TABLE `cart`
   ADD CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`f_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `food`
+--
+ALTER TABLE `food`
+  ADD CONSTRAINT `cat_id` FOREIGN KEY (`category`) REFERENCES `category` (`cat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kos`
+--
+ALTER TABLE `kos`
+  ADD CONSTRAINT `order_id_k` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
