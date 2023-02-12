@@ -149,6 +149,8 @@ if (!isset($_SESSION['success'])) {
                 <?php
                 $i = 0;
                 $totalPrice = 0;
+                $food_id_arr = array();
+                $qty_arr = array();
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
 
@@ -163,6 +165,9 @@ if (!isset($_SESSION['success'])) {
                     $totalPrice += $foodPrice * $row['quantity'];
                     $foodImg = $row_food['img'];
                     $vat = ($totalPrice * 13) / 100;
+
+                    array_push($food_id_arr, $food_id);
+                    array_push($qty_arr, $quantity);
                 ?>
                     <tr class="shadow">
                         <td>
@@ -203,7 +208,7 @@ if (!isset($_SESSION['success'])) {
                         <label for="name">Name:*</label>
                         <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
                         <label for="phone">Phone:*</label>
-                        <input type="tel" name="phone" placeholder="9800000000" class="p_7-20" id="phone" required>
+                        <input type="tel" name="phone" maxlength="10" placeholder="9800000000" class="p_7-20" id="phone" required>
                         <label for="address">Address:*</label>
                         <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
                         <label for="note">Note:</label>
@@ -213,9 +218,8 @@ if (!isset($_SESSION['success'])) {
                             <input type="radio" name="payment-method" id="payment-method" checked>
                             <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
-                        <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
-                        <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
-                        <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
+                        <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr));?>">
+                        <input type="hidden" name="quantity" value="<?php echo base64_encode(serialize($qty_arr)); ?>">
                         <button type="submit" class="button mt-20 w-full border-curve" name="place-order">Place Order</a>
                     </form>
                 </div>
