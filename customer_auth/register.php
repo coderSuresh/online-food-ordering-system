@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['success'])) {
+    header('Location: ../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +33,7 @@
                 <p class="error-container p_7-20">
                     <?php echo $_SESSION["invalid_name"]; ?>
                 </p>
+
             <?php
                 unset($_SESSION["invalid_name"]);
             }

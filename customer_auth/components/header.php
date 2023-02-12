@@ -1,4 +1,3 @@
- <?php session_start(); ?>
  <header>
      <nav class="top_nav flex items-center">
          <div class="logo__back-btn flex items-center">

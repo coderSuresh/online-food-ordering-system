@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['success'])) {
+    header('Location: ../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,12 +112,12 @@ if (isset($_COOKIE['user'])) {
         mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $id = mysqli_insert_id($conn);
         $_SESSION['success'] = "success";
-        $_SESSION['user'] = $id;        
+        $_SESSION['user'] = $id;
         header("location: ../index.php");
     } else {
-        $data = mysqli_fetch_assoc($res_email);        
+        $data = mysqli_fetch_assoc($res_email);
         $_SESSION['success'] = "success";
-        $_SESSION['user'] = $data['id'];   
+        $_SESSION['user'] = $data['id'];
         header("location: ../index.php");
     }
 }
