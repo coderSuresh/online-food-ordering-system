@@ -61,6 +61,15 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
 
             $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending')";
             $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+
+            if ($res && $res_o_c_t && $res_aos) {
+                $sql_remove_cart = "delete from cart where food_id = $f_id and customer_id = $uid";
+                $res_remove_cart = mysqli_query($conn, $sql_remove_cart) or die("Could not remove from cart");
+            } 
+            else {
+                $_SESSION['order_placed'] = "Order could not be placed";
+                header("Location: ../track-order.php");
+            }
         }
 
         if ($res && $res_o_c_t && $res_aos) {

@@ -299,8 +299,7 @@ header {
 }
 
 .checkout_form input,
-.checkout_form button
-.checkout_form div {
+.checkout_form button .checkout_form div {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -1411,6 +1410,7 @@ table tr th {
 .details_main {
     overflow-x: hidden;
 }
+
 .details_container {
     margin: 100px 0 50px;
 }
@@ -1455,4 +1455,69 @@ table tr th {
 .details_description {
     width: 80%;
     margin: auto;
+}
+
+/* ============================== privacy policy ======================= */
+.privacy-container h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.privacy-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+a .section {
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+/* ========================= FAQ ==================== */
+.faq {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.faq h1 {
+    color: var(--primary-color);
+}
+
+.question {
+    margin-bottom: 1em;
+}
+
+.answer {
+    display: none;
+    padding: 1em;
+    background-color: var(--light-gray);
+}
+
+.question h2 {
+    cursor: pointer;
+}
+
+.question h2:after {
+    content: "+";
+    float: right;
+    color: var(--primary-color);
+    font-size: 1.5em;
+}
+
+.question.open h2:after {
+    content: "-";
+    color: var(--primary-color);
+}
+
+.question.open .answer {
+    display: block;
 }
