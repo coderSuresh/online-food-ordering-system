@@ -265,6 +265,18 @@ deleteBtn && deleteBtn.forEach(btn => {
     })
 })
 
+// warn before reject
+const rejectBtn = document.querySelectorAll(".reject_btn")
+
+rejectBtn && rejectBtn.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const confirm = window.confirm("Are you sure to reject this order?")
+        if (!confirm) {
+            e.preventDefault()
+        }
+    })
+})
+
 // show error alert
 const errorContainer = document.querySelectorAll(".error-container")
 
