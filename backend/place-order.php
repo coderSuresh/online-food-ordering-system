@@ -44,8 +44,15 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
         $sql_o_c_t = "insert into order_contact_details values (DEFAULT, $order_id, '$address', '$phone', '$name')";
         $res_o_c_t = mysqli_query($conn, $sql_o_c_t) or die("Could not insert order contact details");
 
-        if ($res && $res_o_c_t) {
+        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending')";
+        $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+
+        if ($res && $res_o_c_t && $res_aos) {
             $_SESSION['order_placed'] = "Order placed successfully";
+            header("Location: ../track-order.php");
+        }
+        else {
+            $_SESSION['order_placed'] = "Order could not be placed";
             header("Location: ../track-order.php");
         }
     }
