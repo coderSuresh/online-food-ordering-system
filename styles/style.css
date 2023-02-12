@@ -1035,6 +1035,7 @@ form .text_field {
     position: absolute;
     background-color: var(--white);
     top: 0;
+    width: fit-content;
     right: 105px;
     width: 150px;
     z-index: 10;

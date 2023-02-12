@@ -102,14 +102,14 @@
                     </button>
                     <!-- options -->
                     <?php if ($status != "rejected") { ?>
-                        <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                        <div class="table_action_options shadow border-curve p-20 r_80 flex direction-col">
                             <div>
                                 <?php
                                 if ($status == "pending") {
                                 ?>
                                     <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                        <input type="hidden" name="aos_id" value="<?php echo $row["kos_id"]; ?>">
                                         <button type="submit" name="accept" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_accept.svg" alt="accept icon">
@@ -121,7 +121,7 @@
                                 ?>
                                     <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                        <input type="hidden" name="aos_id" value="<?php echo $row["kos_id"]; ?>">
                                         <button type="submit" name="prepared" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_prepared.svg" alt="prepared">
@@ -134,7 +134,7 @@
                                 ?>
                             </div>
                             <div>
-                                <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
+                                <?php if ($status == "pending" || $status == "accepted") { ?>
                                     <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                         <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
