@@ -532,3 +532,14 @@ const buyQty = document.querySelector(".buy_qty")
 btnBuyNow && btnBuyNow.addEventListener("click", (e) => {
     buyQty && (buyQty.value = quantity.value)
 })
+
+// =========================== for FAQ page =========================
+const questions = document.querySelectorAll(".question");
+
+questions && questions.forEach((question) => {
+    console.log("aayo")
+    question.addEventListener("click", () => {
+        console.log("aayena")
+        question.classList.toggle("open");
+    });
+});
