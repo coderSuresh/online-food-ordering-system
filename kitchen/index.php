@@ -45,6 +45,26 @@
         </div>
 
         <!-- food cards -->
+        <?php
+             $sql = "select orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    kos.kos_id,
+                    kos.status
+                    from orders 
+                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join kos on orders.id = kos.order_id
+                    ";
+
+        $result = mysqli_query($conn, $sql) or die("Query Failed");
+        ?>
         <table class="mt-20">
             <tr class="shadow">
                 <th>SN</th>
@@ -55,125 +75,90 @@
                 <th>Action</th>
             </tr>
             <tr class="shadow">
-                <td>1</td>
-                <td>Chinese Momo</td>
-                <td>3</td>
-                <td>N/A</td>
-                <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_accept.svg" alt="accpet icon">
-                                    <p>Accept</p>
+            <?php
+            
+         $i = 0;
+            while($data = mysqli_fetch_assoc($result)){   
+                $i++;            
+                 $sql_food_name = "Select name from food where f_id ={$data['f_id']}";
+                 $res_food_name = mysqli_query($conn, $sql_food_name);
+                 $data_food_name= mysqli_fetch_assoc($res_food_name);
+
+                 $sql_quantity = "Select qty,note from orders where c_id ={$data['c_id']}";
+                 $res_quantity = mysqli_query($conn, $sql_quantity);
+                 $data_quantity= mysqli_fetch_assoc($res_quantity);                
+                 $status = $data["status"];
+                 ?>
+                <tr class="shadow">
+                <td><?php echo $i;?> </td>      
+                <td><?php echo $data_food_name["name"]; ?> </td>      
+                <td><?php echo $data_quantity["qty"]; ?> </td>
+                <td><?php echo $data_quantity["note"]; ?> </td>                
+                <td><span class="<?php echo $data['status']; ?> border-curve-lg p_7-20"><?php echo $data['status']; ?></span></td>         
+                
+                  <td class="table_action_container">
+                            <!-- action menu -->
+                            <button class="no_bg no_outline table_option-menu">
+                                <img src="../images//ic_options.svg" alt="options menu">
+                            </button>
+                            <!-- options -->
+                            <?php if($status != "rejected") { ?>
+                            <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                                <div>
+                                    <?php
+                                    if ($status == "pending") {
+                                    ?>
+                                        <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                            <button type="submit" name="accept" class="no_bg no_outline">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_accept.svg" alt="accept icon">
+                                                    <p class="body-text">Accept</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php } else if ($status == "accepted") {
+                                    ?>
+                                        <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                            <button type="submit" name="prepared" class="no_bg no_outline">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_prepared.svg" alt="prepared">
+                                                    <p class="body-text">Prepared</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_reject.svg" alt="reject icon">
-                                    <p>Reject</p>
+                                <div>
+                                    <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
+                                        <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                            <button type="submit" name="reject" class="no_bg no_outline reject_btn">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_reject.svg" alt="reject icon">
+                                                    <p class="body-text">Reject</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php } ?>
                                 </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_prepared.svg" alt="prepared icon">
-                                    <p>Prepared</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>2</td>
-                <td>Chinese Momo</td>
-                <td>3</td>
-                <td>Please put some extra corona viruses</td>
-                <td><span class="accepted border-curve-lg p_7-20">Accepted</span></td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_accept.svg" alt="accpet icon">
-                                    <p>Accept</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_reject.svg" alt="reject icon">
-                                    <p>Reject</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_prepared.svg" alt="prepared icon">
-                                    <p>Prepared</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="shadow">
-                <td>3</td>
-                <td>Chinese Momo</td>
-                <td>3</td>
-                <td>N/A</td>
-                <td><span class="pending border-curve-lg p_7-20">Pending</span></td>
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <div class="table_action_options shadow border-curve p-20 flex direction-col">
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_accept.svg" alt="accpet icon">
-                                    <p>Accept</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_reject.svg" alt="reject icon">
-                                    <p>Reject</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <div class="flex items-center justify-start">
-                                    <img src="../images/ic_prepared.svg" alt="prepared icon">
-                                    <p>Prepared</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                            </div>
+                            <?php } ?>
+                        </td>                  
+                </tr>
+                
+             <?php   
+            } 
+            ?>        
+              
+
+
         </table>
     </main>
 </body>
