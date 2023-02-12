@@ -6,8 +6,8 @@
          </div>
          <ul>
              <li><a href="#">Terms and conditions</a></li>
-             <li><a href="#">Privacy policy</a></li>
-             <li><a href="#">FAQ</a></li>
+             <li><a href="./privacy-policy.html">Privacy policy</a></li>
+             <li><a href="./faq.html">FAQ</a></li>
          </ul>
      </section>
      <section>
