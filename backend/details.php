@@ -5,7 +5,11 @@ require("../config.php");
 if(isset($_POST['view'])) {
     $id = mysqli_real_escape_string($conn, $_POST['f_id']);
     $_SESSION['details-id'] = $id;
-    header("location: ../details.php");
-} else
+    if(isset($_SESSION['success']) && isset($_SESSION['user'])) {
+        header("location: ../details.php");
+    } else {
+        header("location: ../login.php");
+    }
+} else {
     header("location: ../invalid.html");
-?>
+}
