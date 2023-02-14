@@ -13,16 +13,16 @@
 This is a simple online food ordering system. It is a web application that allows users to order food online. 
 
 ## Features
-There are four types of users in this system. They are users, admin, kitchen staff, and delivery staff. Each user has different access rights. The features of each user are listed below:
+There are four types of users in this system. They are customers, admin, kitchen staff, and delivery staff. Each user has different access rights. The features of each user are listed below:
 
-### Users
-- User can register and login
-- User can view menu
-- User can add items to cart
-- User can view cart
-- User can place order
-- User can view order status
-- User can view order history
+### Customers
+- Customers can register and login
+- Customers can view menu
+- Customers can add items to cart
+- Customers can view cart
+- Customers can place order
+- Customers can view order status
+- Customers can view order history
 
 ### Admin
 - Admin can login
