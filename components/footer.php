@@ -20,7 +20,7 @@
                  <a href="#">
                      <div class="flex items-center justify-start">
                          <img src="./images/ic_call.svg" class="icon_with_text" alt="call icon">
-                         <p>011-254565</p>
+                         <p>027-254565</p>
                      </div>
                  </a>
              </li>
@@ -36,7 +36,7 @@
      </section>
 
      <div class="footer_map">
-         <img src="./images/img_map.jpg" alt="our location on map">
+         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23386.30356597996!2d88.05731135729734!3d26.891957725073073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sne!2snp!4v1676360500953!5m2!1sne!2snp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
      </div>
 
      <div class="copyright">
