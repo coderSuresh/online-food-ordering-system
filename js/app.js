@@ -543,3 +543,49 @@ questions && questions.forEach((question) => {
         question.classList.toggle("open");
     });
 });
+
+// ==================== inc / dec from checkout page ==================
+const checkoutInc = document.querySelectorAll(".checkout_inc")
+const checkoutDec = document.querySelectorAll(".checkout_dec")
+const checkoutItemForm = document.querySelectorAll(".checkout_item-form")
+
+checkoutInc && checkoutInc.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        checkoutItemForm[i].setAttribute("action", "./backend/inc-cart-item-quantity.php")
+        checkoutItemForm[i].submit()
+    })
+})
+
+checkoutDec && checkoutDec.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        checkoutItemForm[i].setAttribute("action", "./backend/dec-cart-item-quantity.php")
+        checkoutItemForm[i].submit()
+    })
+})
+
+// ==================== inc / dec from buy page ==================
+const buyInc = document.querySelectorAll(".buy_inc")
+const buyDec = document.querySelectorAll(".buy_dec")
+const buyPageQty = document.querySelectorAll(".buy_page_qty")
+const hiddenQuantity = document.querySelector(".hidden_quantity")
+
+buyInc && buyInc.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        buyPageQty[i].textContent = parseInt(buyPageQty[i].textContent) + 1
+        hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
+    })
+})
+
+buyDec && buyDec.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        if (parseInt(buyPageQty[i].textContent) > 1) {
+            buyPageQty[i].textContent = parseInt(buyPageQty[i].textContent) - 1
+            hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
+        }
+        else {
+            buyPageQty[i].textContent = 1
+            hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
+            showAlert("Quantity cannot be less than 1", "error")
+        }
+    })
+})

@@ -578,6 +578,7 @@ header {
 .cart_qty {
     width: 20px;
     text-align: center;
+    font-size: 0.9rem;
 }
 
 .close_icon {

@@ -53,6 +53,8 @@ if (!isset($_SESSION['success'])) {
                     <span class="nav__tooltip shadow p-20">Login</span></a>';
                 }
                 ?>
+                <div class="count-top cart_count-top shadow" style="position:fixed; right: -200px;"></div>
+            </ul>
         </nav>
     </header>
 
@@ -158,6 +160,7 @@ if (!isset($_SESSION['success'])) {
                     $sql_food = "select * from food where f_id = $food_id";
                     $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
                     $row_food = mysqli_fetch_assoc($res_food);
+                    $cart_id = $row['id'];
 
                     $foodName = $row_food['name'];
                     $foodPrice = $row_food['price'];
@@ -183,7 +186,13 @@ if (!isset($_SESSION['success'])) {
                             <?php echo $foodPrice; ?>
                         </td>
                         <td>
-                            <?php echo $quantity; ?>
+                            <form action="#" method="post" class="flex items-center justify-evenly checkout_item-form">
+                                <button type="button" class="cart_item-btn checkout_inc no_bg no_outline"><img src="./images/ic_add.svg" alt="increment"></button>
+                                <input type="text" name="quantity" class="cart_qty no_bg no_outline" value="<?php echo $quantity; ?>" disabled>
+                                <input type="hidden" name="id" value="<?php echo $cart_id; ?>">
+                                <input type="hidden" name="from_checkout">
+                                <button type="button" class="cart_item-btn checkout_dec no_bg no_outline"><img src="./images/ic_remove.svg" alt="decrement"></button>
+                            </form>
                         </td>
                         <td>
                             <?php echo $foodPrice * $quantity; ?>
@@ -212,13 +221,13 @@ if (!isset($_SESSION['success'])) {
                         <label for="address">Address:*</label>
                         <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
                         <label for="note">Note:</label>
-                        <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
+                        <input type="text" placeholder="example: without sugar" name="note" class="p_7-20" id="note">
                         <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
                         <div class="flex items-center justify-start">
                             <input type="radio" name="payment-method" id="payment-method" checked>
                             <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
-                        <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr));?>">
+                        <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr)); ?>">
                         <input type="hidden" name="quantity" value="<?php echo base64_encode(serialize($qty_arr)); ?>">
                         <button type="submit" class="button mt-20 w-full border-curve" name="place-order">Place Order</a>
                     </form>

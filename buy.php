@@ -92,12 +92,12 @@ require('./config.php');
         ?>
 
         <?php
-        if(isset($_SESSION['note_error'])) {
+        if (isset($_SESSION['note_error'])) {
         ?>
             <p class="error-container error p_7-20">
                 <?php echo $_SESSION['note_error']; ?>
             </p>
-        }
+            }
         <?php
             unset($_SESSION['note_error']);
         }
@@ -150,7 +150,11 @@ require('./config.php');
                     <?php echo $foodPrice; ?>
                 </td>
                 <td>
-                    <?php echo $quantity; ?>
+                    <div class="flex items-center justify-evenly">
+                        <button class="buy_inc no_bg no_outline"><img src="./images/ic_add.svg"></button>
+                        <p class="buy_page_qty"><?php echo $quantity; ?></p>
+                        <button class="buy_dec no_bg no_outline"><img src="./images/ic_remove.svg"></button>
+                    </div>
                 </td>
                 <td>
                     <?php echo $foodPrice * $quantity; ?>
@@ -174,8 +178,8 @@ require('./config.php');
                         <input type="radio" name="payment-method" id="payment-method" checked>
                         <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                     </div>
-                    <input type="hidden" name="food_id" value="<?php echo $food_id; ?>">
-                    <input type="hidden" name="quantity" value="<?php echo $quantity; ?>">
+                    <input type="hidden" name="f_id" value="<?php echo $food_id; ?>">
+                    <input type="hidden" name="qty" class="hidden_quantity" value="<?php echo $quantity; ?>">
                     <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
                     <button type="submit" name="place-order-buy" class="button mt-20 w-full border-curve">Place Order</a>
                 </form>

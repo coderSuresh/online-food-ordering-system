@@ -37,6 +37,11 @@ if (isset($_SESSION['success']) && isset($_SESSION['user'])) {
             if ($result) {
                 $response['status'] = 'hidden';
                 $response['message'] = 'Item updated from cart';
+
+                if (isset($_POST['from_checkout'])) {
+                    header('Location: ../checkout.php');
+                }
+
                 echo json_encode($response);
                 exit();
             } else {
