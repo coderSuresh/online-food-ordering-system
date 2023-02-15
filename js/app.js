@@ -537,9 +537,7 @@ btnBuyNow && btnBuyNow.addEventListener("click", (e) => {
 const questions = document.querySelectorAll(".question");
 
 questions && questions.forEach((question) => {
-    console.log("aayo")
     question.addEventListener("click", () => {
-        console.log("aayena")
         question.classList.toggle("open");
     });
 });
