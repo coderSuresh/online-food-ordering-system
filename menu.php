@@ -72,10 +72,13 @@
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                 ?>
-                        <div class="food_category text-center">
-                            <img src="./uploads/category/<?php echo $row['image']; ?>" class="food_category-img" alt="food category">
-                            <p class="food_category-name"><?php echo $row['cat_name']; ?></p>
-                        </div>
+                        <form action="./backend/category-filter.php" method="post" class="food_category">
+                            <input type="hidden" name="cat-name" value="<?php echo $row['cat_name']; ?>">
+                            <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
+                                <img src="./uploads/category/<?php echo $row['image']; ?>" class="food_category-img" alt="food category">
+                                <p class="food_category-name"><?php echo $row['cat_name']; ?></p>
+                            </button>
+                        </form>
                 <?php
                     }
                 } else
@@ -88,7 +91,13 @@
 
             <!-- fetch categories from db -->
             <?php
-            $sql = "SELECT cat_name FROM category";
+
+            if(isset($_SESSION['cat_name'])) {
+                $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
+            } else {
+                $sql = "SELECT cat_name FROM category";
+            }
+            
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
