@@ -118,7 +118,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">All
                         <div class="count-top shadow"><?php
                                                         echo $count;
                                                         ?>
@@ -128,7 +128,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Pending
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">Pending
                         <div class="count-top shadow"><?php
                                                         echo $count_pending;
                                                         ?>
@@ -138,7 +138,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Accepted
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $count_accepted;
                                                         ?>
@@ -148,7 +148,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="to deliver">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">To Deliver
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
@@ -158,7 +158,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="delivered">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Delivered
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">Delivered
                         <div class="count-top shadow"><?php
                                                         echo $count_delivered;
                                                         ?>
@@ -168,7 +168,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Rejected
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $count_rejected;
                                                         ?>
