@@ -24,6 +24,12 @@ if (isset($_SESSION['success']) && isset($_SESSION['user'])) {
                 $qty = 1;
                 $response['status'] = 'error';
                 $response['message'] = 'Minimum order quantity is 1';
+
+                if (isset($_POST['from_checkout'])) {
+                    $_SESSION['minimum_error'] = 'Minimum order quantity is 1';
+                    header('Location: ../checkout.php');
+                } 
+
                 echo json_encode($response);
                 exit();
             } else {

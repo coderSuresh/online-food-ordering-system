@@ -135,6 +135,16 @@ if (!isset($_SESSION['success'])) {
             </p>
         <?php
         }
+        if (isset($_SESSION['minimum_error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['minimum_error'];
+                unset($_SESSION['minimum_error']);
+                ?>
+            </p>
+        <?php
+        }
 
         if (mysqli_num_rows($res) > 0) {
         ?>
