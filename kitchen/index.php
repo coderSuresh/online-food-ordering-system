@@ -61,7 +61,7 @@
                 $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
                 $data_prepared = mysqli_num_rows($result_prepared);
 
-                if(!isset($_SESSION['filter-by'])){
+                if (!isset($_SESSION['filter-by'])) {
                     $_SESSION['filter-by'] = "pending";
                 }
 
@@ -69,7 +69,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if($_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
                         <div class="count-top shadow"><?php
                                                         echo $data_all;
                                                         ?>
@@ -79,7 +79,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
                         <div class="count-top shadow"><?php
                                                         echo $data_pending;
                                                         ?>
@@ -89,7 +89,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $data_accepted;
                                                         ?>
@@ -99,7 +99,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $data_rejected;
                                                         ?>
@@ -109,7 +109,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if($_SESSION['filter-by'] == "prepared") echo "active"; ?>">Prepared
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "prepared") echo "active"; ?>">Prepared
                         <div class="count-top shadow"><?php
                                                         echo $data_prepared;
                                                         ?>
@@ -142,6 +142,7 @@
                     where kos.status = '{$filter_by}'
                     order by orders.id desc
                     ";
+            unset($_SESSION['filter-by']);
         } else {
             $sql = "select orders.id,
                     orders.c_id,
@@ -160,6 +161,8 @@
                     inner join kos on orders.id = kos.order_id
                     order by orders.id desc
                     ";
+            if (isset($_SESSION['filter-by']))
+                unset($_SESSION['filter-by']);
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
