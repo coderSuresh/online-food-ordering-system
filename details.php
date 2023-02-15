@@ -1,41 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Are you hungry? You are at the right place. We offer mouth watering foods at your doorstep. Click now and order food online.">
-    <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
-    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
-    <title>Food Details | RestroHub</title>
-    <link rel="stylesheet" href="./styles/style.css">
-</head>
-
 <body>
+    <?php
+    session_start();
+    require('./config.php');
+    if (isset($_SESSION['details-id'])) {
+        $id = $_SESSION['details-id'];
+    }
+
+    $sql = "select * from food where f_id = $id";
+    $res = mysqli_query($conn, $sql) or die("could not fetch from database");
+
+    $row = mysqli_fetch_assoc($res);
+
+    $cat_id = $row['category'];
+
+    $sql_cat = "select cat_name from category where cat_id = $cat_id";
+    $res_cat = mysqli_query($conn, $sql_cat) or die("could not fetch from database");
+    $data = mysqli_fetch_assoc($res_cat);
+
+    $category = $data['cat_name'];
+    $title = $row['name'];
+    ?>
 
     <?php require('./components/header.php'); ?>
     <main class="details_main">
-
-        <?php
-        require('./config.php');
-        if (isset($_SESSION['details-id'])) {
-            $id = $_SESSION['details-id'];
-        }
-
-        $sql = "select * from food where f_id = $id";
-        $res = mysqli_query($conn, $sql) or die("could not fetch from database");
-
-        $row = mysqli_fetch_assoc($res);
-
-        $cat_id = $row['category'];
-
-        $sql_cat = "select cat_name from category where cat_id = $cat_id";
-        $res_cat = mysqli_query($conn, $sql_cat) or die("could not fetch from database");
-        $data = mysqli_fetch_assoc($res_cat);
-
-        $category = $data['cat_name'];
-        ?>
 
         <section class="details_container flex justify-center">
             <div class="details_img-container">
