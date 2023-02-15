@@ -28,6 +28,10 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
     }
 
     function redirect()
+
+
+
+
     {
         if (isset($_POST['place-order'])) {
             header("location: ../checkout.php");
@@ -67,7 +71,7 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
 
         if ($res && $res_o_c_t && $res_aos) {
             $_SESSION['order_placed'] = "Order placed successfully";
-            header("Location: ../track-order.php");
+            // header("Location: ../track-order.php");
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
             header("Location: ../track-order.php");

@@ -14,6 +14,7 @@ if (!isset($_SESSION['success'])) {
     <title>Checkout | RestroHub</title>
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./styles/style.css">
+
 </head>
 
 <body>
@@ -213,7 +214,8 @@ if (!isset($_SESSION['success'])) {
 
             <div class="mt-20 flex justify-center">
                 <div>
-                    <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
+                    <!--./backend/place-order.php-->
+                    <form action="#" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
                         <label for="name">Name:*</label>
                         <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
                         <label for="phone">Phone:*</label>
@@ -229,7 +231,7 @@ if (!isset($_SESSION['success'])) {
                         </div>
                         <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr)); ?>">
                         <input type="hidden" name="quantity" value="<?php echo base64_encode(serialize($qty_arr)); ?>">
-                        <button type="submit" class="button mt-20 w-full border-curve" name="place-order">Place Order</a>
+                        <button type="submit" class="button mt-20 w-full border-curve place_order" name="place-order">Place Order</a>
                     </form>
                 </div>
                 <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
@@ -251,6 +253,7 @@ if (!isset($_SESSION['success'])) {
     <?php require('./components/footer.php') ?>
 
     <script type="module" src="./js/app.js"></script>
+    <script src="./firebase-messaging-sw.js" type = "module"></script>
 </body>
 
 </html>
