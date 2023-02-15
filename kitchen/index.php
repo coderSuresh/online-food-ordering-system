@@ -37,16 +37,61 @@
                     </div>
                 </form>
 
-                <button class="button ml-35 border-curve-lg">All</button>
-                <button class="button ml-35 border-curve-lg">Pending</button>
-                <button class="button ml-35 border-curve-lg">Accepted</button>
+                <!-- filter by status -->
 
+                <?php
+
+                $sql_all = "select kos_id as total from kos";
+                $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
+                $data_all = mysqli_num_rows($result_all);
+
+                $sql_pending = "select kos_id as total from kos where status = 'pending'";
+                $result_pending = mysqli_query($conn, $sql_pending) or die("Query Failed");
+                $data_pending = mysqli_num_rows($result_pending);
+
+                $sql_accepted = "select kos_id as total from kos where status = 'accepted'";
+                $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
+                $data_accepted = mysqli_num_rows($result_accepted);
+                ?>
+
+                <form action="./backend/order/specific-order.php" method="post">
+                    <input type="hidden" name="filter-by" value="all">
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
+                        <div class="count-top shadow"><?php
+                                                        echo $data_all;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="./backend/order/specific-order.php" method="post">
+                    <input type="hidden" name="filter-by" value="pending">
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Pending
+                        <div class="count-top shadow"><?php
+                                                        echo $data_pending;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="./backend/order/specific-order.php" method="post">
+                    <input type="hidden" name="filter-by" value="accepted">
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Accepted
+                        <div class="count-top shadow"><?php
+                                                        echo $data_accepted;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
             </div>
         </div>
 
         <!-- food cards -->
         <?php
-        $sql = "select orders.id,
+
+        if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
+            $filter_by = $_SESSION['filter-by'];
+            $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
                     orders.total_price,
@@ -61,7 +106,28 @@
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join kos on orders.id = kos.order_id
+                    where kos.status = '{$filter_by}'
+                    order by orders.id desc
                     ";
+        } else {
+            $sql = "select orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    kos.kos_id,
+                    kos.status
+                    from orders 
+                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join kos on orders.id = kos.order_id
+                    order by orders.id desc
+                    ";
+        }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
         ?>

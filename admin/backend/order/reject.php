@@ -2,8 +2,6 @@
 session_start();
 require('../../../config.php');
 
-$response = array();
-
 if (!isset($_SESSION['admin-success'])) {
     header('location: ../../../invalid.html');
 } else {
