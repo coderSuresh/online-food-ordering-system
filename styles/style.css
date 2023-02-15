@@ -1343,7 +1343,8 @@ table tr th {
     color: var(--trans-red-text);
 }
 
-.rejected {
+.rejected,
+.prepared {
     background-color: var(--light-gray);
 }
 

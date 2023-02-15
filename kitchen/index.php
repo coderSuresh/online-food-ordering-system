@@ -52,6 +52,14 @@
                 $sql_accepted = "select kos_id as total from kos where status = 'accepted'";
                 $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
                 $data_accepted = mysqli_num_rows($result_accepted);
+
+                $sql_rejected = "select kos_id as total from kos where status = 'rejected'";
+                $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
+                $data_rejected = mysqli_num_rows($result_rejected);
+
+                $sql_prepared = "select kos_id as total from kos where status = 'prepared'";
+                $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
+                $data_prepared = mysqli_num_rows($result_prepared);
                 ?>
 
                 <form action="./backend/order/specific-order.php" method="post">
@@ -79,6 +87,26 @@
                     <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $data_accepted;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="./backend/order/specific-order.php" method="post">
+                    <input type="hidden" name="filter-by" value="rejected">
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Rejected
+                        <div class="count-top shadow"><?php
+                                                        echo $data_rejected;
+                                                        ?>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="./backend/order/specific-order.php" method="post">
+                    <input type="hidden" name="filter-by" value="prepared">
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Prepared
+                        <div class="count-top shadow"><?php
+                                                        echo $data_prepared;
                                                         ?>
                         </div>
                     </button>
@@ -144,15 +172,15 @@
                 <?php
 
                 $i = 0;
-                while ($data = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
-                    $sql_food_name = "Select name from food where f_id ={$data['f_id']}";
+                    $sql_food_name = "Select name from food where f_id ={$row['f_id']}";
                     $res_food_name = mysqli_query($conn, $sql_food_name);
                     $data_food_name = mysqli_fetch_assoc($res_food_name);
 
-                    $status = $data["status"];
-                    $quantity = $data["qty"];
-                    $note = $data["note"];
+                    $status = $row["status"];
+                    $quantity = $row["qty"];
+                    $note = $row["note"];
                 ?>
             <tr class="shadow">
                 <td><?php echo $i; ?> </td>
@@ -167,7 +195,7 @@
                         <img src="../images//ic_options.svg" alt="options menu">
                     </button>
                     <!-- options -->
-                    <?php if ($status != "rejected") { ?>
+                    <?php if ($status != "rejected" && $status != "prepared") { ?>
                         <div class="table_action_options shadow border-curve p-20 r_80 flex direction-col">
                             <div>
                                 <?php
@@ -175,7 +203,7 @@
                                 ?>
                                     <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["kos_id"]; ?>">
+                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
                                         <button type="submit" name="accept" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_accept.svg" alt="accept icon">
@@ -187,7 +215,7 @@
                                 ?>
                                     <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["kos_id"]; ?>">
+                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
                                         <button type="submit" name="prepared" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_prepared.svg" alt="prepared">
@@ -203,7 +231,7 @@
                                 <?php if ($status == "pending" || $status == "accepted") { ?>
                                     <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
                                         <button type="submit" name="reject" class="no_bg no_outline reject_btn">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_reject.svg" alt="reject icon">

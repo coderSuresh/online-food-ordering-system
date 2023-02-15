@@ -6,17 +6,16 @@ require('../../../config.php');
 if (!isset($_SESSION['admin-success'])) {
     header('location: ../../../invalid.html');
 } else {
-    if (isset($_POST['reject'])) {
+    if (isset($_POST['prepared'])) {
 
         $order_id = mysqli_real_escape_string($conn, $_POST['id']);
         $kos_id = mysqli_real_escape_string($conn, $_POST['kos_id']);
 
-        // TODO: notify admin that the order has been rejected by the kitchen
-        $sql = "UPDATE kos SET status = 'rejected' WHERE order_id = {$order_id} and kos_id = {$kos_id}";
+        $sql = "UPDATE kos SET status = 'prepared' WHERE order_id = {$order_id} and kos_id = {$kos_id}";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
-            $_SESSION['order-success'] = "Order rejected successfully";
+            $_SESSION['order-success'] = "Order status updated successfully";
             header('location: ../../index.php');
         } else {
             $_SESSION['order-error'] = "Something went wrong. Please try again";
@@ -26,3 +25,4 @@ if (!isset($_SESSION['admin-success'])) {
         header('location: ../../../invalid.html');
     }
 }
+?>

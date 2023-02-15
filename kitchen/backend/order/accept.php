@@ -9,9 +9,9 @@ if (!isset($_SESSION['admin-success'])) {
     if (isset($_POST['accept'])) {
 
         $order_id = mysqli_real_escape_string($conn, $_POST['id']);
-        $aos_id = mysqli_real_escape_string($conn, $_POST['aos_id']);
+        $kos_id = mysqli_real_escape_string($conn, $_POST['kos_id']);
 
-        $sql = "UPDATE kos SET status = 'accepted' WHERE order_id = {$order_id} and kos_id = {$aos_id}";
+        $sql = "UPDATE kos SET status = 'accepted' WHERE order_id = {$order_id} and kos_id = {$kos_id}";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
