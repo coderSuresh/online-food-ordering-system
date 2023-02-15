@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details | RestroHub</title>
+    <title>Order History | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
 </head>
@@ -20,7 +20,7 @@
     <main class="admin_dashboard_body">
 
         <section class="dashboard_inner-head flex items-center">
-            <h2>Current Order Details</h2>
+            <h2>Order History</h2>
             <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
@@ -91,27 +91,27 @@
                 <?php
                 require("../config.php");
 
-                $sql = "select id from orders where Date(date) = CURDATE()";
+                $sql = "select id from orders";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
-                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending' and Date(orders.date) = CURDATE()";
+                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending'";
                 $result_pending = mysqli_query($conn, $sql_pending);
                 $count_pending = mysqli_num_rows($result_pending);
 
-                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted' and Date(orders.date) = CURDATE()";
+                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted'";
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'to deliver' and Date(orders.date) = CURDATE()";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'to deliver'";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
-                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered' and Date(orders.date) = CURDATE()";
+                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered'";
                 $result_delivered = mysqli_query($conn, $sql_delivered);
                 $count_delivered = mysqli_num_rows($result_delivered);
 
-                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected' and Date(orders.date) = CURDATE()";
+                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected'";
                 $result_rejected = mysqli_query($conn, $sql_rejected);
                 $count_rejected = mysqli_num_rows($result_rejected);
                 ?>
@@ -222,8 +222,7 @@
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
-                    where aos.status = '$filter_by' and
-                    Date(orders.date) = CURDATE()
+                    where aos.status = '$filter_by'
                     order by orders.id desc
                     ";
             unset($_SESSION['filter-by']);
@@ -243,7 +242,6 @@
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
-                    where Date(orders.date) = CURDATE()
                     order by orders.id desc
                     ";
         }
