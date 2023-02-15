@@ -70,8 +70,17 @@
                 $sql = "SELECT image, cat_name FROM category";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
                 ?>
+                    <form action="./backend/category-filter.php" method="post" class="food_category">
+                        <input type="hidden" name="cat-name" value="all">
+                        <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
+                            <img src="./images/food.png" class="food_category-img" alt="food category">
+                            <p class="food_category-name">All</p>
+                        </button>
+                    </form>
+                    <?php
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
                         <form action="./backend/category-filter.php" method="post" class="food_category">
                             <input type="hidden" name="cat-name" value="<?php echo $row['cat_name']; ?>">
                             <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
@@ -92,12 +101,12 @@
             <!-- fetch categories from db -->
             <?php
 
-            if(isset($_SESSION['cat_name'])) {
+            if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
                 $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
             } else {
                 $sql = "SELECT cat_name FROM category";
             }
-            
+
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
