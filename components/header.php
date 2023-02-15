@@ -12,7 +12,8 @@
          <title><?php echo $title; ?> | RestroHub</title>
          <link rel="stylesheet" href="./styles/style.css">
      </head>
- <?php } ?>
+ <?php } else
+     session_start(); ?>
  <header>
      <nav class="top_nav flex items-center">
          <div class="logo__back-btn flex items-center">
