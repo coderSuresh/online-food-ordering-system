@@ -60,11 +60,16 @@
                 $sql_prepared = "select kos_id as total from kos where status = 'prepared'";
                 $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
                 $data_prepared = mysqli_num_rows($result_prepared);
+
+                if (!isset($_SESSION['filter-by'])) {
+                    $_SESSION['filter-by'] = "pending";
+                }
+
                 ?>
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
                         <div class="count-top shadow"><?php
                                                         echo $data_all;
                                                         ?>
@@ -74,7 +79,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Pending
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
                         <div class="count-top shadow"><?php
                                                         echo $data_pending;
                                                         ?>
@@ -84,7 +89,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Accepted
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $data_accepted;
                                                         ?>
@@ -94,7 +99,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Rejected
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $data_rejected;
                                                         ?>
@@ -104,7 +109,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Prepared
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "prepared") echo "active"; ?>">Prepared
                         <div class="count-top shadow"><?php
                                                         echo $data_prepared;
                                                         ?>
@@ -137,6 +142,7 @@
                     where kos.status = '{$filter_by}'
                     order by orders.id desc
                     ";
+            unset($_SESSION['filter-by']);
         } else {
             $sql = "select orders.id,
                     orders.c_id,
@@ -155,6 +161,8 @@
                     inner join kos on orders.id = kos.order_id
                     order by orders.id desc
                     ";
+            if (isset($_SESSION['filter-by']))
+                unset($_SESSION['filter-by']);
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
@@ -168,87 +176,85 @@
                 <th>Order Status</th>
                 <th>Action</th>
             </tr>
-            <tr class="shadow">
-                <?php
+            <?php
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $i++;
+                $sql_food_name = "Select name from food where f_id ={$row['f_id']}";
+                $res_food_name = mysqli_query($conn, $sql_food_name);
+                $data_food_name = mysqli_fetch_assoc($res_food_name);
 
-                $i = 0;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $i++;
-                    $sql_food_name = "Select name from food where f_id ={$row['f_id']}";
-                    $res_food_name = mysqli_query($conn, $sql_food_name);
-                    $data_food_name = mysqli_fetch_assoc($res_food_name);
+                $status = $row["status"];
+                $quantity = $row["qty"];
+                $note = $row["note"];
+            ?>
+                <tr class="shadow">
+                    <td><?php echo $i; ?> </td>
+                    <td><?php echo $data_food_name["name"]; ?> </td>
+                    <td><?php echo $quantity; ?> </td>
+                    <td><?php echo $note; ?> </td>
+                    <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
 
-                    $status = $row["status"];
-                    $quantity = $row["qty"];
-                    $note = $row["note"];
-                ?>
-            <tr class="shadow">
-                <td><?php echo $i; ?> </td>
-                <td><?php echo $data_food_name["name"]; ?> </td>
-                <td><?php echo $quantity; ?> </td>
-                <td><?php echo $note; ?> </td>
-                <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
-
-                <td class="table_action_container">
-                    <!-- action menu -->
-                    <button class="no_bg no_outline table_option-menu">
-                        <img src="../images//ic_options.svg" alt="options menu">
-                    </button>
-                    <!-- options -->
-                    <?php if ($status != "rejected" && $status != "prepared") { ?>
-                        <div class="table_action_options shadow border-curve p-20 r_80 flex direction-col">
-                            <div>
-                                <?php
-                                if ($status == "pending") {
-                                ?>
-                                    <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
-                                        <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
-                                        <button type="submit" name="accept" class="no_bg no_outline">
-                                            <div class="flex items-center justify-start">
-                                                <img src="../images/ic_accept.svg" alt="accept icon">
-                                                <p class="body-text">Accept</p>
-                                            </div>
-                                        </button>
-                                    </form>
-                                <?php } else if ($status == "accepted") {
-                                ?>
-                                    <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
-                                        <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
-                                        <button type="submit" name="prepared" class="no_bg no_outline">
-                                            <div class="flex items-center justify-start">
-                                                <img src="../images/ic_prepared.svg" alt="prepared">
-                                                <p class="body-text">Prepared</p>
-                                            </div>
-                                        </button>
-                                    </form>
-                                <?php
-                                }
-                                ?>
+                    <td class="table_action_container">
+                        <!-- action menu -->
+                        <button class="no_bg no_outline table_option-menu">
+                            <img src="../images//ic_options.svg" alt="options menu">
+                        </button>
+                        <!-- options -->
+                        <?php if ($status != "rejected" && $status != "prepared") { ?>
+                            <div class="table_action_options shadow border-curve p-20 r_80 flex direction-col">
+                                <div>
+                                    <?php
+                                    if ($status == "pending") {
+                                    ?>
+                                        <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
+                                            <button type="submit" name="accept" class="no_bg no_outline">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_accept.svg" alt="accept icon">
+                                                    <p class="body-text">Accept</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php } else if ($status == "accepted") {
+                                    ?>
+                                        <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
+                                            <button type="submit" name="prepared" class="no_bg no_outline">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_prepared.svg" alt="prepared">
+                                                    <p class="body-text">Prepared</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                                <div>
+                                    <?php if ($status == "pending" || $status == "accepted") { ?>
+                                        <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
+                                            <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                            <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
+                                            <button type="submit" name="reject" class="no_bg no_outline reject_btn">
+                                                <div class="flex items-center justify-start">
+                                                    <img src="../images/ic_reject.svg" alt="reject icon">
+                                                    <p class="body-text">Reject</p>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    <?php } ?>
+                                </div>
                             </div>
-                            <div>
-                                <?php if ($status == "pending" || $status == "accepted") { ?>
-                                    <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
-                                        <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
-                                        <button type="submit" name="reject" class="no_bg no_outline reject_btn">
-                                            <div class="flex items-center justify-start">
-                                                <img src="../images/ic_reject.svg" alt="reject icon">
-                                                <p class="body-text">Reject</p>
-                                            </div>
-                                        </button>
-                                    </form>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </td>
-            </tr>
+                        <?php } ?>
+                    </td>
+                </tr>
 
-        <?php
-                }
-        ?>
+            <?php
+            }
+            ?>
 
 
 

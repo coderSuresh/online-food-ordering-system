@@ -115,11 +115,16 @@
                 $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected' and Date(orders.date) = CURDATE()";
                 $result_rejected = mysqli_query($conn, $sql_rejected);
                 $count_rejected = mysqli_num_rows($result_rejected);
+
+                if (!isset($_SESSION['filter-by'])) {
+                    $_SESSION['filter-by'] = "pending";
+                }
+
                 ?>
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
                         <div class="count-top shadow"><?php
                                                         echo $count;
                                                         ?>
@@ -129,7 +134,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Pending
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
                         <div class="count-top shadow"><?php
                                                         echo $count_pending;
                                                         ?>
@@ -139,7 +144,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Accepted
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $count_accepted;
                                                         ?>
@@ -149,7 +154,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="to deliver">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">To Deliver
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "to deliver") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
@@ -159,7 +164,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="delivered">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Delivered
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
                         <div class="count-top shadow"><?php
                                                         echo $count_delivered;
                                                         ?>
@@ -169,7 +174,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">Rejected
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $count_rejected;
                                                         ?>
@@ -247,6 +252,8 @@
                     where Date(orders.date) = CURDATE()
                     order by orders.id desc
                     ";
+            if (isset($_SESSION['filter-by']))
+                unset($_SESSION['filter-by']);
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");

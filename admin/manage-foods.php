@@ -21,7 +21,8 @@
     <main class="admin_dashboard_body">
 
         <section class="dashboard_inner-head flex items-center">
-            <h2>Manage Food Items</h2>
+            <h2>Manage Food Items <?php if (isset($_SESSION['filter-by']))
+                                        echo "(" . $_SESSION['filter-by'] . ")"; ?></h2>
         </section>
 
         <section class="modal <?php if (isset($_SESSION['f-id']))

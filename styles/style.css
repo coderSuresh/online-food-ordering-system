@@ -241,7 +241,8 @@ body,
     outline: 1px solid var(--black);
 }
 
-.button:active {
+.button:active,
+.button.active {
     outline: 2px solid var(--black);
 }
 

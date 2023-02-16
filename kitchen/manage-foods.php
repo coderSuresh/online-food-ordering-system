@@ -22,7 +22,8 @@
     <main class="admin_dashboard_body">
 
         <section class="dashboard_inner-head flex items-center">
-            <h2>Manage Food Items</h2>
+            <h2>Manage Food Items <?php if (isset($_SESSION['filter-by']))
+                echo "(". $_SESSION['filter-by'] .")" ; ?></h2>
         </section>
 
         <div class="flex items-center">
@@ -184,7 +185,6 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Cost</th>
                     <th>Category</th>
                     <th>Sold</th>
                     <th>Action</th>
@@ -209,7 +209,6 @@
                         </td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['price']; ?></td>
-                        <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $cat_name; ?></td>
                         <td><?php echo 125; ?></td>
                         <td class="table_action_container">
@@ -218,7 +217,7 @@
                                 <img src="../images/ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <div class="table_action_options shadow border-curve long r_80 p-20 flex direction-col">
+                            <div class="table_action_options shadow border-curve long p-20 flex direction-col">
                                 <div>
                                     <a href="#">
                                         <div class="flex items-center justify-start">
