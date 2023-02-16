@@ -166,7 +166,6 @@ if (!isset($_SESSION['success'])) {
                 $qty_arr = array();
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
-
                     $food_id = $row['food_id'];
                     $sql_food = "select * from food where f_id = $food_id";
                     $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
@@ -225,7 +224,7 @@ if (!isset($_SESSION['success'])) {
             <div class="mt-20 flex justify-center">
                 <div>
                     <!--./backend/place-order.php-->
-                    <form action="#" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
+                    <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
                         <label for="name">Name:*</label>
                         <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
                         <label for="phone">Phone:*</label>
@@ -263,7 +262,7 @@ if (!isset($_SESSION['success'])) {
     <?php require('./components/footer.php') ?>
 
     <script type="module" src="./js/app.js"></script>
-    <script src="./firebase-messaging-sw.js" type = "module"></script>
+    <!-- <script src="/firebase-messaging-sw.js" type = "module"></script> -->
 </body>
 
 </html>

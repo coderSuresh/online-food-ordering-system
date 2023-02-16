@@ -64,7 +64,8 @@ const firebaseConfig = {
     projectId: "annular-magnet-374810",
     storageBucket: "annular-magnet-374810.appspot.com",
     messagingSenderId: "360310508668",
-    appId: "1:360310508668:web:0bf9048fd87a2741338df9"
+    appId: "1:360310508668:web:0bf9048fd87a2741338df9",
+    measurementId:"G-FGTFE1F45W"
 };
 
 
