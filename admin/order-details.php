@@ -207,16 +207,9 @@
         }
         ?>
 
-        <?php
-        require("../config.php");?>
-            <table class="mt-20 order-table">
-                                
-            </table>
-        <?php
-        // } else {
-        //     echo "No Record Found";
-        // }
-        ?>
+        <table class="mt-20 order-table">
+            <!-- data from watch-dog.js -->
+        </table>
     </main>
 
 </body>

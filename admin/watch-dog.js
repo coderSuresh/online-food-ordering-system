@@ -116,7 +116,9 @@ function checkForUpdates() {
         fetch("./backend/watch-order-table.php")
           .then((response) => response.json())
           .then((new_count) => {
-            if (new_count.data !== current_count.data) {
+            
+            // new row is inserted
+            if (new_count.data > current_count.data) {
               sendNotification();
 
               const audio = new Audio("../audio/dog_bark.mp3");
