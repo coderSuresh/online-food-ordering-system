@@ -567,11 +567,14 @@ const buyInc = document.querySelectorAll(".buy_inc")
 const buyDec = document.querySelectorAll(".buy_dec")
 const buyPageQty = document.querySelectorAll(".buy_page_qty")
 const hiddenQuantity = document.querySelector(".hidden_quantity")
+const totalPrice = document.querySelector(".total_price")
 
 buyInc && buyInc.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         buyPageQty[i].textContent = parseInt(buyPageQty[i].textContent) + 1
         hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
+
+        //TODO: update total price
     })
 })
 

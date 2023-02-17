@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
-    <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
+    <script src="../js/admin.js" defer></script>
 </head>
 
 <body>
@@ -208,165 +208,14 @@
         ?>
 
         <?php
-        require("../config.php");
-
-        // filter content by session 
-        if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
-            $filter_by = $_SESSION['filter-by'];
-            $sql = "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where aos.status = '$filter_by' and
-                    Date(orders.date) = CURDATE()
-                    order by orders.id desc
-                    ";
-            unset($_SESSION['filter-by']);
-        } else {
-            $sql = "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where Date(orders.date) = CURDATE()
-                    order by orders.id desc
-                    ";
-            if (isset($_SESSION['filter-by']))
-                unset($_SESSION['filter-by']);
-        }
-
-        $result = mysqli_query($conn, $sql) or die("Query Failed");
-
-        if (mysqli_num_rows($result) > 0) {
-        ?>
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>SN</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Location</th>
-                    <th>Item</th>
-                    <th>Amount</th>
-                    <th>Order Status</th>
-                    <th>Action</th>
-                </tr>
-
-                <?php
-                $i = 0;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $i++;
-
-                    $food_id = $row['f_id'];
-                    $sql_food = "select name from food where f_id = {$food_id}";
-                    $result_food = mysqli_query($conn, $sql_food) or die("Query Failed");
-                    $row_food = mysqli_fetch_assoc($result_food);
-                    $food_name = $row_food['name'];
-                    $order_id = $row['id'];
-
-                    $status = $row['status'];
-
-                    $sql_k_o_s = "select status from kos where order_id = {$order_id}";
-                    $result_k_o_s = mysqli_query($conn, $sql_k_o_s) or die("Query Failed");
-
-                    if (mysqli_num_rows($result_k_o_s) > 0) {
-                        $data = mysqli_fetch_assoc($result_k_o_s);
-                        $k_o_s = $data['status'];
-                    }
-                ?>
-
-                    <tr class="shadow">
-                        <td><?php echo $i; ?></td>
-                        <td>
-                            <?php echo $row['date']; ?>
-                        </td>
-                        <td><?php echo $row['c_name']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $food_name . " x " . $row['qty']; ?></td>
-                        <td><?php echo $row['total_price']; ?></td>
-                        <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
-                        <td class="table_action_container">
-                            <!-- action menu -->
-                            <button class="no_bg no_outline table_option-menu">
-                                <img src="../images//ic_options.svg" alt="options menu">
-                            </button>
-                            <!-- options -->
-                            <?php if ($status != "rejected") { ?>
-                                <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                                    <div>
-                                        <?php
-                                        if ($status == "pending") {
-                                        ?>
-                                            <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="accept" class="no_bg no_outline">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_accept.svg" alt="accept icon">
-                                                        <p class="body-text">Accept</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php } else if ($status == "accepted") {
-                                        ?>
-                                            <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="prepared" class="no_bg no_outline">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_prepared.svg" alt="prepared">
-                                                        <p class="body-text">Prepared</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <div>
-                                        <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
-                                            <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="reject" class="no_bg no_outline reject_btn">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_reject.svg" alt="reject icon">
-                                                        <p class="body-text">Reject</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
+        require("../config.php");?>
+            <table class="mt-20 order-table">
+                                
             </table>
         <?php
-        } else {
-            echo "No Record Found";
-        }
+        // } else {
+        //     echo "No Record Found";
+        // }
         ?>
     </main>
 
