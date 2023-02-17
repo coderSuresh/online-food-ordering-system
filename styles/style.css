@@ -1132,6 +1132,27 @@ form .text_field {
     z-index: 1000;
 }
 
+/* for watch js */
+.alert-dialog {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--trans-black);
+    z-index: 1000;
+}
+
+.alert-dialog__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    width: 400px;
+    text-align: center;
+}
+
 .modal.flex {
     display: flex;
 }
