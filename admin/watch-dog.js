@@ -29,7 +29,19 @@ function checkForUpdates() {
                   }, 1000);
                 }
                 else {
-                  sendNotification();
+                  const alertDialog = document.createElement("div");
+                  alertDialog.classList.add("alert-dialog");
+                  alertDialog.innerHTML = `
+                      <div class="alert-dialog__content border-curve-md p-20 shadow w-fit">
+                        <h3 class="alert-dialog__title">New Order!</h3>
+                        <p class="alert-dialog__text mt-20">You have a new order!</p>
+                        <div class="alert-dialog__actions mt-20 flex items-center">
+                        <button class="button gray border-curve-md w-50 alert-dialog__action" onclick="hideAlert()">OK</button>
+                        <button class="button border-curve-md w-50 alert-dialog__action" onclick="redirect()">View</button>
+                        </div>
+                      </div>
+                    `;
+                  document.body.appendChild(alertDialog);
                 }
               });
 
@@ -44,6 +56,15 @@ function checkForUpdates() {
 }
 
 checkForUpdates();
+
+function redirect() {
+  window.open('https://localhost/messy-code/admin/order-details.php', '_blank')
+}
+
+function hideAlert() {
+  const alertDialog = document.querySelector(".alert-dialog");
+  alertDialog.remove();
+}
 
 function sendNotification() {
   if (!("Notification" in window)) {

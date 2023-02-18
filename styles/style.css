@@ -97,6 +97,10 @@ a:hover {
     width: 100% !important;
 }
 
+.w-50 {
+    width: 50% !important;
+}
+
 .mt-20 {
     margin-top: 20px;
 }
@@ -1130,6 +1134,11 @@ form .text_field {
     right: 0;
     background-color: var(--trans-black);
     z-index: 1000;
+}
+
+/* for alert dialog on order */
+.alert-dialog__actions > button {
+    margin: 0 10px;
 }
 
 /* for watch js */
