@@ -280,7 +280,7 @@ rejectBtn && rejectBtn.forEach(btn => {
             alertDialog.innerHTML = `
                       <div class="alert-dialog__content border-curve-md p-20 shadow w-fit">
                         <h3 class="alert-dialog__title">What's the reason?</h3>
-                        <input type="text" class="reject_reason p_7-20 border-curve mt-20">
+                        <input type="text" class="reject_reason p_7-20 border-curve mt-20" required autofocus>
                         <div class="alert-dialog__actions mt-20 flex items-center">
                         <button class="button gray border-curve-md w-50 alert-dialog__action" onclick="closeDialog()">Close</button>
                         <button class="button border-curve-md w-50 alert-dialog__action" onclick="rejectOrder()">Reject</button>
@@ -312,7 +312,7 @@ function rejectOrder() {
             console.log("reject")
             rejectForm[i].submit()
         })
-    }
+    } else showAlert("Please enter reason", "error")
 }
 
 // show error alert
