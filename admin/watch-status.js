@@ -25,8 +25,9 @@ function checkForUpdates(backendAPI) {
                                         message = `Order of ${foodName} is prepared by kitchen!`;
                                     }
                                     else if (status === "rejected") {
+                                        let reason = new_state[i].reason;
                                         title = "Order Rejected";
-                                        message = `Order of ${foodName} is rejected by kitchen!`;
+                                        message = `Order of ${foodName} is rejected by kitchen!\nReason: ${reason}`;
                                     }
 
                                     playSound();
@@ -40,7 +41,7 @@ function checkForUpdates(backendAPI) {
                                                             <div class="alert-dialog__actions mt-20 flex items-center">
                                                             <button class="button border-curve-md w-full alert-dialog__action" onclick="hideAlert()">OK</button>
                                                             ${status === "rejected" ? `
-                                        (<button class="button border-curve-md w-full alert-dialog__action" onclick="redirect()">View</button>)`
+                                        <button class="button border-curve-md w-full alert-dialog__action" onclick="redirect()">View</button>`
                                         : ""} 
                                                             </div>
                                                         </div>
@@ -74,7 +75,7 @@ function playSound() {
 
 function hideAlert() {
     const alertDialog = document.querySelector(".alert-dialog");
-    alertDialog.remove();
+    // alertDialog.remove();
     location.reload();
 }
 

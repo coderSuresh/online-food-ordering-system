@@ -15,6 +15,13 @@ if (isset($_SESSION['admin-success'])) {
             $res_fetch_food = mysqli_query($conn, $sql_fetch_food) or die(mysqli_error($conn));
             $food_name = mysqli_fetch_assoc($res_fetch_food)['name'];
 
+            if ($row['status'] == "rejected") {
+                $sql_fetch_reason = "select reason from reject_reason where order_id = {$row['order_id']}";
+                $res_fetch_reason = mysqli_query($conn, $sql_fetch_reason) or die(mysqli_error($conn));
+                $reason = mysqli_fetch_assoc($res_fetch_reason)['reason'];
+                $row['reason'] = $reason;
+            }
+
             $row['food_name'] = $food_name;
             $response[] = $row;
         }
