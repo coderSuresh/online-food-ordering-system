@@ -11,7 +11,7 @@ function checkForUpdates() {
               const audio = new Audio("../audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();
-                if (window.location.href == "https://localhost/messy-code/kitchen/index.php" || window.location.href == "https://messy-code/kitchen") {
+                if (window.location.href == "https://localhost/messy-code/kitchen/index.php" || window.location.href == "https://localhost/messy-code/kitchen/") {
                   
                   setTimeout(() => {
                     location.reload();
@@ -48,29 +48,10 @@ function checkForUpdates() {
 checkForUpdates();
 
 function redirect() {
-  window.open('https://localhost/messy-code/admin/order-details.php', '_blank')
+  window.open('https://localhost/messy-code/kitchen/', '_blank')
 }
 
 function hideAlert() {
   const alertDialog = document.querySelector(".alert-dialog");
   alertDialog.remove();
-}
-
-function sendNotification() {
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  } else {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        const notification = new Notification("New Order", {
-          body: "You have a new order!",
-          icon: "../images/logo.png",
-        });
-        notification.onclick = (event) => {
-          event.preventDefault();
-          window.open("https://localhost/messy-code/admin/order-details.php", "_blank");
-        };
-      }
-    });
-  }
 }
