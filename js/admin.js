@@ -274,8 +274,46 @@ rejectBtn && rejectBtn.forEach(btn => {
         if (!confirm) {
             e.preventDefault()
         }
+        else {
+            const alertDialog = document.createElement("div");
+            alertDialog.classList.add("alert-dialog");
+            alertDialog.innerHTML = `
+                      <div class="alert-dialog__content border-curve-md p-20 shadow w-fit">
+                        <h3 class="alert-dialog__title">What's the reason?</h3>
+                        <input type="text" class="reject_reason p_7-20 border-curve mt-20">
+                        <div class="alert-dialog__actions mt-20 flex items-center">
+                        <button class="button gray border-curve-md w-50 alert-dialog__action" onclick="closeDialog()">Close</button>
+                        <button class="button border-curve-md w-50 alert-dialog__action" onclick="rejectOrder()">Reject</button>
+                        </div>
+                      </div>
+                    `;
+            document.body.appendChild(alertDialog);
+        }
     })
 })
+
+function closeDialog() {
+    const alertDialog = document.querySelector(".alert-dialog")
+    alertDialog && alertDialog.remove()
+}
+
+function rejectOrder() {
+    const rejectForm = document.querySelectorAll(".reject_form")
+    const rejectReason = document.querySelector(".reject_reason").value
+    const hiddenReason = document.querySelectorAll(".hidden-reject_reason")
+
+    hiddenReason && hiddenReason.forEach((input) => {
+        input.value = rejectReason
+    })
+
+    if (rejectReason) {
+        console.log("test")
+        rejectForm && rejectForm.forEach((form, i) => {
+            console.log("reject")
+            rejectForm[i].submit()
+        })
+    }
+}
 
 // show error alert
 const errorContainer = document.querySelectorAll(".error-container")

@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
+    <script src="./watch-dog.js" defer></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
         <section class="dashboard_inner-head flex items-center">
             <h2>Manage Food Items <?php if (isset($_SESSION['filter-by']))
-                echo "(". $_SESSION['filter-by'] .")" ; ?></h2>
+                                        echo "(" . $_SESSION['filter-by'] . ")"; ?></h2>
         </section>
 
         <div class="flex items-center">
@@ -226,7 +227,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                
+
                                 <div>
                                     <form action="./backend/foods/<?php if ($row['disabled'] == 0)
                                                                         echo "disable";

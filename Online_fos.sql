@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2023 at 06:58 AM
+-- Generation Time: Feb 18, 2023 at 01:21 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,9 +58,7 @@ CREATE TABLE `aos` (
 --
 
 INSERT INTO `aos` (`aos_id`, `order_id`, `status`) VALUES
-(1, 9, 'pending'),
-(2, 10, 'pending'),
-(3, 11, 'pending');
+(43, 51, 'accepted');
 
 -- --------------------------------------------------------
 
@@ -80,15 +78,11 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `customer_id`, `food_id`, `quantity`) VALUES
-(112, 38, 20, 3),
-(117, 38, 27, 2),
 (132, 40, 24, 4),
 (134, 40, 22, 1),
 (136, 40, 23, 1),
 (138, 40, 20, 4),
-(140, 38, 26, 3),
-(147, 41, 24, 1),
-(151, 41, 26, 2);
+(147, 41, 24, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +136,8 @@ INSERT INTO `customer` (`id`, `names`, `username`, `email`, `password`, `provide
 (37, 'dklfj', 'skjfl', 'jfls@dkfj.adsfj', '4297f44b13955235245b2497399d7a93', '', '0000-00-00 00:00:00', 'not verified', 0, '0', '', 0),
 (38, 'Rame', 'rame', 'rame@chor.ho', '78dacb5f238ca3ac3694f7c2114fa69c', '', '0000-00-00 00:00:00', 'not verified', 1, '0', '', 0),
 (40, 'Ashish Acharya', 'ashish', 'acashish458@gmail.com', '332b3091416bc4687821c4653f1c6eb1', '', '0000-00-00 00:00:00', 'verified', 0, '978534', '', 0),
-(41, 'suresh dahal', NULL, 'dahal4524@gmail.com', NULL, 'google.com', '2023-02-09 18:07:21', 'verified', 1, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4eqmbn7hywqFqlAJna9S49fO4veKZ_FUz8jQPR=s96-c', 0);
+(41, 'suresh dahal', NULL, 'dahal4524@gmail.com', NULL, 'google.com', '2023-02-09 18:07:21', 'verified', 1, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4eqmbn7hywqFqlAJna9S49fO4veKZ_FUz8jQPR=s96-c', 0),
+(42, 'suresh dahal', 'suresh', 'sd807141@gmail.com', '3e6a0966890c85a8ca932302ad6a2405', 'email', '2023-02-18 15:34:54', 'not verified', 1, '370724', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -193,6 +188,13 @@ CREATE TABLE `kos` (
   `status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kos`
+--
+
+INSERT INTO `kos` (`kos_id`, `order_id`, `status`) VALUES
+(2, 51, 'rejected');
+
 -- --------------------------------------------------------
 
 --
@@ -214,9 +216,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(9, 38, 4, 20, 800, 'No note', '2023-02-10 19:40:58'),
-(10, 38, 4, 20, 800, 'No note', '2023-02-10 19:42:06'),
-(11, 38, 2, 26, 452, 'with extra sugar', '2023-02-10 19:48:02');
+(51, 41, 2, 26, 452, 'No note', '2023-02-18 17:57:00');
 
 -- --------------------------------------------------------
 
@@ -237,9 +237,27 @@ CREATE TABLE `order_contact_details` (
 --
 
 INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
-(3, 9, 'Mangsebung, Ilam', '9814256535', 'Alisha Bista'),
-(4, 10, 'Chautari-2, Ilam', '9842635145', 'Jessica Thapa'),
-(5, 11, 'Badame-3, Ilam', '9815254536', 'Nilima Karki');
+(45, 51, 'Mangsebung, Ilam', '9845241253', 'Suresh Dahal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reject_reason`
+--
+
+CREATE TABLE `reject_reason` (
+  `o_r_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `rejected_by` varchar(10) NOT NULL,
+  `reason` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reject_reason`
+--
+
+INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
+(1, 51, 'kitchen', 'Your order has been rejected for testing purpose');
 
 --
 -- Indexes for dumped tables
@@ -308,6 +326,13 @@ ALTER TABLE `order_contact_details`
   ADD KEY `o_id` (`o_id`);
 
 --
+-- Indexes for table `reject_reason`
+--
+ALTER TABLE `reject_reason`
+  ADD PRIMARY KEY (`o_r_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -321,13 +346,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -339,7 +364,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `food`
@@ -351,19 +376,25 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `reject_reason`
+--
+ALTER TABLE `reject_reason`
+  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -406,6 +437,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_contact_details`
   ADD CONSTRAINT `o_id` FOREIGN KEY (`o_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `reject_reason`
+--
+ALTER TABLE `reject_reason`
+  ADD CONSTRAINT `reject_reason_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
