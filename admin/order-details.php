@@ -104,7 +104,7 @@
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'to deliver' and Date(orders.date) = CURDATE()";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'prepared' and Date(orders.date) = CURDATE()";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
@@ -153,7 +153,7 @@
                 </form>
 
                 <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="to deliver">
+                    <input type="hidden" name="filter-by" value="prepared">
                     <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "to deliver") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
@@ -311,7 +311,7 @@
                                 <img src="../images//ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <?php if ($status != "rejected") { ?>
+                            <?php if ($status != "rejected" && $status != "prepared") { ?>
                                 <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
                                     <div>
                                         <?php
