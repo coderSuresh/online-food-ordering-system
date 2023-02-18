@@ -22,6 +22,29 @@
 
     <main class="admin_dashboard_body">
 
+        <?php
+        if (isset($_SESSION['order-success'])) {
+        ?>
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['order-success'];
+                unset($_SESSION['order-success']);
+                ?>
+            </p>
+        <?php
+        }
+        if (isset($_SESSION['order-error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['order-error'];
+                unset($_SESSION['order-error']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+
         <section class="dashboard_inner-head flex items-center">
             <h2>Order Details</h2>
         </section>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
+    <script src="./watch-status.js" defer></script>
 </head>
 
 <body>
@@ -185,22 +186,22 @@
         </div>
 
         <?php
-        if (isset($_SESSION['order-success'])) {
+        if (isset($_SESSION['order-success-a'])) {
         ?>
             <p class="error-container success p_7-20">
                 <?php
-                echo $_SESSION['order-success'];
-                unset($_SESSION['order-success']);
+                echo $_SESSION['order-success-a'];
+                unset($_SESSION['order-success-a']);
                 ?>
             </p>
         <?php
         }
-        if (isset($_SESSION['order-error'])) {
+        if (isset($_SESSION['order-error-a'])) {
         ?>
             <p class="error-container error p_7-20">
                 <?php
-                echo $_SESSION['order-error'];
-                unset($_SESSION['order-error']);
+                echo $_SESSION['order-error-a'];
+                unset($_SESSION['order-error-a']);
                 ?>
             </p>
         <?php

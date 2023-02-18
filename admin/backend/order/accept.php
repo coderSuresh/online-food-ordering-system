@@ -17,10 +17,10 @@ if (!isset($_SESSION['admin-success'])) {
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error($conn));
 
         if ($result && $result_insert) {
-            $_SESSION['order-success'] = "Order accepted successfully";
+            $_SESSION['order-success-a'] = "Order accepted successfully";
             header('location: ../../order-details.php');
         } else {
-            $_SESSION['order-error'] = "Something went wrong. Please try again";
+            $_SESSION['order-error-a'] = "Something went wrong. Please try again";
             header('location: ../../order-details.php');
         }
     } else {

@@ -1,5 +1,5 @@
-function checkForUpdates() {
-  fetch("./backend/watch-order-table.php")
+function checkForUpdates(backendAPI) {
+  fetch(backendAPI)
     .then((response) => response.json())
     .then((current_count) => {
       setTimeout(() => {
@@ -46,16 +46,17 @@ function checkForUpdates() {
               });
 
             } else {
-              checkForUpdates();
+              checkForUpdates(backendAPI);
             }
           })
           .catch((error) => console.error(error));
       }, 3000);
+
     })
     .catch((error) => console.error(error));
 }
 
-checkForUpdates();
+checkForUpdates("./backend/watch-order-table.php");
 
 function redirect() {
   window.open('https://localhost/messy-code/admin/order-details.php', '_blank')

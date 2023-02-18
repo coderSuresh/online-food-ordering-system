@@ -39,11 +39,8 @@ session_start();
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Verify Account</h1>
-        <?php
-           echo $_SESSION["usr"] ;
-        ?>
         <form action="./verify-otp.php" method="post">
-            <?php  if (isset($_SESSION["otp-count"])) {
+            <?php if (isset($_SESSION["otp-count"])) {
             ?>
                 <!-- to show error alert -->
                 <p class="error-container error p_7-20">
@@ -58,12 +55,13 @@ session_start();
                 <input type="text" class="no_bg no_outline" placeholder="546624" minlength="6" maxlength="6" name="otp" required autofocus>
                 <label>OTP</label>
             </div>
-
+            <p class="mt-20">Please check your registered mail.</p>
             <div class="verify_resend flex items-center mt-20">
-                <a href="./resend-otp.php" class="resend_otp button gray border-curve-lg" name = "resend_otp">Resend</a>
-                <button type="submit" class="button no_outline border-curve-lg" name="verify">Verify</button> 
+                <a href="./resend-otp.php" class="resend_otp button gray border-curve-lg" name="resend_otp">Resend</a>
+                <button type="submit" class="button no_outline border-curve-lg" name="verify">Verify</button>
             </div>
         </form>
     </main>
 </body>
+
 </html>
