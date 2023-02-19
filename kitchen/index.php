@@ -267,6 +267,7 @@
                                         <form action="./backend/order/reject.php" method="post" class="flex reject_form items-center justify-start">
                                             <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                             <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
+                                            <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
                                             <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
                                         </form>
                                         <div class="flex items-center justify-start">
