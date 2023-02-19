@@ -155,7 +155,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "to deliver") echo "active"; ?>">To Deliver
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "prepared") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
@@ -295,7 +295,6 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
                         <td>
