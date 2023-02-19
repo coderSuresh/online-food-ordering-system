@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <meta name="robots" content="noindex"> <!-- prevent search engine crawl -->
     <title>Kitchen Login | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>

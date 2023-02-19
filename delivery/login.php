@@ -10,44 +10,30 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-    <meta name="robots" content="noindex"> <!-- prevent search engine crawl -->
-    <title>Admin Login | RestroHub</title>
+    <meta name="robots" content="noindex">
+    <title>Delivery Login | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
-
 </head>
 
 <body>
 
     <main class=" flex direction-col h-100 border-curve-lg shadow">
         <div class="center shadow border-curve-md">
-            <h1 class="heading text-center">Admin Login</h1>
+            <h1 class="heading text-center">Delivery Login</h1>
 
-            <form action="./auth.php" method="post">
+            <form action="./backend/auth.php" method="post">
                 <?php
 
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['delivery-error'])) {
                 ?>
                     <!-- to show error alert -->
                     <p class="error-container error p_7-20">
-                        <?php echo $_SESSION['username']; ?>
+                        <?php echo $_SESSION['delivery-error']; ?>
                     </p>
 
                 <?php
-                    unset($_SESSION['username']);
-                }
-                ?>
-
-                <?php
-                if (isset($_SESSION['password'])) {
-                ?>
-                    <!-- to show error alert -->
-                    <p class="error-container error p_7-20">
-                        <?php echo $_SESSION['password']; ?>
-                    </p>
-
-                <?php
-                    unset($_SESSION['password']);
+                    unset($_SESSION['delivery-error']);
                 }
                 ?>
 
@@ -62,7 +48,7 @@ session_start();
                 <a href="./reset/reset-password.php" class="forget_password">Forgot password?</a>
 
                 <div>
-                    <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="login" value="Login">
+                    <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="delivery-login" value="Login">
                 </div>
             </form>
         </div>
