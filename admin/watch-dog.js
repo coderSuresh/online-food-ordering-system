@@ -1,5 +1,5 @@
-function checkForUpdates(backendAPI) {
-  fetch(backendAPI)
+function checkForUpdates() {
+  fetch("./backend/watch-order-table.php")
     .then((response) => response.json())
     .then((current_count) => {
       setTimeout(() => {
@@ -7,11 +7,13 @@ function checkForUpdates(backendAPI) {
           .then((response) => response.json())
           .then((new_count) => {
             if (new_count.data !== current_count.data) {
-
               const audio = new Audio("../audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();
-                if (window.location.href == "https://localhost/messy-code/admin/order-details.php") {
+                if (
+                  window.location.href ==
+                  "https://localhost/messy-code/admin/order-details.php"
+                ) {
                   setTimeout(() => {
                     const alertDialog = document.createElement("div");
                     alertDialog.classList.add("alert-dialog");
@@ -27,8 +29,7 @@ function checkForUpdates(backendAPI) {
                     `;
                     document.body.appendChild(alertDialog);
                   }, 1000);
-                }
-                else {
+                } else {
                   const alertDialog = document.createElement("div");
                   alertDialog.classList.add("alert-dialog");
                   alertDialog.innerHTML = `
@@ -44,19 +45,17 @@ function checkForUpdates(backendAPI) {
                   document.body.appendChild(alertDialog);
                 }
               });
-
             } else {
-              checkForUpdates(backendAPI);
+              checkForUpdates();
             }
           })
           .catch((error) => console.error(error));
       }, 3000);
-
     })
     .catch((error) => console.error(error));
 }
 
-checkForUpdates("./backend/watch-order-table.php");
+checkForUpdates();
 
 function redirect() {
   window.open('https://localhost/messy-code/admin/order-details.php', '_blank')

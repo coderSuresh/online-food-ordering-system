@@ -27,6 +27,10 @@ if (isset($_SESSION['admin-success'])) {
         }
         echo json_encode($response);
     }
+    else{
+        $response[]=0;
+        echo json_encode($response);
+    }
 } else {
     header('location: ../../invalid.html');
 }
