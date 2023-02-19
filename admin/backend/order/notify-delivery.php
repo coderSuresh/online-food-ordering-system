@@ -21,10 +21,10 @@ if (!isset($_SESSION['admin-success'])) {
         $res_insert_tbd = mysqli_query($conn, $sql_insert_tbd) or die(mysqli_error($conn));
 
         if ($result && $res_insert_tbd) {
-            $_SESSION['order-success'] = "Delivery staff notified successfully";
+            $_SESSION['order-success-a'] = "Delivery staff notified successfully";
             header('location: ../../order-details.php');
         } else {
-            $_SESSION['order-error'] = "Something went wrong. Please try again";
+            $_SESSION['order-error-a'] = "Something went wrong. Please try again";
             header('location: ../../order-details.php');
         }
     } else {

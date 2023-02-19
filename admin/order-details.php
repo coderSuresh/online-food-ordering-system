@@ -230,13 +230,14 @@
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
-                    where aos.status = '$filter_by' and
+                    where aos.status = 'prepared' or
+                    aos.status = 'delivering' and
                     Date(orders.date) = CURDATE()
                     order by orders.id desc
                     ";
                 unset($_SESSION['filter-by']);
-            }
-            $sql = "select orders.id,
+            } else {
+                $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
                     orders.total_price,
@@ -255,7 +256,8 @@
                     Date(orders.date) = CURDATE()
                     order by orders.id desc
                     ";
-            unset($_SESSION['filter-by']);
+                unset($_SESSION['filter-by']);
+            }
         } else {
             $sql = "select orders.id,
                     orders.c_id,
