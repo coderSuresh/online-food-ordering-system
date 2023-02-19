@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
+    <script src="./watch-status.js" defer></script>
+
 </head>
 
 <body>
@@ -56,7 +58,6 @@
                             <input type="radio" name="filter_option" id="filter_option-custom">
                             <label for="filter_option-custom"> &nbsp; Custom</label>
                         </div>
-
                     </div>
 
                     <!-- filter using custom date range start -->

@@ -10,6 +10,8 @@
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
     <script src="./watch-status.js" defer></script>
+    <script src="./watch-status.js" defer></script>
+
 </head>
 
 <body>

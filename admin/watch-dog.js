@@ -58,6 +58,7 @@ function checkForUpdates() {
 checkForUpdates();
 
 function redirect() {
+  hideAlert();
   window.open('https://localhost/messy-code/admin/order-details.php', '_blank')
 }
 
