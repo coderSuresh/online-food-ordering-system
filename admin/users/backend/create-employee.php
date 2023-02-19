@@ -13,7 +13,6 @@ if (!isset($_SESSION['admin-success'])) {
 } else {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        // function for response status update
         function updateResponse($status, $msg)
         {
             $response['status'] = $status;
@@ -23,7 +22,7 @@ if (!isset($_SESSION['admin-success'])) {
         }
 
         // get image info
-        $target_dir = "../../../uploads/foods/";
+        $target_dir = "../../../uploads/employees/";
         $target_file = $target_dir . basename($_FILES["emp_photo"]["name"]);
         $temp_file = $_FILES["emp_photo"]["tmp_name"];
         $file_name = basename($_FILES["emp_photo"]["name"]);
@@ -37,6 +36,8 @@ if (!isset($_SESSION['admin-success'])) {
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = $_POST['password'];
         $con_password = $_POST['con-password'];
+        $department = $_POST['department'];
+
         if (!preg_match("/^[A-Z a-z]{2,30}$/", $name)) {
             updateResponse("error","Name should contain alphabet only");
         } else if (!preg_match("/^[0-9A-Za-z_-]{2,30}$/", $username)) {
@@ -55,6 +56,10 @@ if (!isset($_SESSION['admin-success'])) {
                     $password_md5 = md5($password);
                     $sql = "INSERT INTO employees VALUES (DEFAULT, '$name', $department, '$email', '$username', '$password_md5', '$target_file')";
                     $result = mysqli_query($conn, $sql);
+
+                    $response['status'] = "success";
+                    $response['msg'] = $sql;
+
                     if ($result) {
                         $response['status'] = "success";
                         $response['msg'] = $name . " has been added successfully";

@@ -227,7 +227,6 @@ form &&
           : submitForm("./backend/category/update.php");
       }
     } else if (isForEmployees) {
-        console.log("Please select")
         btnName == "add"
           ? submitForm("./backend/create-employee.php")
           : submitForm("./backend/update.php");

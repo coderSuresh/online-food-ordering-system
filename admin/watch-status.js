@@ -1,9 +1,10 @@
+const hostUrl = "https://localhost/messy-code/";
 function checkForStatusUpdates() {
-    fetch("./backend/watch-status-change.php")
+    fetch(hostUrl+"admin/backend/watch-status-change.php")
         .then((response) => response.json())
         .then((current_state) => {
             setTimeout(() => {
-                fetch("./backend/watch-status-change.php")
+                fetch(hostUrl+"admin/backend/watch-status-change.php")
                     .then((response) => response.json())
                     .then((new_state) => {
                         isChanged = false
@@ -15,7 +16,7 @@ function checkForStatusUpdates() {
                                     isChanged = true
                                     if (
                                         !window.location.href ==
-                                        "https://localhost/messy-code/admin/order-details.php"
+                                        hostUrl+"admin/order-details.php"
                                     ) {
                                         sendNotification();
                                     } else {
@@ -75,11 +76,11 @@ function checkForStatusUpdates() {
 checkForStatusUpdates();
 
 function redirect() {
-    window.open('https://localhost/messy-code/admin/reject-report.php', '_blank')
+    window.open(hostUrl+'admin/reject-report.php', '_blank')
 }
 
 function playSound() {
-    const audio = new Audio("../audio/dog_bark.mp3");
+    const audio = new Audio(hostUrl+"audio/dog_bark.mp3");
     audio.addEventListener("canplaythrough", () => {
         audio.play();
     });
@@ -99,11 +100,11 @@ function sendNotification() {
             if (permission === "granted") {
                 const notification = new Notification("New Order", {
                     body: "You have a new order!",
-                    icon: "../images/logo.png",
+                    icon: hostUrl+"images/logo.png",
                 });
                 notification.onclick = (event) => {
                     event.preventDefault();
-                    window.open("https://localhost/messy-code/admin/order-details.php", "_blank");
+                    window.open(hostUrl+"admin/order-details.php", "_blank");
                 };
             }
         });
