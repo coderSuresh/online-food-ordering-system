@@ -15,7 +15,7 @@ if (!isset($_SESSION['kitchen-success'])) {
 
         $sql = "UPDATE kos SET status = 'rejected' WHERE order_id = {$order_id} and kos_id = {$kos_id}";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
+ 
         $sql_aos = "UPDATE aos SET status = 'rejected' WHERE order_id = {$order_id} and aos_id = {$aos_id}";
         $result_aos = mysqli_query($conn, $sql_aos) or die(mysqli_error($conn));
 
