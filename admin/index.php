@@ -79,23 +79,28 @@
             </div>
         </section>
 
-        <?php 
-            require("../config.php");
-            $sql_cat = "SELECT count(*) as total FROM category";
-            $res_cat = mysqli_query($conn, $sql_cat);
-            $count_cat = mysqli_fetch_assoc($res_cat)['total'];
+        <?php
+        require("../config.php");
+        $sql_cat = "SELECT cat_name FROM category";
+        $res_cat = mysqli_query($conn, $sql_cat);
+        $count_cat = mysqli_num_rows($res_cat);
 
-            $sql_food = "SELECT count(*) as total FROM food";
-            $res_food = mysqli_query($conn, $sql_food);
-            $count_food = mysqli_fetch_assoc($res_food)['total'];
+        $sql_food = "SELECT name as food_total FROM food";
+        $res_food = mysqli_query($conn, $sql_food);
+        $count_food = mysqli_num_rows($res_food);
 
-            $sql_order = "SELECT count(*) as total FROM orders";
-            $res_order = mysqli_query($conn, $sql_order);
-            $count_order = mysqli_fetch_assoc($res_order)['total'];
+        $sql_order = "SELECT id FROM orders";
+        $res_order = mysqli_query($conn, $sql_order);
+        $count_order = mysqli_num_rows($res_order);
 
-            $sql_customer = "SELECT count(*) as total FROM customer";
-            $res_customer = mysqli_query($conn, $sql_customer);
-            $count_customer = mysqli_fetch_assoc($res_customer)['total'];
+        $sql_customer = "SELECT names FROM customer";
+        $res_customer = mysqli_query($conn, $sql_customer);
+        $count_customer = mysqli_num_rows($res_customer);
+
+        $sql_order_canceled = "SELECT o_r_id FROM reject_reason";
+        $res_order_canceled = mysqli_query($conn, $sql_order_canceled);
+        $count_order_canceled = mysqli_num_rows($res_order_canceled);
+
         ?>
 
         <div class="admin_dashboard_stat">
@@ -103,8 +108,8 @@
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-menu.svg" alt="total menu" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2><?php echo $count_cat; ?></h2>
-                    <p>Total Menu</p>
+                    <h2><?php echo $count_food; ?></h2>
+                    <p>Menu Items</p>
                 </div>
             </article>
             <article class="card flex items-center text-center border-curve-md shadow">
@@ -117,14 +122,14 @@
             <article class="card flex items-center text-center border-curve-md  shadow">
                 <img src="../images/ic_total-order.svg" alt="total order" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2><?php $count_order; ?></h2>
+                    <h2><?php echo $count_order; ?></h2>
                     <p>Total Orders</p>
                 </div>
             </article>
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-customer.svg" alt="total customer" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2><?php $count_customer; ?></h2>
+                    <h2><?php echo $count_customer; ?></h2>
                     <p>Total Customers</p>
                 </div>
             </article>
@@ -138,7 +143,7 @@
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_order-cancel.svg" alt="order cancel" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>3</h2>
+                    <h2><?php echo $count_order_canceled; ?></h2>
                     <p>Order Canceled</p>
                 </div>
             </article>
