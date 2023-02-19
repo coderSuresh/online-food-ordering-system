@@ -337,7 +337,7 @@
                                 <img src="../images//ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <?php if ($status != "rejected") { ?>
+                            <?php if ($status != "rejected" && $status != "delivered") { ?>
                                 <div class="table_action_options long shadow border-curve p-20 r_70 flex direction-col">
                                     <div>
                                         <?php

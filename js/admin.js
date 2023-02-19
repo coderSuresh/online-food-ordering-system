@@ -173,7 +173,6 @@ const isForCategory =
   form && form.getAttribute("class").includes("form_add-category");
 const isForEmployees =
     form && form.getAttribute("class").includes("form_add-employees");
-  console.log(isForEmployees);
 
 const submitBtn = document.querySelector(".modal_form-submit-btn");
 
