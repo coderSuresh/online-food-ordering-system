@@ -53,7 +53,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="./logout.php">
+                         <a href="./backend/logout.php">
                              <div class="flex items-center justify-start">
                                  <img class="admin_profile_icon" src="../images/ic_logout.svg" alt="logout icon" aria-hidden="true">
                                  <p>Logout</p>
