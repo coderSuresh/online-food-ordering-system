@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2023 at 11:25 AM
+-- Generation Time: Feb 19, 2023 at 01:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -59,9 +59,11 @@ CREATE TABLE `aos` (
 --
 
 INSERT INTO `aos` (`aos_id`, `order_id`, `status`, `date`) VALUES
-(78, 88, 'rejected', '2023-02-19 13:49:58'),
+(78, 88, 'pending', '2023-02-19 13:49:58'),
 (79, 89, 'prepared', '2023-02-19 13:50:19'),
-(80, 90, 'rejected', '2023-02-19 13:51:28');
+(80, 90, 'delivered', '2023-02-19 13:51:28'),
+(81, 91, 'prepared', '2023-02-19 17:01:32'),
+(82, 92, 'accepted', '2023-02-19 17:15:18');
 
 -- --------------------------------------------------------
 
@@ -146,13 +148,32 @@ INSERT INTO `customer` (`id`, `names`, `username`, `email`, `password`, `provide
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `dept_id` int(11) NOT NULL,
+  `department` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`dept_id`, `department`) VALUES
+(1, 'kitchen'),
+(2, 'delivery');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employees`
 --
 
 CREATE TABLE `employees` (
   `emp_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `department` varchar(20) NOT NULL,
+  `department` int(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -164,8 +185,8 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`emp_id`, `name`, `department`, `email`, `username`, `password`, `image`) VALUES
-(1, 'Ashika Dulal', 'kitchen', 'dulalashika@protonmail.com', 'chef_ashika', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/ashika.jpg'),
-(2, 'Suresh Dahal', 'delivery', 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg');
+(1, 'Ashika Dulal', 1, 'dulalashika@protonmail.com', 'chef_ashika', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/ashika.jpg'),
+(2, 'Suresh Dahal', 2, 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg');
 
 -- --------------------------------------------------------
 
@@ -221,7 +242,11 @@ CREATE TABLE `kos` (
 --
 
 INSERT INTO `kos` (`kos_id`, `order_id`, `status`) VALUES
-(8, 89, 'pending');
+(8, 89, 'prepared'),
+(10, 91, 'pending'),
+(11, 91, 'pending'),
+(12, 90, 'pending'),
+(13, 92, 'prepared');
 
 -- --------------------------------------------------------
 
@@ -246,7 +271,9 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
 (88, 43, 3, 26, 678, 'No note', '2023-02-19 13:49:58'),
 (89, 43, 2, 26, 452, 'No note', '2023-02-19 13:50:19'),
-(90, 43, 3, 27, 1542, 'No note', '2023-02-19 13:51:28');
+(90, 43, 3, 27, 1542, 'No note', '2023-02-19 13:51:28'),
+(91, 41, 1, 26, 226, 'No note', '2023-02-19 17:01:32'),
+(92, 41, 1, 26, 226, 'No note', '2023-02-19 17:15:18');
 
 -- --------------------------------------------------------
 
@@ -269,7 +296,9 @@ CREATE TABLE `order_contact_details` (
 INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
 (82, 88, 'jdsfgkl jl', '9875555555', 'suresh dahal'),
 (83, 89, 'dajfk jkfjsadlf sajl', '9875555555', 'sdfjaaj ljlj'),
-(84, 90, 'test address', '9875555555', 'suresh dahal');
+(84, 90, 'test address', '9875555555', 'suresh dahal'),
+(85, 91, 'salf jasl jasdkljf al', '9800000000', 'dsfjas dklfjl'),
+(86, 92, 'Ashika ko ghar', '9800000000', 'Ashika Dulal');
 
 -- --------------------------------------------------------
 
@@ -290,6 +319,26 @@ CREATE TABLE `reject_reason` (
 
 INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
 (8, 88, 'admin', 'for testing purpose');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `to_be_delivered`
+--
+
+CREATE TABLE `to_be_delivered` (
+  `tbd_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `to_be_delivered`
+--
+
+INSERT INTO `to_be_delivered` (`tbd_id`, `order_id`, `status`, `date`) VALUES
+(7, 90, 'pending', '2023-02-19 17:25:58');
 
 --
 -- Indexes for dumped tables
@@ -329,10 +378,17 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`dept_id`);
+
+--
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
-  ADD PRIMARY KEY (`emp_id`);
+  ADD PRIMARY KEY (`emp_id`),
+  ADD KEY `department` (`department`);
 
 --
 -- Indexes for table `food`
@@ -371,6 +427,13 @@ ALTER TABLE `reject_reason`
   ADD KEY `order_id` (`order_id`);
 
 --
+-- Indexes for table `to_be_delivered`
+--
+ALTER TABLE `to_be_delivered`
+  ADD PRIMARY KEY (`tbd_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -384,7 +447,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -405,6 +468,12 @@ ALTER TABLE `customer`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
@@ -420,25 +489,31 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `reject_reason`
 --
 ALTER TABLE `reject_reason`
   MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `to_be_delivered`
+--
+ALTER TABLE `to_be_delivered`
+  MODIFY `tbd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -456,6 +531,12 @@ ALTER TABLE `aos`
 ALTER TABLE `cart`
   ADD CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`f_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department`) REFERENCES `department` (`dept_id`);
 
 --
 -- Constraints for table `food`
@@ -487,6 +568,12 @@ ALTER TABLE `order_contact_details`
 --
 ALTER TABLE `reject_reason`
   ADD CONSTRAINT `reject_reason_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
+-- Constraints for table `to_be_delivered`
+--
+ALTER TABLE `to_be_delivered`
+  ADD CONSTRAINT `to_be_delivered_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

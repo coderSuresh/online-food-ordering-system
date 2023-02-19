@@ -79,12 +79,31 @@
             </div>
         </section>
 
+        <?php 
+            require("../config.php");
+            $sql_cat = "SELECT count(*) as total FROM category";
+            $res_cat = mysqli_query($conn, $sql_cat);
+            $count_cat = mysqli_fetch_assoc($res_cat)['total'];
+
+            $sql_food = "SELECT count(*) as total FROM food";
+            $res_food = mysqli_query($conn, $sql_food);
+            $count_food = mysqli_fetch_assoc($res_food)['total'];
+
+            $sql_order = "SELECT count(*) as total FROM orders";
+            $res_order = mysqli_query($conn, $sql_order);
+            $count_order = mysqli_fetch_assoc($res_order)['total'];
+
+            $sql_customer = "SELECT count(*) as total FROM customer";
+            $res_customer = mysqli_query($conn, $sql_customer);
+            $count_customer = mysqli_fetch_assoc($res_customer)['total'];
+        ?>
+
         <div class="admin_dashboard_stat">
 
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-menu.svg" alt="total menu" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>15</h2>
+                    <h2><?php echo $count_cat; ?></h2>
                     <p>Total Menu</p>
                 </div>
             </article>
@@ -98,21 +117,21 @@
             <article class="card flex items-center text-center border-curve-md  shadow">
                 <img src="../images/ic_total-order.svg" alt="total order" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>15</h2>
+                    <h2><?php $count_order; ?></h2>
                     <p>Total Orders</p>
                 </div>
             </article>
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-customer.svg" alt="total customer" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>15</h2>
+                    <h2><?php $count_customer; ?></h2>
                     <p>Total Customers</p>
                 </div>
             </article>
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-category.svg" alt="total category" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>5</h2>
+                    <h2><?php echo $count_cat; ?></h2>
                     <p>Total Categories</p>
                 </div>
             </article>
