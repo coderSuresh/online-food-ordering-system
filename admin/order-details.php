@@ -346,16 +346,19 @@
                                     </div>
                                     <div>
                                         <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
-                                            <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
+                                            <form action="./backend/order/reject.php" method="post" class="flex reject_form items-center justify-start">
                                                 <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                                 <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                                <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
+                                            </form>
+                                            <div class="flex items-center justify-start">
                                                 <button type="submit" name="reject" class="no_bg no_outline reject_btn">
                                                     <div class="flex items-center justify-start">
                                                         <img src="../images/ic_reject.svg" alt="reject icon">
                                                         <p class="body-text">Reject</p>
                                                     </div>
                                                 </button>
-                                            </form>
+                                            </div>
                                         <?php } ?>
                                     </div>
                                 </div>

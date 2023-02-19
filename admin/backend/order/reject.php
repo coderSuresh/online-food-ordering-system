@@ -5,10 +5,11 @@ require('../../../config.php');
 if (!isset($_SESSION['admin-success'])) {
     header('location: ../../../invalid.html');
 } else {
-    if (isset($_POST['reject'])) {
+    if (isset($_POST['reject-reason'])) {
 
         $order_id = mysqli_real_escape_string($conn, $_POST['id']);
         $aos_id = mysqli_real_escape_string($conn, $_POST['aos_id']);
+        $reject_reason = mysqli_real_escape_string($conn, $_POST['reject-reason']);
 
         $sql = "UPDATE aos SET status = 'rejected' WHERE order_id = {$order_id} and aos_id = {$aos_id}";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -22,7 +23,10 @@ if (!isset($_SESSION['admin-success'])) {
             $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error($conn));
         }
 
-        if ($result) {
+        $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, $order_id, 'admin', '$reject_reason')";
+        $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
+
+        if ($result && $result_reason) {
             $_SESSION['order-success'] = "Order rejected successfully";
             header('location: ../../order-details.php');
         } else {

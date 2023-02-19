@@ -259,7 +259,6 @@
                                 </div>
                                 <div>
                                     <?php if ($status == "pending" || $status == "accepted") { ?>
-                                        <!-- will remove later -->
                                         <form action="./backend/order/reject.php" method="post" class="flex reject_form items-center justify-start">
                                             <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                             <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
