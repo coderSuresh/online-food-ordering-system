@@ -15,7 +15,7 @@ if (isset($_POST['register'])) {
     $signin_provider = "email";
 
     if (!preg_match("/^[A-Z a-z]{2,30}$/", $name)) {
-        $_SESSION["invalid_name"] = "Name sould contain alphabaet only";
+        $_SESSION["invalid_name"] = "Name sould contain alphabet only";
         header("Location:./register.php");
     } else if (!preg_match("/^[0-9A-Za-z_-]{2,30}$/", $username)) {
         $_SESSION["invalid_username"] = "Username shouldn't contain special characters";

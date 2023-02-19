@@ -16,10 +16,87 @@
     <?php
     require("./components/header.php");
     require("./components/sidebar.php");
+    require("../../config.php");
     ?>
 
     <main class="admin_dashboard_body">
-
+        <?php
+        if (isset($_SESSION["invalid_name_e"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["invalid_name_e"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["invalid_name_e"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["invalid_username_e"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["invalid_username_e"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["invalid_username_e"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["invalid_email_e"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["invalid_email_e"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["invalid_email_e"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["invlaid_password_e"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["invlaid_password_e"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["invlaid_password_e"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["password_not_match_e"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["password_not_match_e"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["password_not_match_e"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["emp-success"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["emp-success"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["emp-success"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["emp-error"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["emp-error"]; ?>
+            </p>
+        <?php
+            unset($_SESSION["emp-error"]);
+        }
+        ?>
         <section class="dashboard_inner-head flex items-center">
             <h2>Employees</h2>
         </section>
@@ -32,19 +109,19 @@
                     <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></button>
                 </div>
 
-                <form action="#" method="post" class="form_add-food modal_form">
+                <form action="./backend/create-employee.php" method="post" name="model_form" class="form_add-employees modal_form">
 
                     <div class="row">
                         <div class="col">
                             <div class="col">
                                 <div class="col">
                                     <label for="name">Name:</label>
-                                    <input type="text" name="name" id="name" autofocus>
+                                    <input type="text" name="name" id="name" autofocus required>
                                 </div>
                             </div>
                             <div class="col">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email">
+                                <input type="email" name="email" id="email" required>
                             </div>
                         </div>
 
@@ -59,36 +136,51 @@
                     <div class="row">
                         <div class="col">
                             <label for="username">Username:</label>
-                            <input type="text" name="username" id="username">
+                            <input type="text" name="username" id="username" required>
                         </div>
 
                         <div class="col">
                             <label for="emp_photo">Image:</label>
-                            <input type="file" name="emp_photo" class="img_upload-input" id="emp_photo">
+                            <input type="file" name="emp_photo" class="img_upload-input" id="emp_photo" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="password">Password:</label>
-                            <input type="text" name="password" id="password">
+                            <input type="text" name="password" id="password" required>
                         </div>
 
                         <div class="col">
                             <label for="con-password">Confirm Password:</label>
-                            <input type="text" name="con-password" id="con-password">
+                            <input type="text" name="con-password" id="con-password" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <label for="position">Position:</label>
-                            <input type="text" name="position" id="position">
+                            <label for="department">Department:</label>
+                            <select name="department" id="department" required>
+                                <?php
+                                $dep_sql = "Select * from department";
+                                $dep_result = mysqli_query($conn, $dep_sql) or die("Query Failed.");
+                                ?>
+                                <option value="">Select Deparmtent</option>
+                                <?php
+                                while ($dep_row = mysqli_fetch_assoc($dep_result)) {
+                                ?>
+                                    <option value="<?php echo $dep_row['dept_id']; ?>"><?php echo $dep_row['department']; ?></option>
+                                <?php  }
+                                ?>
+
+                            </select>
+
+
                         </div>
 
                         <div class="col">
                             <label for="add-employee" class="not-required">not required</label>
-                            <button type="submit" name="add-employee" id="add-employee" class="button">Add an
+                            <button type="submit" name="add" id="add-employee" class="button modal_form-submit-btn form_add-employees">Add an
                                 Employee</button>
                         </div>
                     </div>
