@@ -3,7 +3,7 @@ session_start();
 require('../../../config.php');
 
 // TODO: replace this with the kitchen-success session
-if (!isset($_SESSION['admin-success'])) {
+if (!isset($_SESSION['kitchen-success'])) {
     header('location: ../../../invalid.html');
 } else {
     if (isset($_POST['reject-reason'])) {
