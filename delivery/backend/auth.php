@@ -20,7 +20,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['deli
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         if($row['username'] == $username && $row['password'] == $password) {
-            $_SESSION['username'] = $username;
+            $_SESSION['delivery-username'] = $username;
             $_SESSION['delivery-success'] = "Successfully logged in as delivery";
             $_SESSION['id'] = $row['id'];
             header("Location: ../index.php");

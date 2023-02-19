@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['kitchen-success'])){
-    session_destroy();
+    unset($_SESSION['kitchen-success']);
     header('location: ../login.php');
 }
 else{

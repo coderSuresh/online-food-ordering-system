@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['admin-success'])) {
+    header('location: ./index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +27,10 @@ session_start();
             <h1 class="heading text-center">Admin Login</h1>
 
             <form action="./auth.php" method="post">
+                <!-- to show error alert -->
                 <?php
-
                 if (isset($_SESSION['username'])) {
                 ?>
-                    <!-- to show error alert -->
                     <p class="error-container error p_7-20">
                         <?php echo $_SESSION['username']; ?>
                     </p>
@@ -41,7 +43,6 @@ session_start();
                 <?php
                 if (isset($_SESSION['password'])) {
                 ?>
-                    <!-- to show error alert -->
                     <p class="error-container error p_7-20">
                         <?php echo $_SESSION['password']; ?>
                     </p>

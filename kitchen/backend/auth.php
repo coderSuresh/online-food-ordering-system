@@ -21,7 +21,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['kitc
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         if($row['username'] == $username && $row['password'] == $password) {
-            $_SESSION['username'] = $username;
+            $_SESSION['kitchen-username'] = $username;
             $_SESSION['kitchen-success'] = "Successfully logged in as kitchen";
             $_SESSION['id'] = $row['id'];
             header("Location: ../index.php");
