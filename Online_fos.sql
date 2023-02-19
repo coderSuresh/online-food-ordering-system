@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2023 at 01:21 PM
+-- Generation Time: Feb 19, 2023 at 11:25 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -50,15 +50,18 @@ INSERT INTO `admin` (`id`, `name`, `username`, `password`) VALUES
 CREATE TABLE `aos` (
   `aos_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `status` varchar(15) NOT NULL
+  `status` varchar(15) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `aos`
 --
 
-INSERT INTO `aos` (`aos_id`, `order_id`, `status`) VALUES
-(43, 51, 'accepted');
+INSERT INTO `aos` (`aos_id`, `order_id`, `status`, `date`) VALUES
+(78, 88, 'rejected', '2023-02-19 13:49:58'),
+(79, 89, 'prepared', '2023-02-19 13:50:19'),
+(80, 90, 'rejected', '2023-02-19 13:51:28');
 
 -- --------------------------------------------------------
 
@@ -137,7 +140,32 @@ INSERT INTO `customer` (`id`, `names`, `username`, `email`, `password`, `provide
 (38, 'Rame', 'rame', 'rame@chor.ho', '78dacb5f238ca3ac3694f7c2114fa69c', '', '0000-00-00 00:00:00', 'not verified', 1, '0', '', 0),
 (40, 'Ashish Acharya', 'ashish', 'acashish458@gmail.com', '332b3091416bc4687821c4653f1c6eb1', '', '0000-00-00 00:00:00', 'verified', 0, '978534', '', 0),
 (41, 'suresh dahal', NULL, 'dahal4524@gmail.com', NULL, 'google.com', '2023-02-09 18:07:21', 'verified', 1, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4eqmbn7hywqFqlAJna9S49fO4veKZ_FUz8jQPR=s96-c', 0),
-(42, 'suresh dahal', 'suresh', 'sd807141@gmail.com', '3e6a0966890c85a8ca932302ad6a2405', 'email', '2023-02-18 15:34:54', 'not verified', 1, '370724', NULL, 0);
+(42, 'suresh dahal', 'suresh', 'sd807141@gmail.com', '3e6a0966890c85a8ca932302ad6a2405', 'email', '2023-02-18 15:34:54', 'not verified', 1, '370724', NULL, 0),
+(43, 'Suresh Dahal', NULL, 'itsureshdahal@gmail.com', NULL, 'google.com', '2023-02-19 13:45:31', 'verified', 1, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4RIDKQ7PaRgFvQR1ah3Hmu_4PgcJ6c3FSHBBZA=s96-c', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `emp_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `department` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`emp_id`, `name`, `department`, `email`, `username`, `password`, `image`) VALUES
+(1, 'Ashika Dulal', 'kitchen', 'dulalashika@protonmail.com', 'chef_ashika', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/ashika.jpg'),
+(2, 'Suresh Dahal', 'delivery', 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg');
 
 -- --------------------------------------------------------
 
@@ -193,7 +221,7 @@ CREATE TABLE `kos` (
 --
 
 INSERT INTO `kos` (`kos_id`, `order_id`, `status`) VALUES
-(2, 51, 'rejected');
+(8, 89, 'pending');
 
 -- --------------------------------------------------------
 
@@ -216,7 +244,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(51, 41, 2, 26, 452, 'No note', '2023-02-18 17:57:00');
+(88, 43, 3, 26, 678, 'No note', '2023-02-19 13:49:58'),
+(89, 43, 2, 26, 452, 'No note', '2023-02-19 13:50:19'),
+(90, 43, 3, 27, 1542, 'No note', '2023-02-19 13:51:28');
 
 -- --------------------------------------------------------
 
@@ -237,7 +267,9 @@ CREATE TABLE `order_contact_details` (
 --
 
 INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
-(45, 51, 'Mangsebung, Ilam', '9845241253', 'Suresh Dahal');
+(82, 88, 'jdsfgkl jl', '9875555555', 'suresh dahal'),
+(83, 89, 'dajfk jkfjsadlf sajl', '9875555555', 'sdfjaaj ljlj'),
+(84, 90, 'test address', '9875555555', 'suresh dahal');
 
 -- --------------------------------------------------------
 
@@ -257,7 +289,7 @@ CREATE TABLE `reject_reason` (
 --
 
 INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
-(1, 51, 'kitchen', 'Your order has been rejected for testing purpose');
+(8, 88, 'admin', 'for testing purpose');
 
 --
 -- Indexes for dumped tables
@@ -295,6 +327,12 @@ ALTER TABLE `category`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`emp_id`);
 
 --
 -- Indexes for table `food`
@@ -346,7 +384,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -364,7 +402,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `food`
@@ -376,25 +420,25 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `reject_reason`
 --
 ALTER TABLE `reject_reason`
-  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
