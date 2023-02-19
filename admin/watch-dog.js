@@ -39,7 +39,7 @@ function checkForUpdates() {
                         <p class="alert-dialog__text mt-20">You have a new order!</p>
                         <div class="alert-dialog__actions mt-20 flex items-center">
                         <button class="button gray border-curve-md w-50 alert-dialog__action" onclick="hideAlert()">OK</button>
-                        <button class="button border-curve-md w-50 alert-dialog__action" onclick="redirect()">View</button>
+                        <button class="button border-curve-md w-50 alert-dialog__action" onclick="redirectToOrderPage()">View</button>
                         </div>
                       </div>
                     `;
@@ -58,7 +58,7 @@ function checkForUpdates() {
 
 checkForUpdates();
 
-function redirect() {
+function redirectToOrderPage() {
   hideAlert();
   window.open(hostURL + 'admin/order-details.php', '_blank')
 }

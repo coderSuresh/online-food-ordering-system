@@ -117,7 +117,6 @@
         <div class="emplooyee_stat">
 
             <div class="flex items-center">
-                <!-- buttons for employee management -->
                 <div class="emp_button-container">
                     <!-- 
                         // popper-btn class listenes for click event and opens modal popup
@@ -139,183 +138,58 @@
             </div>
 
             <!-- employee cards -->
-            <div class="emp_card_container flex wrap gap justify-start">
-                <div class="employee_card p-20 text-center shadow border-curve-md">
+            <?php
+            $sql = "SELECT * FROM employees";
+            $result = mysqli_query($conn, $sql) or die("Query Failed.");
+            if (mysqli_num_rows($result) > 0) {
+            ?>
+                <div class="emp_card_container flex wrap gap justify-start">
 
-                    <!-- overlay for disabled account -->
-                    <div class="emp_card-overlay border-curve-md"></div>
+                    <?php while ($row = mysqli_fetch_assoc($result)) {
+                        $sql_dept = "SELECT * FROM department WHERE dept_id = {$row['department']}";
+                        $result_dept = mysqli_query($conn, $sql_dept) or die("Query Failed.");
+                        $row_dept = mysqli_fetch_assoc($result_dept)['department'];
+                    ?>
+                        <div class="employee_card p-20 text-center shadow border-curve-md">
 
-                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                    <img src="../../images/profile.jpg" alt="user profile">
-                    <h3 class="emp_name">Test Employee</h3>
-                    <p class="emp_id">#2020295</p>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_acc.svg" alt="account icon">
-                        <p>testemployee123</p>
-                    </div>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_mail.svg" alt="mail icon">
-                        <p>testemployee@yandex.ru</p>
-                    </div>
+                            <!-- overlay for disabled account -->
+                            <div class="emp_card-overlay border-curve-md"></div>
 
-                    <!-- options -->
-                    <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_edit.svg" alt="edit icon">
-                                <p>Edit</p>
+                            <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
+                            <img src="../../images/profile.jpg" alt="user profile">
+                            <h3 class="emp_name"><?php echo $row['name']; ?></h3>
+                            <p class="emp_id"><?php echo $row_dept; ?></p>
+                            <div class="flex emp_card_content items-center justify-start">
+                                <img src="../../images/ic_acc.svg" alt="account icon">
+                                <p><?php echo $row['username']; ?></p>
                             </div>
-                        </a>
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_disable.svg" alt="disable icon">
-                                <p>Disable</p>
+                            <div class="flex emp_card_content items-center justify-start">
+                                <img src="../../images/ic_mail.svg" alt="mail icon">
+                                <p><?php echo $row['email']; ?></p>
                             </div>
-                        </a>
-                    </div>
+
+                            <!-- options -->
+                            <div class="emp_card_options table_action_options shadow border-curve-md p-20">
+                                <a href="#">
+                                    <div class="flex items-center justify-start">
+                                        <img src="../../images/ic_edit.svg" alt="edit icon">
+                                        <p>Edit</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="flex items-center justify-start">
+                                        <img src="../../images/ic_disable.svg" alt="disable icon">
+                                        <p>Disable</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                <?php
+                    }
+                }
+                ?>
+
                 </div>
-
-                <div class="employee_card p-20 text-center shadow border-curve-md">
-
-                    <!-- overlay for disabled account -->
-                    <div class="emp_card-overlay border-curve-md"></div>
-
-                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                    <img src="../../images/profile.jpg" alt="user profile">
-                    <h3 class="emp_name">Test Employee</h3>
-                    <p class="emp_id">#2020295</p>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_acc.svg" alt="account icon">
-                        <p>testemployee123</p>
-                    </div>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_mail.svg" alt="mail icon">
-                        <p>testemployee@yandex.ru</p>
-                    </div>
-
-                    <!-- options -->
-                    <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_edit.svg" alt="edit icon">
-                                <p>Edit</p>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_disable.svg" alt="disable icon">
-                                <p>Disable</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="employee_card p-20 text-center shadow border-curve-md">
-
-                    <!-- overlay for disabled account -->
-                    <div class="emp_card-overlay border-curve-md"></div>
-
-                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                    <img src="../../images/profile.jpg" alt="user profile">
-                    <h3 class="emp_name">Test Employee</h3>
-                    <p class="emp_id">#2020295</p>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_acc.svg" alt="account icon">
-                        <p>testemployee123</p>
-                    </div>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_mail.svg" alt="mail icon">
-                        <p>testemployee@yandex.ru</p>
-                    </div>
-
-                    <!-- options -->
-                    <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_edit.svg" alt="edit icon">
-                                <p>Edit</p>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_disable.svg" alt="disable icon">
-                                <p>Disable</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="employee_card p-20 text-center shadow border-curve-md">
-
-                    <!-- overlay for disabled account -->
-                    <div class="emp_card-overlay border-curve-md"></div>
-
-                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                    <img src="../../images/profile.jpg" alt="user profile">
-                    <h3 class="emp_name">Test Employee</h3>
-                    <p class="emp_id">#2020295</p>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_acc.svg" alt="account icon">
-                        <p>testemployee123</p>
-                    </div>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_mail.svg" alt="mail icon">
-                        <p>testemployee@yandex.ru</p>
-                    </div>
-
-                    <!-- options -->
-                    <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_edit.svg" alt="edit icon">
-                                <p>Edit</p>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_disable.svg" alt="disable icon">
-                                <p>Disable</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="employee_card p-20 text-center shadow border-curve-md">
-
-                    <!-- overlay for disabled account -->
-                    <div class="emp_card-overlay border-curve-md"></div>
-
-                    <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                    <img src="../../images/profile.jpg" alt="user profile">
-                    <h3 class="emp_name">Test Employee</h3>
-                    <p class="emp_id">#2020295</p>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_acc.svg" alt="account icon">
-                        <p>testemployee123</p>
-                    </div>
-                    <div class="flex emp_card_content items-center justify-start">
-                        <img src="../../images/ic_mail.svg" alt="mail icon">
-                        <p>testemployee@yandex.ru</p>
-                    </div>
-
-                    <!-- options -->
-                    <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_edit.svg" alt="edit icon">
-                                <p>Edit</p>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="flex items-center justify-start">
-                                <img src="../../images/ic_disable.svg" alt="disable icon">
-                                <p>Disable</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
 
