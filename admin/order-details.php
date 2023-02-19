@@ -214,6 +214,28 @@
         // filter content by session 
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
+            if ($filter_by == 'delivering' || $filter_by == 'prepared') {
+                $sql = "select orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    aos.aos_id,
+                    aos.status
+                    from orders 
+                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join aos on orders.id = aos.order_id
+                    where aos.status = '$filter_by' and
+                    Date(orders.date) = CURDATE()
+                    order by orders.id desc
+                    ";
+                unset($_SESSION['filter-by']);
+            }
             $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
@@ -311,8 +333,8 @@
                                 <img src="../images//ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <?php if ($status != "rejected" && $status != "prepared") { ?>
-                                <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                            <?php if ($status != "rejected") { ?>
+                                <div class="table_action_options long shadow border-curve p-20 r_70 flex direction-col">
                                     <div>
                                         <?php
                                         if ($status == "pending") {
@@ -336,6 +358,32 @@
                                                     <div class="flex items-center justify-start">
                                                         <img src="../images/ic_prepared.svg" alt="prepared">
                                                         <p class="body-text">Prepared</p>
+                                                    </div>
+                                                </button>
+                                            </form>
+                                        <?php
+                                        } else if ($status == "prepared") {
+                                        ?>
+                                            <form action="./backend/order/notify-delivery.php" method="post" class="flex items-center justify-start">
+                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                                <button type="submit" name="notify-delivery" class="no_bg no_outline">
+                                                    <div class="flex items-center justify-start">
+                                                        <img src="../images/ic_bell.svg" alt="notify">
+                                                        <p class="body-text">Call Delivery</p>
+                                                    </div>
+                                                </button>
+                                            </form>
+                                        <?php
+                                        } else if ($status == "delivering") {
+                                        ?>
+                                            <form action="./backend/order/delivered.php" method="post" class="flex items-center justify-start">
+                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                                <button type="submit" name="delivered" class="no_bg no_outline">
+                                                    <div class="flex items-center justify-start">
+                                                        <img src="../images/ic_accept.svg" alt="notify">
+                                                        <p class="body-text">Delivered</p>
                                                     </div>
                                                 </button>
                                             </form>

@@ -159,10 +159,12 @@
                     order_contact_details.phone,
                     order_contact_details.c_name,
                     kos.kos_id,
-                    kos.status
+                    kos.status,
+                    aos.aos_id
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join kos on orders.id = kos.order_id
+                    inner join aos on orders.id = aos.order_id
                     where kos.status = '{$filter_by}'
                     order by orders.id desc
                     ";
@@ -179,10 +181,12 @@
                     order_contact_details.phone,
                     order_contact_details.c_name,
                     kos.kos_id,
-                    kos.status
+                    kos.status,
+                    aos.aos_id
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join kos on orders.id = kos.order_id
+                    inner join aos on orders.id = aos.order_id
                     order by orders.id desc
                     ";
             if (isset($_SESSION['filter-by']))
@@ -246,6 +250,7 @@
                                         <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
                                             <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                             <input type="hidden" name="kos_id" value="<?php echo $row["kos_id"]; ?>">
+                                            <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
                                             <button type="submit" name="prepared" class="no_bg no_outline">
                                                 <div class="flex items-center justify-start">
                                                     <img src="../images/ic_prepared.svg" alt="prepared">

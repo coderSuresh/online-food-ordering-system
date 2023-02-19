@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin-success'])) {
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
-            $_SESSION['order-success'] = "Order prepared successfully";
+            $_SESSION['order-success'] = "Order prepared";
             header('location: ../../order-details.php');
         } else {
             $_SESSION['order-error'] = "Something went wrong. Please try again";
