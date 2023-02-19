@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['delivery-success'])) {
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,6 @@ session_start();
 
             <form action="./backend/auth.php" method="post">
                 <?php
-
                 if (isset($_SESSION['delivery-error'])) {
                 ?>
                     <!-- to show error alert -->

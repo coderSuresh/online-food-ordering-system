@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['kitchen-success'])) {
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +17,6 @@ session_start();
     <title>Kitchen Login | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
-
 </head>
 
 <body>
@@ -23,31 +25,17 @@ session_start();
         <div class="center shadow border-curve-md">
             <h1 class="heading text-center">Kitchen Login</h1>
 
-            <form action="./auth.php" method="post">
+            <form action="./backend/auth.php" method="post">
                 <?php
-
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['kitchen-error'])) {
                 ?>
                     <!-- to show error alert -->
                     <p class="error-container error p_7-20">
-                        <?php echo $_SESSION['username']; ?>
+                        <?php echo $_SESSION['kitchen-error']; ?>
                     </p>
 
                 <?php
-                    unset($_SESSION['username']);
-                }
-                ?>
-
-                <?php
-                if (isset($_SESSION['password'])) {
-                ?>
-                    <!-- to show error alert -->
-                    <p class="error-container error p_7-20">
-                        <?php echo $_SESSION['password']; ?>
-                    </p>
-
-                <?php
-                    unset($_SESSION['password']);
+                    unset($_SESSION['kitchen-error']);
                 }
                 ?>
 
@@ -61,7 +49,7 @@ session_start();
                 </div>
 
                 <div>
-                    <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="login" value="Login">
+                    <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="kitchen-login" value="Login">
                 </div>
             </form>
         </div>
