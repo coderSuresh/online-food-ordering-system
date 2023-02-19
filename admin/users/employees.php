@@ -22,7 +22,7 @@
     ?>
 
     <main class="admin_dashboard_body">
-        
+
         <section class="dashboard_inner-head flex items-center">
             <h2>Employees</h2>
         </section>
@@ -35,7 +35,7 @@
                     <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></button>
                 </div>
 
-                <form action="./backend/create-employee.php" method="post" name="model_form" class="form_add-employees modal_form">
+                <form action="./backend/create-employee.php" enctype="multipart/form-data" method="post" name="model_form" class="form_add-employees modal_form">
 
                     <div class="row">
                         <div class="col">
@@ -67,7 +67,7 @@
 
                         <div class="col">
                             <label for="emp_photo">Image:</label>
-                            <input type="file" name="emp_photo" class="img_upload-input" id="emp_photo" required>
+                            <input type="file" name="image" class="img_upload-input" id="emp_photo" required>
                         </div>
                     </div>
 
@@ -100,8 +100,6 @@
                                 ?>
 
                             </select>
-
-
                         </div>
 
                         <div class="col">
