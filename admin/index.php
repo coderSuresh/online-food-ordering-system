@@ -107,6 +107,14 @@
         $row_rev = mysqli_fetch_assoc($res_calc_rev);
         $total_rev = $row_rev['total_rev'];
 
+        if($total_rev == null){
+            $total_rev = 0;
+        } else if($total_rev >= 1000) {
+            $total_rev = $total_rev / 1000;
+            $total_rev = round($total_rev, 2);
+            $total_rev = $total_rev . "K";
+        }
+
         ?>
 
         <div class="admin_dashboard_stat">
