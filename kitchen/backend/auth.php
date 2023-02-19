@@ -16,7 +16,12 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['kitc
 
     $password = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
-    $sql = "SELECT * FROM employees WHERE username = '$username' AND password = '$password' AND department = 'kitchen'";
+    $sql_dept = "select dept_id from department where department = 'kitchen'";
+    $result_dept = mysqli_query($conn, $sql_dept);
+    $row_dept = mysqli_fetch_assoc($result_dept);
+    $dept_id = $row_dept['dept_id'];
+
+    $sql = "SELECT * FROM employees WHERE username = '$username' AND password = '$password' AND department = $dept_id";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);

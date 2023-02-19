@@ -102,6 +102,11 @@
         $res_order_canceled = mysqli_query($conn, $sql_order_canceled);
         $count_order_canceled = mysqli_num_rows($res_order_canceled);
 
+        $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered'";
+        $res_calc_rev = mysqli_query($conn, $sql_calc_rev);
+        $row_rev = mysqli_fetch_assoc($res_calc_rev);
+        $total_rev = $row_rev['total_rev'];
+
         ?>
 
         <div class="admin_dashboard_stat">
@@ -116,7 +121,7 @@
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-revenue.svg" alt="total revenue" aria-hidden="true" class="card_icon">
                 <div>
-                    <h2>15K</h2>
+                    <h2><?php echo $total_rev; ?></h2>
                     <p>Total Revenue</p>
                 </div>
             </article>
