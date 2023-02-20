@@ -54,7 +54,7 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
                     $password_md5 = md5($password);
-                    $sql = "INSERT INTO employees VALUES (DEFAULT, '$name', $department, '$email', '$username', '$password_md5', '$target_file')";
+                    $sql = "INSERT INTO employees VALUES (DEFAULT, '$name', $department, '$email', '$username', '$password_md5', '$file_name')";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {

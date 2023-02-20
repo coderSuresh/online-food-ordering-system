@@ -172,7 +172,7 @@ const isForFood = form && form.getAttribute("class").includes("form_add-food");
 const isForCategory =
   form && form.getAttribute("class").includes("form_add-category");
 const isForEmployees =
-    form && form.getAttribute("class").includes("form_add-employees");
+  form && form.getAttribute("class").includes("form_add-employees");
 
 const submitBtn = document.querySelector(".modal_form-submit-btn");
 
@@ -195,18 +195,17 @@ form &&
 
     if (isForFood) {
       const price = document.forms["modal_form"]["price"].value;
-      const cost = document.forms["modal_form"]["cost"].value;
+      const itemName = document.forms["modal_form"]["name"].value;
       const desc = document.forms["modal_form"]["description"].value;
       const category = document.forms["modal_form"]["cat_id"].value;
       const productId = document.forms["modal_form"]["product-id"].value;
-      const estimatedCookingTime =
-        document.forms["modal_form"]["estimated-cooking-time"].value;
+      const estimatedCookingTime = document.forms["modal_form"]["estimated-cooking-time"].value;
       const vegNonVeg = document.forms["modal_form"]["veg-non-veg"].value;
+      const img = document.querySelector(".img_upload-input").files;
 
       if (
         itemName &&
         price &&
-        cost &&
         desc &&
         category &&
         productId &&
@@ -227,10 +226,10 @@ form &&
           : submitForm("./backend/category/update.php");
       }
     } else if (isForEmployees) {
-        btnName == "add"
-          ? submitForm("./backend/create-employee.php")
-          : submitForm("./backend/update.php");
-      }
+      btnName == "add"
+        ? submitForm("./backend/create-employee.php")
+        : submitForm("./backend/update.php");
+    }
   });
 
 // submit form

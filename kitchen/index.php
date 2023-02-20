@@ -146,6 +146,10 @@
         <!-- food cards -->
         <?php
 
+        // delete older orders
+        $sql = "delete from kos where Date(date) < DATE_SUB(NOW(), INTERVAL 1 DAY)";
+        mysqli_query($conn, $sql) or die("Something went wrong");
+
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
             $sql = "select orders.id,

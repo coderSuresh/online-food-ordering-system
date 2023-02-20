@@ -26,7 +26,6 @@ if (!isset($_SESSION['admin-success'])) {
         $isSpecial = 0;
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $price = mysqli_real_escape_string($conn, $_POST['price']);
-        $cost = mysqli_real_escape_string($conn, $_POST['cost']);
         $cat_id = mysqli_real_escape_string($conn, $_POST['cat_id']);
         $desc = mysqli_real_escape_string($conn, $_POST['description']);
         $estimated_cooking_time = mysqli_real_escape_string($conn, $_POST['estimated-cooking-time']);
@@ -91,8 +90,6 @@ if (!isset($_SESSION['admin-success'])) {
             updateResponse("error", "Name should contain alphabet only");
         } else if (!preg_match("/^[0-9]+$/", $price)) {
             updateResponse("error", "Price should contain numbers only");
-        } else if (!preg_match("/^[0-9]+$/", $cost)) {
-            updateResponse("error", "Cost should contain numbers only");
         } else if (!preg_match("/^[0-9]+$/", $estimated_cooking_time)) {
             updateResponse("error", "Estimated cooking time should contain numbers only");
         } else if (!preg_match("/^[A-Za-z0-9]+$/", $product_id)) {
@@ -117,14 +114,14 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if ($isDuplicate) {
                     // don't update image
-                    $sql = "update food set name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
+                    $sql = "update food set name = '$name', price = $price, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
                     $res = mysqli_query($conn, $sql) or die("Could not update category name");
                 } else {
                     if (move_uploaded_file($temp_file, $target_file)) {
                         // remove previous image
                         unlink($target_dir . $imgName);
                         // update name and image
-                        $sql = "update food set img = '$file_name', name = '$name', price = $price, cost = $cost, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
+                        $sql = "update food set img = '$file_name', name = '$name', price = $price, cooking_time = $estimated_cooking_time, description = '$desc', veg = $isVeg, product_id = '$product_id', short_desc = '$short_desc', ingredients = '$ingredients', disabled = $isDisabled, special = $isSpecial, category = $cat_id where f_id = $id";
                         $res = mysqli_query($conn, $sql) or die("Could not update category");
                     } else {
                         $response["status"] = "error";

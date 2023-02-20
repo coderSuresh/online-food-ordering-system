@@ -35,7 +35,6 @@ if (!isset($_SESSION['admin-success'])) {
         $isVeg = 0;
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $price = mysqli_real_escape_string($conn, $_POST['price']);
-        $cost = mysqli_real_escape_string($conn, $_POST['cost']);
         $cat_id = mysqli_real_escape_string($conn, $_POST['cat_id']);
         $desc = mysqli_real_escape_string($conn, $_POST['description']);
         $estimated_cooking_time = mysqli_real_escape_string($conn, $_POST['estimated-cooking-time']);
@@ -54,8 +53,6 @@ if (!isset($_SESSION['admin-success'])) {
             updateResponse("error", "Name should contain alphabet only");
         } else if (!preg_match("/^[0-9]+$/", $price)) {
             updateResponse("error", "Price should contain numbers only");
-        } else if (!preg_match("/^[0-9]+$/", $cost)) {
-            updateResponse("error", "Cost should contain numbers only");
         } else if (!preg_match("/^[0-9]+$/", $estimated_cooking_time)) {
             updateResponse("error", "Estimated cooking time should contain numbers only");
         } else if (!preg_match("/^[A-Za-z0-9]+$/", $product_id)) {
@@ -74,7 +71,7 @@ if (!isset($_SESSION['admin-success'])) {
             } else {
                 if (move_uploaded_file($temp_file, $target_file)) {
                     // insert into database
-                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $cost, $estimated_cooking_time, '$desc', $isVeg, '$product_id', '$short_desc', '$ingredients', 0, 0, $cat_id)";
+                    $sql = "INSERT INTO food VALUES (DEFAULT, '$file_name', '$name', $price, $estimated_cooking_time, '$desc', $isVeg, '$product_id', '$short_desc', '$ingredients', 0, 0, $cat_id)";
                     $result = mysqli_query($conn, $sql);
                 } else {
                     updateResponse("error", "Sorry, there was an error uploading your file.");
