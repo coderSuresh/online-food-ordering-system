@@ -102,10 +102,8 @@
         </section>
 
         <div class="flex items-center">
-            <!-- buttons for food management -->
             <div class="flex items-center">
 
-                <!-- search form for employee -->
                 <form action="#" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
                         <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
@@ -179,6 +177,29 @@
                 $i = 0;
                 while ($data = mysqli_fetch_assoc($res)) {
                     $i++;
+                    $cat_id = $data['cat_id'];
+
+                    $sql_total_cat = "select count(*) as total from food where category = $cat_id";
+                    $res_total_cat = mysqli_query($conn, $sql_total_cat);
+                    $total_cat = mysqli_fetch_assoc($res_total_cat)['total'];
+
+                    $sql_fetch_order_id_from_cat_id = "select id from orders where f_id in (select f_id from food where category = $cat_id)";
+                    $res_fetch_order_id_from_cat_id = mysqli_query($conn, $sql_fetch_order_id_from_cat_id);
+                    $order_id = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id);
+                    
+                    if ($order_id == null)
+                        $order_id = 0;
+                    else
+                        $order_id = $order_id['id'];
+
+                    $sql_total_sold = "select count(*) as total from aos where order_id = $order_id ";
+                    $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
+                    $total_sold = mysqli_fetch_assoc($res_total_sold);
+
+                    if ($total_sold['total'] == null)
+                        $total_sold = 0;
+                    else
+                        $total_sold = $total_sold['total'];
                 ?>
                     <tr class="shadow">
                         <td> <?php echo $i; ?> </td>
@@ -186,8 +207,8 @@
                             <img src="../uploads/category/<?php echo $data["image"]; ?>" alt="food image" class="table_food-img">
                         </td>
                         <td> <?php echo $data["cat_name"]; ?> </td>
-                        <td>160</td>
-                        <td>123</td>
+                        <td><?php echo $total_cat; ?></td>
+                        <td><?php echo $total_sold; ?></td>
                         <td class="table_action_container">
                             <!-- action menu -->
                             <button class="no_bg no_outline table_option-menu">
