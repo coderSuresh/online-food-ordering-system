@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin-success'])) {
         $sql = "UPDATE aos SET status = 'accepted' WHERE order_id = {$order_id} and aos_id = {$aos_id}";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-        $sql_insert = "insert into kos values (DEFAULT, $order_id, 'pending')";
+        $sql_insert = "insert into kos values (DEFAULT, $order_id, 'pending', NOW())";
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error($conn));
 
         if ($result && $result_insert) {

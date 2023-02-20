@@ -192,7 +192,7 @@
                     else
                         $order_id = $order_id['id'];
 
-                    $sql_total_sold = "select count(*) as total from aos where order_id = $order_id ";
+                    $sql_total_sold = "select count(*) as total from aos where order_id = $order_id and status = 'delivered'";
                     $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
                     $total_sold = mysqli_fetch_assoc($res_total_sold);
 

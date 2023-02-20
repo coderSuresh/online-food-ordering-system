@@ -166,6 +166,8 @@
         require("../../config.php");
 
         // filter by session
+        $sql = "SELECT names,username,email,date,status,active FROM customer";
+
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
@@ -183,7 +185,7 @@
             $sql = "SELECT names,username,email,date,status,active FROM customer";
         }
 
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if (mysqli_num_rows($result) > 0) {
         ?>
