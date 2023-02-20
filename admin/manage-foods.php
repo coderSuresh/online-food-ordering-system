@@ -368,7 +368,6 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Cost</th>
                     <th>Category</th>
                     <th>Sold</th>
                     <th>Action</th>
@@ -384,6 +383,19 @@
                     $res_cat = mysqli_query($conn, $sql_cat) or die("Could not fetch category name from database");
                     $row_cat = mysqli_fetch_assoc($res_cat);
                     $cat_name = $row_cat['cat_name'];
+
+                    $total_sold = "select count(orders.f_id) as total_sold
+                                    from orders
+                                    inner join aos on orders.id = aos.order_id
+                                    where aos.status = 'delivered'
+                                    and orders.f_id = $row[f_id]";
+                    $res_sold = mysqli_query($conn, $total_sold) or die("Could not fetch total sold from database");
+                    $row_sold = mysqli_fetch_assoc($res_sold);
+                    $total_sold = $row_sold['total_sold'];
+
+                    if($total_sold == null){
+                        $total_sold = 0;
+                    }
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
@@ -393,16 +405,15 @@
                         </td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['price']; ?></td>
-                        <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $cat_name; ?></td>
-                        <td><?php echo 125; ?></td>
+                        <td><?php echo $total_sold; ?></td>
                         <td class="table_action_container">
                             <!-- action menu -->
                             <button class="no_bg no_outline table_option-menu">
                                 <img src="../images/ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <div class="table_action_options shadow border-curve long r_80 p-20 flex direction-col">
+                            <div class="table_action_options shadow border-curve long p-20 flex direction-col">
                                 <div>
                                     <form action="./backend/foods/edit.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
