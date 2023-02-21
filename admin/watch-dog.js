@@ -10,8 +10,7 @@ function checkForUpdates() {
             if (new_count.data !== JSON.parse(localStorage.getItem('old_data') ? localStorage.getItem('old_data') : current_count.data)) {
 
               localStorage.setItem('old_data', JSON.stringify(new_count.data));
-              console.log(localStorage.getItem('old_data'));
-
+              
               const audio = new Audio(hostURLDog + "audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();

@@ -107,9 +107,9 @@
         $row_rev = mysqli_fetch_assoc($res_calc_rev);
         $total_rev = $row_rev['total_rev'];
 
-        if($total_rev == null){
+        if ($total_rev == null) {
             $total_rev = 0;
-        } else if($total_rev >= 1000) {
+        } else if ($total_rev >= 1000) {
             $total_rev = $total_rev / 1000;
             $total_rev = round($total_rev, 2);
             $total_rev = $total_rev . "K";
@@ -165,70 +165,38 @@
             <section class="top_selling p-20 flex direction-col shadow justify-start border-curve-md">
                 <h2>Top selling items</h2>
 
-                <article class="top_selling_item flex items-center">
-                    <div class="top_selling_item_intro flex items-center">
-                        <img class="top_selling_item_img" src="../images/food.png" alt="">
-                        <div>
-                            <h3 class="top_selling_item_name">Chinese MoMO</h3>
-                            <p class="top_selling_item_sold">153 Items sold</p>
+                <?php
+                $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' group by f_id order by qty desc limit 5";
+                $res_fetch_food = mysqli_query($conn, $sql_fetch_food);
+                $count_fetch_food = mysqli_num_rows($res_fetch_food);
+                $i = 0;
+                while ($top_data = mysqli_fetch_assoc($res_fetch_food)) {
+                    $i++;
+                    
+                    $total_sold = $top_data['total_sold'];
+                    $f_id = $top_data['f_id'];
+
+                    $sql_food = "SELECT name, price FROM food where f_id = $f_id";
+                    $res_food = mysqli_query($conn, $sql_food);
+                    $row_food = mysqli_fetch_assoc($res_food);
+                    $food_name = $row_food['name'];
+                    $food_price = $row_food['price'];
+                ?>
+                    <article class="top_selling_item flex items-center">
+                        <div class="top_selling_item_intro flex items-center">
+                            <img class="top_selling_item_img" src="../images/food.png" alt="">
+                            <div>
+                                <h3 class="top_selling_item_name"><?php echo $food_name; ?></h3>
+                                <p class="top_selling_item_sold"><?php echo $total_sold; ?> Items sold</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <p class="top_selling_item_price">Rs. 230</p>
+                        <p class="top_selling_item_price">Rs. <?php echo $food_price; ?></p>
 
-                </article>
+                    </article>
+                <?php
+                } ?>
 
-                <article class="top_selling_item flex items-center">
-                    <div class="top_selling_item_intro flex items-center">
-                        <img class="top_selling_item_img" src="../images/food.png" alt="">
-                        <div>
-                            <h3 class="top_selling_item_name">Chinese MoMO</h3>
-                            <p class="top_selling_item_sold">153 Items sold</p>
-                        </div>
-                    </div>
-
-                    <p class="top_selling_item_price">Rs. 230</p>
-
-                </article>
-
-                <article class="top_selling_item flex items-center">
-                    <div class="top_selling_item_intro flex items-center">
-                        <img class="top_selling_item_img" src="../images/food.png" alt="">
-                        <div>
-                            <h3 class="top_selling_item_name">Chinese MoMO</h3>
-                            <p class="top_selling_item_sold">153 Items sold</p>
-                        </div>
-                    </div>
-
-                    <p class="top_selling_item_price">Rs. 230</p>
-
-                </article>
-
-                <article class="top_selling_item flex items-center">
-                    <div class="top_selling_item_intro flex items-center">
-                        <img class="top_selling_item_img" src="../images/food.png" alt="">
-                        <div>
-                            <h3 class="top_selling_item_name">Chinese MoMO</h3>
-                            <p class="top_selling_item_sold">153 Items sold</p>
-                        </div>
-                    </div>
-
-                    <p class="top_selling_item_price">Rs. 230</p>
-
-                </article>
-
-                <article class="top_selling_item flex items-center">
-                    <div class="top_selling_item_intro flex items-center">
-                        <img class="top_selling_item_img" src="../images/food.png" alt="">
-                        <div>
-                            <h3 class="top_selling_item_name">Chinese MoMO</h3>
-                            <p class="top_selling_item_sold">153 Items sold</p>
-                        </div>
-                    </div>
-
-                    <p class="top_selling_item_price">Rs. 230</p>
-
-                </article>
             </section>
         </div>
     </main>
