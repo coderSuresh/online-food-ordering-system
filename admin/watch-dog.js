@@ -1,19 +1,19 @@
-const hostURL = "https://localhost/messy-code/";
+const hostURLDog = "https://localhost/messy-code/";
 function checkForUpdates() {
-  fetch(hostURL + "admin/backend/watch-order-table.php")
+  fetch(hostURLDog + "admin/backend/watch-order-table.php")
     .then((response) => response.json())
     .then((current_count) => {
       setTimeout(() => {
-        fetch(hostURL + "admin/backend/watch-order-table.php")
+        fetch(hostURLDog + "admin/backend/watch-order-table.php")
           .then((response) => response.json())
           .then((new_count) => {
             if (new_count.data !== current_count.data) {
-              const audio = new Audio(hostURL + "audio/dog_bark.mp3");
+              const audio = new Audio(hostURLDog + "audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();
                 if (
                   window.location.href ==
-                  hostURL + "admin/order-details.php"
+                  hostURLDog + "admin/order-details.php"
                 ) {
                   setTimeout(() => {
                     const alertDialog = document.createElement("div");
@@ -60,7 +60,7 @@ checkForUpdates();
 
 function redirectToOrderPage() {
   hideAlert();
-  window.open(hostURL + 'admin/order-details.php', '_blank')
+  window.open(hostURLDog + 'admin/order-details.php', '_blank')
 }
 
 function hideAlert() {
@@ -76,11 +76,11 @@ function sendNotification() {
       if (permission === "granted") {
         const notification = new Notification("New Order", {
           body: "You have a new order!",
-          icon: hostURL+"images/logo.png",
+          icon: hostURLDog + "images/logo.png",
         });
         notification.onclick = (event) => {
           event.preventDefault();
-          window.open(hostURL + "admin/order-details.php", "_blank");
+          window.open(hostURLDog + "admin/order-details.php", "_blank");
         };
       }
     });

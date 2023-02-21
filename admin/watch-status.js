@@ -1,10 +1,10 @@
-const hostUrl = "https://localhost/messy-code/";
+const hostURLStatus = "https://localhost/messy-code/";
 function checkForStatusUpdates() {
-    fetch(hostUrl+"admin/backend/watch-status-change.php")
+    fetch(hostURLStatus+"admin/backend/watch-status-change.php")
         .then((response) => response.json())
         .then((current_state) => {
             setTimeout(() => {
-                fetch(hostUrl+"admin/backend/watch-status-change.php")
+                fetch(hostURLStatus+"admin/backend/watch-status-change.php")
                     .then((response) => response.json())
                     .then((new_state) => {
                         isChanged = false
@@ -16,7 +16,7 @@ function checkForStatusUpdates() {
                                     isChanged = true
                                     if (
                                         !window.location.href ==
-                                        hostUrl+"admin/order-details.php"
+                                        hostURLStatus+"admin/order-details.php"
                                     ) {
                                         sendNotification();
                                     } else {
@@ -76,11 +76,11 @@ function checkForStatusUpdates() {
 checkForStatusUpdates();
 
 function redirect() {
-    window.open(hostUrl+'admin/reject-report.php', '_blank')
+    window.open(hostURLStatus+'admin/reject-report.php', '_blank')
 }
 
 function playSound() {
-    const audio = new Audio(hostUrl+"audio/dog_bark.mp3");
+    const audio = new Audio(hostURLStatus+"audio/dog_bark.mp3");
     audio.addEventListener("canplaythrough", () => {
         audio.play();
     });
@@ -88,7 +88,7 @@ function playSound() {
 
 function hideAlert() {
     const alertDialog = document.querySelector(".alert-dialog");
-    // alertDialog.remove();
+    alertDialog.remove();
     location.reload();
 }
 
@@ -100,11 +100,11 @@ function sendNotification() {
             if (permission === "granted") {
                 const notification = new Notification("New Order", {
                     body: "You have a new order!",
-                    icon: hostUrl+"images/logo.png",
+                    icon: hostURLStatus+"images/logo.png",
                 });
                 notification.onclick = (event) => {
                     event.preventDefault();
-                    window.open(hostUrl+"admin/order-details.php", "_blank");
+                    window.open(hostURLStatus+"admin/order-details.php", "_blank");
                 };
             }
         });
