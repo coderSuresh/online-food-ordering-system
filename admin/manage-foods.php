@@ -19,6 +19,10 @@
     <?php
     require("./components/header.php");
     require("./components/sidebar.php");
+
+    if ($_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != 'enabled' && $_SESSION['filter-by'] != 'disabled' && $_SESSION['filter-by'] != 'special') {
+        $_SESSION['filter-by'] = 'all';
+    }
     ?>
 
     <main class="admin_dashboard_body">
@@ -303,7 +307,6 @@
         // filter content by sessions
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
-            unset($_SESSION['filter-by']);
             if ($filter_by == 'all') {
                 $sql = "SELECT * FROM food";
             } else if ($filter_by == 'enabled') {
@@ -314,6 +317,7 @@
                 $sql = "SELECT * FROM food where special = 1";
             }
         } else {
+            $_SESSION['filter-by'] = 'all';
             $sql = "SELECT * FROM food order by f_id desc";
         }
 
@@ -384,7 +388,7 @@
                     $row_cat = mysqli_fetch_assoc($res_cat);
                     $cat_name = $row_cat['cat_name'];
 
-                    $total_sold = "select count(orders.f_id) as total_sold
+                    $total_sold = "select (count(orders.f_id) * orders.qty) as total_sold
                                     from orders
                                     inner join aos on orders.id = aos.order_id
                                     where aos.status = 'delivered'
@@ -393,7 +397,7 @@
                     $row_sold = mysqli_fetch_assoc($res_sold);
                     $total_sold = $row_sold['total_sold'];
 
-                    if($total_sold == null){
+                    if ($total_sold == null) {
                         $total_sold = 0;
                     }
                 ?>

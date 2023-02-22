@@ -185,21 +185,15 @@
 
                     $sql_fetch_order_id_from_cat_id = "select id from orders where f_id in (select f_id from food where category = $cat_id)";
                     $res_fetch_order_id_from_cat_id = mysqli_query($conn, $sql_fetch_order_id_from_cat_id);
-                    $order_id = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id);
-                    
-                    if ($order_id == null)
-                        $order_id = 0;
-                    else
+
+                    $total_sold = 0;
+                    while($order_id = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id)){
                         $order_id = $order_id['id'];
-
-                    $sql_total_sold = "select count(*) as total from aos where order_id = $order_id and status = 'delivered'";
-                    $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
-                    $total_sold = mysqli_fetch_assoc($res_total_sold);
-
-                    if ($total_sold['total'] == null)
-                        $total_sold = 0;
-                    else
-                        $total_sold = $total_sold['total'];
+                        $sql_total_sold = "select (count(*)*orders.qty) as total from orders inner join aos on orders.id = aos.order_id where aos.order_id = $order_id and aos.status = 'delivered'";
+                        $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
+                        $total_sold_data = mysqli_fetch_assoc($res_total_sold);
+                        $total_sold += $total_sold_data['total'];
+                    }
                 ?>
                     <tr class="shadow">
                         <td> <?php echo $i; ?> </td>
