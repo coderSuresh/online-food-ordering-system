@@ -107,7 +107,7 @@
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'prepared' or status = 'delivering' and Date(orders.date) = CURDATE()";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering') and Date(orders.date) = CURDATE()";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
@@ -228,8 +228,7 @@
                     from orders 
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
-                    where aos.status = 'prepared' or
-                    aos.status = 'delivering' and
+                    where aos.status in ('prepared', 'delivering') and
                     Date(orders.date) = CURDATE()
                     order by orders.id desc
                     ";

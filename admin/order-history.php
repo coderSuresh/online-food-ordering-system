@@ -106,7 +106,7 @@
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'to deliver'";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering')";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
@@ -126,7 +126,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
                         <div class="count-top shadow"><?php
                                                         echo $count;
                                                         ?>
@@ -136,7 +136,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
                         <div class="count-top shadow"><?php
                                                         echo $count_pending;
                                                         ?>
@@ -146,7 +146,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $count_accepted;
                                                         ?>
@@ -155,8 +155,8 @@
                 </form>
 
                 <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="to deliver">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "to deliver") echo "active"; ?>">To Deliver
+                    <input type="hidden" name="filter-by" value="prepared">
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "prepared") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
@@ -166,7 +166,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="delivered">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
                         <div class="count-top shadow"><?php
                                                         echo $count_delivered;
                                                         ?>
@@ -176,7 +176,7 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $count_rejected;
                                                         ?>
@@ -187,35 +187,32 @@
         </div>
 
         <?php
-        if (isset($_SESSION['order-success'])) {
-        ?>
-            <p class="error-container success p_7-20">
-                <?php
-                echo $_SESSION['order-success'];
-                unset($_SESSION['order-success']);
-                ?>
-            </p>
-        <?php
-        }
-        if (isset($_SESSION['order-error'])) {
-        ?>
-            <p class="error-container error p_7-20">
-                <?php
-                echo $_SESSION['order-error'];
-                unset($_SESSION['order-error']);
-                ?>
-            </p>
-        <?php
-        }
-        ?>
-
-        <?php
         require("../config.php");
 
         // filter content by session 
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
-            $sql = "select orders.id,
+            if ($filter_by == 'delivering' || $filter_by == 'prepared') {
+                $sql = "select orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    aos.aos_id,
+                    aos.status
+                    from orders 
+                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join aos on orders.id = aos.order_id
+                    where aos.status in ('prepared', 'delivering') 
+                    order by orders.id desc
+                    ";
+            } else {
+                $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
                     orders.total_price,
@@ -233,6 +230,7 @@
                     where aos.status = '$filter_by'
                     order by orders.id desc
                     ";
+            }
         } else {
             $sql = "select orders.id,
                     orders.c_id,
@@ -308,54 +306,20 @@
                                 <img src="../images//ic_options.svg" alt="options menu">
                             </button>
                             <!-- options -->
-                            <?php if ($status != "rejected") { ?>
-                                <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                                    <div>
-                                        <?php
-                                        if ($status == "pending") {
-                                        ?>
-                                            <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="accept" class="no_bg no_outline">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_accept.svg" alt="accept icon">
-                                                        <p class="body-text">Accept</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php } else if ($status == "accepted") {
-                                        ?>
-                                            <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="prepared" class="no_bg no_outline">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_prepared.svg" alt="prepared">
-                                                        <p class="body-text">Prepared</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <div>
-                                        <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
-                                            <form action="./backend/order/reject.php" method="post" class="flex items-center justify-start">
-                                                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                                <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                                <button type="submit" name="reject" class="no_bg no_outline reject_btn">
-                                                    <div class="flex items-center justify-start">
-                                                        <img src="../images/ic_reject.svg" alt="reject icon">
-                                                        <p class="body-text">Reject</p>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        <?php } ?>
-                                    </div>
+                            <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
+                                <div>
+                                    <form action="./backend/order/view.php" method="post" class="flex items-center justify-start">
+                                        <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                        <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
+                                        <button type="submit" name="view" class="no_bg no_outline">
+                                            <div class="flex items-center justify-start">
+                                                <img src="../images/ic_view.svg" alt="view icon">
+                                                <p class="body-text">View</p>
+                                            </div>
+                                        </button>
+                                    </form>
                                 </div>
-                            <?php } ?>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>
