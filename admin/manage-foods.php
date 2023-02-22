@@ -469,18 +469,6 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <form action="./backend/foods/delete.php" method="post" class="flex items-center justify-start">
-                                        <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
-                                        <input type="hidden" name="img" value="<?php echo $row["img"]; ?>">
-                                        <button type="submit" name="delete" class="no_bg no_outline delete_btn">
-                                            <div class="flex items-center justify-start">
-                                                <img src="../images/ic_delete.svg" alt="delete icon">
-                                                <p>Delete</p>
-                                            </div>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div>
                                     <form action="./backend/foods/<?php if ($row['disabled'] == 0)
                                                                         echo "disable";
                                                                     else
