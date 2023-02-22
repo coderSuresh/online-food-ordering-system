@@ -186,6 +186,7 @@
                     $sql_fetch_order_id_from_cat_id = "select id from orders where f_id in (select f_id from food where category = $cat_id)";
                     $res_fetch_order_id_from_cat_id = mysqli_query($conn, $sql_fetch_order_id_from_cat_id);
 
+                    // calculate total sold items of a category
                     $total_sold = 0;
                     while($order_id = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id)){
                         $order_id = $order_id['id'];
