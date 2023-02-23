@@ -987,6 +987,7 @@ form .text_field {
     margin-right: 10px;
     height: 70px;
     width: 80px;
+    object-fit: cover;
 }
 
 .top_selling_item_name {

@@ -172,11 +172,11 @@
                 $i = 0;
                 while ($top_data = mysqli_fetch_assoc($res_fetch_food)) {
                     $i++;
-                    
+
                     $total_sold = $top_data['total_sold'];
                     $f_id = $top_data['f_id'];
 
-                    $sql_food = "SELECT name, price FROM food where f_id = $f_id";
+                    $sql_food = "SELECT name, price, img FROM food where f_id = $f_id";
                     $res_food = mysqli_query($conn, $sql_food);
                     $row_food = mysqli_fetch_assoc($res_food);
                     $food_name = $row_food['name'];
@@ -184,15 +184,15 @@
                 ?>
                     <article class="top_selling_item flex items-center">
                         <div class="top_selling_item_intro flex items-center">
-                            <img class="top_selling_item_img" src="../images/food.png" alt="">
+                            <img class="top_selling_item_img" src="../uploads/foods/<?php echo $row_food['img']; ?>" alt="food image">
                             <div>
                                 <h3 class="top_selling_item_name"><?php echo $food_name; ?></h3>
                                 <p class="top_selling_item_sold"><?php echo $total_sold; ?> Items sold</p>
                             </div>
                         </div>
-
-                        <p class="top_selling_item_price">Rs. <?php echo $food_price; ?></p>
-
+                        <div class="top_selling_item_price">
+                            <p class="top_selling_item_price_text">Rs. <?php echo $food_price; ?></p>
+                        </div>
                     </article>
                 <?php
                 } ?>
