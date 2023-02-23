@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2023 at 01:30 PM
+-- Generation Time: Feb 23, 2023 at 04:37 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -59,11 +59,20 @@ CREATE TABLE `aos` (
 --
 
 INSERT INTO `aos` (`aos_id`, `order_id`, `status`, `date`) VALUES
-(78, 88, 'pending', '2023-02-19 13:49:58'),
-(79, 89, 'prepared', '2023-02-19 13:50:19'),
-(80, 90, 'delivered', '2023-02-19 13:51:28'),
-(81, 91, 'prepared', '2023-02-19 17:01:32'),
-(82, 92, 'accepted', '2023-02-19 17:15:18');
+(109, 119, 'delivered', '2023-02-21 12:01:51'),
+(110, 120, 'prepared', '2023-02-21 12:02:23'),
+(111, 121, 'delivering', '2023-02-21 12:02:45'),
+(112, 122, 'prepared', '2023-02-21 12:03:17'),
+(113, 123, 'delivering', '2023-02-21 12:03:44'),
+(114, 124, 'delivering', '2023-02-21 12:04:30'),
+(115, 125, 'rejected', '2023-02-21 12:15:03'),
+(116, 126, 'delivered', '2023-02-21 12:15:18'),
+(117, 127, 'delivered', '2023-02-21 12:15:31'),
+(118, 128, 'pending', '2023-02-21 13:14:31'),
+(119, 129, 'pending', '2023-02-21 13:14:56'),
+(120, 130, 'prepared', '2023-02-21 13:15:15'),
+(121, 131, 'prepared', '2023-02-21 13:15:29'),
+(122, 132, 'delivered', '2023-02-21 16:28:25');
 
 -- --------------------------------------------------------
 
@@ -85,9 +94,8 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `customer_id`, `food_id`, `quantity`) VALUES
 (132, 40, 24, 4),
 (134, 40, 22, 1),
-(136, 40, 23, 1),
 (138, 40, 20, 4),
-(147, 41, 24, 1);
+(156, 41, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -107,8 +115,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`cat_id`, `image`, `cat_name`) VALUES
 (114, 'momo.jpg', 'Momo'),
-(115, '1674974608momo.jpg', 'Burgers'),
-(116, '1674974554momo.jpg', 'Coffee');
+(115, '1674974608momo.jpg', 'Burger'),
+(120, '1677064988momo.jpg', 'Pizza');
 
 -- --------------------------------------------------------
 
@@ -122,7 +130,7 @@ CREATE TABLE `customer` (
   `username` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `provider` varchar(50) NOT NULL,
+  `provider` varchar(50) DEFAULT NULL,
   `date` datetime NOT NULL,
   `status` varchar(20) NOT NULL,
   `active` int(1) NOT NULL,
@@ -186,7 +194,8 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`emp_id`, `name`, `department`, `email`, `username`, `password`, `image`) VALUES
 (1, 'Ashika Dulal', 1, 'dulalashika@protonmail.com', 'chef_ashika', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/ashika.jpg'),
-(2, 'Suresh Dahal', 2, 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg');
+(2, 'Suresh Dahal', 2, 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg'),
+(3, 'Adip Sharma', 2, 'adip@gmail.com', 'adip', '332b3091416bc4687821c4653f1c6eb1', '../../../uploads/employees/momo.jpg');
 
 -- --------------------------------------------------------
 
@@ -216,14 +225,12 @@ CREATE TABLE `food` (
 --
 
 INSERT INTO `food` (`f_id`, `img`, `name`, `price`, `cost`, `cooking_time`, `description`, `veg`, `product_id`, `short_desc`, `ingredients`, `disabled`, `special`, `category`) VALUES
-(19, '1675007250momo.jpg', 'Cheese Burger', 180, 150, 20, 'very delicious cheesy burger', 0, 'bg1', '', '', 1, 0, 114),
-(20, 'momo.jpg', 'Chicken Burger', 200, 160, 20, 'This is very delicious chicken burger made from fresh chicken', 0, 'bg2', '', '', 0, 0, 114),
+(19, '1675007250momo.jpg', 'Cheese Burger', 180, 150, 20, 'very delicious cheesy burger', 0, 'bg1', 'This is another short description', 'dsfsd\r\nfsdf\r\nsd\r\nfsd\r\nfsd\r\nf\r\nsdfds                            ', 0, 1, 115),
+(20, '1676865352momo.jpg', 'Chicken Burger', 200, 160, 20, 'This is very delicious chicken burger made from fresh chicken', 0, 'bg2', 'This is also a short description', 'sfsd\r\nf\r\ndfsd\r\nfs\r\ndf\r\nsdf\r\nsdf\r\nsdf                                                        ', 0, 0, 115),
 (22, '1675058201momo.jpg', 'Buff Burger', 150, 100, 20, 'this is another description', 0, 'bg2', 'This is not delicious burger sjdkfjl jaldjl', 'these are not the list of ingredients                            ', 0, 1, 115),
-(23, '1675063660momo.jpg', 'Espresso', 150, 100, 20, 'Espresso is a kind of coffee with very bad taste. made by using 1kg decayed coffee', 0, 'cf1', 'Espresso is a kind of coffee with very bad taste.', 'coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again                            ', 0, 0, 116),
-(24, '1675066279momo.jpg', 'testnnmn', 400, 200, 10, 'jsdklfjsdalkfjdsafsa\r\ndsfklasdjflksadjflkdsjf\r\nsdfdaskjfsdlkf', 0, 'sdf', 'ajsdlkfjdkfjslkdjfskljflksjdlkfj', 'test\r\ntest1\r\ntest2                                                                                        ', 0, 0, 114),
-(25, '1675066384momo.jpg', 'testjs', 200, 100, 10, 'dfghkl', 0, 'skjdfl', 'sdlfkjslkdfjsdkjfdlkjflskdjfldsjflksjdlfjsldkf', 'h\r\nh\r\nh\r\n', 1, 0, 114),
-(26, '1675073155momo.jpg', 'Cappuccino', 200, 100, 12, 'ashdfsjdfhkajdshfksdhfsdfsadfasdfsd', 0, 'sdjfl', 'dfkdsjflsadjflsdflasdjfklasjksjdfff ffffffffffffff', 'coffee\r\nwater\r\ncoffee again\r\nlittle sugar\r\ncoffee again                                                                                                                                            ', 0, 1, 116),
-(27, '1675144473momo.jpg', 'test food', 455, 200, 15, 'ksjdlfkjds\r\nfsdfsdf\r\ndsfsdjfdslfs dkjfkdsjfkdsjfldskjf kldsjflsdfjsdlkfjsldsd', 0, 'fsd54', 'this is very short description', 'ek\r\nzero\r\ndui\r\ntin\r\nchar\r\npanch\r\nxa\r\nsat\r\naath                                                                                                                ', 0, 1, 114);
+(24, '1675066279momo.jpg', 'Veg C Momo', 400, 200, 10, 'jsdklfjsdalkfjdsafsa\r\ndsfklasdjflksadjflkdsjf\r\nsdfdaskjfsdlkf', 1, 'sdf', 'ajsdlkfjdkfjslkdjfskljflksjdlkfj', 'test\r\ntest1\r\ntest2                                                                                                                    ', 0, 1, 114),
+(25, '1675066384momo.jpg', 'Pork Momo', 200, 100, 10, 'dfghkl', 0, 'skjdfl', 'sdlfkjslkdfjsdkjfdlkjflskdjfldsjflksjdlfjsldkf', 'h\r\nh\r\nh\r\n                            ', 1, 0, 114),
+(27, '1675144473momo.jpg', 'Chinese Momo', 455, 200, 15, 'ksjdlfkjds\r\nfsdfsdf\r\ndsfsdjfdslfs dkjfkdsjfkdsjfldskjf kldsjflsdfjsdlkfjsldsd', 0, 'fsd54', 'this is very short description', 'ek\r\nzero\r\ndui\r\ntin\r\nchar\r\npanch\r\nxa\r\nsat\r\naath       \r\nnou                                                                                                                                                                                             ', 0, 1, 114);
 
 -- --------------------------------------------------------
 
@@ -234,19 +241,27 @@ INSERT INTO `food` (`f_id`, `img`, `name`, `price`, `cost`, `cooking_time`, `des
 CREATE TABLE `kos` (
   `kos_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `status` varchar(15) NOT NULL
+  `status` varchar(15) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kos`
 --
 
-INSERT INTO `kos` (`kos_id`, `order_id`, `status`) VALUES
-(8, 89, 'prepared'),
-(10, 91, 'pending'),
-(11, 91, 'pending'),
-(12, 90, 'pending'),
-(13, 92, 'prepared');
+INSERT INTO `kos` (`kos_id`, `order_id`, `status`, `date`) VALUES
+(29, 124, 'prepared', '2023-02-21 12:07:34'),
+(30, 123, 'prepared', '2023-02-21 12:07:38'),
+(31, 121, 'accepted', '2023-02-21 12:07:44'),
+(32, 122, 'prepared', '2023-02-21 12:07:48'),
+(33, 120, 'accepted', '2023-02-21 12:12:53'),
+(34, 119, 'accepted', '2023-02-21 12:12:55'),
+(35, 127, 'prepared', '2023-02-21 12:15:48'),
+(36, 126, 'prepared', '2023-02-21 12:15:51'),
+(37, 125, 'prepared', '2023-02-21 12:18:02'),
+(38, 132, 'pending', '2023-02-21 16:28:49'),
+(39, 131, 'pending', '2023-02-22 17:52:44'),
+(40, 130, 'pending', '2023-02-22 17:58:54');
 
 -- --------------------------------------------------------
 
@@ -269,11 +284,20 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(88, 43, 3, 26, 678, 'No note', '2023-02-19 13:49:58'),
-(89, 43, 2, 26, 452, 'No note', '2023-02-19 13:50:19'),
-(90, 43, 3, 27, 1542, 'No note', '2023-02-19 13:51:28'),
-(91, 41, 1, 26, 226, 'No note', '2023-02-19 17:01:32'),
-(92, 41, 1, 26, 226, 'No note', '2023-02-19 17:15:18');
+(119, 41, 2, 27, 1028, 'No note', '2023-02-21 12:01:51'),
+(120, 41, 2, 27, 1028, 'No note', '2023-02-21 12:02:23'),
+(121, 41, 2, 27, 1028, 'No note', '2023-02-21 12:02:45'),
+(122, 41, 2, 27, 1028, 'No note', '2023-02-21 12:03:17'),
+(123, 41, 2, 27, 1028, 'No note', '2023-02-21 12:03:44'),
+(124, 41, 2, 27, 1028, 'No note', '2023-02-21 12:04:30'),
+(125, 41, 2, 27, 1028, 'No note', '2023-02-21 12:15:03'),
+(126, 41, 2, 27, 1028, 'No note', '2023-02-21 12:15:18'),
+(127, 41, 2, 27, 1028, 'No note', '2023-02-21 12:15:31'),
+(128, 41, 2, 27, 1028, 'No note', '2023-02-21 13:14:31'),
+(129, 41, 2, 27, 1028, 'No note', '2023-02-21 13:14:56'),
+(130, 41, 2, 27, 1028, 'No note', '2023-02-21 13:15:15'),
+(131, 41, 2, 27, 1028, 'No note', '2023-02-21 13:15:29'),
+(132, 41, 2, 22, 339, 'No note', '2023-02-21 16:28:25');
 
 -- --------------------------------------------------------
 
@@ -294,11 +318,20 @@ CREATE TABLE `order_contact_details` (
 --
 
 INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
-(82, 88, 'jdsfgkl jl', '9875555555', 'suresh dahal'),
-(83, 89, 'dajfk jkfjsadlf sajl', '9875555555', 'sdfjaaj ljlj'),
-(84, 90, 'test address', '9875555555', 'suresh dahal'),
-(85, 91, 'salf jasl jasdkljf al', '9800000000', 'dsfjas dklfjl'),
-(86, 92, 'Ashika ko ghar', '9800000000', 'Ashika Dulal');
+(113, 119, 's ljdfkls ajldfja lskdfjalsk', '9800000000', 'suresh dahal'),
+(114, 120, 'fjdslk ajklsjf sklj', '9800000000', 'dfj alsdjf lk'),
+(115, 121, 'djf lasdjlf ajsdlkf ', '9800000000', 'sdjfa jsdkfjalskdfjlk'),
+(116, 122, 'dkfjal jdskf jasfkl jslkfjdslk', '9800000000', 'fsjdfa lsdfjlk jdl'),
+(117, 123, 'sdjf ksad jflaskjdflk jlads', '9800000000', 'djfsd lfkasj dklsjlk'),
+(118, 124, 'faklsdj fasdlkajsl k', '9800000000', 'djsf lajsdlfjsl'),
+(119, 125, 'jlfj skd jfls jlk', '9800000000', 'kjf lsajl'),
+(120, 126, 'ksdjlfksjdlk', '9800000000', 'jklfjl klskd '),
+(121, 127, 'ksjfl sdfjkl', '9800000000', 'fjksd jfklsjkjkj'),
+(122, 128, 'sjkdf jsdlk fj', '9800000000', 'dfsh lsdjfk'),
+(123, 129, 'djdlfkasj lsfjl', '9800000000', 'jdlkj sldfjs'),
+(124, 130, 'f aldjfkas lf', '9800000000', 'daf alsdjfks'),
+(125, 131, 'djf kasjdl fksjldf', '9800000000', 'asdfkjsa lfjs'),
+(126, 132, 'kdjfslkdjf ldsjflk', '9800000000', 'jsk fdlkj');
 
 -- --------------------------------------------------------
 
@@ -318,7 +351,7 @@ CREATE TABLE `reject_reason` (
 --
 
 INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
-(8, 88, 'admin', 'for testing purpose');
+(16, 125, 'admin', 'just testing');
 
 -- --------------------------------------------------------
 
@@ -338,7 +371,9 @@ CREATE TABLE `to_be_delivered` (
 --
 
 INSERT INTO `to_be_delivered` (`tbd_id`, `order_id`, `status`, `date`) VALUES
-(7, 90, 'pending', '2023-02-19 17:25:58');
+(16, 124, 'pending', '2023-02-21 19:42:55'),
+(17, 121, 'pending', '2023-02-22 17:47:26'),
+(18, 123, 'pending', '2023-02-22 17:47:41');
 
 --
 -- Indexes for dumped tables
@@ -447,19 +482,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -477,7 +512,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `food`
@@ -489,31 +524,31 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `reject_reason`
 --
 ALTER TABLE `reject_reason`
-  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `to_be_delivered`
 --
 ALTER TABLE `to_be_delivered`
-  MODIFY `tbd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `tbd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
