@@ -423,7 +423,7 @@
                                 <div>
                                     <form action="./backend/foods/edit.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
-                                        <input type="hidden" name="category" value="<?php echo $row["category"]; ?>">
+                                        <input type="hidden" name="category" value="<?php echo $cat_name; ?>">
                                         <input type="hidden" name="veg" value="<?php echo $row["veg"]; ?>">
                                         <button type="submit" name="edit" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
