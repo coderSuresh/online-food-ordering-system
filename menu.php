@@ -71,13 +71,6 @@
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                 ?>
-                    <form action="./backend/category-filter.php" method="post" class="food_category">
-                        <input type="hidden" name="cat-name" value="all">
-                        <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
-                            <img src="./images/food.png" class="food_category-img" alt="food category">
-                            <p class="food_category-name">All</p>
-                        </button>
-                    </form>
                     <?php
                     while ($row = mysqli_fetch_assoc($result)) {
                     ?>

@@ -11,13 +11,9 @@
              <a href="./index.php" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
                  <span>Hub</span>
              </a>
-
-             <div class="menu__for-sidebar ml-35">
-                 <div class="bar bar1"></div>
-                 <div class="bar bar2"></div>
-                 <div class="bar bar3"></div>
-             </div>
          </div>
+
+         <h1 class="heading">Kitchen Department</h1>
 
          <ul class="flex items-center">
 
