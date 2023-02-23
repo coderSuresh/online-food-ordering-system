@@ -636,7 +636,8 @@ header {
 
 .food_category-img {
     width: 100px;
-    height: 90px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
     margin-bottom: 5px;
     padding: 3px;
