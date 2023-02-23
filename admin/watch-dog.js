@@ -62,7 +62,7 @@ function checkForUpdates() {
 checkForUpdates();
 
 function redirectToOrderPage() {
-  window.open(hostURLDog + 'admin/order-details.php', '_blank')
+  window.open(hostURLDog + 'admin/backend/order/view-pending-order.php', '_blank')
   hideAlert();
 }
 
