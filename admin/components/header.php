@@ -19,6 +19,8 @@
              </div>
          </div>
 
+         <h1 class="heading">Admin Department</h1>
+
          <ul class="flex items-center">
 
              <li>
