@@ -619,7 +619,7 @@ header {
     margin-bottom: 5px;
     padding: 3px;
     cursor: pointer;
-    outline: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
 }
 
 .menu_food-card {

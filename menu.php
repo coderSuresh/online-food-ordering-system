@@ -74,7 +74,7 @@
                     <form action="./backend/category-filter.php" method="post" class="food_category">
                         <input type="hidden" name="cat-name" value="all">
                         <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
-                            <img src="./images/all.jpg" class="food_category-img" alt="all food">
+                            <img src="./images/all.jpg" class="border-curve food_category-img" alt="all food">
                             <p class="food_category-name">All</p>
                         </button>
                     </form>
@@ -84,7 +84,7 @@
                         <form action="./backend/category-filter.php" method="post" class="food_category">
                             <input type="hidden" name="cat-name" value="<?php echo $row['cat_name']; ?>">
                             <button class="text-center pointer no_bg no_outline" type="submit" name="category-filter">
-                                <img src="./uploads/category/<?php echo $row['image']; ?>" class="food_category-img" alt="food category">
+                                <img src="./uploads/category/<?php echo $row['image']; ?>" class="border-curve food_category-img" alt="food category">
                                 <p class="food_category-name"><?php echo $row['cat_name']; ?></p>
                             </button>
                         </form>
