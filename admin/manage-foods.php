@@ -20,8 +20,10 @@
     require("./components/header.php");
     require("./components/sidebar.php");
 
-    if ($_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != 'enabled' && $_SESSION['filter-by'] != 'disabled' && $_SESSION['filter-by'] != 'special') {
-        $_SESSION['filter-by'] = 'all';
+    if (isset($_SESSION['filter-by'])) {
+        if ($_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != 'enabled' && $_SESSION['filter-by'] != 'disabled' && $_SESSION['filter-by'] != 'special') {
+            $_SESSION['filter-by'] = 'all';
+        }
     }
     ?>
 

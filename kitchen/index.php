@@ -17,10 +17,9 @@
     <?php
     require("../config.php");
     require("./components/header.php");
-    require("./components/sidebar.php");
     ?>
 
-    <main class="admin_dashboard_body">
+    <main style="margin: 40px 5%;">
 
         <?php
         if (isset($_SESSION['order-success'])) {
