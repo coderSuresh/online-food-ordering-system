@@ -37,6 +37,7 @@ const setLightMode = () => {
   darkModeIcon &&
     darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg");
   document && document.documentElement.setAttribute("data-theme", "light");
+  //TODO: if implemented dark mode, store it in local storage
 };
 
 const setDarkMode = () => {

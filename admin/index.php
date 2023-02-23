@@ -166,7 +166,7 @@
                 <h2>Top selling items</h2>
 
                 <?php
-                $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' group by f_id order by qty desc limit 5";
+                $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' group by f_id order by (count(f_id) * qty) desc limit 5";
                 $res_fetch_food = mysqli_query($conn, $sql_fetch_food);
                 $count_fetch_food = mysqli_num_rows($res_fetch_food);
                 $i = 0;
