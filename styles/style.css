@@ -1450,6 +1450,10 @@ table tr th {
     overflow-x: hidden;
 }
 
+pre {
+    font-family: "Poppins", sans-serif;
+}
+
 .details_container {
     margin: 100px 0 50px;
 }

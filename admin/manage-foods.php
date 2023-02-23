@@ -176,15 +176,15 @@
                                 <select name="veg-non-veg" id="veg-non-veg" required>
                                     <?php
                                     $isVeg = false;
-                                    if (isset($_SESSION['veg'])) {
-                                        if ($_SESSION['veg'] == 0) {
+                                    if (isset($_SESSION['f-veg'])) {
+                                        if ($_SESSION['f-veg'] == 0) {
                                             $isVeg = false;
                                         } else {
                                             $isVeg = true;
                                         }
                                     }
                                     ?>
-                                    <option value="">Select one</option>
+                                    <option value="" selected>Select one</option>
                                     <option value="veg" <?php if ($isVeg)
                                                             echo "selected"; ?>>Veg</option>
                                     <option value="non-veg" <?php if (!$isVeg)
@@ -406,7 +406,6 @@
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
                         <td>
-
                             <img src="../uploads/foods/<?php echo $row['img']; ?>" alt="food image" class="table_food-img">
                         </td>
                         <td><?php echo $row['name']; ?></td>
@@ -424,7 +423,7 @@
                                     <form action="./backend/foods/edit.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["f_id"]; ?>">
                                         <input type="hidden" name="category" value="<?php echo $cat_name; ?>">
-                                        <input type="hidden" name="veg" value="<?php echo $row["veg"]; ?>">
+                                        <input type="hidden" name="veg" value="<?php echo $row['veg']; ?>">
                                         <button type="submit" name="edit" class="no_bg no_outline">
                                             <div class="flex items-center justify-start">
                                                 <img src="../images/ic_edit.svg" alt="edit icon">

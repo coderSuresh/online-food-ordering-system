@@ -62,8 +62,8 @@ function checkForUpdates() {
 checkForUpdates();
 
 function redirectToOrderPage() {
-  hideAlert();
   window.open(hostURLDog + 'admin/order-details.php', '_blank')
+  hideAlert();
 }
 
 function hideAlert() {

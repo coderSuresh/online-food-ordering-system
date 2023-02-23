@@ -43,19 +43,19 @@
                         // controlled from admin.js
                     -->
                 <?php
-                $sql = "SELECT * FROM food";
+                $sql = "SELECT * FROM food order by f_id desc";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
-                $sql_enabled = "SELECT * FROM food where disabled = 0";
+                $sql_enabled = "SELECT * FROM food where disabled = 0 order by f_id desc";
                 $result_enabled = mysqli_query($conn, $sql_enabled);
                 $count_enabled = mysqli_num_rows($result_enabled);
 
-                $sql_disabled = "SELECT * FROM food where disabled = 1";
+                $sql_disabled = "SELECT * FROM food where disabled = 1 order by f_id desc";
                 $result_disabled = mysqli_query($conn, $sql_disabled);
                 $count_disabled = mysqli_num_rows($result_disabled);
 
-                $sql_special = "SELECT * FROM food where special = 1";
+                $sql_special = "SELECT * FROM food where special = 1 order by f_id desc";
                 $result_special = mysqli_query($conn, $sql_special);
                 $count_special = mysqli_num_rows($result_special);
                 ?>
@@ -123,13 +123,13 @@
             $filter_by = $_SESSION['filter-by'];
             unset($_SESSION['filter-by']);
             if ($filter_by == 'all') {
-                $sql = "SELECT * FROM food";
+                $sql = "SELECT * FROM food order by f_id desc";
             } else if ($filter_by == 'enabled') {
-                $sql = "SELECT * FROM food where disabled = 0";
+                $sql = "SELECT * FROM food where disabled = 0 order by f_id desc";
             } else if ($filter_by == 'disabled') {
-                $sql = "SELECT * FROM food where disabled = 1";
+                $sql = "SELECT * FROM food where disabled = 1 order by f_id desc";
             } else if ($filter_by == 'special') {
-                $sql = "SELECT * FROM food where special = 1";
+                $sql = "SELECT * FROM food where special = 1 order by f_id desc";
             }
         } else {
             $sql = "SELECT * FROM food order by f_id desc";
