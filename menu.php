@@ -96,7 +96,7 @@
 
             if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
                 $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
-            } else {
+            } else { 
                 $sql = "SELECT cat_name FROM category";
             }
 
