@@ -28,21 +28,21 @@ popperBtn &&
 const darkModeIcon = document.querySelector(".dark-mode-icon");
 darkModeIcon &&
   darkModeIcon.addEventListener("click", () => {
-    darkModeIcon.getAttribute("src") == "../images/ic_light_mode.svg"
+    darkModeIcon.getAttribute("src") == "../images/ic_dark_mode.svg"
       ? setDarkMode()
       : setLightMode();
   });
 
 const setLightMode = () => {
   darkModeIcon &&
-    darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg");
-  console.log("set light mode");
+    darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg");
+  document && document.documentElement.setAttribute("data-theme", "light");
 };
 
 const setDarkMode = () => {
   darkModeIcon &&
-    darkModeIcon.setAttribute("src", "../images/ic_dark_mode.svg");
-  console.log("set dark mode");
+    darkModeIcon.setAttribute("src", "../images/ic_light_mode.svg");
+  document && document.documentElement.setAttribute("data-theme", "dark");
 };
 
 // toggle admin profile

@@ -19,6 +19,24 @@
     --white: #ffffff;
 }
 
+[data-theme="dark"] {
+    --black: #ffffff;
+    --gray: #afafaf;
+    --light-gray: #f3f3f3;
+    --primary-color: #F7922F;
+    --trans-black: #00000030;
+    --trans-green: #DCFFD380;
+    --trans-green-text: #30B900;
+    --trans-yellow: #fafd3e67;
+    --trans-yellow-text: #46500C;
+    --trans-purple: #FFA0FB66;
+    --trans-purple-text: #A500F3;
+    --trans-primary: #F7922F50;
+    --trans-red: #FFD6D6;
+    --trans-red-text: #934747;
+    --white: #000000;
+}
+
 /* reset defaults */
 * {
     margin: 0;
@@ -56,6 +74,10 @@ hr {
 /* add no_bg class when background is not required */
 .no_bg {
     background-color: transparent;
+}
+
+body {
+    background-color: var(--white);
 }
 
 /* set cursor to pointer for all anchor tag */
@@ -1144,7 +1166,7 @@ form .text_field {
 }
 
 /* for alert dialog on order */
-.alert-dialog__actions > button {
+.alert-dialog__actions>button {
     margin: 0 10px;
 }
 
