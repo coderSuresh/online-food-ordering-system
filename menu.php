@@ -100,24 +100,84 @@
 
             <!-- fetch categories from db -->
             <?php
-
-            if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
-                $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
+            if (isset($_GET['search'])) {
+                $searchKey = $_GET['search'];
+                $sql = "SELECT * FROM food where name like '%$searchKey%'";
             } else {
-                $sql = "SELECT cat_name FROM category";
+                if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
+                    $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
+                } else {
+                    $sql = "SELECT cat_name FROM category";
+                }
             }
 
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
+                if (!isset($_GET['search'])) {
+                    while ($row = mysqli_fetch_assoc($result)) {
             ?>
+                        <section class="menu_food-card-container mt-20 flex direction-col">
+                            <?php
+                            $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0";
+                            $res = mysqli_query($conn, $sql_food);
+                            if (mysqli_num_rows($res) > 0) {
+                            ?>
+                                <h2 class="heading"><?php if (isset($row['cat_name']))
+                                                        echo $row['cat_name'];
+                                                    else
+                                                        echo $searchKey; ?></h2>
+                                <div class="food_cards mt-20 flex gap wrap justify-start">
+                                    <?php while ($data = mysqli_fetch_assoc($res)) {
+                                    ?>
+                                        <div class="menu_food-card border-curve shadow">
+                                            <!-- testing badge or something for card -->
+                                            <p class="card__tag text-center heading">
+                                                <?php
+                                                if ($data['veg'] == 1)
+                                                    echo "Veg";
+                                                else
+                                                    echo "Non-veg";
+                                                ?>
+                                            </p>
+
+                                            <div class="card__food-img">
+                                                <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food">
+                                            </div>
+                                            <article class="card__food-info flex items-center">
+                                                <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
+                                                <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
+                                            </article>
+                                            <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
+                                            <div class="card__btns flex">
+                                                <form action="./backend/details.php" class="mr-10" method="post">
+                                                    <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                                    <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
+                                                </form>
+
+                                                <form action="./backend/add-to-cart.php" method="post" class="form_food-card" name="form_food-card">
+                                                    <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                                                    <button type="button" class="button card__btn btn_add-to-cart flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                <?php   }
+                                }
+                                ?>
+                                </div>
+                        </section>
+                    <?php  }
+                } else {
+                    ?>
                     <section class="menu_food-card-container mt-20 flex direction-col">
                         <?php
-                        $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0";
+                        $sql_food = "SELECT * FROM food where name like '%$searchKey%' and disabled = 0";
                         $res = mysqli_query($conn, $sql_food);
                         if (mysqli_num_rows($res) > 0) {
                         ?>
-                            <h2 class="heading"><?php echo $row['cat_name']; ?></h2>
+                            <h2 class="heading"><?php if (isset($row['cat_name']))
+                                                    echo $row['cat_name'];
+                                                else
+                                                    echo $searchKey; ?></h2>
                             <div class="food_cards mt-20 flex gap wrap justify-start">
                                 <?php while ($data = mysqli_fetch_assoc($res)) {
                                 ?>
@@ -157,7 +217,7 @@
                             ?>
                             </div>
                     </section>
-            <?php  }
+            <?php }
             } else
                 echo "No food items found";
             ?>

@@ -13,7 +13,7 @@
          <link rel="stylesheet" href="./styles/style.css">
      </head>
  <?php } else
-     session_start(); ?>
+        session_start(); ?>
  <header>
      <nav class="top_nav flex items-center">
          <div class="logo__back-btn flex items-center">
@@ -29,12 +29,13 @@
 
              <!-- nav search form -->
              <li>
-                 <form action="#" method="post" class="search_form flex items-center border-curve-lg">
-                     <input type="search" name="search" placeholder="search..." id="search" class="search no_outline">
-                     <button type="submit" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
+                 <form action="./backend/search-food.php" method="post" class="search_form flex items-center border-curve-lg">
+                     <input type="search" name="search-key" placeholder="search..." id="search" class="search no_outline">
+                     <button type="submit" name="search-btn" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
                  </form>
-             </li>
 
+             </li>
+        
              <!-- show profile icon if the user is logged in -->
              <?php
                 if (isset($_SESSION['success'])) {
