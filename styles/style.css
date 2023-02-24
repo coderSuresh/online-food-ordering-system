@@ -398,7 +398,6 @@ header {
 .hero {
     width: 80%;
     max-width: 1600px;
-    height: 400px;
     margin: 40px auto;
 }
 
@@ -408,7 +407,6 @@ header {
 
 .offer_img {
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
