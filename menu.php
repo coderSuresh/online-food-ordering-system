@@ -33,22 +33,6 @@
                 <label for="non-veg"> Non-veg</label>
             </div>
         </form>
-
-        <!-- price range filter form -->
-        <h4 class="mt-20 heading">Price range</h4>
-        <form action="#" method="post" class="mt-20 price_filter_form">
-            <div>
-                <label for="from">From:</label>
-                <input type="number" name="from" id="from" class="p_7-20">
-            </div>
-
-            <div>
-                <label for="to">To:</label>
-                <input type="number" name="to" id="to" class="p_7-20">
-            </div>
-            <button type="submit" class="button mt-20">Search</button>
-        </form>
-
     </aside>
 
     <main class="menu_container">

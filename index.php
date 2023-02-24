@@ -27,7 +27,7 @@
 
         </section>
 
-        <h1 class="heading our_special ml-auto">Our Special
+        <h1 class="heading our_special ml-auto mt-20">Our Special
             <hr class="underline ml-auto no_outline">
         </h1>
 
