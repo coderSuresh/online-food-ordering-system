@@ -19,7 +19,12 @@
     <main class="main">
 
         <section class="hero">
-            <!-- TODO: slider/banner goes here -->
+            <!-- <img src="./images/restrohub offer banner.png" alt="offer banner"> -->
+            <form action="./backend/details.php" class="mr-10" method="post">
+                <input type="hidden" name="f_id" value="44">
+                <button type="submit" class="border-curve no_outline no_bg" style="border: 1px solid;" name="view"><img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner"></button>
+            </form>
+
         </section>
 
         <h1 class="heading our_special ml-auto">Our Special
