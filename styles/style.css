@@ -1511,6 +1511,10 @@ pre {
     font-size: 1rem;
 }
 
+.details_quantity-container button{
+    padding: 5px;
+}
+
 .details_quantity {
     min-width: 50px;
     max-width: 80px;
