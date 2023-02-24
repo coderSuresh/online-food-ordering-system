@@ -34,7 +34,6 @@
                 <p class="details_category"><?php echo $category; ?></p>
                 <h1 class="details_title heading"><?php echo $row['name']; ?></h1>
                 <p class="details_short-desc mt-20"><?php echo $row['short_desc']; ?></p>
-                <p class="mt-20">Cooking time: <?php echo $row['cooking_time']; ?> Minute</p>
                 <p class="details_price mt-20"><b>Rs. <?php echo $row['price']; ?></b></p>
 
                 <div class="details_add-to-cart">
@@ -64,6 +63,7 @@
 
         <section class="details_description">
             <h2 class="description heading">Description</h2>
+            <p class="mt-20">Cooking time: <?php echo $row['cooking_time']; ?> Minute</p>
             <p class="mt-20">
                 <?php echo $row['description']; ?>
             </p>

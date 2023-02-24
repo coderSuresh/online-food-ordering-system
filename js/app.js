@@ -65,7 +65,7 @@ const firebaseConfig = {
     storageBucket: "annular-magnet-374810.appspot.com",
     messagingSenderId: "360310508668",
     appId: "1:360310508668:web:0bf9048fd87a2741338df9",
-    measurementId:"G-FGTFE1F45W"
+    measurementId: "G-FGTFE1F45W"
 };
 
 
@@ -563,33 +563,43 @@ checkoutDec && checkoutDec.forEach((btn, i) => {
 })
 
 // ==================== inc / dec from buy page ==================
-const buyInc = document.querySelectorAll(".buy_inc")
-const buyDec = document.querySelectorAll(".buy_dec")
-const buyPageQty = document.querySelectorAll(".buy_page_qty")
+const buyInc = document.querySelector(".buy_inc")
+const buyDec = document.querySelector(".buy_dec")
+const buyPageQty = document.querySelector(".buy_page_qty")
 const hiddenQuantity = document.querySelector(".hidden_quantity")
+const buyPrice = document.querySelector(".buy_price")
+const priceTotal = document.querySelector(".price_total")
+const finalPriceWithoutVat = document.querySelector(".final_price_without_vat")
+const vat = document.querySelector(".vat")
+const finalPrice = document.querySelector(".final_price")
 
-buyInc && buyInc.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-        buyPageQty[i].textContent = parseInt(buyPageQty[i].textContent) + 1
-        hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
-    })
+buyInc && buyInc.addEventListener("click", () => {
+    buyPageQty.textContent = parseInt(buyPageQty.textContent) + 1
+    hiddenQuantity && (hiddenQuantity.value = buyPageQty.textContent)
+    calculatePrice()
 })
 
-//TODO: inc / dec price from buy page
-
-buyDec && buyDec.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-        if (parseInt(buyPageQty[i].textContent) > 1) {
-            buyPageQty[i].textContent = parseInt(buyPageQty[i].textContent) - 1
-            hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
-        }
-        else {
-            buyPageQty[i].textContent = 1
-            hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
-            showAlert("Quantity cannot be less than 1", "error")
-        }
-    })
+buyDec && buyDec.addEventListener("click", () => {
+    if (parseInt(buyPageQty.textContent) > 1) {
+        buyPageQty.textContent = parseInt(buyPageQty.textContent) - 1
+        hiddenQuantity && (hiddenQuantity.value = buyPageQty.textContent)
+        calculatePrice()
+    }
+    else {
+        buyPageQty.textContent = 1
+        hiddenQuantity && (hiddenQuantity.value = buyPageQty.textContent)
+        calculatePrice()
+        showAlert("Quantity cannot be less than 1", "error")
+    }
 })
+
+function calculatePrice() {
+    priceTotal && (priceTotal.textContent = parseInt(hiddenQuantity.value) * parseInt(buyPrice.textContent))
+    finalPriceWithoutVat && (finalPriceWithoutVat.textContent = priceTotal.textContent)
+    vat && (vat.textContent = "Vat (13%): " + (priceTotal.textContent) * 0.13)
+    finalPrice && (finalPrice.textContent = "Grand Total: Rs. " + (parseFloat(priceTotal.textContent) + parseFloat(vat.textContent.split("Vat (13%): ")[1])))
+    finalPriceWithoutVat && (finalPriceWithoutVat.textContent = "Total: " + priceTotal.textContent)
+}
 
 // ==================== for menu sidebar filter ==================
 const filterCheckbox = document.querySelectorAll(".cbox-veg_nonveg")

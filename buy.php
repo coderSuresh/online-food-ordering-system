@@ -146,7 +146,7 @@ require('./config.php');
                 <td>
                     <?php echo $foodName; ?>
                 </td>
-                <td>
+                <td class="buy_price">
                     <?php echo $foodPrice; ?>
                 </td>
                 <td>
@@ -156,7 +156,7 @@ require('./config.php');
                         <button class="buy_dec no_bg no_outline"><img src="./images/ic_remove.svg"></button>
                     </div>
                 </td>
-                <td>
+                <td class="price_total">
                     <?php echo $foodPrice * $quantity; ?>
                 </td>
             </tr>
@@ -186,9 +186,9 @@ require('./config.php');
             </div>
             <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
                 <div class="checkout_info">
-                    <h5>Total: <?php echo $totalPrice; ?></h5>
-                    <h5>Vat (13%): <?php echo $vat; ?> </h5>
-                    <h5>Grand Total: Rs. <?php echo $totalPrice + $vat; ?></h5>
+                    <h5 class="final_price_without_vat">Total: <?php echo $totalPrice; ?></h5>
+                    <h5 class="vat">Vat (13%): <?php echo $vat; ?> </h5>
+                    <h5 class="final_price">Grand Total: Rs. <?php echo $totalPrice + $vat; ?></h5>
                 </div>
                 <div class="mt-20 flex direction-col">
                     <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;">Continue Shopping</a>
