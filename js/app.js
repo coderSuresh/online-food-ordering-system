@@ -575,6 +575,8 @@ buyInc && buyInc.forEach((btn, i) => {
     })
 })
 
+//TODO: inc / dec price from buy page
+
 buyDec && buyDec.forEach((btn, i) => {
     btn.addEventListener("click", () => {
         if (parseInt(buyPageQty[i].textContent) > 1) {
@@ -585,6 +587,18 @@ buyDec && buyDec.forEach((btn, i) => {
             buyPageQty[i].textContent = 1
             hiddenQuantity && (hiddenQuantity.value = buyPageQty[i].textContent)
             showAlert("Quantity cannot be less than 1", "error")
+        }
+    })
+})
+
+// ==================== for menu sidebar filter ==================
+const filterCheckbox = document.querySelectorAll(".cbox-veg_nonveg")
+const vegFilterForm = document.querySelector(".veg_filter_form")
+
+filterCheckbox && filterCheckbox.forEach((checkbox) => {
+    checkbox.addEventListener("click", () => {
+        if (checkbox.checked) {
+            vegFilterForm.submit()
         }
     })
 })
