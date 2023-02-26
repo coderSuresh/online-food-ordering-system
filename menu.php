@@ -86,7 +86,7 @@
             <?php
             if (isset($_GET['search'])) {
                 $searchKey = $_GET['search'];
-                $sql = "SELECT * FROM food where name like '%$searchKey%'" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "");
+                $sql = "SELECT * FROM food where name like '%$searchKey%'" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by f_id desc";
             } else {
                 if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
                     $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
@@ -102,7 +102,7 @@
             ?>
                         <section class="menu_food-card-container mt-20 flex direction-col">
                             <?php
-                            $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "");
+                            $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by food.f_id desc";
                             $res = mysqli_query($conn, $sql_food);
                             if (mysqli_num_rows($res) > 0) {
                             ?>
@@ -154,7 +154,7 @@
                     ?>
                     <section class="menu_food-card-container mt-20 flex direction-col">
                         <?php
-                        $sql_food = "SELECT * FROM food where name like '%$searchKey%' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "");
+                        $sql_food = "SELECT * FROM food where name like '%$searchKey%' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by f_id desc";
                         $res = mysqli_query($conn, $sql_food);
                         if (mysqli_num_rows($res) > 0) {
                         ?>

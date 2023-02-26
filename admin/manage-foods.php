@@ -310,13 +310,13 @@
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
-                $sql = "SELECT * FROM food";
+                $sql = "SELECT * FROM food order by f_id desc";
             } else if ($filter_by == 'enabled') {
-                $sql = "SELECT * FROM food where disabled = 0";
+                $sql = "SELECT * FROM food where disabled = 0 order by f_id desc";
             } else if ($filter_by == 'disabled') {
-                $sql = "SELECT * FROM food where disabled = 1";
+                $sql = "SELECT * FROM food where disabled = 1 order by f_id desc";
             } else if ($filter_by == 'special') {
-                $sql = "SELECT * FROM food where special = 1";
+                $sql = "SELECT * FROM food where special = 1 order by f_id desc";
             }
         } else {
             $_SESSION['filter-by'] = 'all';
