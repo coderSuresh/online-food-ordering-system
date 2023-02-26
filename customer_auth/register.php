@@ -30,7 +30,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["invalid_name"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["invalid_name"]; ?>
                 </p>
 
@@ -43,7 +43,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["invalid_username"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["invalid_username"]; ?>
                 </p>
             <?php
@@ -55,7 +55,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["username_already_exit"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["username_already_exit"]; ?>
                 </p>
             <?php
@@ -67,7 +67,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["invalid_email"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["invalid_email"]; ?>
                 </p>
             <?php
@@ -79,7 +79,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["email_already_exit"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["email_already_exit"]; ?>
                 </p>
             <?php
@@ -91,7 +91,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["invlaid_password"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["invlaid_password"]; ?>
                 </p>
             <?php
@@ -103,7 +103,7 @@ if (isset($_SESSION['success'])) {
             if (isset($_SESSION["password_not_match"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container p_7-20">
+                <p class="error-container error p_7-20">
                     <?php echo $_SESSION["password_not_match"]; ?>
                 </p>
             <?php
