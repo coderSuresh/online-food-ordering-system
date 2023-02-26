@@ -18,7 +18,11 @@
      <nav class="top_nav flex items-center">
          <div class="logo__back-btn flex items-center">
              <!-- back btn -->
-             <button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>
+             <?php if (isset($noBackBtn) && $noBackBtn == true) {
+                } else {
+                    echo '<button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>';
+                }
+                ?>
              <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
                  <span>Hub</span>
              </a>
@@ -35,7 +39,7 @@
                  </form>
 
              </li>
-        
+
              <!-- show profile icon if the user is logged in -->
              <?php
                 if (isset($_SESSION['success'])) {

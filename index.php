@@ -14,7 +14,7 @@
 
 <body>
 
-    <?php require("./components/header.php"); ?>
+    <?php $noBackBtn = true; require("./components/header.php"); ?>
 
     <main class="main">
 
