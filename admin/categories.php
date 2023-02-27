@@ -104,9 +104,9 @@
         <div class="flex items-center">
             <div class="flex items-center">
 
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./backend/category/search.php" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline search_category" name="search-category" id="search-category">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -135,7 +135,15 @@
 
         <?php
         require("../config.php");
-        $sql = "select * from category order by cat_id desc";
+        
+        if (isset($_SESSION['search-category'])) {
+            $searchKey = $_SESSION['search-category'];
+            $sql = "select * from category where cat_name like '$searchKey%' order by cat_id desc";
+            unset($_SESSION['search-category']);
+        } else {
+            $sql = "select * from category order by cat_id desc";
+        }
+
         $res = mysqli_query($conn, $sql);
 
         if (isset($_SESSION['delete_success'])) {
@@ -188,8 +196,8 @@
 
                     // calculate total sold items of a category
                     $total_sold = 0;
-                    while($order_id = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id)){
-                        $order_id = $order_id['id'];
+                    while($row = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id)){
+                        $order_id = $row['id'];
                         $sql_total_sold = "select (count(*)*orders.qty) as total from orders inner join aos on orders.id = aos.order_id where aos.order_id = $order_id and aos.status = 'delivered'";
                         $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
                         $total_sold_data = mysqli_fetch_assoc($res_total_sold);
