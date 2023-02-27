@@ -14,22 +14,18 @@
 
 <body>
 
-    <?php $noBackBtn = true; require("./components/header.php"); ?>
+    <?php $noBackBtn = true;
+    require("./components/header.php"); ?>
 
     <main class="main">
 
-        <section class="hero">
-            <!-- <img src="./images/restrohub offer banner.png" alt="offer banner"> -->
-            <form action="./backend/details.php" class="mr-10" method="post">
-                <input type="hidden" name="f_id" value="44">
-                <button type="submit" class="border-curve no_outline no_bg" style="border: 1px solid;" name="view"><img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner"></button>
-            </form>
-
+        <section class="hero" style="border: 1px solid #000">
+            <a href="./details.php?name=meat lovers pizza"><img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner"></a>
         </section>
 
-        <h1 class="heading our_special ml-auto mt-20">Our Special
+        <h2 class="heading our_special ml-auto mt-20">Our Special
             <hr class="underline ml-auto no_outline">
-        </h1>
+        </h2>
 
         <!-- cards container -->
         <div class="food_cards flex gap wrap justify-center">
@@ -57,14 +53,12 @@
                         </article>
                         <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
                         <div class="card__btns flex">
-                            <form action="./backend/details.php" class="mr-10" method="post">
-                                <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
-                                <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
-                            </form>
-
+                            <div class="form mr-10">
+                                <a href="./details.php?name=<?php echo $data['name']; ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
+                            </div>
                             <form action="#" method="post" class="form_food-card" name="form_food-card">
                                 <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
-                                <button type="submit" class="button card__btn btn_add-to-cart flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                                <button href="submit" class="button card__btn btn_add-to-cart flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
                             </form>
                         </div>
                     </div>

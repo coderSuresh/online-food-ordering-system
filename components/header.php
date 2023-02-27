@@ -14,59 +14,61 @@
      </head>
  <?php } else
         session_start(); ?>
- <header>
-     <nav class="top_nav flex items-center">
-         <div class="logo__back-btn flex items-center">
-             <!-- back btn -->
-             <?php if (isset($noBackBtn) && $noBackBtn == true) {
-                } else {
-                    echo '<button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>';
-                }
-                ?>
-             <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
-                 <span>Hub</span>
-             </a>
-         </div>
 
-         <ul class="flex items-center">
-             <li class="flex direction-col"><a href="menu.php">Menu</a></li>
+ <body>
+     <header>
+         <nav class="top_nav flex items-center">
+             <div class="logo__back-btn flex items-center">
+                 <!-- back btn -->
+                 <?php if (isset($noBackBtn) && $noBackBtn == true) {
+                    } else {
+                        echo '<button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>';
+                    }
+                    ?>
+                 <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
+                     <span>Hub</span>
+                 </a>
+             </div>
 
-             <!-- nav search form -->
-             <li>
-                 <form action="./backend/search-food.php" method="post" class="search_form flex items-center border-curve-lg">
-                     <input type="search" name="search-key" placeholder="search..." id="search" class="search no_outline">
-                     <button type="submit" name="search-btn" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
-                 </form>
+             <ul class="flex items-center">
+                 <li class="flex direction-col"><a href="menu.php">Menu</a></li>
 
-             </li>
+                 <!-- nav search form -->
+                 <li>
+                     <form action="./backend/search-food.php" method="post" class="search_form flex items-center border-curve-lg">
+                         <input type="search" name="search-key" placeholder="search..." id="search" class="search no_outline">
+                         <button type="submit" name="search-btn" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
+                     </form>
 
-             <!-- show profile icon if the user is logged in -->
-             <?php
-                if (isset($_SESSION['success'])) {
-                    echo '<li class="flex direction-col">
+                 </li>
+
+                 <!-- show profile icon if the user is logged in -->
+                 <?php
+                    if (isset($_SESSION['success'])) {
+                        echo '<li class="flex direction-col">
                             <img src="./images/logo.png" class="user_profile_icon relative" alt="account">
                             <div class="logout-dropdown border-curve shadow p-20">
                                 <a href="./customer_auth/logout.php">Logout</a>   
                             </div>                         
                           </li>
                           ';
-                } else {
-                    echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account">
+                    } else {
+                        echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account">
                     <span class="nav__tooltip shadow p-20">Login</span></a>';
-                }
-                ?>
+                    }
+                    ?>
 
-             <li class="flex direction-col">
-                 <button class="cart no_bg no_outline relative"><img src="./images/ic_cart.svg" alt="cart">
-                     <div class="count-top cart_count-top shadow"></div>
-                 </button>
-             </li>
-         </ul>
-         <!-- cart drop down -->
-         <div class="cart_dropdown border-curve shadow p-20">
+                 <li class="flex direction-col">
+                     <button class="cart no_bg no_outline relative"><img src="./images/ic_cart.svg" alt="cart">
+                         <div class="count-top cart_count-top shadow"></div>
+                     </button>
+                 </li>
+             </ul>
+             <!-- cart drop down -->
+             <div class="cart_dropdown border-curve shadow p-20">
 
-         </div>
+             </div>
 
-     </nav>
+         </nav>
 
- </header>
+     </header>

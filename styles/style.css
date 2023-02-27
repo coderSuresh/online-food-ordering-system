@@ -405,10 +405,6 @@ header {
     margin: 40px auto;
 }
 
-.hero form button {
-    width: 100%;
-}
-
 .offer_img {
     width: 100%;
     object-fit: cover;
@@ -453,7 +449,8 @@ header {
     margin: 10px;
 }
 
-.card__btns form {
+.card__btns form,
+.card__btns .form {
     flex: 1;
 }
 

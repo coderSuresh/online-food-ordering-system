@@ -1,10 +1,13 @@
-<body>
-    <?php
-    session_start();
-    require('./config.php');
-    if (isset($_SESSION['details-id'])) {
-        $id = $_SESSION['details-id'];
-    }
+<?php
+session_start();
+require('./config.php');
+
+if (isset($_GET['name'])) {
+    $name = $_GET['name'];
+    $sql = "select * from food where name = '$name'";
+    $res = mysqli_query($conn, $sql) or die("could not fetch from database");
+    $row = mysqli_fetch_assoc($res);
+    $id = $row['f_id'];
 
     $sql = "select * from food where f_id = $id";
     $res = mysqli_query($conn, $sql) or die("could not fetch from database");
@@ -19,9 +22,8 @@
 
     $category = $data['cat_name'];
     $title = $row['name'];
-    ?>
-
-    <?php require('./components/header.php'); ?>
+    require('./components/header.php');
+?>
     <main class="details_main">
 
         <section class="details_container flex justify-center">
@@ -72,9 +74,14 @@
         </section>
     </main>
 
-    <?php require('./components/footer.php'); ?>
-
+    <?php
+    require('./components/footer.php');
+    ?>
     <script type="module" src="./js/app.js"></script>
-</body>
+    </body>
 
-</html>
+    </html>
+<?php } else
+    echo "Something went wrong! Please go back and try again.";
+    echo " <a href='./menu.php'>Go back</a>"
+?>
