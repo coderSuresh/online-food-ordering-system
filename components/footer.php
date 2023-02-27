@@ -6,8 +6,8 @@
          </div>
          <ul>
              <li><a href="#">Terms and conditions</a></li>
-             <li><a href="./privacy-policy.html">Privacy policy</a></li>
-             <li><a href="./faq.html">FAQ</a></li>
+             <li><a href="./privacy-policy.php">Privacy policy</a></li>
+             <li><a href="./faq.php">FAQ</a></li>
          </ul>
      </section>
      <section>
@@ -17,7 +17,7 @@
          </div>
          <ul>
              <li>
-                 <a href="#">
+                 <a href="tel:+9779800000000">
                      <div class="flex items-center justify-start">
                          <img src="./images/ic_call.svg" class="icon_with_text" alt="call icon">
                          <p>027-254565</p>
@@ -25,7 +25,7 @@
                  </a>
              </li>
              <li>
-                 <a href="#">
+                 <a href="mailto:customers@restrohub.com">
                      <div class="flex items-center justify-start">
                          <img src="./images/ic_mail.svg" class="icon_with_text" alt="mail icon">
                          <p>customers@restrohub.com</p>

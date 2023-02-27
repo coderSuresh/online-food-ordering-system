@@ -127,6 +127,10 @@ a:hover {
     margin-top: 20px;
 }
 
+.mt-60 {
+    margin-top: 60px;
+}
+
 /* set padding 20px */
 .p-20 {
     padding: 20px;
@@ -1566,7 +1570,8 @@ h2 {
     margin: 0 auto;
 }
 
-.faq h1 {
+.faq h1,
+.yellow-text {
     color: var(--primary-color);
 }
 
