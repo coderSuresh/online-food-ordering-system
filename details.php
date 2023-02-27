@@ -3,17 +3,15 @@ session_start();
 require('./config.php');
 
 if (isset($_GET['name'])) {
-    $name = $_GET['name'];
+    $name = mysqli_real_escape_string($conn, $_GET['name']);
     $sql = "select * from food where name = '$name'";
     $res = mysqli_query($conn, $sql) or die("could not fetch from database");
     $row = mysqli_fetch_assoc($res);
-    $id = $row['f_id'];
 
-    $sql = "select * from food where f_id = $id";
-    $res = mysqli_query($conn, $sql) or die("could not fetch from database");
-
-    $row = mysqli_fetch_assoc($res);
-
+    if($row <= 0) {
+        header("Location: ./invalid.html");
+    }
+    
     $cat_id = $row['category'];
 
     $sql_cat = "select cat_name from category where cat_id = $cat_id";
@@ -81,7 +79,8 @@ if (isset($_GET['name'])) {
     </body>
 
     </html>
-<?php } else
+<?php } else {
     echo "Something went wrong! Please go back and try again.";
-    echo " <a href='./menu.php'>Go back</a>"
+    echo " <a href='./menu.php'>Go back</a>";
+}
 ?>

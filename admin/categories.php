@@ -119,13 +119,13 @@
             </div>
             <!-- TODO: make filter here -->
             <div class="filter flex items-center">
-                <form action="#" method="post" class="filter-form">
+                <form action="./backend/category/filter.php" method="post" class="filter-form">
                     <select name="cat-filter" class="p_7-20 border-curve" id="cat-filter">
-                        <option value="name">Sort by name</option>
-                        <option value="most-selling">Most selling</option>
-                        <option value="least-selling">Least selling</option>
-                        <option value="last-added" selected>Last added</option>
-                        <option value="first-added">First added</option>
+                        <option value="name" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Sort by name</option>
+                        <option value="most-selling" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Most selling</option>
+                        <option value="least-selling" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Least selling</option>
+                        <option value="last-added" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Last added</option>
+                        <option value="first-added" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>First added</option>
                     </select>
                 </form>
                 <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
