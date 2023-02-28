@@ -93,10 +93,9 @@
               </article>
               <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
               <div class="card__btns flex">
-                <form action="./backend/details.php" class="mr-10" method="post">
-                  <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
-                  <button type="submit" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></button>
-                </form>
+                <div class="form mr-10">
+                  <a href="./details.php?name=<?php echo $data['name']; ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
+                </div>
 
                 <form action="#" method="post" class="form_food-card" name="form_food-card">
                   <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">

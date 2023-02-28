@@ -1537,10 +1537,21 @@ pre {
 }
 
 /* ============================== privacy policy ======================= */
+
+.privacy_page {
+    margin: 40px;
+}
+
+.privacy_container {
+    width: 60%;
+}
+
+.top-foods {
+    width: 300px;
+}
+
 .privacy-container h1 {
     font-size: 36px;
-    text-align: center;
-    margin-top: 50px;
 }
 
 .privacy-container {
