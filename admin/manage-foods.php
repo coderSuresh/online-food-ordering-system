@@ -20,18 +20,16 @@
     require("./components/header.php");
     require("./components/sidebar.php");
 
-    if (isset($_SESSION['filter-by'])) {
-        if ($_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != 'enabled' && $_SESSION['filter-by'] != 'disabled' && $_SESSION['filter-by'] != 'special') {
-            $_SESSION['filter-by'] = 'all';
-        }
+    if (!isset($_GET['filter-by'])) {
+        $_GET['filter-by'] = "all";
     }
     ?>
 
     <main class="admin_dashboard_body">
 
         <section class="dashboard_inner-head flex items-center">
-            <h2>Manage Food Items <?php if (isset($_SESSION['filter-by']))
-                                        echo "(" . $_SESSION['filter-by'] . ")"; ?></h2>
+            <h2>Manage Food Items <?php if (isset($_GET['filter-by']))
+                                        echo "(" . $_GET['filter-by'] . ")"; ?></h2>
         </section>
 
         <section class="modal <?php if (isset($_SESSION['f-id']))
@@ -249,44 +247,34 @@
                 $count_special = mysqli_num_rows($result_special);
                 ?>
 
-                <form action="./backend/foods/specific-food.php" method="post">
-                    <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">All
-                        <div class="count-top shadow"><?php
-                                                        echo $count;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+                <a href="?filter-by=all" class="button ml-35 border-curve-lg relative">All
+                    <div class="count-top shadow"><?php
+                                                    echo $count;
+                                                    ?>
+                    </div>
+                </a>
 
-                <form action="./backend/foods/specific-food.php" method="post">
-                    <input type="hidden" name="filter-by" value="enabled">
-                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Enabled
-                        <div class="count-top shadow"><?php
-                                                        echo $count_enabled;
-                                                        ?>
-                        </div>
-                </form>
+                <a href="?filter-by=enabled" class="button ml-35 border-curve-lg relative">Enabled
+                    <div class="count-top shadow"><?php
+                                                    echo $count_enabled;
+                                                    ?>
+                    </div>
+                </a>
 
-                <form action="./backend/foods/specific-food.php" method="post">
-                    <input type="hidden" name="filter-by" value="disabled">
-                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Disabled
-                        <div class="count-top shadow"><?php
-                                                        echo $count_disabled;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+                <a href="?filter-by=disabled" class="button ml-35 border-curve-lg relative">Disabled
+                    <div class="count-top shadow"><?php
+                                                    echo $count_disabled;
+                                                    ?>
+                    </div>
+                </a>
 
-                <form action="./backend/foods/specific-food.php" method="post">
-                    <input type="hidden" name="filter-by" value="special">
-                    <button type="submit" name="specific-food" class="button ml-35 border-curve-lg relative">Special
-                        <div class="count-top shadow"><?php
-                                                        echo $count_special;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+                <a href="?filter-by=special" class="button ml-35 border-curve-lg relative">Special
+                    <div class="count-top shadow"><?php
+                                                    echo $count_special;
+                                                    ?>
+                    </div>
+                </a>
+
             </div>
             <!-- TODO: make filter here -->
             <div class="filter flex items-center">
@@ -305,26 +293,6 @@
         </div>
 
         <?php
-
-        // filter content by sessions
-        if (isset($_SESSION['filter-by'])) {
-            $filter_by = $_SESSION['filter-by'];
-            if ($filter_by == 'all') {
-                $sql = "SELECT * FROM food order by f_id desc";
-            } else if ($filter_by == 'enabled') {
-                $sql = "SELECT * FROM food where disabled = 0 order by f_id desc";
-            } else if ($filter_by == 'disabled') {
-                $sql = "SELECT * FROM food where disabled = 1 order by f_id desc";
-            } else if ($filter_by == 'special') {
-                $sql = "SELECT * FROM food where special = 1 order by f_id desc";
-            }
-        } else {
-            $_SESSION['filter-by'] = 'all';
-            $sql = "SELECT * FROM food order by f_id desc";
-        }
-
-        $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
-
         if (isset($_SESSION['delete_success'])) {
         ?>
             <!-- to show error alert -->
@@ -366,6 +334,53 @@
             </p>
         <?php
         }
+
+        $limit = 10;
+
+        if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
+            $filter_by = $_GET['filter-by'];
+            switch ($filter_by) {
+                case 'enabled':
+                    $count = $count_enabled;
+                    break;
+                case 'disabled':
+                    $count = $count_disabled;
+                    break;
+                case 'special':
+                    $count = $count_special;
+                    break;
+            }
+        }
+
+        $total_pages = ceil($count / $limit);
+        if (isset($_GET['page'])) {
+            $page = mysqli_real_escape_string($conn, $_GET['page']);
+            if (!is_numeric($page)) {
+                $page = 1;
+            }
+        } else {
+            $page = 1;
+        }
+
+        $offset = ($page - 1) * $limit;
+
+        if (isset($_GET['filter-by'])) {
+            $filter_by = $_GET['filter-by'];
+            if ($filter_by == 'all') {
+                $sql = "SELECT * FROM food order by f_id desc limit $offset, $limit";
+            } else if ($filter_by == 'enabled') {
+                $sql = "SELECT * FROM food where disabled = 0 order by f_id desc limit $offset, $limit";
+            } else if ($filter_by == 'disabled') {
+                $sql = "SELECT * FROM food where disabled = 1 order by f_id desc limit $offset, $limit";
+            } else if ($filter_by == 'special') {
+                $sql = "SELECT * FROM food where special = 1 order by f_id desc limit $offset, $limit";
+            }
+        } else {
+            $_SESSION['filter-by'] = 'all';
+            $sql = "SELECT * FROM food order by f_id desc limit $offset, $limit";
+        }
+
+        $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
         if (mysqli_num_rows($res) > 0) {
         ?>
             <table class="mt-20">
@@ -379,10 +394,13 @@
                     <th>Action</th>
                 </tr>
                 <?php
-                $i = 0;
+                if ($count > 0) {
+                    $i = $offset;
+                } else {
+                    $i = 0;
+                }
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
-
                     // fetch category name
                     $cat_id = $row['category'];
                     $sql_cat = "select cat_name from category where cat_id = $cat_id";
@@ -496,14 +514,53 @@
                             </div>
                         </td>
                     </tr>
-                <?php
+            <?php
                 }
-                ?>
+            } else
+                echo "No records found";
+            ?>
             </table>
-        <?php
-        } else
-            echo "No records found";
-        ?>
+
+            <div class="mt-20">
+                <p>Showing <?php echo $offset + 1; ?> - <?php if (($offset + $limit) < $count)
+                                                            echo $offset + $limit;
+                                                        else
+                                                            echo $count; ?> of <?php echo $count; ?></p>
+            </div>
+
+            <?php
+            if ($page > 1 || $page < $total_pages) {
+                $visible_pages = 1;
+                $start_page = max(1, $page - $visible_pages);
+                $end_page = min($total_pages, $page + $visible_pages);
+
+                $prev_ellipsis = $start_page > 2;
+                $next_ellipsis = $end_page < $total_pages - 1;
+            ?>
+                <div class="pagination flex items-center gap wrap justify-center mt-20">
+
+                    <?php if ($page > 1) { ?>
+                        <a href='?<?php if (isset($_GET['filter-by'])) echo 'filter-by=' . $_GET['filter-by'] . "&"; ?>page=<?php echo $page - 1; ?>' class='pagination-nums border-curve button gray'>Prev</a>
+                    <?php } ?>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                        <?php if ($i == 1 || $i == $total_pages || ($i >= $start_page && $i <= $end_page)) { ?>
+                            <a href="?<?php if (isset($_GET['filter-by'])) echo 'filter-by=' . $_GET['filter-by'] . "&"; ?>page=<?php echo ($i); ?>">
+                                <div class="pagination-nums border-curve button <?php if ($page != $i) echo "gray"; ?>"><?php echo $i; ?></div>
+                            </a>
+                        <?php } elseif ($prev_ellipsis && $i == $start_page - 1) { ?>
+                            <div class="pagination-nums border-curve button gray">...</div>
+                        <?php } elseif ($next_ellipsis && $i == $end_page + 1) { ?>
+                            <div class="pagination-nums border-curve button gray">...</div>
+                        <?php } ?>
+                    <?php } ?>
+
+                    <?php if ($page < $total_pages) { ?>
+                        <a href='?<?php if (isset($_GET['filter-by'])) echo 'filter-by=' . $_GET['filter-by'] . "&"; ?>page=<?php echo $page + 1; ?>' class='pagination-nums border-curve button gray'>Next</a>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+
     </main>
 
 </body>
