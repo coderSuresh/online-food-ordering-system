@@ -132,9 +132,9 @@
             ?>
         </div>
 
-        <div class="button w-fit border-curve mt-60 ml-auto">
-            <a href="./menu.php">View All Foods</a>
-        </div>
+        <a href="./menu.php">
+            <div class="button w-fit border-curve mt-60 ml-auto">View All Foods </div>
+        </a>
     </main>
 
     <?php require("./components/footer.php"); ?>
