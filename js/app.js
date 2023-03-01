@@ -172,8 +172,9 @@ window.onscroll = () => {
 }
 
 goToTopBtn && goToTopBtn.addEventListener("click", () => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    // document.body.scrollTop = 0; // For Safari
+    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    window.scroll({top: 0, left: 0, behavior: 'smooth'})
 })
 
 // show alert message for modal form
