@@ -125,10 +125,14 @@
                                             </p>
 
                                             <div class="card__food-img">
-                                                <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food">
+                                                <a href="./details.php?name=<?php echo $data['name']; ?>">
+                                                    <img src="./uploads/foods/<?php echo $data['img']; ?>" alt="food image" class="border-curve food_img">
+                                                </a>
                                             </div>
                                             <article class="card__food-info flex items-center">
-                                                <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
+                                                <a href="./details.php?name=<?php echo $data['name']; ?>">
+                                                    <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
+                                                </a>
                                                 <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
                                             </article>
                                             <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>

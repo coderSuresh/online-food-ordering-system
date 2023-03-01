@@ -96,10 +96,6 @@ input[type="submit"],
     cursor: pointer;
 }
 
-a:hover {
-    opacity: 0.9;
-}
-
 /* add shadow class if shadow is needed */
 .shadow {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
