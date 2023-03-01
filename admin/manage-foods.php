@@ -216,7 +216,6 @@
             <!-- buttons for food management -->
             <div class="flex items-center">
 
-                <!-- search form for employee -->
                 <form action="#" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
                         <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
@@ -247,32 +246,40 @@
                 $count_special = mysqli_num_rows($result_special);
                 ?>
 
-                <a href="?filter-by=all" class="button ml-35 border-curve-lg relative">All
-                    <div class="count-top shadow"><?php
-                                                    echo $count;
-                                                    ?>
-                    </div>
+                <a href="?filter-by=all">
+                    <button class="button ml-35 border-curve-lg relative">All
+                        <div class="count-top shadow"><?php
+                                                        echo $count;
+                                                        ?>
+                        </div>
+                    </button>
                 </a>
 
-                <a href="?filter-by=enabled" class="button ml-35 border-curve-lg relative">Enabled
-                    <div class="count-top shadow"><?php
-                                                    echo $count_enabled;
-                                                    ?>
-                    </div>
+                <a href="?filter-by=enabled">
+                    <button class="button ml-35 border-curve-lg relative">Enabled
+                        <div class="count-top shadow"><?php
+                                                        echo $count_enabled;
+                                                        ?>
+                        </div>
+                    </button>
                 </a>
 
-                <a href="?filter-by=disabled" class="button ml-35 border-curve-lg relative">Disabled
-                    <div class="count-top shadow"><?php
-                                                    echo $count_disabled;
-                                                    ?>
-                    </div>
+                <a href="?filter-by=disabled">
+                    <button class="button ml-35 border-curve-lg relative">Disabled
+                        <div class="count-top shadow"><?php
+                                                        echo $count_disabled;
+                                                        ?>
+                        </div>
+                    </button>
                 </a>
 
-                <a href="?filter-by=special" class="button ml-35 border-curve-lg relative">Special
-                    <div class="count-top shadow"><?php
-                                                    echo $count_special;
-                                                    ?>
-                    </div>
+                <a href="?filter-by=special">
+                    <button class="button ml-35 border-curve-lg relative">Special
+                        <div class="count-top shadow"><?php
+                                                        echo $count_special;
+                                                        ?>
+                        </div>
+                    </button>
                 </a>
 
             </div>
