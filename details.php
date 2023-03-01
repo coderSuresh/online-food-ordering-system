@@ -78,7 +78,7 @@ if (isset($_GET['name'])) {
 
             <div class="food_cards flex gap wrap justify-center p-20">
                 <?php
-                $sql_food = "select * from food where category = $cat_id order by f_id desc limit 4";
+                $sql_food = "select * from food where category = $cat_id and name not in ('{$row['name']}') order by f_id desc limit 4";
                 $res_food = mysqli_query($conn, $sql_food);
                 while ($data = mysqli_fetch_assoc($res_food)) {
                 ?>
