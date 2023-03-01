@@ -12,7 +12,7 @@
     <script src="./watch-status.js" defer></script>
     <script src="./watch-status.js" defer></script>
 
-</head>
+</head> 
 
 <body>
 
