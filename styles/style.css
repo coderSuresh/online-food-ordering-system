@@ -1618,8 +1618,6 @@ h2 {
 .swiper-button:after {
     color: var(--primary-color);
     font-size: 2rem !important;
-    background-color: var(--light-gray);
-    padding: 5px;
 }
 
 .swiper-pagination-bullet-active {

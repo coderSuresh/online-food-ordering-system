@@ -132,7 +132,7 @@
             ?>
         </div>
 
-        <div class="button w-fit border-curve mt-20 ml-auto">
+        <div class="button w-fit border-curve mt-60 ml-auto">
             <a href="./menu.php">View All Foods</a>
         </div>
     </main>

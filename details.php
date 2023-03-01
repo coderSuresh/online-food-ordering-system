@@ -8,10 +8,10 @@ if (isset($_GET['name'])) {
     $res = mysqli_query($conn, $sql) or die("could not fetch from database");
     $row = mysqli_fetch_assoc($res);
 
-    if($row <= 0) {
+    if ($row <= 0) {
         header("Location: ./invalid.html");
     }
-    
+
     $cat_id = $row['category'];
 
     $sql_cat = "select cat_name from category where cat_id = $cat_id";
@@ -70,6 +70,48 @@ if (isset($_GET['name'])) {
             <h3 class="heading mt-20">Ingredients</h3>
             <pre class="ingredients-font mt-20"><?php echo $row['ingredients']; ?></pre>
         </section>
+
+        <h2 class="heading our_special ml-auto mt-60">Foods You May Like
+            <hr class="underline ml-auto no_outline">
+        </h2>
+
+        <div class="food_cards flex gap wrap justify-center">
+            <?php
+            $sql_food = "select * from food where category = $cat_id order by f_id desc limit 4";
+            $res_food = mysqli_query($conn, $sql_food);
+            while ($data = mysqli_fetch_assoc($res_food)) {
+            ?>
+                <div class="menu_food-card border-curve shadow">
+                    <!-- testing badge or something for card -->
+                    <p class="card__tag text-center heading"><?php if ($data['veg'] == 1)
+                                                                    echo "Veg";
+                                                                else
+                                                                    echo "Non-veg"; ?></p>
+
+                    <div class="card__food-img">
+                        <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food item">
+                    </div>
+                    <article class="card__food-info flex items-center">
+                        <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
+                        <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
+                    </article>
+                    <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
+                    <div class="card__btns flex">
+                        <div class="form mr-10">
+                            <a href="./details.php?name=<?php echo $data['name']; ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
+                        </div>
+                        <form action="#" method="post" class="form_food-card" name="form_food-card">
+                            <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
+                            <button href="submit" class="button card__btn btn_add-to-cart flex justify-center border-curve" name="add-to-card"><img src="./images/ic_add-cart.svg" alt="add to cart"></button>
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }
+
+            ?>
+        </div>
+
     </main>
 
     <?php
