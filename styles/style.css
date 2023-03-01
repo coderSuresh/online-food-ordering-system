@@ -7,6 +7,7 @@
     --light-gray: #f3f3f3;
     --primary-color: #F7922F;
     --trans-black: #00000030;
+    --very-trans-black: #00000020;
     --trans-green: #DCFFD380;
     --trans-green-text: #30B900;
     --trans-yellow: #fafd3e67;
@@ -402,7 +403,7 @@ header {
 .hero {
     width: 80%;
     max-width: 1600px;
-    margin: 40px auto;
+    margin: 40px auto 0 auto;
 }
 
 .offer_img {
@@ -1512,7 +1513,7 @@ pre {
     font-size: 1rem;
 }
 
-.details_quantity-container button{
+.details_quantity-container button {
     padding: 5px;
 }
 
@@ -1611,4 +1612,20 @@ h2 {
 
 .question.open .answer {
     display: block;
+}
+
+/* ========= customer homepage slider styles customization ============= */
+.swiper-button:after {
+    color: var(--primary-color);
+    font-size: 2rem !important;
+    background-color: var(--light-gray);
+    padding: 5px;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary-color) !important;
+}
+
+.swiper-slide {
+    padding: 40px;
 }

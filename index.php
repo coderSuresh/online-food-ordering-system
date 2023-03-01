@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <title>RestroHub | Order Food Online</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -19,8 +20,30 @@
 
     <main class="main">
 
-        <section class="hero" style="border: 1px solid #000">
-            <a href="./details.php?name=meat lovers pizza"><img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner"></a>
+        <section class="hero border-curve" style="border: 1px solid #000">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="./details.php?name=meat lovers pizza">
+                            <img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="./details.php?name=meat lovers pizza">
+                            <img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="./details.php?name=meat lovers pizza">
+                            <img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-button-prev swiper-button"></div>
+                <div class="swiper-button-next swiper-button"></div>
+                <div class="swiper-pagination"></div>
+            </div>
         </section>
 
         <h2 class="heading our_special ml-auto mt-60">Our Special
@@ -121,6 +144,7 @@
 
     <?php require("./components/footer.php"); ?>
     <script type="module" src="./js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </body>
 
 </html>
