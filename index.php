@@ -30,12 +30,7 @@
                     </div>
                     <div class="swiper-slide">
                         <a href="./details.php?name=meat lovers pizza">
-                            <img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner">
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="./details.php?name=meat lovers pizza">
-                            <img src="./images/restrohub offer banner.png" class="offer_img" alt="offer banner">
+                            <img src="./images/kharbuja ko juice.png" class="offer_img" alt="offer banner">
                         </a>
                     </div>
                 </div>
