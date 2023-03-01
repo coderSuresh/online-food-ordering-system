@@ -43,6 +43,9 @@
                  <li class="border-curve-lg">
                      <a href="./manage-foods.php">Manage Foods</a>
                  </li>
+                 <li class="border-curve-lg">
+                     <a href="./manage-offer.php">Manage Offer</a>
+                 </li>
              </ul>
 
          </li>
@@ -80,7 +83,7 @@
                      <a href="./users/employees.php">Employees</a>
                  </li>
                  <li class="border-curve-lg">
-                     <a href="./users/customer.php">Customers  </a>
+                     <a href="./users/customer.php">Customers </a>
                  </li>
              </ul>
          </li>

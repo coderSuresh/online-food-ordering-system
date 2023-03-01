@@ -43,6 +43,9 @@
                  <li class="border-curve-lg">
                      <a href="../manage-foods.php">Manage Foods</a>
                  </li>
+                 <li class="border-curve-lg">
+                     <a href="../manage-offer.php">Manage Offer</a>
+                 </li>
              </ul>
          </li>
          <li class="sidebar_accordion">
