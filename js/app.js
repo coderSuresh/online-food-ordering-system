@@ -597,7 +597,7 @@ buyDec && buyDec.addEventListener("click", () => {
 function calculatePrice() {
     priceTotal && (priceTotal.textContent = parseInt(hiddenQuantity.value) * parseInt(buyPrice.textContent))
     finalPriceWithoutVat && (finalPriceWithoutVat.textContent = priceTotal.textContent)
-    vat && (vat.textContent = "Vat (13%): " + (priceTotal.textContent) * 0.13)
+    vat && (vat.textContent = "Vat (13%): " + parseInt(priceTotal.textContent) * 0.13)
     finalPrice && (finalPrice.textContent = "Grand Total: Rs. " + (parseInt(priceTotal.textContent) + parseInt(vat.textContent.split("Vat (13%): ")[1])))
     finalPriceWithoutVat && (finalPriceWithoutVat.textContent = "Total: " + priceTotal.textContent)
 }
