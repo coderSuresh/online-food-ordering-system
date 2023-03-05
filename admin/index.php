@@ -10,11 +10,9 @@
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
     <script src="./watch-status.js" defer></script>
-
 </head>
 
 <body>
-
     <?php
     require("./components/header.php");
     require("./components/sidebar.php");
@@ -23,7 +21,7 @@
     <main class="admin_dashboard_body">
 
         <section class="dashboard_inner-head flex items-center">
-            <h2>Dashboard</h2>
+            <h2 class="heading">Dashboard</h2>
             <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
@@ -114,11 +112,9 @@
             $total_rev = round($total_rev, 2);
             $total_rev = $total_rev . "K";
         }
-
         ?>
 
         <div class="admin_dashboard_stat">
-
             <article class="card flex items-center text-center border-curve-md shadow">
                 <img src="../images/ic_total-menu.svg" alt="total menu" aria-hidden="true" class="card_icon">
                 <div>
@@ -163,7 +159,7 @@
             </article>
 
             <section class="top_selling p-20 flex direction-col shadow justify-start border-curve-md">
-                <h2>Top selling items</h2>
+                <h2 class="heading">Top selling items</h2>
 
                 <?php
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' group by f_id order by (count(f_id) * qty) desc limit 5";
