@@ -314,7 +314,7 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-                    <tr class="shadow">
+                    <tr class="shadow pointer" onclick="redirectToViewPage(<?php echo $order_id; ?>);">
                         <td><?php echo $i; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
@@ -443,6 +443,13 @@
         }
         ?>
     </main>
+
+    <script src="./prevent-redirect-onclick-action.js"></script>
+    <script>
+        function redirectToViewPage(id) {
+            window.location = `./view-details.php?id=${id}`;
+        }
+    </script>
 
 </body>
 
