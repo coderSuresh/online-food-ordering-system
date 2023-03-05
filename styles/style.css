@@ -320,6 +320,23 @@ header {
 }
 
 /* user profile logout button and cart drop down */
+.user_profile_icon_text, 
+.user_profile_icon{
+    border-radius: 50%;
+} 
+
+.user_profile_icon_text {
+    background-color: var(--primary-color);
+    height: 35px;
+    width: 35px;
+    color: var(--white);
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+    font-weight: 700;
+    user-select: none;
+}
 
 .checkout_form {
     width: 400px;

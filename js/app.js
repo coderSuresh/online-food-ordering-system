@@ -174,7 +174,7 @@ window.onscroll = () => {
 goToTopBtn && goToTopBtn.addEventListener("click", () => {
     // document.body.scrollTop = 0; // For Safari
     // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    window.scroll({top: 0, left: 0, behavior: 'smooth'})
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' })
 })
 
 // show alert message for modal form
@@ -393,7 +393,7 @@ window.addEventListener("click", (e) => {
     if (!e.target.closest(".cart_dropdown") && !e.target.closest(".cart")) {
         cartDropdown && cartDropdown.classList.remove("visible")
     }
-    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon")) {
+    if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon") && !e.target.closest(".user_profile_icon_text") && !e.target.closest(".user_profile_icon")) {
         userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
     }
 })
@@ -614,8 +614,29 @@ filterCheckbox && filterCheckbox.forEach((checkbox) => {
     })
 })
 
+// ==================== create user profile img ==================
+const profileImg = document.querySelector(".user_profile_icon")
+const imgSRC = profileImg && profileImg.getAttribute("src")
 
-// ==================== for home page slider ==================
+if (imgSRC === "") {
+    const profileName = document.querySelector(".user_name")
+    const profileNameText = profileName && profileName.textContent
+    const firstLetter = profileNameText && profileNameText[0].toUpperCase()
+    profileName.style.display = "none"
+    const profileImgText = document.createElement("p")
+    profileImgText.setAttribute("class", "user_profile_icon_text")
+    profileImgText.textContent = firstLetter
+
+    profileImg && profileImg.replaceWith(profileImgText)
+}
+
+document.body.addEventListener("click", (e) => {
+    if (e.target.classList.contains("user_profile_icon_text")) {
+        userLogoutDropdown.classList.toggle("visible")
+    }
+})
+
+// ==================== for home page slider (don't code below this block) ==================
 const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     loop: true,

@@ -44,14 +44,30 @@
 
                  <!-- show profile icon if the user is logged in -->
                  <?php
+                    require './config.php';
                     if (isset($_SESSION['success'])) {
-                        echo '<li class="flex direction-col">
-                            <img src="./images/logo.png" class="user_profile_icon relative" alt="account">
-                            <div class="logout-dropdown border-curve shadow p-20">
-                                <a href="./customer_auth/logout.php">Logout</a>   
-                            </div>                         
-                          </li>
-                          ';
+                        $sql = "SELECT * FROM customer WHERE id = '{$_SESSION['user']}'";
+                        $result = mysqli_query($conn, $sql);
+                        $row_header = mysqli_fetch_assoc($result);
+                        $name = $row_header['names'];
+
+                        if ($row_header['image'] != '') {
+                            $profile_img = $row_header['image'];
+                        } else {
+                            $profile_img = '';
+                    ?>
+                         <p class="user_name"><?php echo $name; ?></p>
+
+                     <?php
+                        }
+                        ?>
+                     <li class="flex direction-col profile_img-container">
+                         <img src="<?php echo $profile_img; ?>" class="user_profile_icon relative" alt="account">
+                         <div class="logout-dropdown border-curve shadow p-20">
+                             <a href="./customer_auth/logout.php">Logout</a>
+                         </div>
+                     </li>
+                 <?php
                     } else {
                         echo '<li class="flex direction-col"><a href="./customer_auth/login.php"><img src="./images/ic_acc.svg" alt="account">
                     <span class="nav__tooltip shadow p-20">Login</span></a>';
