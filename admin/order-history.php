@@ -212,8 +212,7 @@
         // filter content by session 
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
-            if ($filter_by == 'delivering' || $filter_by == 'prepared') {
-                $sql = "select orders.id,
+            $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ? "select orders.id,
                     orders.c_id,
                     orders.qty,
                     orders.total_price,
@@ -231,9 +230,7 @@
                     where aos.status in ('prepared', 'delivering') 
                     order by orders.id desc
                     limit $offset, $limit
-                    ";
-            } else {
-                $sql = "select orders.id,
+                    " : "select orders.id,
                     orders.c_id,
                     orders.qty,
                     orders.total_price,
@@ -252,7 +249,6 @@
                     order by orders.id desc
                     limit $offset, $limit
                     ";
-            }
         } else {
             $sql = "select orders.id,
                     orders.c_id,
