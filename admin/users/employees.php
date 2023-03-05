@@ -114,7 +114,7 @@
             </div>
         </section>
 
-        <div class="emplooyee_stat">
+        <div class="emplooyee_stat mt-20">
 
             <div class="flex items-center">
                 <div class="emp_button-container">

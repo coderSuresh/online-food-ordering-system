@@ -78,7 +78,7 @@
             </div>
         </section>
 
-        <div class="flex items-center">
+        <div class="flex items-center mt-20">
             <!-- buttons for order management -->
             <div class="flex items-center">
 
