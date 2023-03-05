@@ -359,17 +359,7 @@
             }
         }
 
-        $total_pages = ceil($count / $limit);
-        if (isset($_GET['page'])) {
-            $page = mysqli_real_escape_string($conn, $_GET['page']);
-            if (!is_numeric($page)) {
-                $page = 1;
-            }
-        } else {
-            $page = 1;
-        }
-
-        $offset = ($page - 1) * $limit;
+        require './components/calculate-offset.php';
 
         if (isset($_GET['filter-by'])) {
             $filter_by = $_GET['filter-by'];
@@ -401,11 +391,7 @@
                     <th>Action</th>
                 </tr>
                 <?php
-                if ($count > 0) {
-                    $i = $offset;
-                } else {
-                    $i = 0;
-                }
+                $i = $offset;
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
                     // fetch category name

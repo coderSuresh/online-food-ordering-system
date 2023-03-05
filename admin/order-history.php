@@ -189,6 +189,26 @@
         <?php
         require("../config.php");
 
+        $limit = 10;
+
+        // TODO: replace by actual filter values
+        // if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
+        //     $filter_by = $_GET['filter-by'];
+        //     switch ($filter_by) {
+        //         case 'enabled':
+        //             $count = $count_enabled;
+        //             break;
+        //         case 'disabled':
+        //             $count = $count_disabled;
+        //             break;
+        //         case 'special':
+        //             $count = $count_special;
+        //             break;
+        //     }
+        // }
+
+        require './components/calculate-offset.php';
+
         // filter content by session 
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
@@ -210,6 +230,7 @@
                     inner join aos on orders.id = aos.order_id
                     where aos.status in ('prepared', 'delivering') 
                     order by orders.id desc
+                    limit $offset, $limit
                     ";
             } else {
                 $sql = "select orders.id,
@@ -229,6 +250,7 @@
                     inner join aos on orders.id = aos.order_id
                     where aos.status = '$filter_by'
                     order by orders.id desc
+                    limit $offset, $limit
                     ";
             }
         } else {
@@ -248,6 +270,7 @@
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
                     order by orders.id desc
+                    limit $offset, $limit
                     ";
         }
 
@@ -268,7 +291,7 @@
                 </tr>
 
                 <?php
-                $i = 0;
+                $i = $offset;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
 
@@ -307,7 +330,7 @@
                             <!-- options -->
                             <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
                                 <div>
-                                    <form action="./backend/order/view.php" method="post" class="flex items-center justify-start">
+                                    <form action="./view-details.php" method="post" class="flex items-center justify-start">
                                         <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                                         <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
                                         <button type="submit" name="view" class="no_bg no_outline">
@@ -323,6 +346,7 @@
                     </tr>
                 <?php } ?>
             </table>
+            <?php require './components/pagination.php'; ?>
         <?php
         } else {
             echo "No Record Found";
