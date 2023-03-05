@@ -941,10 +941,6 @@ form .text_field {
     max-width: 1440px;
 }
 
-.dashboard_inner-head {
-    margin-bottom: 30px;
-}
-
 .small-modal {
     max-width: 400px !important;
 }
