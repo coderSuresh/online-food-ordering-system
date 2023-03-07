@@ -212,7 +212,7 @@
             </div>
         </section>
 
-        <div class="flex items-center">
+        <div class="flex items-center mt-20">
             <!-- buttons for food management -->
             <div class="flex items-center">
 

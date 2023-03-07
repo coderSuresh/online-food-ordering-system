@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History | RestroHub</title>
+    <link rel="icon" href="../images/logo.png" type="image/png">
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
@@ -117,72 +118,61 @@
                 $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected'";
                 $result_rejected = mysqli_query($conn, $sql_rejected);
                 $count_rejected = mysqli_num_rows($result_rejected);
-
-                if (!isset($_SESSION['filter-by'])) {
-                    $_SESSION['filter-by'] = "all";
-                }
-
                 ?>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                <a href="?filter-by=all" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "all") echo "active"; ?>">All
                         <div class="count-top shadow"><?php
                                                         echo $count;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+                <a href="?filter-by=pending" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "pending") echo "active"; ?>">Pending
                         <div class="count-top shadow"><?php
                                                         echo $count_pending;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                <a href="?filter-by=accepted" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "accepted") echo "active"; ?>">Accepted
                         <div class="count-top shadow"><?php
                                                         echo $count_accepted;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "prepared") echo "active"; ?>">To Deliver
+                <a href="?filter-by=to-deliver" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "to-deliver") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="delivered">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
+                <a href="?filter-by=delivered" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "delivered") echo "active"; ?>">Delivered
                         <div class="count-top shadow"><?php
                                                         echo $count_delivered;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order-history" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                <a href="?filter-by=rejected" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "rejected") echo "active"; ?>">Rejected
                         <div class="count-top shadow"><?php
                                                         echo $count_rejected;
                                                         ?>
                         </div>
                     </button>
-                </form>
+                </a>
             </div>
         </div>
 
@@ -191,27 +181,23 @@
 
         $limit = 10;
 
-        // TODO: replace by actual filter values
-        // if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
-        //     $filter_by = $_GET['filter-by'];
-        //     switch ($filter_by) {
-        //         case 'enabled':
-        //             $count = $count_enabled;
-        //             break;
-        //         case 'disabled':
-        //             $count = $count_disabled;
-        //             break;
-        //         case 'special':
-        //             $count = $count_special;
-        //             break;
-        //     }
-        // }
+        if (isset($_GET['filter-by'])) {
+            $filter_by = $_GET['filter-by'];
+            $count = match ($filter_by) {
+                'pending' => $count_pending,
+                'accepted' => $count_accepted,
+                'to-deliver' => $count_to_deliver,
+                'delivered' => $count_delivered,
+                'rejected' => $count_rejected,
+                default => $count,
+            };
+        }
 
         require './components/calculate-offset.php';
 
         // filter content by session 
-        if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
-            $filter_by = $_SESSION['filter-by'];
+        if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
+            $filter_by = $_GET['filter-by'];
             $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ? "select orders.id,
                     orders.c_id,
                     orders.qty,

@@ -2,7 +2,8 @@
     <p>Showing <?php echo $offset + 1; ?> - <?php if (($offset + $limit) < $count)
                                                 echo $offset + $limit;
                                             else
-                                                echo $count; ?> of <?php echo $count; ?></p>
+                                                echo $count; ?> of <?php echo $count; ?>
+    </p>
 </div>
 
 <?php
