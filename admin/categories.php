@@ -101,7 +101,7 @@
 
         </section>
 
-        <div class="flex items-center">
+        <div class="flex items-center mt-20">
             <div class="flex items-center">
 
                 <form action="./backend/category/search.php" method="post" class="search_form border-curve-lg">
