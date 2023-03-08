@@ -52,16 +52,7 @@
             <!-- buttons for order management -->
             <div class="flex items-center">
 
-                <!-- search form for orders -->
-                <form action="#" method="post" class="search_form border-curve-lg">
-                    <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
-                        <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
-                    </div>
-                </form>
-
                 <!-- filter by status -->
-
                 <?php
 
                 $sql_all = "select kos_id as total from kos";
