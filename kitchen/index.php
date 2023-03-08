@@ -44,102 +44,93 @@
         }
         ?>
 
-        <section class="dashboard_inner-head flex items-center">
-            <h2>Order Details</h2>
-        </section>
+        <div class="flex items-center mt-20 justify-center">
+            <!-- filter by status -->
+            <?php
 
-        <div class="flex items-center">
-            <!-- buttons for order management -->
-            <div class="flex items-center">
+            // delete older orders
+            $sql = "delete from kos where Date(date) < DATE_SUB(NOW(), INTERVAL 1 DAY)";
+            mysqli_query($conn, $sql) or die("Something went wrong");
 
-                <!-- filter by status -->
-                <?php
+            $sql_all = "select kos_id as total from kos";
+            $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
+            $data_all = mysqli_num_rows($result_all);
 
-                $sql_all = "select kos_id as total from kos";
-                $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
-                $data_all = mysqli_num_rows($result_all);
+            $sql_pending = "select kos_id as total from kos where status = 'pending'";
+            $result_pending = mysqli_query($conn, $sql_pending) or die("Query Failed");
+            $data_pending = mysqli_num_rows($result_pending);
 
-                $sql_pending = "select kos_id as total from kos where status = 'pending'";
-                $result_pending = mysqli_query($conn, $sql_pending) or die("Query Failed");
-                $data_pending = mysqli_num_rows($result_pending);
+            $sql_accepted = "select kos_id as total from kos where status = 'accepted'";
+            $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
+            $data_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_accepted = "select kos_id as total from kos where status = 'accepted'";
-                $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
-                $data_accepted = mysqli_num_rows($result_accepted);
+            $sql_rejected = "select kos_id as total from kos where status = 'rejected'";
+            $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
+            $data_rejected = mysqli_num_rows($result_rejected);
 
-                $sql_rejected = "select kos_id as total from kos where status = 'rejected'";
-                $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
-                $data_rejected = mysqli_num_rows($result_rejected);
+            $sql_prepared = "select kos_id as total from kos where status = 'prepared'";
+            $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
+            $data_prepared = mysqli_num_rows($result_prepared);
 
-                $sql_prepared = "select kos_id as total from kos where status = 'prepared'";
-                $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
-                $data_prepared = mysqli_num_rows($result_prepared);
+            if (!isset($_SESSION['filter-by'])) {
+                $_SESSION['filter-by'] = "pending";
+            }
 
-                if (!isset($_SESSION['filter-by'])) {
-                    $_SESSION['filter-by'] = "pending";
-                }
+            ?>
 
-                ?>
+            <form action="./backend/order/specific-order.php" method="post">
+                <input type="hidden" name="filter-by" value="all">
+                <button type="submit" name="specific-order" class="button border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                    <div class="count-top shadow"><?php
+                                                    echo $data_all;
+                                                    ?>
+                    </div>
+                </button>
+            </form>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
-                        <div class="count-top shadow"><?php
-                                                        echo $data_all;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+            <form action="./backend/order/specific-order.php" method="post">
+                <input type="hidden" name="filter-by" value="pending">
+                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+                    <div class="count-top shadow"><?php
+                                                    echo $data_pending;
+                                                    ?>
+                    </div>
+                </button>
+            </form>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
-                        <div class="count-top shadow"><?php
-                                                        echo $data_pending;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+            <form action="./backend/order/specific-order.php" method="post">
+                <input type="hidden" name="filter-by" value="accepted">
+                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                    <div class="count-top shadow"><?php
+                                                    echo $data_accepted;
+                                                    ?>
+                    </div>
+                </button>
+            </form>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
-                        <div class="count-top shadow"><?php
-                                                        echo $data_accepted;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
+            <form action="./backend/order/specific-order.php" method="post">
+                <input type="hidden" name="filter-by" value="rejected">
+                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                    <div class="count-top shadow"><?php
+                                                    echo $data_rejected;
+                                                    ?>
+                    </div>
+                </button>
+            </form>
 
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
-                        <div class="count-top shadow"><?php
-                                                        echo $data_rejected;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
-
-                <form action="./backend/order/specific-order.php" method="post">
-                    <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "prepared") echo "active"; ?>">Prepared
-                        <div class="count-top shadow"><?php
-                                                        echo $data_prepared;
-                                                        ?>
-                        </div>
-                    </button>
-                </form>
-            </div>
+            <form action="./backend/order/specific-order.php" method="post">
+                <input type="hidden" name="filter-by" value="prepared">
+                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "prepared") echo "active"; ?>">Prepared
+                    <div class="count-top shadow"><?php
+                                                    echo $data_prepared;
+                                                    ?>
+                    </div>
+                </button>
+            </form>
         </div>
 
         <!-- food cards -->
         <?php
-
-        // delete older orders
-        $sql = "delete from kos where Date(date) < DATE_SUB(NOW(), INTERVAL 1 DAY)";
-        mysqli_query($conn, $sql) or die("Something went wrong");
-
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
             $sql = "select orders.id,
