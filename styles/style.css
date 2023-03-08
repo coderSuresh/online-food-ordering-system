@@ -1559,6 +1559,10 @@ pre {
     margin: 40px;
 }
 
+.justify-text {
+    text-align: justify;
+}
+
 .privacy_container {
     width: 60%;
 }

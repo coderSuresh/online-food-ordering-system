@@ -20,7 +20,7 @@
       <h1 class="heading yellow-text">Privacy Policy</h1>
       <section class="section mt-20">
         <h2>Introduction</h2>
-        <p>
+        <p class="justify-text">
           This privacy policy outlines how we collect, use, and protect the personal information of our users. By using
           our website or services, you agree to the terms outlined in this policy.
         </p>
@@ -28,12 +28,12 @@
 
       <section class="section mt-20">
         <h2>Information Collection and Use</h2>
-        <p>
+        <p class="justify-text">
           We may collect information such as your name, email address, and other contact information when you sign up for
           our services or communicate with us through our website. We may also collect information about your use of our
           services and website, including but not limited to your browsing behavior and search history.
         </p>
-        <p>
+        <p class="justify-text">
           This information is used to improve the services we provide and to communicate with you. We may also use this
           information to provide you with targeted foods that may be of interest to you.
         </p>
@@ -41,12 +41,12 @@
 
       <section class="section mt-20">
         <h2>Data Retention and Security</h2>
-        <p>
+        <p class="justify-text">
           We take appropriate measures to protect the personal information we collect, including using encryption and
           other security technologies. However, no method of transmission over the Internet or electronic storage is 100%
           secure. As such, we cannot guarantee the absolute security of your personal information.
         </p>
-        <p>
+        <p class="justify-text">
           We retain personal information for as long as necessary to provide our services and fulfill the purposes
           outlined in this privacy policy. When it is no longer necessary to retain personal information, we will securely
           delete it.
@@ -55,7 +55,7 @@
 
       <section class="section mt-20 mb-40">
         <h2>Changes to this Privacy Policy</h2>
-        <p>
+        <p class="justify-text">
           We may update this privacy policy from time to time. If we make any material changes to this policy, we will
           notify you either through the email address you have provided or by placing a prominent notice on our website.
         </p>
