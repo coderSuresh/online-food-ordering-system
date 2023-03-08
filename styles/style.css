@@ -142,6 +142,10 @@ input[type="submit"],
     margin-left: 35px;
 }
 
+.ml-5 {
+    margin-left: 5px;
+}
+
 /* set margin auto */
 .margin-auto {
     margin: auto;
@@ -320,10 +324,10 @@ header {
 }
 
 /* user profile logout button and cart drop down */
-.user_profile_icon_text, 
-.user_profile_icon{
+.user_profile_icon_text,
+.user_profile_icon {
     border-radius: 50%;
-} 
+}
 
 .user_profile_icon_text {
     background-color: var(--primary-color);
@@ -1073,8 +1077,98 @@ form .text_field {
     }
 }
 
-/* ===================== for admin manage food.php ===================== */
+/* ===================== for admin view order details.php ================== */
+.vod_container>* {
+    height: 500px;
+    flex: 1;
+    min-width: 350px;
+    overflow-y: auto;
+}
 
+.vod_btns {
+    flex-direction: row-reverse;
+    justify-content: end;
+}
+
+.vod_btns button {
+    font-weight: bold;
+}
+
+
+.table_order-details {
+    text-align: left;
+}
+
+.table_order-details td {
+    padding: 5px 10px;
+}
+
+/* select this td if this is the first child of its parent */
+.table_order-details td:first-child {
+    font-weight: 700;
+}
+
+.vod_image-container {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.vod_food-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive view order details */
+@media(max-width: 1320px) {
+    .vod_btns {
+        justify-content: center;
+    }
+
+    .vdo_food-details {
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .vdo_food-details>* {
+        width: 50%;
+        height: auto;
+    }
+}
+
+@media(max-width: 960px) {
+    .vod_container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vod_container>* {
+        width: 80%;
+    }
+
+    .vod_container>* {
+        height: fit-content !important;
+    }
+
+    .vdo_food-details {
+        flex-direction: column;
+    }
+
+    .vdo_food-details .vod_image-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .vdo_food-details>* {
+        width: 100%;
+    }
+}
+
+/* ===================== for admin manage food.php ===================== */
 .pagination-nums {
     height: 40px;
     width: 50px;
