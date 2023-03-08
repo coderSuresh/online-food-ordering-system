@@ -37,6 +37,10 @@
 
                     <div class="date_filter_form_options flex justify-start items-center wrap">
                         <div class="flex justify-start items-center">
+                            <input type="radio" name="filter_option" value="all-time" id="filter_option-all-time" checked>
+                            <label for="filter_option-all-time"> &nbsp; All time</label>
+                        </div>
+                        <div class="flex justify-start items-center">
                             <input type="radio" name="filter_option" value="today" id="filter_option-today" checked>
                             <label for="filter_option-today"> &nbsp; Today</label>
                         </div>
