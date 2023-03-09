@@ -507,15 +507,13 @@
                             </div>
                         </td>
                     </tr>
-            <?php
-                }
-            } else
-                echo "No records found";
-            ?>
+                <?php } ?>
             </table>
-
-            <?php require './components/pagination.php'; ?>
-
+        <?php
+            require './components/pagination.php';
+        } else
+            echo "No records found";
+        ?>
     </main>
 
 </body>
