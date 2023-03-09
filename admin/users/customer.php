@@ -21,7 +21,58 @@
     ?>
 
     <main class="admin_dashboard_body">
-
+        <?php
+        if (isset($_SESSION['block-success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['block-success'];
+                unset($_SESSION['block-success']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['block-error'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['block-error'];
+                unset($_SESSION['block-error']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['unblock-success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['unblock-success'];
+                unset($_SESSION['unblock-success']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['unblock-error'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['unblock-error'];
+                unset($_SESSION['unblock-error']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
         <section class="dashboard_inner-head flex items-center">
             <h2>Customer Details</h2>
             <img src="../../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
@@ -166,23 +217,23 @@
         require("../../config.php");
 
         // filter by session
-        $sql = "SELECT names,username,email,date,status,active FROM customer";
+        $sql = "SELECT id,names,username,email,date,status,active FROM customer";
 
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
-                $sql = "SELECT names,username,email,date,status,active FROM customer";
+                $sql = "SELECT id,names,username,email,date,status,active FROM customer";
             } else if ($filter_by == 'active') {
-                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE active = 1";
+                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE active = 1";
             } else if ($filter_by == 'inactive') {
-                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE active = 0";
+                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE active = 0";
             } else if ($filter_by == 'verified') {
-                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE status = 'verified'";
             } else if ($filter_by == 'not verified') {
-                $sql = "SELECT names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
+                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
             }
         } else {
-            $sql = "SELECT names,username,email,date,status,active FROM customer";
+            $sql = "SELECT id,names,username,email,date,status,active FROM customer";
         }
 
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -206,7 +257,7 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
-                    $username = $row['username'];
+                    $id = $row['id'];
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
@@ -228,8 +279,8 @@
                                 <?php
                                 if ($row['active'] == 1) {
                                 ?>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                    <form action="./backend/block.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="flex items-center justify-start">
                                             <img src="../../images/ic_disable.svg" alt="activate">
                                             <button type="submit" name="block" class="no_bg no_outline" style="font-size: 1rem;">Block</button>
@@ -238,8 +289,8 @@
                                 <?php
                                 } else {
                                 ?>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                    <form action="./backend/enable.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="flex items-center justify-start">
                                             <img src="../../images/ic_enable.svg" alt="activate">
                                             <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
