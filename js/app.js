@@ -103,7 +103,7 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "image=" + image;
                         location.reload();
                         window.location.href =
-                           "https://localhost/messy-code/customer_auth/google_auth.php";
+                            "https://localhost/messy-code/customer_auth/google_auth.php";
                     });
                 }
             });
@@ -440,14 +440,14 @@ function createCartItemContainer(id, name, img, price, quantity) {
     const divCartContent = document.createElement("div")
     divCartContent.setAttribute("class", "cart_content flex items-center")
 
-    const cartImg = document.createElement("img")
-    cartImg.setAttribute("class", "cart_img")
-    cartImg.setAttribute("src", "./uploads/foods/" + img)
-    divCartContent.appendChild(cartImg)
-
     const div1 = document.createElement("div")
     div1.setAttribute("class", "flex items-center")
     divCartContent.appendChild(div1)
+
+    const cartImg = document.createElement("img")
+    cartImg.setAttribute("class", "cart_img")
+    cartImg.setAttribute("src", "./uploads/foods/" + img)
+    div1.appendChild(cartImg)
 
     const div2 = document.createElement("div")
     div1.appendChild(div2)
@@ -458,7 +458,7 @@ function createCartItemContainer(id, name, img, price, quantity) {
     div2.appendChild(cartTitle)
 
     const divCartQty = document.createElement("div")
-    divCartQty.setAttribute("class", "qty_container flex items-center")
+    divCartQty.setAttribute("class", "qty_container flex items-center justify-start")
     div2.appendChild(divCartQty)
 
     const divCartQtyBtnInc = document.createElement("button")
@@ -500,15 +500,19 @@ function createCartItemContainer(id, name, img, price, quantity) {
     cartHiddenPrice.textContent = price
     div1.appendChild(cartHiddenPrice)
 
+    const div3 = document.createElement("div")
+    div3.setAttribute("class", "flex items-center")
+    divCartContent.appendChild(div3)
+
     const cartItemPrice = document.createElement("p")
     cartItemPrice.setAttribute("class", "cart_price ml-35")
     cartItemPrice.textContent = "Rs. " + (parseInt(price) * parseInt(quantity))
-    div1.appendChild(cartItemPrice)
+    div3.appendChild(cartItemPrice)
 
     const cartContentForm = document.createElement("form")
     cartContentForm.setAttribute("class", "cart_content-form")
     cartContentForm.setAttribute("method", "POST")
-    divCartContent.appendChild(cartContentForm)
+    div3.appendChild(cartContentForm)
 
     const cartHiddenId = document.createElement("input")
     cartHiddenId.setAttribute("name", "id")
