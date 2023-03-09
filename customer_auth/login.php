@@ -60,6 +60,18 @@ if (isset($_SESSION['success'])) {
                 unset($_SESSION["invalid"]);
             }
             ?>
+            <?php
+            if (isset($_SESSION["block"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container error p_7-20">
+                    <?php echo $_SESSION["block"]; ?>
+                </p>
+
+            <?php
+                unset($_SESSION["block"]);
+            }
+            ?>
 
             <div class="text_field">
                 <input type="text" class="no_bg no_outline" placeholder="John Doe" name="username" required autofocus>
@@ -94,33 +106,4 @@ if (isset($_SESSION['success'])) {
     </main>
     <script type="module" src="../js/app.js"></script>
 </body>
-<?php
-if (isset($_COOKIE['user'])) {
-    include('../config.php');
-    $signin_provider = $_COOKIE['sign_in_provider'];
-    $names  = $_COOKIE['profile_name'];
-    $email = $_COOKIE['email'];
-    $image = $_COOKIE['image'];
-    $count = 0;
-
-    $sql_email = "SELECT email,id FROM customer WHERE email='$email'";
-    $res_email = mysqli_query($conn, $sql_email) or die("Error");
-
-    if (!(mysqli_num_rows($res_email) > 0)) {
-        $status = "verified";
-        $sql = "Insert into customer values (default,'$names',NULL,'$email',NULL,'$signin_provider',NOW(),'$status',1,NULL,'$image',$count)";
-        mysqli_query($conn, $sql) or die(mysqli_error($conn));
-        $id = mysqli_insert_id($conn);
-        $_SESSION['success'] = "success";
-        $_SESSION['user'] = $id;
-        header("location: ../index.php");
-    } else {
-        $data = mysqli_fetch_assoc($res_email);
-        $_SESSION['success'] = "success";
-        $_SESSION['user'] = $data['id'];
-        header("location: ../index.php");
-    }
-}
-?>
-
-</html>
+ </html>
