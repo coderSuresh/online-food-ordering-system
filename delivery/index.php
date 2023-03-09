@@ -23,12 +23,12 @@ if (!isset($_SESSION['delivery-success'])) {
     <header>
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
-                <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../images/ic_back.svg" alt="go back"></button>
                 <a href="./index.php" class="logo heading flex items-center"><img src="../images/logo.png" alt="logo">Restro
                     <span>Hub</span>
                 </a>
             </div>
+
+            <h2 class="heading">Delivery Department</h2>
 
             <ul class="flex items-center">
                 <!-- show profile icon if the user is logged in -->
@@ -51,11 +51,7 @@ if (!isset($_SESSION['delivery-success'])) {
     </header>
 
     <main class="admin_dashboard_body">
-
-        <section class="dashboard_inner-head flex items-center">
-            <h2>Delivery Details</h2>
-        </section>
-
+            
     </main>
     <script src="../js/app.js" type="module"></script>
 </body>

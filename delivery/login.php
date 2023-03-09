@@ -21,11 +21,11 @@ if (isset($_SESSION['delivery-success'])) {
 
 <body>
 
-    <main class=" flex direction-col h-100 border-curve-lg shadow">
+    <main class="flex direction-col h-100 border-curve-lg shadow">
         <div class="center shadow border-curve-md">
             <h1 class="heading text-center">Delivery Login</h1>
 
-            <form action="./backend/auth.php" method="post">
+            <form action="./backend/auth_web.php" method="post">
                 <?php
                 if (isset($_SESSION['delivery-error'])) {
                 ?>
@@ -47,8 +47,6 @@ if (isset($_SESSION['delivery-success'])) {
                     <input type="password" class="no_bg no_outline" placeholder="xxxxxxxx" name="password" required>
                     <label>Password</label>
                 </div>
-                <a href="./reset/reset-password.php" class="forget_password">Forgot password?</a>
-
                 <div>
                     <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="delivery-login" value="Login">
                 </div>
