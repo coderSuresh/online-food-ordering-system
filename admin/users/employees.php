@@ -22,6 +22,58 @@
     ?>
 
     <main class="admin_dashboard_body">
+        <?php
+        if (isset($_SESSION['block-success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['block-success'];
+                unset($_SESSION['block-success']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['block-error'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['block-error'];
+                unset($_SESSION['block-error']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['unblock-success'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['unblock-success'];
+                unset($_SESSION['unblock-success']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['unblock-error'])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['unblock-error'];
+                unset($_SESSION['unblock-error']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
 
         <section class="dashboard_inner-head flex items-center">
             <h2>Employees</h2>
@@ -117,15 +169,52 @@
         <div class="emplooyee_stat mt-20">
 
             <div class="flex items-center">
-                <div class="emp_button-container">
+                <div class="emp_button-container flex gap items-center justify-start">
                     <!-- 
                         // popper-btn class listenes for click event and opens modal popup
                         // controlled from admin.js
                     -->
                     <button class="button border-curve-lg popper-btn">Add</button>
-                    <button class="button border-curve-lg">All</button>
-                    <button class="button border-curve-lg">Active</button>
-                    <button class="button border-curve-lg">Disabled</button>
+                    <?php
+                    $sql_all = "SELECT name,username,email,active,department FROM employees";
+                    $result_all = mysqli_query($conn, $sql_all);
+                    $count_all = mysqli_num_rows($result_all);
+
+                    $sql_active = "SELECT name,username,email,active,department FROM employees WHERE active =1";
+                    $result_active = mysqli_query($conn, $sql_active);
+                    $count_active = mysqli_num_rows($result_active);
+
+                    $sql_inactive = "SELECT name,username,email,active,department FROM employees WHERE active = 0";
+                    $result_inactive = mysqli_query($conn, $sql_inactive);
+                    $count_inactive = mysqli_num_rows($result_inactive);
+
+                    ?>
+
+                    <form action="./backend/specific-users.php" method="post">
+                        <input type="hidden" name="filter-by" value="all">
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                            <div class="count-top shadow"><?php
+                                                            echo $count_all;
+                                                            ?>
+                            </div>
+                    </form>
+                    <form action="./backend/specific-users.php" method="post">
+                        <input type="hidden" name="filter-by" value="active">
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "active") echo "active"; ?> ">Active
+                            <div class="count-top shadow"><?php
+                                                            echo $count_active;
+                                                            ?>
+                            </div>
+                    </form>
+                    <form action="./backend/specific-users.php" method="post">
+                        <input type="hidden" name="filter-by" value="inactive">
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "inactive") echo "active"; ?> ">Inactive
+                            <div class="count-top shadow"><?php
+                                                            echo $count_inactive;
+                                                            ?>
+                            </div>
+                    </form>
+
                 </div>
 
                 <!-- search form for employee -->
@@ -139,7 +228,20 @@
 
             <!-- employee cards -->
             <?php
-            $sql = "SELECT * FROM employees";
+            // filter by session
+            if (isset($_SESSION['filter-by'])) {
+                $filter_by = $_SESSION['filter-by'];
+                if ($filter_by == 'all') {
+                    $sql = "SELECT * FROM employees";
+                } else if ($filter_by == 'active') {
+                    $sql = "SELECT * FROM employees WHERE active = 1";
+                } else if ($filter_by == 'inactive') {
+                    $sql = "SELECT * FROM employees WHERE active = 0";
+                }
+            } else {
+                $sql = "SELECT * FROM employees";
+            }
+
             $result = mysqli_query($conn, $sql) or die("Query Failed.");
             if (mysqli_num_rows($result) > 0) {
             ?>
@@ -149,6 +251,7 @@
                         $sql_dept = "SELECT * FROM department WHERE dept_id = {$row['department']}";
                         $result_dept = mysqli_query($conn, $sql_dept) or die("Query Failed.");
                         $row_dept = mysqli_fetch_assoc($result_dept)['department'];
+                        $id = $row['emp_id'];
                     ?>
                         <div class="employee_card p-20 text-center shadow border-curve-md">
 
@@ -170,18 +273,29 @@
 
                             <!-- options -->
                             <div class="emp_card_options table_action_options shadow border-curve-md p-20">
-                                <a href="#">
-                                    <div class="flex items-center justify-start">
-                                        <img src="../../images/ic_edit.svg" alt="edit icon">
-                                        <p>Edit</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="flex items-center justify-start">
-                                        <img src="../../images/ic_disable.svg" alt="disable icon">
-                                        <p>Disable</p>
-                                    </div>
-                                </a>
+                                <?php
+                                if ($row['active'] == 1) {
+                                ?>
+                                    <form action="./backend/emp_block.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_disable.svg" alt="activate">
+                                            <button type="submit" name="block" class="no_bg no_outline" style="font-size: 1rem;">Block</button>
+                                        </div>
+                                    </form>
+                                <?php
+                                } else {
+                                ?>
+                                    <form action="./backend/emp_enable.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_enable.svg" alt="activate">
+                                            <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
+                                        </div>
+                                    </form>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                 <?php
