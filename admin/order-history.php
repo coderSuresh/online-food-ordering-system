@@ -147,8 +147,8 @@
                     </button>
                 </a>
 
-                <a href="?filter-by=to-deliver" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "to-deliver") echo "active"; ?>">To Deliver
+                <a href="?filter-by=prepared" class="ml-35">
+                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "prepared") echo "active"; ?>">To Deliver
                         <div class="count-top shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
@@ -186,7 +186,7 @@
             $count = match ($filter_by) {
                 'pending' => $count_pending,
                 'accepted' => $count_accepted,
-                'to-deliver' => $count_to_deliver,
+                'prepared' => $count_to_deliver,
                 'delivered' => $count_delivered,
                 'rejected' => $count_rejected,
                 default => $count,
