@@ -279,8 +279,16 @@
                                     <form action="./backend/emp_block.php" method="post">
                                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="flex items-center justify-start">
-                                            <img src="../../images/ic_disable.svg" alt="activate">
+                                            <img src="../../images/ic_disable.svg" alt="block">
                                             <button type="submit" name="block" class="no_bg no_outline" style="font-size: 1rem;">Block</button>
+                                        </div>
+                                    </form>
+
+                                    <form action="#" method="post" class="mt-20">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_edit.svg" alt="edit">
+                                            <button type="submit" name="edit-emp" class="no_bg no_outline" style="font-size: 1rem;">Edit</button>
                                         </div>
                                     </form>
                                 <?php
@@ -293,6 +301,15 @@
                                             <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
                                         </div>
                                     </form>
+
+                                    <form action="#" method="post" class="mt-20">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <div class="flex items-center justify-start">
+                                            <img src="../../images/ic_edit.svg" alt="edit">
+                                            <button type="submit" name="edit-emp" class="no_bg no_outline" style="font-size: 1rem;">Edit</button>
+                                        </div>
+                                    </form>
+
                                 <?php
                                 }
                                 ?>
