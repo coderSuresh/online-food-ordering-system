@@ -136,18 +136,12 @@
             $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
-                    orders.total_price,
                     orders.note,
-                    orders.date,
                     orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
                     kos.kos_id,
                     kos.status,
                     aos.aos_id
                     from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join kos on orders.id = kos.order_id
                     inner join aos on orders.id = aos.order_id
                     where kos.status = '{$filter_by}'
@@ -158,18 +152,12 @@
             $sql = "select orders.id,
                     orders.c_id,
                     orders.qty,
-                    orders.total_price,
                     orders.note,
-                    orders.date,
                     orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
                     kos.kos_id,
                     kos.status,
                     aos.aos_id
                     from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join kos on orders.id = kos.order_id
                     inner join aos on orders.id = aos.order_id
                     order by orders.id desc
