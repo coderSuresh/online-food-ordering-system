@@ -94,7 +94,7 @@
               <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
               <div class="card__btns flex">
                 <div class="form mr-10">
-                  <a href="./details.php?name=<?php echo $data['name']; ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
+                  <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
                 </div>
 
                 <form action="#" method="post" class="form_food-card" name="form_food-card">

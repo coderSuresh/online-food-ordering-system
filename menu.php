@@ -125,12 +125,12 @@
                                             </p>
 
                                             <div class="card__food-img">
-                                                <a href="./details.php?name=<?php echo $data['name']; ?>">
+                                                <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>">
                                                     <img src="./uploads/foods/<?php echo $data['img']; ?>" alt="food image" class="border-curve food_img">
                                                 </a>
                                             </div>
                                             <article class="card__food-info flex items-center">
-                                                <a href="./details.php?name=<?php echo $data['name']; ?>">
+                                                <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>">
                                                     <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>
                                                 </a>
                                                 <p class="card__food-price heading">Rs. <?php echo $data['price']; ?></p>
@@ -138,7 +138,7 @@
                                             <p class="card__food-desc"><?php echo $data['short_desc']; ?></p>
                                             <div class="card__btns flex">
                                                 <div class="form mr-10">
-                                                    <a href="./details.php?name=<?php echo $data['name']; ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
+                                                    <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>" class="button card__btn flex justify-center border-curve" name="view"><img src="./images/ic_eye.svg" alt="view"></a>
                                                 </div>
                                                 <form action="./backend/add-to-cart.php" method="post" class="form_food-card" name="form_food-card">
                                                     <input type="hidden" name="f_id" value="<?php echo $data['f_id']; ?>">
