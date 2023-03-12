@@ -288,9 +288,10 @@
                                     </form>
                                 <?php
                                 } else {
-                                ?>m action="./backend/enable.php" method="post">
-                                        
-                                    <for<input type="hidden" name="id" value="<?php echo $id; ?>">
+                                ?>
+                                    <form action="./backend/enable.php" method="post">
+
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="flex items-center justify-start">
                                             <img src="../../images/ic_enable.svg" alt="activate">
                                             <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
