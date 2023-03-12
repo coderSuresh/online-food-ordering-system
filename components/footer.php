@@ -1,4 +1,5 @@
- <footer class="footer">
+ <footer class="footer<?php if (isset($mt_0))
+                            echo "mt-0"; ?>">
      <section>
          <div class="footer_title">
              <h3 class="heading">Legal</h3>

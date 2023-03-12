@@ -513,6 +513,34 @@ header {
     top: 10px;
 }
 
+/* newsletter section */
+.newsletter {
+    background-color: var(--light-gray);
+    padding: 40px;
+    text-align: center;
+}
+
+.newsletter-desc {
+    font-size: 0.825rem;
+}
+
+.newsletter-form div {
+    width: fit-content;
+    margin: 0 auto;
+    border: 1px solid var(--gray);
+}
+
+.newsletter-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+}
+
+.newsletter-form div input {
+    padding: 10px;
+}
+
 /* footer for customers */
 .footer {
     margin-top: 40px;
