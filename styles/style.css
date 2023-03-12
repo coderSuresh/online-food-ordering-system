@@ -124,6 +124,10 @@ input[type="submit"],
     margin-top: 20px;
 }
 
+.mt-40 {
+    margin-top: 40px;
+}
+
 .mt-60 {
     margin-top: 60px;
 }
@@ -527,6 +531,7 @@ header {
 .newsletter-form div {
     width: fit-content;
     margin: 0 auto;
+    outline: 1px solid var(--gray);
     border: 1px solid var(--gray);
 }
 

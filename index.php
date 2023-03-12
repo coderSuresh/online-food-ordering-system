@@ -151,7 +151,7 @@
                 <p class="newsletter-desc mt-20">Get the latest updates on our new foods and offers</p>
             </div>
 
-            <form method="post" action="#" class="newsletter-form flex items-center mt-60">
+            <form method="post" action="#" class="newsletter-form flex items-center mt-40">
                 <div class="border-curve">
                     <input type="email" name="email" placeholder="Enter your email" class="newsletter-input border-curve no_bg no_outline" required>
                     <button type="submit" name="subscribe" class="newsletter-btn button border-curve">Subscribe</button>
