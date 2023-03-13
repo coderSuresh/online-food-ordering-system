@@ -1,0 +1,61 @@
+@media (max-width: 1220px) {
+
+    .footer .footer_map,
+    .footer_map iframe {
+        width: 100% !important;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1060px) {
+    .user_main {
+        margin: 0 40px;
+    }
+}
+
+@media (max-width: 980px) {
+
+    /* ============ for customer index.php ======== */
+    .hero {
+        width: 100%;
+        margin: 40px auto;
+    }
+
+    .nav__btn-back {
+        position: absolute;
+        left: -100%;
+    }
+
+    .top_nav ul li {
+        margin: 0 15px;
+    }
+
+    /* ======== for menu.php ========= */
+    .menu_sidebar {
+        min-height: fit-content;
+        width: fit-content !important;
+        padding: 10px;
+        left: 60px;
+        top: 20vh;
+    }
+
+    .menu_filter_icon {
+        position: fixed;
+        left: 0;
+        top: 20vh;
+        display: block;
+        width: 40px;
+    }
+
+    .menu_container {
+        margin: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user_main {
+        margin: 0 20px;
+    }
+
+    /* TODO: convert header elements into hamburger menu */
+}

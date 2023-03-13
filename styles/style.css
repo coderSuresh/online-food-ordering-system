@@ -551,10 +551,11 @@ header {
     margin-top: 40px;
     background-color: var(--light-gray);
     padding: 20px 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 30px;
+}
+
+.footer > section,
+.footer > div {
+    min-width: 300px;
 }
 
 .footer .footer_title {
@@ -596,6 +597,10 @@ header {
 .menu_sidebar {
     width: 150px !important;
     text-align: left !important;
+}
+
+.menu_filter_icon {
+    display: none;
 }
 
 .menu_sidebar .form input {

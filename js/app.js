@@ -620,6 +620,31 @@ filterCheckbox && filterCheckbox.forEach((checkbox) => {
     })
 })
 
+// show and hide filter content on click outside
+if (window.innerWidth < 980) {
+    const filterBtn = document.querySelector(".menu_filter_icon")
+    const filterContent = document.querySelector(".menu_sidebar")
+
+    filterContent && filterContent.setAttribute("style", "display: none !important")
+
+    filterBtn && filterBtn.addEventListener("click", () => {
+        console.log("clicked")
+        filterContent && (
+            filterContent.getAttribute && filterContent.getAttribute("style") === "display: none !important" ?
+                filterContent.setAttribute("style", "display: block !important") :
+                filterContent.setAttribute("style", "display: none !important")
+        )
+    })
+
+    document.body.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("menu_sidebar") && !e.target.classList.contains("menu_filter_icon")) {
+            filterContent && (
+                filterContent.setAttribute("style", "display: none !important")
+            )
+        }
+    })
+}
+
 // ==================== create user profile img ==================
 const profileImg = document.querySelector(".user_profile_icon")
 const imgSRC = profileImg && profileImg.getAttribute("src")

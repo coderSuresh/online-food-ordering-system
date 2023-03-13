@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <title>RestroHub | Order Food Online</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 </head>
 
@@ -18,7 +19,7 @@
     <?php $noBackBtn = true;
     require("./components/header.php"); ?>
 
-    <main>
+    <main class="user_main">
 
         <section class="hero border-curve" style="border: 1px solid #000">
             <div class="swiper">

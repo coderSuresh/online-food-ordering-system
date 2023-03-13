@@ -10,14 +10,19 @@
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <title>Menu | RestroHub</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
 </head>
 
 <body>
 
     <?php require("./components/header.php"); ?>
 
+    <!-- filter icon for small screen devices -->
+    <img src="./images/ic_filter.svg" alt="filter icon" class="menu_filter_icon">
+
     <aside class="sidebar menu_sidebar shadow p_7-20">
         <h4 class="heading">Filter</h4>
+
         <!-- veg non-veg filter form -->
         <form action="./backend/veg-filter.php" method="post" class="veg_filter_form form flex direction-col mt-20">
             <div>
