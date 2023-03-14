@@ -17,6 +17,9 @@
   <?php require("./components/header.php"); ?>
 
   <main class="flex privacy_page justify-center">
+    
+    <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+
     <section class="privacy_container">
       <h1 class="heading yellow-text">Privacy Policy</h1>
       <section class="section mt-20">

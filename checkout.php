@@ -61,6 +61,8 @@ if (!isset($_SESSION['success'])) {
     </header>
 
     <main style="margin: 0 40px 40px;">
+    
+        <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
 
         <?php
         if (isset($_SESSION["name_error"])) {

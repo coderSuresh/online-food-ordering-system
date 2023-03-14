@@ -25,6 +25,8 @@ if (isset($_GET['name'])) {
 ?>
     <main class="details_main">
 
+        <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+
         <section class="details_container flex justify-center">
             <div class="details_img-container">
                 <img src="./uploads/foods/<?php echo $row['img']; ?>" class="details_img border-curve-md" alt="food image">

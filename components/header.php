@@ -11,6 +11,7 @@
          <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
          <title><?php echo $title; ?> | RestroHub</title>
          <link rel="stylesheet" href="./styles/style.css">
+         <link rel="stylesheet" href="./styles/responsive.css">
      </head>
  <?php } else
         session_start(); ?>

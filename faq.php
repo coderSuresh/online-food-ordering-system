@@ -17,6 +17,9 @@
   <?php require("./components/header.php"); ?>
 
   <main class="faq">
+    
+    <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+
     <h1 class="heading mt-20">FAQs</h1>
 
     <section class="question mt-20 open">

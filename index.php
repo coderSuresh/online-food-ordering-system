@@ -21,6 +21,8 @@
 
     <main class="user_main">
 
+        <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
+
         <section class="hero border-curve" style="border: 1px solid #000">
             <div class="swiper">
                 <div class="swiper-wrapper">
