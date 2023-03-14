@@ -113,7 +113,7 @@
                             $res = mysqli_query($conn, $sql_food);
                             if (mysqli_num_rows($res) > 0) {
                             ?>
-                                <h2 class="heading"><?php if (isset($row['cat_name']))
+                                <h2 class="heading h2"><?php if (isset($row['cat_name']))
                                                         echo $row['cat_name'];
                                                     else
                                                         echo $searchKey; ?></h2>
@@ -167,7 +167,7 @@
                         $res = mysqli_query($conn, $sql_food);
                         if (mysqli_num_rows($res) > 0) {
                         ?>
-                            <h2 class="heading"><?php if (isset($row['cat_name']))
+                            <h2 class="heading h2"><?php if (isset($row['cat_name']))
                                                     echo $row['cat_name'];
                                                 else
                                                     echo $searchKey; ?></h2>
