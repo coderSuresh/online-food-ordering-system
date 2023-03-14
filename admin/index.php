@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="icon" href="../images/logo.png" type="image/png">
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
     <script src="./watch-status.js" defer></script>
