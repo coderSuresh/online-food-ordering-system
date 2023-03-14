@@ -67,7 +67,7 @@ if (isset($_GET['name'])) {
         <section class="details_description">
             <h2 class="description heading">Description</h2>
             <p class="mt-20">Cooking time: <?php echo $row['cooking_time']; ?> Minute</p>
-            <p class="mt-20">
+            <p class="mt-20" style="text-align: justify;">
                 <?php echo $row['description']; ?>
             </p>
             <h3 class="heading mt-20">Ingredients</h3>
