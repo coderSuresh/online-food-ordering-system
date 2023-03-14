@@ -31,6 +31,7 @@
     }
 
     .food_cards {
+        width: 100%;
         justify-content: center !important;
     }
 
@@ -128,6 +129,7 @@
     .menu_food-card {
         max-width: 50%;
         width: 220px;
+        height: 350px;
     }
 
     .card__food-img {
