@@ -1658,6 +1658,10 @@ pre {
     opacity: 0.8;
 }
 
+pre {
+    white-space: pre-wrap;
+}
+
 .ingredients-font {
     font-size: 1rem;
 }
