@@ -665,7 +665,6 @@ if (window.innerWidth < 768) {
 
     document.body.addEventListener("click", (e) => {
         if (!e.target.classList.contains("header_search") && !e.target.classList.contains("icon_search") && !e.target.classList.contains("header_search_input")) {
-            console.log(e.target)
             headerSearchInput && headerSearchInput.classList.remove("active")
         }
     })
