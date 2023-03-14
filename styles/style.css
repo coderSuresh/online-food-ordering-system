@@ -553,8 +553,8 @@ header {
     padding: 20px 40px;
 }
 
-.footer > section,
-.footer > div {
+.footer>section,
+.footer>div {
     min-width: 300px;
 }
 
@@ -663,6 +663,10 @@ header {
 .cart_content .cart_price,
 .cart_content .qty {
     font-size: 0.85rem;
+}
+
+.cart_price {
+    white-space: nowrap;
 }
 
 .cart_qty {

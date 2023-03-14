@@ -172,6 +172,12 @@
 
 @media (max-width: 500px) {
 
+    /* ======== for cart ================== */
+    .cart_dropdown {
+        left: 5px;
+        right: 5px;
+    }
+
     /* ======== for details page ========== */
     .details_container {
         margin: 20px;
