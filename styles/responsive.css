@@ -57,5 +57,50 @@
         margin: 0 20px;
     }
 
+    .header_search {
+        border: none;
+        padding: 0;
+    }
+
+    .header_search input {
+        display: none;
+    }
+
+    .header_search.active {
+        background-color: #fff;
+        position: absolute;
+        border-radius: 0;
+        z-index: 1001;
+        top: 0;
+        left: 0;
+        padding: 0 20px;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+
+    .header_search.active input {
+        display: block;
+        width: 100%;
+    }
+
     /* TODO: convert header elements into hamburger menu */
+}
+
+@media (max-width: 710px) {
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer ul img {
+       margin-left: 0;
+    }
+
+    .footer .social {
+        margin: 40px 0 20px;
+    }
+
+    .footer .social img {
+        margin-left: 0;
+    }
 }

@@ -645,6 +645,35 @@ if (window.innerWidth < 980) {
     })
 }
 
+// ==================== for header search ==================
+const headerSearchBtn = document.querySelector(".header_btn-search")
+const headerSearchInput = document.querySelector(".header_search")
+
+if (window.innerWidth < 768) {
+
+    headerSearchBtn && headerSearchBtn.addEventListener("click", () => {
+
+        if (headerSearchInput.classList.contains("active")) {
+            headerSearchBtn && headerSearchBtn.setAttribute("type", "submit")
+        }
+        else {
+            headerSearchBtn && headerSearchBtn.setAttribute("type", "button")
+        }
+
+        headerSearchInput && headerSearchInput.classList.add("active")
+    })
+
+    document.body.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("header_search") && !e.target.classList.contains("icon_search") && !e.target.classList.contains("header_search_input")) {
+            console.log(e.target)
+            headerSearchInput && headerSearchInput.classList.remove("active")
+        }
+    })
+}
+else {
+    headerSearchInput && headerSearchInput.classList.remove("active")
+}
+
 // ==================== create user profile img ==================
 const profileImg = document.querySelector(".user_profile_icon")
 const imgSRC = profileImg && profileImg.getAttribute("src")

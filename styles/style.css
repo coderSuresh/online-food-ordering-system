@@ -1508,6 +1508,7 @@ textarea {
 .search_form {
     border: 1px solid var(--black);
     padding: 7px 20px;
+    transition: 0.3s;
 }
 
 .search_form div img {
