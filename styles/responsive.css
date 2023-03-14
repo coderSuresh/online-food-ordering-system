@@ -15,6 +15,25 @@
 
 @media (max-width: 980px) {
 
+    /* ============ for menu container ============ */
+    .menu_container {
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu_container_inner {
+        margin: 20px 20px 0 20px;
+    }
+
+    .menu_food-card-category-container h2 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .food_cards {
+        justify-content: center !important;
+    }
+
     /* ============ for customer index.php ======== */
     .hero {
         width: 100%;
@@ -45,10 +64,7 @@
         top: 20vh;
         display: block;
         width: 40px;
-    }
-
-    .menu_container {
-        margin: 0 40px;
+        z-index: 1000;
     }
 }
 
@@ -84,7 +100,10 @@
         width: 100%;
     }
 
-    /* TODO: convert header elements into hamburger menu */
+    .food_category-img {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 @media (max-width: 710px) {

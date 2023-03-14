@@ -42,6 +42,8 @@
 
     <main class="menu_container">
 
+    <div class="menu_container_inner">
+
         <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
 
         <section class="food_categories">
@@ -212,6 +214,7 @@
                 echo "No food items found";
             ?>
         </div>
+    </div>
         <?php require("./components/footer.php"); ?>
     </main>
 
