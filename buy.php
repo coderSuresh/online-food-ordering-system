@@ -35,9 +35,9 @@ require('./config.php');
 
                 <!-- nav search form -->
                 <li>
-                    <form action="#" method="post" class="search_form flex items-center border-curve-lg">
-                        <input type="search" name="search" placeholder="search..." id="search" class="search no_outline">
-                        <button type="submit" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
+                    <form action="#" method="post" class="header_search search_form flex items-center border-curve-lg">
+                        <input type="search" name="search" placeholder="search..." id="search" class="header_search_input search no_outline">
+                        <button type="submit" class="header_btn-search btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
                     </form>
                 </li>
 
@@ -59,7 +59,7 @@ require('./config.php');
         </nav>
     </header>
 
-    <main style="margin: 0 40px 40px;">
+    <main class="checkout_page" style="margin: 0 40px 40px;">
         <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
 
         <?php
@@ -99,7 +99,6 @@ require('./config.php');
             <p class="error-container error p_7-20">
                 <?php echo $_SESSION['note_error']; ?>
             </p>
-            }
         <?php
             unset($_SESSION['note_error']);
         }
@@ -109,62 +108,65 @@ require('./config.php');
             <h2 class="heading">Checkout</h2>
         </section>
 
-        <table class="mt-20">
-            <tr class="shadow">
-                <th>SN</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-            </tr>
-            <?php
-            $totalPrice = 0;
+        <div class="checkout_table">
 
-            if (isset($_POST['f_id'])) {
-                $_SESSION['food_id'] = $_POST['f_id'];
-                $_SESSION['quantity'] = $_POST['quantity'];
-            }
+            <table class="mt-20">
+                <tr class="shadow">
+                    <th>SN</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                </tr>
+                <?php
+                $totalPrice = 0;
 
-            $food_id = $_SESSION['food_id'];
-            $quantity = $_SESSION['quantity'];
+                if (isset($_POST['f_id'])) {
+                    $_SESSION['food_id'] = $_POST['f_id'];
+                    $_SESSION['quantity'] = $_POST['quantity'];
+                }
 
-            $sql_food = "select * from food where f_id = $food_id";
-            $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
-            $row_food = mysqli_fetch_assoc($res_food);
+                $food_id = $_SESSION['food_id'];
+                $quantity = $_SESSION['quantity'];
 
-            $foodName = $row_food['name'];
-            $foodPrice = $row_food['price'];
-            $totalPrice += $foodPrice * $quantity;
-            $foodImg = $row_food['img'];
+                $sql_food = "select * from food where f_id = $food_id";
+                $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
+                $row_food = mysqli_fetch_assoc($res_food);
 
-            $vat = ($totalPrice * 13) / 100;
-            ?>
-            <tr class="shadow">
-                <td>1</td>
-                <td>
-                    <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
-                </td>
-                <td>
-                    <?php echo $foodName; ?>
-                </td>
-                <td class="buy_price">
-                    <?php echo $foodPrice; ?>
-                </td>
-                <td>
-                    <div class="flex items-center justify-evenly">
-                        <button class="buy_inc no_bg no_outline"><img src="./images/ic_add.svg"></button>
-                        <p class="buy_page_qty"><?php echo $quantity; ?></p>
-                        <button class="buy_dec no_bg no_outline"><img src="./images/ic_remove.svg"></button>
-                    </div>
-                </td>
-                <td class="price_total">
-                    <?php echo $foodPrice * $quantity; ?>
-                </td>
-            </tr>
-        </table>
+                $foodName = $row_food['name'];
+                $foodPrice = $row_food['price'];
+                $totalPrice += $foodPrice * $quantity;
+                $foodImg = $row_food['img'];
 
-        <div class="mt-20 flex justify-center">
+                $vat = ($totalPrice * 13) / 100;
+                ?>
+                <tr class="shadow">
+                    <td>1</td>
+                    <td>
+                        <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
+                    </td>
+                    <td>
+                        <?php echo $foodName; ?>
+                    </td>
+                    <td>
+                        <div class="flex items-center justify-evenly">
+                            <button class="buy_inc no_bg no_outline"><img src="./images/ic_add.svg"></button>
+                            <p class="buy_page_qty"><?php echo $quantity; ?></p>
+                            <button class="buy_dec no_bg no_outline"><img src="./images/ic_remove.svg"></button>
+                        </div>
+                    </td>
+                    <td class="buy_price">
+                        <?php echo $foodPrice; ?>
+                    </td>
+                    <td class="price_total">
+                        <?php echo $foodPrice * $quantity; ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="mt-20 flex justify-center checkout_form_container">
             <div>
                 <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
                     <label for="name">Name:*</label>
@@ -176,7 +178,7 @@ require('./config.php');
                     <label for="note">Note:</label>
                     <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
                     <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
-                    <div class="flex items-center justify-start">
+                    <div class="flex items-center justify-start payment">
                         <input type="radio" name="payment-method" id="payment-method" checked>
                         <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                     </div>
@@ -186,7 +188,7 @@ require('./config.php');
                     <button type="submit" name="place-order-buy" class="button mt-20 w-full border-curve">Place Order</a>
                 </form>
             </div>
-            <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
+            <div class="direction-col justify-start ml-35 p-20 shadow border-curve checkout_details">
                 <div class="checkout_info">
                     <h5 class="final_price_without_vat">Total: <?php echo $totalPrice; ?></h5>
                     <h5 class="vat">Vat (13%): <?php echo $vat; ?> </h5>
@@ -196,6 +198,7 @@ require('./config.php');
                     <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;">Continue Shopping</a>
                 </div>
             </div>
+        </div>
     </main>
 
     <?php require('./components/footer.php') ?>

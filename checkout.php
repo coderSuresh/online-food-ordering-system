@@ -34,9 +34,9 @@ if (!isset($_SESSION['success'])) {
 
                 <!-- nav search form -->
                 <li>
-                    <form action="#" method="post" class="search_form flex items-center border-curve-lg">
-                        <input type="search" name="search" placeholder="search..." id="search" class="search no_outline">
-                        <button type="submit" class="btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
+                    <form action="#" method="post" class="header_search search_form flex items-center border-curve-lg">
+                        <input type="search" name="search" placeholder="search..." id="search" class="header_search_input search no_outline">
+                        <button type="submit" class="header_btn-search btn_search no_outline no_bg"><img src="./images/ic_search.svg" alt="search icon" class="icon_search"></button>
                     </form>
                 </li>
 
@@ -60,8 +60,8 @@ if (!isset($_SESSION['success'])) {
         </nav>
     </header>
 
-    <main style="margin: 0 40px 40px;">
-    
+    <main class="checkout_page" style="margin: 0 40px 40px;">
+
         <button class="go_top no_bg no_outline"><img src="./images/ic_top.svg" alt="go to top"></button>
 
         <?php
@@ -101,7 +101,6 @@ if (!isset($_SESSION['success'])) {
             <p class="error-container error p_7-20">
                 <?php echo $_SESSION['note_error']; ?>
             </p>
-            }
         <?php
             unset($_SESSION['note_error']);
         }
@@ -152,79 +151,81 @@ if (!isset($_SESSION['success'])) {
 
         if (mysqli_num_rows($res) > 0) {
         ?>
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>SN</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Action</th>
-                </tr>
-                <?php
-                $i = 0;
-                $totalPrice = 0;
-                $food_id_arr = array();
-                $qty_arr = array();
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $i++;
-                    $food_id = $row['food_id'];
-                    $sql_food = "select * from food where f_id = $food_id";
-                    $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
-                    $row_food = mysqli_fetch_assoc($res_food);
-                    $cart_id = $row['id'];
-
-                    $foodName = $row_food['name'];
-                    $foodPrice = $row_food['price'];
-                    $quantity = $row['quantity'];
-                    $totalPrice += $foodPrice * $row['quantity'];
-                    $foodImg = $row_food['img'];
-                    $vat = ($totalPrice * 13) / 100;
-
-                    array_push($food_id_arr, $food_id);
-                    array_push($qty_arr, $quantity);
-                ?>
+            <div class="checkout_table">
+                <table class="mt-20">
                     <tr class="shadow">
-                        <td>
-                            <?php echo $i; ?>
-                        </td>
-                        <td>
-                            <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
-                        </td>
-                        <td>
-                            <?php echo $foodName; ?>
-                        </td>
-                        <td>
-                            <?php echo $foodPrice; ?>
-                        </td>
-                        <td>
-                            <form action="#" method="post" class="flex items-center justify-evenly checkout_item-form">
-                                <button type="button" class="cart_item-btn checkout_inc no_bg no_outline"><img src="./images/ic_add.svg" alt="increment"></button>
-                                <input type="text" name="quantity" class="cart_qty no_bg no_outline" value="<?php echo $quantity; ?>" disabled>
-                                <input type="hidden" name="id" value="<?php echo $cart_id; ?>">
-                                <input type="hidden" name="from_checkout">
-                                <button type="button" class="cart_item-btn checkout_dec no_bg no_outline"><img src="./images/ic_remove.svg" alt="decrement"></button>
-                            </form>
-                        </td>
-                        <td>
-                            <?php echo $foodPrice * $quantity; ?>
-                        </td>
-                        <td>
-                            <form action="./backend/remove-from-cart.php" method="post" class="checkout_content-form">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="no_bg no_outline btn_remove-from-checkout">
-                                    <img src="./images/ic_delete.svg" alt="remove from cart">
-                                </button>
-                            </form>
-                        </td>
+                        <th>SN</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </table>
+                    <?php
+                    $i = 0;
+                    $totalPrice = 0;
+                    $food_id_arr = array();
+                    $qty_arr = array();
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        $i++;
+                        $food_id = $row['food_id'];
+                        $sql_food = "select * from food where f_id = $food_id";
+                        $res_food = mysqli_query($conn, $sql_food) or die("Could not fetch food details from database");
+                        $row_food = mysqli_fetch_assoc($res_food);
+                        $cart_id = $row['id'];
 
-            <div class="mt-20 flex justify-center">
+                        $foodName = $row_food['name'];
+                        $foodPrice = $row_food['price'];
+                        $quantity = $row['quantity'];
+                        $totalPrice += $foodPrice * $row['quantity'];
+                        $foodImg = $row_food['img'];
+                        $vat = ($totalPrice * 13) / 100;
+
+                        array_push($food_id_arr, $food_id);
+                        array_push($qty_arr, $quantity);
+                    ?>
+                        <tr class="shadow">
+                            <td>
+                                <?php echo $i; ?>
+                            </td>
+                            <td>
+                                <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
+                            </td>
+                            <td>
+                                <?php echo $foodName; ?>
+                            </td>
+                            <td>
+                                <form action="#" method="post" class="flex items-center justify-evenly checkout_item-form">
+                                    <button type="button" class="cart_item-btn checkout_inc no_bg no_outline"><img src="./images/ic_add.svg" alt="increment"></button>
+                                    <input type="text" name="quantity" class="cart_qty no_bg no_outline" value="<?php echo $quantity; ?>" disabled>
+                                    <input type="hidden" name="id" value="<?php echo $cart_id; ?>">
+                                    <input type="hidden" name="from_checkout">
+                                    <button type="button" class="cart_item-btn checkout_dec no_bg no_outline"><img src="./images/ic_remove.svg" alt="decrement"></button>
+                                </form>
+                            </td>
+                            <td>
+                                <?php echo $foodPrice; ?>
+                            </td>
+                            <td>
+                                <?php echo $foodPrice * $quantity; ?>
+                            </td>
+                            <td>
+                                <form action="./backend/remove-from-cart.php" method="post" class="checkout_content-form">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="no_bg no_outline btn_remove-from-checkout">
+                                        <img src="./images/ic_delete.svg" alt="remove from cart">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
+            </div>
+
+            <div class="mt-20 flex justify-center checkout_form_container">
                 <div>
                     <!--./backend/place-order.php-->
                     <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
@@ -237,7 +238,7 @@ if (!isset($_SESSION['success'])) {
                         <label for="note">Note:</label>
                         <input type="text" placeholder="example: without sugar" name="note" class="p_7-20" id="note">
                         <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
-                        <div class="flex items-center justify-start">
+                        <div class="flex items-center justify-start payment">
                             <input type="radio" name="payment-method" id="payment-method" checked>
                             <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
@@ -246,7 +247,7 @@ if (!isset($_SESSION['success'])) {
                         <button type="submit" class="button mt-20 w-full border-curve place_order" name="place-order">Place Order</a>
                     </form>
                 </div>
-                <div class="direction-col justify-start ml-35 p-20 shadow border-curve">
+                <div class="direction-col justify-start ml-35 p-20 shadow border-curve checkout_details">
                     <div class="checkout_info">
                         <h5>Total: <?php echo $totalPrice; ?></h5>
                         <h5>Vat (13%): <?php echo $vat; ?> </h5>

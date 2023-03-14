@@ -98,6 +98,38 @@
 }
 
 @media (max-width: 768px) {
+
+    /* ============ for checkout / buy page ============== */
+    .checkout_form_container {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .checkout_table {
+        padding: 3px;
+    }
+
+    .checkout_page {
+        margin: 0 20px 20px !important;
+    }
+
+    .checkout_form_container div {
+        width: 100%;
+    }
+
+    .payment {
+        width: fit-content !important;
+        justify-content: flex-start;
+    }
+
+    .checkout_details {
+        margin: 20px 0 40px 0;
+    }
+
+    .checkout_form {
+        width: 100%;
+    }
+
     .user_main {
         margin: 0 20px;
     }
@@ -222,6 +254,7 @@
     .user_profile_icon_text {
         width: 25px;
         height: 25px;
+        object-fit: contain;
         font-size: 1rem;
         line-height: 25px;
     }
