@@ -13,9 +13,9 @@
 
              <!-- nav search form -->
              <li>
-                 <form action="#" method="post" class="search_form flex items-center border-curve-lg">
+                 <form action="#" method="post" class="header_search search_form flex items-center border-curve-lg">
                      <input type="search" name="search" placeholder="search..." id="search" class="search no_outline">
-                     <button type="submit" class="btn_search no_outline no_bg"><img src="../images/ic_search.svg" alt="search icon" class="icon_search"></button>
+                     <button type="submit" class="header_btn-search btn_search no_outline no_bg"><img src="../images/ic_search.svg" alt="search icon" class="icon_search"></button>
                  </form>
              </li>
 

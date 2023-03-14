@@ -8,6 +8,8 @@
   <title>FAQ | RestroHub</title>
   <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/responsive.css">
+
 </head>
 
 <body>
@@ -85,8 +87,8 @@
                                                           echo "Non-veg"; ?></p>
 
               <div class="card__food-img">
-              <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>">
-                <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food item">
+                <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($data['name'])); ?>">
+                  <img src="./uploads/foods/<?php echo $data['img']; ?>" class="food_img w-full" alt="food item">
               </div>
               <article class="card__food-info flex items-center">
                 <h2 class="card__food-title heading"><?php echo $data['name']; ?></h2>

@@ -16,6 +16,7 @@ require('./config.php');
     <title>Checkout | RestroHub</title>
     <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
 </head>
 
 <body>

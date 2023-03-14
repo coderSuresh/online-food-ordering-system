@@ -15,6 +15,8 @@ if (isset($_SESSION['success'])) {
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <title>Login | RestroHub</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <script type="module" src="../js/app.js" defer></script>
 </head>
 
 <body>
@@ -106,4 +108,5 @@ if (isset($_SESSION['success'])) {
     </main>
     <script type="module" src="../js/app.js"></script>
 </body>
- </html>
+
+</html>
