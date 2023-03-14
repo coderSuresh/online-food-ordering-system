@@ -647,30 +647,30 @@ if (window.innerWidth < 980) {
 
 // ==================== for header search ==================
 const headerSearchBtn = document.querySelector(".header_btn-search")
-const headerSearchInput = document.querySelector(".header_search")
+const headerSearchForm = document.querySelector(".header_search")
 
 if (window.innerWidth < 768) {
 
     headerSearchBtn && headerSearchBtn.addEventListener("click", () => {
 
-        if (headerSearchInput.classList.contains("active")) {
+        if (headerSearchForm.classList.contains("active")) {
             headerSearchBtn && headerSearchBtn.setAttribute("type", "submit")
         }
         else {
             headerSearchBtn && headerSearchBtn.setAttribute("type", "button")
         }
 
-        headerSearchInput && headerSearchInput.classList.add("active")
+        headerSearchForm && headerSearchForm.classList.add("active")
     })
 
     document.body.addEventListener("click", (e) => {
         if (!e.target.classList.contains("header_search") && !e.target.classList.contains("icon_search") && !e.target.classList.contains("header_search_input")) {
-            headerSearchInput && headerSearchInput.classList.remove("active")
+            headerSearchForm && headerSearchForm.classList.remove("active")
         }
     })
 }
 else {
-    headerSearchInput && headerSearchInput.classList.remove("active")
+    headerSearchForm && headerSearchForm.classList.remove("active")
 }
 
 // ==================== create user profile img ==================
