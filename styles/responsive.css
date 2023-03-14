@@ -105,6 +105,11 @@
         width: 60px;
         height: 60px;
     }
+
+    /* ======= for login/register form */
+    .center form {
+        padding: 0 10px;
+    }
 }
 
 @media (max-width: 710px) {
