@@ -99,6 +99,28 @@
 
 @media (max-width: 768px) {
 
+    /* ============ for privacy page ===================== */
+    .privacy_page {
+        flex-direction: column;
+    }
+
+    .privacy_container {
+        width: 100%;
+    }
+
+    .top-foods {
+        width: 100%;
+    }
+
+    .top-foods.ml-35 {
+        margin-left: 0 !important;
+    }
+
+    /* ============ for FAQ page ======================== */
+    .question h2 {
+        font-size: 1.2rem;
+    }
+
     /* ============ for checkout / buy page ============== */
     .checkout_form_container {
         flex-direction: column-reverse;
