@@ -8,6 +8,7 @@
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <meta name="description" content="Are you hungry? You are at the right place. We offer mouth watering foods at your doorstep. Click now and order food online.">
          <meta name="author" content="Ashish Acharya, Bibek Mahat, Parask K. Bhandari, Suresh Dahal">
+         <meta name="theme-color" content="#F7922F">
          <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
          <title><?php echo $title; ?> | RestroHub</title>
          <link rel="stylesheet" href="./styles/style.css">

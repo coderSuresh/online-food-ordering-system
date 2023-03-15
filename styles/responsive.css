@@ -116,6 +116,10 @@
         margin-left: 0 !important;
     }
 
+    .privacy_container h2 {
+        font-size: 1.2rem;
+    }
+
     /* ============ for FAQ page ======================== */
     .question h2 {
         font-size: 1.2rem;
