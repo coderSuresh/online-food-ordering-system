@@ -47,7 +47,7 @@
                     INNER JOIN customer ON orders.c_id = customer.id
                     INNER JOIN order_contact_details ON orders.id = order_contact_details.o_id
                     INNER JOIN food ON orders.f_id = food.f_id
-                    WHERE orders.date = '2023-03-17 14:58:10' AND customer.id=44";
+                    WHERE orders.date = '$date' AND customer.id=$cid";
 
     $result_all = mysqli_query($conn, $sql_all) or die(mysqli_error($conn));
     $row = mysqli_fetch_assoc($result_all);
