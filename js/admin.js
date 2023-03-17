@@ -337,10 +337,8 @@ function rejectOrder() {
     });
 
   if (rejectReason) {
-    console.log("test");
     rejectForm &&
       rejectForm.forEach((form, i) => {
-        console.log("reject");
         rejectForm[i].submit();
       });
   } else showAlert("Please enter reason", "error");
