@@ -1,9 +1,7 @@
 <?php
     function getCurrentTimestamp()
     {
-        $date = new DateTime();
-        $date->setTimezone(new DateTimeZone('Asia/Kathmandu'));
-        $date = $date->format('Y-m-d H:i:s');
+        date_default_timezone_set('Asia/Kathmandu');
+        $date = date('Y-m-d H:i:s');
         return $date;
     }
-?>
