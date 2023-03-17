@@ -1,6 +1,8 @@
 <?php
 session_start();
 require('../config.php');
+require('../components/get-current-timestamp.php');
+
 if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
 
     $isFromBuy = false;
@@ -47,14 +49,16 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
         $vat = $total_price * 13 / 100;
         $total_price = $total_price + $vat;
 
-        $sql = "insert into orders values (DEFAULT, $uid, $q, $f_id, $total_price, '$note', NOW())";
+        $date = getCurrentTimestamp();
+
+        $sql = "insert into orders values (DEFAULT, $uid, $q, $f_id, $total_price, '$note', '$date')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
 
         $sql_o_c_t = "insert into order_contact_details values (DEFAULT, $order_id, '$address', '$phone', '$name')";
         $res_o_c_t = mysqli_query($conn, $sql_o_c_t) or die("Could not insert order contact details");
 
-        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', NOW())";
+        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$date')";
         $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
 
         if ($res && $res_o_c_t && $res_aos) {
