@@ -229,6 +229,7 @@
             <!-- employee cards -->
             <?php
             // filter by session
+            $sql = "select * from employees";
             if (isset($_SESSION['filter-by'])) {
                 $filter_by = $_SESSION['filter-by'];
                 if ($filter_by == 'all') {
