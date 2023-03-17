@@ -23,8 +23,8 @@
     if (!isset($_GET['cid']) && !isset($_GET['date'])) {
         echo "<script>window.location.href = 'order-details.php';</script>";
     } else {
-        $cid = base64_decode(mysqli_real_escape_string($conn, $_GET['cid']));
-        $date = base64_decode(mysqli_real_escape_string($conn, $_GET['date']));
+        $cid = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['cid'])));
+        $date = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['date'])));
     }
 
     $sql_all = "SELECT orders.date,
@@ -323,7 +323,7 @@
                 <?php if ($status == "pending" || $status == "accepted" && $k_o_s == "pending") { ?>
                     <form action="./backend/order/reject.php" method="post" class="flex reject_form items-center justify-start">
                         <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
+                        <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
                         <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
                     </form>
                     <div class="flex items-center justify-start">

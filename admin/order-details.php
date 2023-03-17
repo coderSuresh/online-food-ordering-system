@@ -320,7 +320,7 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode($cid); ?>', '<?php echo base64_encode($date); ?>');">
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($date)); ?>');">
                         <td><?php echo $i; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
