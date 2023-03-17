@@ -88,7 +88,7 @@
         <section class="dashboard_inner-head flex items-center">
             <h2 class="heading">View Order Details</h2>
         </section>
-        <div class="vod_container flex gap wrap justify-center p-20">
+        <div class="vod_container flex gap wrap mt-20">
             <div class="vod_left shadow p-20 border-curve">
                 <div class="vod_left-head w-fit">
                     <h3 class="heading">Order Details</h3>
@@ -238,7 +238,7 @@
 
         <div class="vod_btns flex gap w-full p-20 mt-20">
             <?php if ($status != "rejected" && $status != "delivered") { ?>
-                <div>
+                <div class="flex gap row-reverse">
                     <?php
                     if ($status == "pending") {
                     ?>

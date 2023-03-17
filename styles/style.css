@@ -171,6 +171,10 @@ input[type="submit"],
     flex-direction: row;
 }
 
+.row-reverse {
+    flex-direction: row-reverse;
+}
+
 p {
     font-weight: 400;
 }
@@ -1118,7 +1122,6 @@ form .text_field {
 }
 
 .vod_btns {
-    flex-direction: row-reverse;
     justify-content: end;
 }
 
