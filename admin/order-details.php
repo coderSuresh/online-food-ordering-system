@@ -212,51 +212,56 @@
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != "") {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'delivering' || $filter_by == 'prepared') {
-                $sql = "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where aos.status in ('prepared', 'delivering') and
-                    Date(orders.date) = CURDATE()
-                    order by orders.id desc
-                    ";
+
+                $sql = "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join aos on orders.id = aos.order_id
+                        where aos.status in ('prepared', 'delivering') and
+                        Date(orders.date) = CURDATE()
+                        group by orders.c_id
+                        order by orders.id desc";
             } else {
-                $sql = "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where aos.status = '$filter_by' and
-                    Date(orders.date) = CURDATE()
-                    order by orders.id desc
-                    ";
+                $sql =
+                    "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join aos on orders.id = aos.order_id
+                        where aos.status = '$filter_by' and
+                        Date(orders.date) = CURDATE()
+                        group by orders.c_id
+                        order by orders.id desc";
             }
         } else {
-            $sql = "select orders.id,
+            $sql = "select count(orders.id) as total_item_bought,
+                    orders.id,
                     orders.c_id,
                     orders.qty,
-                    orders.total_price,
+                    sum(orders.total_price) as total_price,
                     orders.note,
                     orders.date,
                     orders.f_id,
@@ -269,6 +274,7 @@
                     inner join order_contact_details on orders.id = order_contact_details.o_id
                     inner join aos on orders.id = aos.order_id
                     where Date(orders.date) = CURDATE()
+                    group by orders.c_id
                     order by orders.id desc
                     ";
         }
@@ -301,6 +307,9 @@
                     $food_name = $row_food['name'];
                     $order_id = $row['id'];
 
+                    $cid = $row['c_id'];
+                    $date = $row['date'];
+
                     $status = $row['status'];
 
                     $sql_k_o_s = "select status from kos where order_id = {$order_id}";
@@ -311,14 +320,14 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage(<?php echo $order_id; ?>);">
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode($cid); ?>', '<?php echo base64_encode($date); ?>');">
                         <td><?php echo $i; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
                         </td>
                         <td><?php echo $row['c_name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $food_name . " x " . $row['qty']; ?></td>
+                        <td><?php echo $row['total_item_bought']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
                         <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
                         <td class="table_action_container">
@@ -443,8 +452,8 @@
 
     <script src="./prevent-redirect-onclick-action.js"></script>
     <script>
-        function redirectToViewPage(id) {
-            window.location = `./view-details.php?id=${id}`;
+        function redirectToViewPage(cid, date) {
+            window.location = `./view-details.php?cid=${cid}&date=${date}`;
         }
     </script>
 

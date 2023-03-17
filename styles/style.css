@@ -1112,9 +1112,8 @@ form .text_field {
 
 /* ===================== for admin view order details.php ================== */
 .vod_container>* {
-    height: 500px;
     flex: 1;
-    min-width: 350px;
+    min-width: 45%;
     overflow-y: auto;
 }
 
@@ -1126,7 +1125,6 @@ form .text_field {
 .vod_btns button {
     font-weight: bold;
 }
-
 
 .table_order-details {
     text-align: left;
