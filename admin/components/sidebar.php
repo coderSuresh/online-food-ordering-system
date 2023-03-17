@@ -20,7 +20,7 @@
                      <a href="./order-history.php">Order History</a>
                  </li>
                  <li class="border-curve-lg">
-                     <a href="#">Revenue Details</a>
+                     <a href="./report.php">Revenue Details</a>
                  </li>
                  <li class="border-curve-lg">
                      <a href="#">Reviews</a>
