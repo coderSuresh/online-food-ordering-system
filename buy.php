@@ -136,6 +136,20 @@
 
         <div class="mt-20 flex justify-center checkout_form_container">
             <div>
+
+                <?php
+                // get current date and time
+                require './components/get-current-timestamp.php';
+
+                $date = getCurrentDate();
+                $time = getCurrentTime();
+
+                $time = date('h:i A', strtotime($time . ' +40 minutes'));
+                $end_time = "09:00 PM";
+
+                // TODO: reset time to 9:00 AM if date is changed in above input
+                ?>
+
                 <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
                     <label for="name">Name:*</label>
                     <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
@@ -143,33 +157,54 @@
                     <input type="tel" name="phone" placeholder="9800000000" maxlength="10" class="p_7-20" id="phone" required>
                     <label for="address">Address:*</label>
                     <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
-                    <label for="note">Note:</label>
-                    <input type="text" placeholder="example: with extra cheese" name="note" class="p_7-20" id="note">
-                    <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
+
+                    <label for="date">Date:*</label>
+                    <input type="date" name="date" min="<?php echo $date; ?>" class="p_7-20" id="date" required>
+                    <label for="time">Time:*</label>
+
+                    <?php
+                    if (date('h:i A', strtotime($time . ' +20 minutes')) > $end_time) {
+                        echo "<p><b>Sorry, we are closed at this time. Please select another date if you wish to order for later.</b></p>";
+                    }
+                    ?>
+
+                    <select name="time" required>
+                        <?php
+                        while (date('h:i A', strtotime($time . ' +20 minutes')) <= $end_time) {
+                            $time = date('h:i A', strtotime($time . ' +20 minutes'))
+                        ?> <option value='$time'> <?php echo $time; ?> </option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+
+                    <label for="note"> Note: </label>
+                    <input type="text" placeholder="example: with no sugar" name="note" class="p_7-20" id="note">
+                    <p style="font-weight: 700; margin-top: 10px;"> Payment Method </p>
                     <div class="flex items-center justify-start payment">
                         <div class="flex items-center">
                             <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod">
-                            <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
+                            <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;"> Cash on Delivery </label>
                         </div>
                         <div class="flex items-center ml-35">
                             <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" checked>
-                            <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">E-Sewa</label>
+                            <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;"> e-Sewa </label>
                         </div>
                     </div>
                     <input type="hidden" name="f_id" value="<?php echo $food_id; ?>">
                     <input type="hidden" name="qty" class="hidden_quantity" value="<?php echo $quantity; ?>">
                     <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
-                    <button type="submit" name="place-order-buy" class="button mt-20 w-full border-curve">Place Order</a>
+                    <button type="submit" name="place-order-buy" class="button mt-20 w-full border-curve"> Place Order </a>
                 </form>
             </div>
             <div class="direction-col justify-start ml-35 p-20 shadow border-curve checkout_details">
                 <div class="checkout_info">
-                    <h5 class="final_price_without_vat">Total: <?php echo $totalPrice; ?></h5>
-                    <h5 class="vat">Vat (13%): <?php echo $vat; ?> </h5>
-                    <h5 class="final_price">Grand Total: Rs. <?php echo $totalPrice + $vat; ?></h5>
+                    <h5 class="final_price_without_vat"> Total: <?php echo $totalPrice; ?> </h5>
+                    <h5 class="vat"> Vat(13 % ): <?php echo $vat; ?> </h5>
+                    <h5 class="final_price"> Grand Total: Rs.<?php echo $totalPrice + $vat; ?> </h5>
                 </div>
                 <div class="mt-20 flex direction-col">
-                    <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;">Continue Shopping</a>
+                    <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;"> Continue Shopping </a>
                 </div>
             </div>
         </div>
@@ -177,7 +212,8 @@
 
     <?php require('./components/footer.php') ?>
 
-    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/app.js">
+    </script>
 </body>
 
 </html>

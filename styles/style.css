@@ -346,7 +346,8 @@ header {
 }
 
 .checkout_form input,
-.checkout_form button .checkout_form div {
+.checkout_form button .checkout_form div ,
+.checkout_form select {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
