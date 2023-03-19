@@ -241,11 +241,11 @@ if (!isset($_SESSION['success'])) {
                         <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
                         <div class="flex items-center justify-start payment">
                             <div class="flex items-center">
-                                <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod">
+                                <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod" required checked>
                                 <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                             </div>
                             <div class="flex items-center ml-35">
-                                <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" checked>
+                                <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" required>
                                 <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">E-Sewa</label>
                             </div>
                         </div>
@@ -273,7 +273,6 @@ if (!isset($_SESSION['success'])) {
     <?php require('./components/footer.php') ?>
 
     <script type="module" src="./js/app.js"></script>
-    <!-- <script src="/firebase-messaging-sw.js" type = "module"></script> -->
 </body>
 
 </html>
