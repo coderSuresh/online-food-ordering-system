@@ -143,7 +143,12 @@ require('./config.php');
                         <img src="./uploads/foods/<?php echo $foodImg; ?>" alt="food image" class="table_food-img">
                     </td>
                     <td>
-                        <?php echo $foodName; ?>
+                        <div class="w-fit" style="margin: auto;">
+                            <a href="./details.php?name=<?php echo str_replace(" ", "-", strtolower($foodName)); ?>">
+                                <?php echo $foodName; ?>
+                            </a>
+                            <hr>
+                        </div>
                     </td>
                     <td>
                         <div class="flex items-center justify-evenly">
