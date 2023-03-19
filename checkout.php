@@ -235,8 +235,14 @@ if (!isset($_SESSION['success'])) {
                         <input type="text" placeholder="example: without sugar" name="note" class="p_7-20" id="note">
                         <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
                         <div class="flex items-center justify-start payment">
-                            <input type="radio" name="payment-method" id="payment-method" checked>
-                            <label for="payment-method" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
+                            <div class="flex items-center">
+                                <input type="radio" name="payment-method" id="payment-method-cod" checked>
+                                <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
+                            </div>
+                            <div class="flex items-center ml-35">
+                                <input type="radio" name="payment-method" id="payment-method-esewa" checked>
+                                <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">E-Sewa</label>
+                            </div>
                         </div>
                         <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr)); ?>">
                         <input type="hidden" name="quantity" value="<?php echo base64_encode(serialize($qty_arr)); ?>">
