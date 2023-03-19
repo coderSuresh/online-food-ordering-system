@@ -181,11 +181,11 @@ require('./config.php');
                     <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
                     <div class="flex items-center justify-start payment">
                         <div class="flex items-center">
-                            <input type="radio" name="payment-method-cod" id="payment-method-cod" checked>
+                            <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod" checked>
                             <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
                         </div>
                         <div class="flex items-center ml-35">
-                            <input type="radio" name="payment-method-esewa" id="payment-method-esewa" checked>
+                            <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" checked>
                             <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">E-Sewa</label>
                         </div>
                     </div>
