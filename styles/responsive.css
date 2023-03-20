@@ -15,6 +15,11 @@
 
 @media (max-width: 980px) {
 
+    /* ============ for index page time location section ============== */
+    .time_location_section .right {
+        margin-top: 40px;
+    }
+
     /* ============ for details page ============== */
     .details_container {
         margin: 40px;

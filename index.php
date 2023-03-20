@@ -148,6 +148,8 @@
             <div class="button w-fit border-curve mt-60 ml-auto">View All Foods </div>
         </a>
 
+        <!-- ==================== NEWSLETTER =================== -->
+
         <section class="newsletter mt-60">
 
             <div>
@@ -161,6 +163,25 @@
                     <button type="submit" name="subscribe" class="newsletter-btn button border-curve">Subscribe</button>
                 </div>
             </form>
+
+        </section>
+
+        <!-- ====================== OPENING TIME ======================== -->
+
+        <section class="time_location_section flex gap wrap">
+
+            <!-- TODO: display opening time and delivery location -->
+            <div class="left">
+                <img src="./images/ic_clock.svg" alt="clock icon" class="tls_icon" aria-hidden="true" role="presentation">
+                <h2 class="heading mt-20">Opening Hours</h2>
+                <p class="mt-20">We open everyday from 9 AM to 9 PM. You can also order for another day by selecting time while checking out.</p>
+            </div>
+
+            <div class="right">
+                <img src="./images/ic_location.svg" alt="location icon" class="tls_icon" aria-hidden="true" role="presentation">
+                <h2 class="heading mt-20">Delivery Area</h2>
+                <p class="mt-20">Currently, we deliver in Kathmandu inside ring road. Order placed from outside of our delivery area will be rejected.</p>
+            </div>
 
         </section>
 
