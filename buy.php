@@ -14,6 +14,9 @@
 
 <body>
     <?php
+
+    use function PHPSTORM_META\type;
+
     require './components/header.php';
     if (!isset($_SESSION['success'])) {
         echo '<script>alert("Please login first to access this page")</script>';
@@ -144,8 +147,10 @@
                 $date = getCurrentDate();
                 $time = getCurrentTime();
 
-                $time = date('h:i A', strtotime($time . ' +40 minutes'));
-                $end_time = "09:00 PM";
+                $start_time = "09:00";
+                $end_time = "21:00";
+
+                $isToday = false;
 
                 // TODO: reset time to 9:00 AM if date is changed in above input
                 ?>
@@ -158,25 +163,46 @@
                     <label for="address">Address:*</label>
                     <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
 
-                    <label for="date">Date:*</label>
-                    <input type="date" name="date" min="<?php echo $date; ?>" class="p_7-20" id="date" required>
-                    <label for="time">Time:*</label>
+                    <div class="flex items-center">
+                        <input type="checkbox" name="for-later" class="p_7-20 for_later" id="for-later">
+                        <label for="for-later" style="white-space: nowrap;">&nbsp; Order for Later</label>
+                    </div>
 
-                    <?php
-                    if (date('h:i A', strtotime($time . ' +20 minutes')) > $end_time) {
-                        echo "<p><b>Sorry, we are closed at this time. Please select another date if you wish to order for later.</b></p>";
-                    }
-                    ?>
+                    <div class="for_later_inputs">
+                        <label for="date">Date:*</label>
+                        <input type="date" name="date" min="<?php echo $date; ?>" class="p_7-20" id="date" required>
+                        <label for="time">Time:*</label>
 
-                    <select name="time" required>
                         <?php
-                        while (date('h:i A', strtotime($time . ' +20 minutes')) <= $end_time) {
-                            $time = date('h:i A', strtotime($time . ' +20 minutes'))
-                        ?> <option value='$time'> <?php echo $time; ?> </option>
-                        <?php
+                        if (date('H:i', strtotime($time . ' +30 minutes')) > $end_time || date('H:i', strtotime($time . ' +30 minutes')) < $start_time) {
+                            echo "<p><b>Sorry, we are not open at this time. Please select another date if you wish to order for later.</b></p>";
                         }
+
                         ?>
-                    </select>
+
+                        <select name="time" required>
+                            <option value=''>__SELECT__</option>
+                            <?php
+                            $user_date = $_POST['date'];
+                            ?>
+                            <?php
+                            while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
+                                $time = date('H:i', strtotime($time . ' +30 minutes'))
+                            ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
+                            <?php
+                            }
+                            if (isset($_POST['date'])) { ?>
+                                <option><?php echo $_POST['date'] ?></option>
+
+                                <?php while (date('H:i', strtotime($start_time . ' +30 minutes')) <= $end_time) {
+                                    $start_time = date('H:i', strtotime($start_time . ' +30 minutes'))
+                                ?> <option value='<?php echo $start_time; ?>'> <?php echo $start_time; ?> </option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
 
                     <label for="note"> Note: </label>
                     <input type="text" placeholder="example: with no sugar" name="note" class="p_7-20" id="note">
@@ -212,7 +238,18 @@
 
     <?php require('./components/footer.php') ?>
 
-    <script type="module" src="./js/app.js">
+    <script type="module" src="./js/app.js"></script>
+    <script>
+        const forLaterInputs = document.querySelector('.for_later_inputs')
+        const forLaterCheckBox = document.querySelector('.for_later')
+
+        forLaterCheckBox.addEventListener("click", () => {
+            if (forLaterCheckBox.checked) {
+                forLaterInputs.classList.add("visi")
+            } else {
+                forLaterInputs.classList.remove("class", "visi")
+            }
+        })
     </script>
 </body>
 

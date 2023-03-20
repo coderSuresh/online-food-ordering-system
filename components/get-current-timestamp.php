@@ -8,12 +8,12 @@ function getCurrentTimestamp()
 
 function getCurrentDate()
 {
-    $date = date('Y-m-d');
+    $date = date('m-d-Y');
     return $date;
 }
 
 function getCurrentTime()
 {
-    $time = date('h:i A');
+    $time = date('H:i');
     return $time;
 }

@@ -170,7 +170,6 @@
 
         <section class="time_location_section flex gap wrap">
 
-            <!-- TODO: display opening time and delivery location -->
             <div class="left">
                 <img src="./images/ic_clock.svg" alt="clock icon" class="tls_icon" aria-hidden="true" role="presentation">
                 <h2 class="heading mt-20">Opening Hours</h2>
