@@ -203,13 +203,13 @@ function showAlert(msg, level) {
 
     setInterval(() => {
         modalAlert.classList.remove("active")
-    }, 1400);
+    }, 2400);
 
     modalAlert.textContent = msg
 
     setTimeout(() => {
         body.removeChild(modalAlert)
-    }, 1500)
+    }, 2500)
 
     body.appendChild(modalAlert)
 }
@@ -704,6 +704,24 @@ document.body.addEventListener("click", (e) => {
         userLogoutDropdown.classList.toggle("visible")
     }
 })
+
+// ==================== for home page newsletter ==================
+const newsletterForm = document.querySelector(".newsletter-form")
+const newsletterInput = document.querySelector(".newsletter-input")
+const newsletterBtn = document.querySelector(".newsletter-btn")
+
+newsletterBtn && newsletterBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+    if (newsletterInput.value === "") {
+        showAlert("Please enter your email address", "error")
+    }
+    else {
+        const formData = new FormData(newsletterForm)
+        submitForm(formData, "./backend/newsletter.php")
+    }
+})
+
+
 
 // ==================== for home page slider (don't code below this block) ==================
 const swiper = new Swiper('.swiper', {
