@@ -148,7 +148,8 @@
         width: 100%;
     }
 
-    .payment {
+    .payment,
+    .for-later {
         width: fit-content !important;
         justify-content: flex-start;
     }

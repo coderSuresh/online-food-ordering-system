@@ -15,8 +15,6 @@
 <body>
     <?php
 
-    use function PHPSTORM_META\type;
-
     require './components/header.php';
     if (!isset($_SESSION['success'])) {
         echo '<script>alert("Please login first to access this page")</script>';
@@ -163,7 +161,7 @@
                     <label for="address">Address:*</label>
                     <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
 
-                    <div class="flex items-center">
+                    <div class="for-later flex items-center">
                         <input type="checkbox" name="for-later" class="p_7-20 for_later" id="for-later">
                         <label for="for-later" style="white-space: nowrap;">&nbsp; Order for Later</label>
                     </div>
@@ -183,22 +181,10 @@
                         <select name="time" required>
                             <option value=''>__SELECT__</option>
                             <?php
-                            $user_date = $_POST['date'];
-                            ?>
-                            <?php
                             while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
                                 $time = date('H:i', strtotime($time . ' +30 minutes'))
                             ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
                             <?php
-                            }
-                            if (isset($_POST['date'])) { ?>
-                                <option><?php echo $_POST['date'] ?></option>
-
-                                <?php while (date('H:i', strtotime($start_time . ' +30 minutes')) <= $end_time) {
-                                    $start_time = date('H:i', strtotime($start_time . ' +30 minutes'))
-                                ?> <option value='<?php echo $start_time; ?>'> <?php echo $start_time; ?> </option>
-                            <?php
-                                }
                             }
                             ?>
                         </select>
