@@ -8,7 +8,7 @@ function getCurrentTimestamp()
 
 function getCurrentDate()
 {
-    $date = date('m-d-Y');
+    $date = date('Y-m-d');
     return $date;
 }
 
