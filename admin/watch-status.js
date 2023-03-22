@@ -88,22 +88,3 @@ function hideAlert() {
     const alertDialog = document.querySelector(".alert-dialog");
     alertDialog.remove();
 }
-
-function sendNotification() {
-    if (!("Notification" in window)) {
-        alert("This browser does not support desktop notification");
-    } else {
-        Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-                const notification = new Notification("New Order", {
-                    body: "You have a new order!",
-                    icon: hostURLStatus + "images/logo.png",
-                });
-                notification.onclick = (event) => {
-                    event.preventDefault();
-                    window.open(hostURLStatus + "admin/order-details.php", "_blank");
-                };
-            }
-        });
-    }
-}
