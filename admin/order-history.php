@@ -94,28 +94,27 @@
                 <!-- filter by status -->
                 <?php
                 require("../config.php");
-
-                $sql = "select id from orders";
+                $sql = "select id from orders group by orders.c_id, orders.date";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
-                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending'";
+                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending' group by orders.c_id, orders.date";
                 $result_pending = mysqli_query($conn, $sql_pending);
                 $count_pending = mysqli_num_rows($result_pending);
 
-                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted'";
+                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted' group by orders.c_id, orders.date";
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering')";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering') group by orders.c_id, orders.date";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
-                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered'";
+                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered' group by orders.c_id, orders.date";
                 $result_delivered = mysqli_query($conn, $sql_delivered);
                 $count_delivered = mysqli_num_rows($result_delivered);
 
-                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected'";
+                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected' group by orders.c_id, orders.date";
                 $result_rejected = mysqli_query($conn, $sql_rejected);
                 $count_rejected = mysqli_num_rows($result_rejected);
                 ?>
@@ -198,61 +197,68 @@
         // filter content by session 
         if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
             $filter_by = $_GET['filter-by'];
-            $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ? "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where aos.status in ('prepared', 'delivering') 
-                    order by orders.id desc
-                    limit $offset, $limit
-                    " : "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    where aos.status = '$filter_by'
-                    order by orders.id desc
-                    limit $offset, $limit
+            $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ? "
+            select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join aos on orders.id = aos.order_id
+                        where aos.status in ('prepared', 'delivering')
+                        group by orders.date, orders.c_id
+                        order by orders.id desc
+                        limit $offset, $limit
+                    " : "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join aos on orders.id = aos.order_id
+                        where aos.status = '$filter_by'
+                        group by orders.date, orders.c_id
+                        order by orders.id desc
+                        limit $offset, $limit
                     ";
         } else {
-            $sql = "select orders.id,
-                    orders.c_id,
-                    orders.qty,
-                    orders.total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    aos.aos_id,
-                    aos.status
-                    from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
-                    inner join aos on orders.id = aos.order_id
-                    order by orders.id desc
-                    limit $offset, $limit
+            $sql = "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join aos on orders.id = aos.order_id
+                        group by orders.date, orders.c_id
+                        order by orders.id desc
+                        limit $offset, $limit
                     ";
         }
 
@@ -284,6 +290,9 @@
                     $food_name = $row_food['name'];
                     $order_id = $row['id'];
 
+                    $cid = $row['c_id'];
+                    $date = $row['date'];
+
                     $status = $row['status'];
 
                     $sql_k_o_s = "select status from kos where order_id = {$order_id}";
@@ -294,14 +303,14 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage(<?php echo $order_id; ?>);">
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($date)); ?>');">
                         <td><?php echo $i; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
                         </td>
                         <td><?php echo $row['c_name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $food_name . " x " . $row['qty']; ?></td>
+                        <td><?php echo $row['total_item_bought']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
                         <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
                         <td class="table_action_container">
@@ -338,11 +347,10 @@
 
     <script src="./prevent-redirect-onclick-action.js"></script>
     <script>
-        function redirectToViewPage(id) {
-            window.location = `./view-details.php?id=${id}`;
+        function redirectToViewPage(cid, date) {
+            window.location = `./view-details.php?cid=${cid}&date=${date}`;
         }
     </script>
-
 </body>
 
 </html>
