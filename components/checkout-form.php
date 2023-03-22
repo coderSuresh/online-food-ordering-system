@@ -76,9 +76,22 @@
         <!-- ================ e-Sewa ================== -->
         <div class="mt-40 flex direction-col">
             <h4>Pay with eSewa</h4>
-            <button class="button gray mt-20 no_outline no_bg" style="padding: 3px !important">
-                <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
-            </button>
+
+            <form action="https://uat.esewa.com.np/epay/main" method="POST">
+                <input value="100" name="tAmt" type="hidden">
+                <input value="90" name="amt" type="hidden">
+                <input value="5" name="txAmt" type="hidden">
+                <input value="2" name="psc" type="hidden">
+                <input value="3" name="pdc" type="hidden">
+                <input value="EPAYTEST" name="scd" type="hidden">
+                <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+                <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+                <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+                <button class="button gray mt-20 no_outline no_bg" style="padding: 3px !important">
+                    <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
+                </button>
+            </form>
+
         </div>
 
     </div>
