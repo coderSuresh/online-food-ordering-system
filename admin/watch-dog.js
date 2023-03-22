@@ -10,7 +10,7 @@ function checkForUpdates() {
             if (new_count.data !== JSON.parse(localStorage.getItem('old_data') ? localStorage.getItem('old_data') : current_count.data)) {
 
               localStorage.setItem('old_data', JSON.stringify(new_count.data));
-              
+
               const audio = new Audio(hostURLDog + "audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();
@@ -69,4 +69,8 @@ function redirectToOrderPage() {
 function hideAlert() {
   const alertDialog = document.querySelector(".alert-dialog");
   alertDialog.remove();
+}
+
+window.onunload = () => {
+  localStorage.removeItem('old_data');
 }
