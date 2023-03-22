@@ -149,8 +149,6 @@
                 $end_time = "21:00";
 
                 $isToday = false;
-
-                // TODO: reset time to 9:00 AM if date is changed in above input
                 ?>
 
                 <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
@@ -247,10 +245,7 @@
                         </select>
                         `
 
-
                 // ============== listen for date change and set time options accordingly ==============
-
-                console.log("hello")
 
                 const dateInput = document.querySelector('#date')
                 const timeOption = document.querySelector('.time_option')
@@ -261,7 +256,6 @@
                     const today = '<?php echo $date; ?>'
 
                     if (date != today) {
-                        console.log("not today")
                         timeOption.innerHTML = `
                     <?php
                     while (date('H:i', strtotime($start_time . ' +30 minutes')) <= $end_time) {
@@ -270,9 +264,7 @@
                     <?php
                     }
                     ?>`
-                    } else {
-                        console.log("today")
-                    }
+                    } 
                 })
             } else {
                 forLaterInputs.innerHTML = ''
