@@ -191,53 +191,15 @@
                 </table>
             </div>
 
-            <div class="mt-20 flex justify-center checkout_form_container">
-                <div>
-                    <!--./backend/place-order.php-->
-                    <form action="./backend/place-order.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
-                        <label for="name">Name:*</label>
-                        <input type="text" placeholder="John Sharma" name="name" class="p_7-20" id="name" required autofocus>
-                        <label for="phone">Phone:*</label>
-                        <input type="tel" name="phone" maxlength="10" placeholder="9800000000" class="p_7-20" id="phone" required>
-                        <label for="address">Address:*</label>
-                        <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
-                        <label for="note">Note:</label>
-                        <input type="text" placeholder="example: without sugar" name="note" class="p_7-20" id="note">
-                        <p style="font-weight: 700; margin-top: 10px;">Payment Method</p>
-                        <div class="flex items-center justify-start payment">
-                            <div class="flex items-center">
-                                <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod" required checked>
-                                <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;">Cash on Delivery</label>
-                            </div>
-                            <div class="flex items-center ml-35">
-                                <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" required>
-                                <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">E-Sewa</label>
-                            </div>
-                        </div>
-                        <input type="hidden" name="food_id" value="<?php echo base64_encode(serialize($food_id_arr)); ?>">
-                        <input type="hidden" name="quantity" value="<?php echo base64_encode(serialize($qty_arr)); ?>">
-                        <button type="submit" class="button mt-20 w-full border-curve place_order" name="place-order">Place Order</a>
-                    </form>
-                </div>
-                <div class="direction-col justify-start ml-35 p-20 shadow border-curve checkout_details">
-                    <div class="checkout_info">
-                        <h5>Total: <?php echo $totalPrice; ?></h5>
-                        <h5>Vat (13%): <?php echo $vat; ?> </h5>
-                        <h5>Grand Total: Rs. <?php echo $totalPrice + $vat; ?></h5>
-                    </div>
-                    <div class="mt-20 flex direction-col">
-                        <a href="./index.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;">Continue Shopping</a>
-                    </div>
-                </div>
             <?php
+            $isFromCheckout = true;
+            require './components/checkout-form.php';
+            ?>
+
+        <?php
         } else
             echo "No records found";
-            ?>
+        ?>
     </main>
 
-    <?php require('./components/footer.php') ?>
-
-    <script type="module" src="./js/app.js"></script>
-</body>
-
-</html>
+    <?php require './components/get-footer-script.php'; ?>
