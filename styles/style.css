@@ -338,7 +338,6 @@ header {
 }
 
 /* for time location section */
-
 .time_location_section {
     margin: 60px 40px;
     justify-content: space-evenly;
@@ -354,15 +353,6 @@ header {
 .checkout_form {
     width: 400px;
 }
-
-.for_later_inputs {
-    display: none;
-}
-
-.for_later_inputs.visi {
-    display: block;
-}
-
 
 .checkout_table {
     overflow-x: auto;
