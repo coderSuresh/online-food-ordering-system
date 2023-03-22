@@ -135,7 +135,10 @@
             </table>
         </div>
 
-        <?php require './components/checkout-form.php'; ?>
+        <?php
+        $isFromBuy = true;
+        require './components/checkout-form.php'; 
+        ?>
 
     </main>
 
