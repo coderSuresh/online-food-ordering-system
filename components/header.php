@@ -27,7 +27,7 @@
                         echo '<button class="nav__btn-back no_bg no_outline"><img src="./images/ic_back.svg" alt="go back"></button>';
                     }
                     ?>
-                 <a href="./index.php" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
+                 <a href="./" class="logo heading flex items-center"><img src="./images/logo.png" alt="logo">Restro
                      <span>Hub</span>
                  </a>
              </div>

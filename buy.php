@@ -168,7 +168,7 @@
 
                     <div class="for_later_inputs">
                         <label for="date">Date:*</label>
-                        <input type="date" name="date" min="<?php echo $date; ?>" class="p_7-20" id="date" required>
+                        <input type="date" name="date" min="<?php echo $date; ?>" max="<?php echo date_format((date_add(date_create($date), date_interval_create_from_date_string("3 days"))), 'Y-m-d'); ?>" class="p_7-20" id="date" required>
                         <label for="time">Time:*</label>
 
                         <?php
@@ -200,7 +200,7 @@
                         </div>
                         <div class="flex items-center ml-35">
                             <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" checked>
-                            <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;"> e-Sewa </label>
+                            <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;"> eSewa </label>
                         </div>
                     </div>
                     <input type="hidden" name="f_id" value="<?php echo $food_id; ?>">
@@ -218,6 +218,15 @@
                 <div class="mt-20 flex direction-col">
                     <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;"> Continue Shopping </a>
                 </div>
+
+                <!-- ================ e-Sewa ================== -->
+                <div class="mt-40 flex direction-col">
+                    <h4>Pay with eSewa</h4>
+                    <button class="button gray mt-20 no_outline no_bg" style="padding: 3px !important">
+                        <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
+                    </button>
+                </div>
+
             </div>
         </div>
     </main>
