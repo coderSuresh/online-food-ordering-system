@@ -202,6 +202,7 @@
                         orders.id,
                         orders.c_id,
                         orders.qty,
+                        orders.track_id,
                         sum(orders.total_price) as total_price,
                         orders.note,
                         orders.date,
@@ -222,6 +223,7 @@
                         orders.id,
                         orders.c_id,
                         orders.qty,
+                        orders.track_id,
                         sum(orders.total_price) as total_price,
                         orders.note,
                         orders.date,
@@ -244,6 +246,7 @@
                         orders.id,
                         orders.c_id,
                         orders.qty,
+                        orders.track_id,
                         sum(orders.total_price) as total_price,
                         orders.note,
                         orders.date,
@@ -291,7 +294,7 @@
                     $order_id = $row['id'];
 
                     $cid = $row['c_id'];
-                    $date = $row['date'];
+                    $id = $row['track_id'];
 
                     $status = $row['status'];
 
@@ -303,7 +306,7 @@
                         $k_o_s = $data['status'];
                     }
                 ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($date)); ?>');">
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
                         <td><?php echo $i; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
@@ -347,8 +350,8 @@
 
     <script src="./prevent-redirect-onclick-action.js"></script>
     <script>
-        function redirectToViewPage(cid, date) {
-            window.location = `./view-details.php?cid=${cid}&date=${date}`;
+        function redirectToViewPage(cid, id) {
+            window.location = `./view-details.php?cid=${cid}&id=${id}`;
         }
     </script>
 </body>
