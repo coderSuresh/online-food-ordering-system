@@ -17,10 +17,9 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
         $isFromBuy = true;
         $f_id = mysqli_real_escape_string($conn, $data['f_id']);
         $q = mysqli_real_escape_string($conn, $data['qty']);
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
         $isFromBuy = false;
-        
+
         $food_id = mysqli_real_escape_string($conn, $data['food_id']);
         $qty = mysqli_real_escape_string($conn, $data['quantity']);
 
@@ -38,16 +37,10 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
         $note = "No note";
     }
 
-    function redirect()
+    function redirect($errorMessage)
     {
-        // if (isset($data['place-order'])) {
-        //     header("location: ../checkout.php");
-        // } else if (isset($data['place-order-buy'])) {
-        //     header("location: ../buy.php");
-        // }
-
         $response['success'] = false;
-        $response['message'] = "Could not place order";
+        $response['message'] = $errorMessage;
         echo json_encode($response);
         exit();
     }
@@ -80,7 +73,6 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
             mysqli_query($conn, $sql_remove_cart) or die("Could not remove from cart");
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
-            // header("Location: ../track-order.php");
             $response['success'] = false;
             $response['message'] = "Could not place order";
             echo json_encode($response);
@@ -89,14 +81,12 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
 
         if ($res && $res_o_c_t && $res_aos) {
             $_SESSION['order_placed'] = "Order placed successfully";
-            // header("Location: ../track-order.php");
             $response['success'] = true;
             $response['message'] = "Order placed successfully";
             echo json_encode($response);
             exit();
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
-            // header("Location: ../track-order.php");
             $response['success'] = false;
             $response['message'] = "Could not place order";
             echo json_encode($response);
@@ -105,17 +95,13 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
     }
 
     if (!preg_match("/^[a-z A-z]{2,}$/", $name)) {
-        $_SESSION['name_error'] = "Name must contain only letters and must be at least 2 characters long";
-        redirect();
+        redirect("Name must contain only letters and must be at least 2 characters long");
     } else if (!preg_match("/^98\d{8}|0\d{8}$/", $phone)) {
-        $_SESSION['phone_error'] = "Phone number must contain only 10 digits & start with 98";
-        redirect();
+        redirect("Phone number must contain only 10 digits & start with 98");
     } else if (!preg_match("/^[a-zA-z,0-9 -]{5,}$/", $address)) {
-        $_SESSION['address_error'] = "Address must contain only letters, numbers, commas and must be at least 5 characters long";
-        redirect();
+        redirect("Address must contain only letters, numbers, commas and must be at least 5 characters long");
     } else if (!preg_match("/^[a-z A-z\/0-9]{5,}$/", $note)) {
-        $_SESSION['note_error'] = "Note must contain only letters, numbers and must be at least 5 characters long";
-        redirect();
+        redirect("Note must contain only letters, numbers and must be at least 5 characters long");
     } else {
 
         $sql_get_track_id = "select track_id from orders order by track_id desc limit 1";
@@ -136,7 +122,6 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
             foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
                 placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
             }
-           
         }
     }
 } else {
