@@ -234,88 +234,20 @@
                     <?php
                     if ($status == "pending") {
                     ?>
-                        <form action="./backend/order/accept.php" method="post" class="flex items-center justify-start">
-                            <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
-                            <button type="submit" name="accept" class="button no_outline border-curve">
-                                <div class="flex items-center">
-                                    <img src="../images/ic_accept.svg" alt="accept icon">
-                                    <p class="body-text ml-5">Accept</p>
-                                </div>
-                            </button>
-                        </form>
-                    <?php } else if ($status == "accepted") {
-                    ?>
-                        <form action="./backend/order/prepared.php" method="post" class="flex items-center justify-start">
-                            <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
-                            <button type="submit" name="prepared" class="button no_outline border-curve">
-                                <div class="flex items-center">
-                                    <img src="../images/ic_prepared.svg" alt="prepared">
-                                    <p class="body-text ml-5">Prepared</p>
-                                </div>
-                            </button>
-                        </form>
-                    <?php
-                    } else if ($status == "prepared") {
-                    ?>
-                        <form action="./backend/order/notify-delivery.php" method="post" class="flex items-center justify-start">
-                            <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
-                            <button type="submit" name="notify-delivery" class="button no_outline border-curve">
-                                <div class="flex items-center">
-                                    <img src="../images/ic_bell.svg" alt="notify">
-                                    <p class="body-text ml-5">Call Delivery</p>
-                                </div>
-                            </button>
-                        </form>
-                        <form action="./backend/order/reject.php" method="post" class="flex reject_form mt-20 items-center justify-start">
-                            <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
-                            <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
-                        </form>
-                        <div class="flex items-center justify-start">
-                            <button type="submit" name="reject" class="button gray no_outline border-curve reject_btn">
-                                <div class="flex items-center">
-                                    <img src="../images/ic_reject.svg" alt="reject icon">
-                                    <p class="body-text ml-5">Reject</p>
-                                </div>
-                            </button>
-                        </div>
-                    <?php
-                    } else if ($status == "delivering") {
-                    ?>
                         <form action="./backend/order/delivered.php" method="post" class="flex items-center justify-start">
                             <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
+                            <input type="hidden" name="tbd_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
                             <button type="submit" name="delivered" class="button no_outline border-curve">
                                 <div class="flex items-center">
-                                    <img src="../images/ic_accept.svg" alt="notify">
+                                    <img src="../images/ic_accept.svg" alt="accept icon">
                                     <p class="body-text ml-5">Delivered</p>
                                 </div>
                             </button>
                         </form>
-                        <form action="./backend/order/reject.php" method="post" class="flex reject_form mt-20 items-center justify-start">
-                            <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                            <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
-                            <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
-                        </form>
-                        <div class="flex items-center justify-start">
-                            <button type="submit" name="reject" class="button gray no_outline border-curve reject_btn">
-                                <div class="flex items-center">
-                                    <img src="../images/ic_reject.svg" alt="reject icon">
-                                    <p class="body-text ml-5">Reject</p>
-                                </div>
-                            </button>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
-                <?php if ($status == "pending" || $status == "accepted") { ?>
-                    <form action="./backend/order/reject.php" method="post" class="flex reject_form items-center justify-start">
+                    <?php } ?>
+                    <form action="./backend/order/reject.php" method="post" class="flex reject_form mt-20 items-center justify-start">
                         <input type="hidden" name="id" value='<?php echo base64_encode(serialize($id)); ?>'>
-                        <input type="hidden" name="aos_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
+                        <input type="hidden" name="tbd_id" value='<?php echo base64_encode(serialize($a_id)); ?>'>
                         <input type="hidden" class="hidden-reject_reason" name="reject-reason" value="">
                     </form>
                     <div class="flex items-center justify-start">
@@ -326,10 +258,10 @@
                             </div>
                         </button>
                     </div>
+
                 <?php } ?>
+                </div>
         </div>
-    <?php } ?>
-    </div>
 
     </main>
 

@@ -60,67 +60,63 @@ if (!isset($_SESSION['delivery-success'])) {
             mysqli_query($conn, $sql) or die("Something went wrong");
 
             // TODO: fix this based on filters and status provided to the delivery person
-            $sql_all = "select tbd_id as total from to_be_delivered";
+            $sql_all = "select tbd_id from to_be_delivered inner join orders on to_be_delivered.order_id  = orders.id group by orders.c_id, orders.date";
             $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
             $data_all = mysqli_num_rows($result_all);
 
-            $sql_pending = "select tbd_id as total from to_be_delivered where status = 'pending'";
+            $sql_pending = "select tbd_id from to_be_delivered inner join orders on to_be_delivered.order_id = orders.id where status = 'pending' group by orders.c_id, orders.date";
             $result_pending = mysqli_query($conn, $sql_pending) or die("Query Failed");
             $data_pending = mysqli_num_rows($result_pending);
 
-            $sql_accepted = "select tbd_id as total from to_be_delivered where status = 'accepted'";
-            $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
-            $data_accepted = mysqli_num_rows($result_accepted);
+            $sql_delivered = "select tbd_id from to_be_delivered inner join orders on to_be_delivered.order_id = orders.id where status = 'delivered' group by orders.c_id, orders.date";
+            $result_delivered  = mysqli_query($conn, $sql_delivered) or die("Query Failed");
+            $data_delivered = mysqli_num_rows($result_delivered);
 
-            $sql_rejected = "select tbd_id as total from to_be_delivered where status = 'rejected'";
+            $sql_rejected = "select tbd_id from to_be_delivered inner join orders on to_be_delivered.order_id = orders.id where status = 'rejected' group by orders.c_id, orders.date";
             $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
             $data_rejected = mysqli_num_rows($result_rejected);
 
-            if (!isset($_SESSION['filter-by'])) {
-                $_SESSION['filter-by'] = "pending";
+            if (!isset($_GET['filter'])) {
+                $_GET['filter'] = "pending";
             }
 
             ?>
 
-            <form action="./backend/order/specific-order.php" method="post">
-                <input type="hidden" name="filter-by" value="all">
-                <button type="submit" name="specific-order" class="button border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "all") echo "active"; ?>">All
+            <a href="?filter=all" class="ml-35">
+                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "all") echo "active"; ?>">All
                     <div class="count-top shadow"><?php
                                                     echo $data_all;
                                                     ?>
                     </div>
                 </button>
-            </form>
+            </a>
 
-            <form action="./backend/order/specific-order.php" method="post">
-                <input type="hidden" name="filter-by" value="pending">
-                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+            <a href="?filter=pending" class="ml-35">
+                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "pending") echo "active"; ?>">Pending
                     <div class="count-top shadow"><?php
                                                     echo $data_pending;
                                                     ?>
                     </div>
                 </button>
-            </form>
+            </a>
 
-            <form action="./backend/order/specific-order.php" method="post">
-                <input type="hidden" name="filter-by" value="accepted">
-                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+            <a href="?filter=delivered" class="ml-35">
+                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "delivered") echo "active"; ?>">Delivered
                     <div class="count-top shadow"><?php
-                                                    echo $data_accepted;
+                                                    echo $data_delivered;
                                                     ?>
                     </div>
                 </button>
-            </form>
+            </a>
 
-            <form action="./backend/order/specific-order.php" method="post">
-                <input type="hidden" name="filter-by" value="rejected">
-                <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative filter <?php if ($_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+            <a href="?filter=rejected" class="ml-35">
+                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "rejected") echo "active"; ?>">Rejected
                     <div class="count-top shadow"><?php
                                                     echo $data_rejected;
                                                     ?>
                     </div>
                 </button>
-            </form>
+            </a>
 
             <!-- search form for order in case someone is calling delivery staff and asking if he has their order -->
             <form action="#" method="post" class="search_form relative border-curve-lg" style="margin-left: 35px !important">
@@ -132,10 +128,9 @@ if (!isset($_SESSION['delivery-success'])) {
 
         </div>
 
-        <!-- food cards -->
         <?php
-        if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
-            $filter_by = $_SESSION['filter-by'];
+        if (isset($_GET['filter']) && $_GET['filter'] != 'all') {
+            $filter_by = $_GET['filter'];
             $sql = "select count(orders.id) as total_item_bought,
                     orders.c_id,
                     orders.qty,
@@ -157,7 +152,7 @@ if (!isset($_SESSION['delivery-success'])) {
                     group by orders.c_id, orders.date
                     order by orders.id desc
                     ";
-            unset($_SESSION['filter-by']);
+            unset($_GET['filter']);
         } else {
             $sql = "select count(orders.id) as total_item_bought,
                     orders.c_id,
@@ -179,8 +174,8 @@ if (!isset($_SESSION['delivery-success'])) {
                     group by orders.c_id, orders.date
                     order by orders.id desc
                     ";
-            if (isset($_SESSION['filter-by']))
-                unset($_SESSION['filter-by']);
+            if (isset($_GET['filter']))
+                unset($_GET['filter']);
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
