@@ -146,7 +146,7 @@ if (!isset($_SESSION['delivery-success'])) {
                     to_be_delivered.status,
                     aos.aos_id
                     from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     inner join to_be_delivered on orders.id = to_be_delivered.order_id
                     inner join aos on orders.id = aos.order_id
                     where to_be_delivered.status = '{$filter_by}'
@@ -170,7 +170,7 @@ if (!isset($_SESSION['delivery-success'])) {
                     to_be_delivered.status,
                     aos.aos_id
                     from orders 
-                    inner join order_contact_details on orders.id = order_contact_details.o_id
+                    inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     inner join to_be_delivered on orders.id = to_be_delivered.order_id
                     inner join aos on orders.id = aos.order_id
                     group by orders.c_id, orders.date

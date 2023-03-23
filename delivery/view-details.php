@@ -45,7 +45,7 @@
                     food.img
                     FROM orders
                     INNER JOIN customer ON orders.c_id = customer.id
-                    INNER JOIN order_contact_details ON orders.id = order_contact_details.o_id
+                    INNER JOIN order_contact_details ON orders.o_c_id = order_contact_details.o_c_id
                     INNER JOIN food ON orders.f_id = food.f_id
                     INNER JOIN to_be_delivered ON orders.id = to_be_delivered.order_id
                     WHERE orders.track_id = '$id'";

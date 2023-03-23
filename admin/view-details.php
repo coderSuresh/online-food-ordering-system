@@ -47,7 +47,7 @@
                     FROM orders
                     INNER JOIN aos ON orders.id = aos.order_id
                     INNER JOIN customer ON orders.c_id = customer.id
-                    INNER JOIN order_contact_details ON orders.id = order_contact_details.o_id
+                    INNER JOIN order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     INNER JOIN food ON orders.f_id = food.f_id
                     WHERE orders.track_id = '$id'";
 

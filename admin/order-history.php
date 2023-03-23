@@ -213,7 +213,7 @@
                         aos.aos_id,
                         aos.status
                         from orders 
-                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
                         where aos.status in ('prepared', 'delivering')
                         group by orders.date, orders.c_id
@@ -234,7 +234,7 @@
                         aos.aos_id,
                         aos.status
                         from orders 
-                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
                         where aos.status = '$filter_by'
                         group by orders.date, orders.c_id
@@ -257,7 +257,7 @@
                         aos.aos_id,
                         aos.status
                         from orders 
-                        inner join order_contact_details on orders.id = order_contact_details.o_id
+                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
                         group by orders.date, orders.c_id
                         order by orders.id desc
