@@ -100,15 +100,15 @@
                 </div>`
                 : ""
             }
-            
-            ${data.pm ? 
-                data.pm == "cod" 
-                ? `<div class="flex gap mt-20">
-                    <p class="tal"> <b>Payment Status:</b> </p>
-                    <p class="tar"> Pending </p>
-                </div>`
-                : ""
-                : ""
+
+            ${data.pm == "cod" 
+                ? `<button class="button border-curve mt-20 cod_btn">Place Order</button>`
+                : ``
+            }
+
+            ${data.pm == "esewa" 
+                ? `<button class="button border-curve mt-20 esewa_btn">Pay with eSewa</button>`
+                : ``
             }
 
             ${data.msg 
