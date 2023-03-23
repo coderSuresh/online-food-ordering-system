@@ -38,7 +38,7 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
         }
     }
 
-    function placeOrder($f_id, $q, $uid, $name, $phone, $address, $note, $conn)
+    function placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn)
     {
         $sql_food_info = "select price from food where f_id = $f_id";
         $res_food_info = mysqli_query($conn, $sql_food_info) or die("Could not get food info");
@@ -51,7 +51,7 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
 
         $date = getCurrentTimestamp();
 
-        $sql = "insert into orders values (DEFAULT, $uid, $q, $f_id, $total_price, '$note', '$date')";
+        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $q, $f_id, $total_price, '$note', '$date')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
 
@@ -92,11 +92,23 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
         redirect();
     } else {
 
+        $sql_get_track_id = "select track_id from orders order by track_id desc limit 1";
+        $res_get_track_id = mysqli_query($conn, $sql_get_track_id) or die("Could not get track id");
+        $row_get_track_id = mysqli_fetch_assoc($res_get_track_id);
+
+        if (mysqli_num_rows($res_get_track_id) > 0) {
+            $track_id = $row_get_track_id['track_id'];
+            $track_id = intval(str_replace("rh", "", $track_id)) + 1;
+            $track_id = "rh" . str_pad($track_id, 8, "0", STR_PAD_LEFT);
+        } else {
+            $track_id = "rh00000000";
+        }
+
         if ($isFromBuy) {
-            placeOrder($f_id, $q, $uid, $name, $phone, $address, $note, $conn);
+            placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
         } else {
             foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
-                placeOrder($f_id, $q, $uid, $name, $phone, $address, $note, $conn);
+                placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
             }
            
         }
