@@ -24,7 +24,7 @@
         echo "<script>window.location.href = './index.php';</script>";
     } else {
         $cid = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['cid'])));
-        $date = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['date'])));
+        $id = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['id'])));
     }
 
     $sql_all = "SELECT orders.date,
@@ -48,7 +48,7 @@
                     INNER JOIN order_contact_details ON orders.id = order_contact_details.o_id
                     INNER JOIN food ON orders.f_id = food.f_id
                     INNER JOIN to_be_delivered ON orders.id = to_be_delivered.order_id
-                    WHERE orders.date = '$date' AND customer.id=$cid";
+                    WHERE orders.track_id = '$id'";
 
     $result_all = mysqli_query($conn, $sql_all) or die(mysqli_error($conn));
     $row = mysqli_fetch_assoc($result_all);
@@ -67,7 +67,7 @@
         array_push($a_id, $row['tbd_id']);
 
         if ($row['status'] == 'rejected') {
-            $sql_reject = "SELECT reason, rejected_by FROM reject_reason WHERE order_id in (" . implode(',', $id) . ")";
+            $sql_reject = "SELECT reason FROM reject_reason WHERE order_id in (" . implode(',', $id) . ")";
             $result_reject = mysqli_query($conn, $sql_reject) or die(mysqli_error($conn));
             $row_reject = mysqli_fetch_assoc($result_reject);
         }

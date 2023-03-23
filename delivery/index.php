@@ -16,6 +16,7 @@ if (!isset($_SESSION['delivery-success'])) {
     <title>Delivery | RestroHub</title>
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="./watch-dog.js" defer></script>
 </head>
 
 <body>
@@ -204,9 +205,9 @@ if (!isset($_SESSION['delivery-success'])) {
                 $quantity = $row["qty"];
 
                 $cid = $row["c_id"];
-                $date = $row["date"];
+                $id = $row["track_id"];
             ?>
-                <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($date)); ?>');">
+                <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
                     <td><?php echo $i; ?> </td>
                     <td><?php echo $row["c_name"]; ?> </td>
                     <td><?php echo $address; ?> </td>
@@ -230,8 +231,8 @@ if (!isset($_SESSION['delivery-success'])) {
         </table>
     </main>
     <script>
-        function redirectToViewPage(cid, date) {
-            window.location = `./view-details.php?cid=${cid}&date=${date}`;
+        function redirectToViewPage(cid, id) {
+            window.location = `./view-details.php?cid=${cid}&id=${id}`;
         }
     </script>
 </body>
