@@ -7,21 +7,21 @@ header('Content-Type: application/json; charset=utf-8');
 
 $response = array();
 
-$data = json_decode(file_get_contents('php://input'), true);
+// $_POST = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
+if (isset($_POST['name']) && isset($_POST['phone']) && isset($_POST['address'])) {
 
     $isFromBuy = false;
 
-    if (isset($data['f_id']) && isset($data['qty'])) {
+    if (isset($_POST['f_id']) && isset($_POST['qty'])) {
         $isFromBuy = true;
-        $f_id = mysqli_real_escape_string($conn, $data['f_id']);
-        $q = mysqli_real_escape_string($conn, $data['qty']);
-    } else if (isset($data['food_id']) && isset($data['quantity'])) {
+        $f_id = mysqli_real_escape_string($conn, $_POST['f_id']);
+        $q = mysqli_real_escape_string($conn, $_POST['qty']);
+    } else if (isset($_POST['food_id']) && isset($_POST['quantity'])) {
         $isFromBuy = false;
 
-        $food_id = mysqli_real_escape_string($conn, $data['food_id']);
-        $qty = mysqli_real_escape_string($conn, $data['quantity']);
+        $food_id = mysqli_real_escape_string($conn, $_POST['food_id']);
+        $qty = mysqli_real_escape_string($conn, $_POST['quantity']);
 
         $fo_id = unserialize(base64_decode($food_id));
         $quantity = unserialize(base64_decode($qty));
@@ -31,10 +31,10 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     }
 
     $uid = $_SESSION['user'];
-    $name = mysqli_real_escape_string($conn, $data['name']);
-    $phone = mysqli_real_escape_string($conn, $data['phone']);
-    $address = mysqli_real_escape_string($conn, $data['address']);
-    $note = mysqli_real_escape_string($conn, $data['note']);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $note = mysqli_real_escape_string($conn, $_POST['note']);
 
     if ($note == "") {
         $note = "No note";
@@ -48,7 +48,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         exit();
     }
 
-    function placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn)
+    function placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id)
     {
         $sql_food_info = "select price from food where f_id = $f_id";
         $res_food_info = mysqli_query($conn, $sql_food_info) or die("Could not get food info");
@@ -61,17 +61,14 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
 
         $date = getCurrentTimestamp();
 
-        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $q, $f_id, $total_price, '$note', '$date')";
+        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$date')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
-
-        $sql_o_c_t = "insert into order_contact_details values (DEFAULT, $order_id, '$address', '$phone', '$name')";
-        $res_o_c_t = mysqli_query($conn, $sql_o_c_t) or die("Could not insert order contact details");
 
         $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$date')";
         $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
 
-        if ($res && $res_o_c_t && $res_aos) {
+        if ($res && $res_aos) {
             $sql_remove_cart = "delete from cart where food_id = $f_id and customer_id = $uid";
             mysqli_query($conn, $sql_remove_cart) or die("Could not remove from cart");
         } else {
@@ -82,7 +79,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
             exit();
         }
 
-        if ($res && $res_o_c_t && $res_aos) {
+        if ($res && $res_aos) {
             $_SESSION['order_placed'] = "Order placed successfully";
             $response['success'] = true;
             $response['message'] = "Order placed successfully";
@@ -93,6 +90,19 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
             $response['message'] = "Could not place order";
             echo json_encode($response);
             exit();
+        }
+    }
+
+    function insertContactDetails($address, $phone, $name, $conn)
+    {
+        $sql_o_c_t = "insert into order_contact_details values (DEFAULT, '$address', '$phone', '$name')";
+        $res_o_c_t = mysqli_query($conn, $sql_o_c_t) or die("Could not insert order contact details");
+        $o_c_t_id = mysqli_insert_id($conn);
+
+        if ($res_o_c_t) {
+            return $o_c_t_id;
+        } else {
+            return 0;
         }
     }
 
@@ -119,10 +129,20 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         }
 
         if ($isFromBuy) {
-            $response = placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
+            $o_c_id = insertContactDetails($address, $phone, $name, $conn);
+            if ($o_c_id == 0) {
+                showMessage("Could not place order");
+            } else {
+                $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id);
+            }
         } else {
-            foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
-                $response = placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
+            $o_c_id = insertContactDetails($address, $phone, $name, $conn);
+            if ($o_c_id == 0) {
+                showMessage("Could not place order");
+            } else {
+                foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
+                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id);
+                }
             }
         }
 
