@@ -1794,3 +1794,18 @@ h2 {
 .swiper-slide {
     padding: 40px;
 }
+
+/* ================ checkout confirm page ========================= */
+.confirm_card {
+    width: 95%;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.tal {
+    text-align: left;
+}
+
+.tar {
+    text-align: right;
+}

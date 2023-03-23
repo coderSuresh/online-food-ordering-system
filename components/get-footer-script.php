@@ -75,7 +75,6 @@
 
     const checkoutForm = document.querySelector('.checkout_form');
     const esewaBtn = document.querySelector('.esewa_btn');
-    const esewaForm = document.querySelector('.esewa_form');
     const esewaRadioBtn = document.querySelector('#payment-method-esewa');
     const placeOrderBtn = document.querySelector('.place_order');
 
@@ -88,30 +87,25 @@
         e.preventDefault()
         if (checkoutForm.checkValidity()) {
 
-            if (esewaRadioBtn.checked) {
-                const formData = new FormData(checkoutForm)
-                const data = Object.fromEntries(formData.entries())
-                const json = JSON.stringify(data)
-                localStorage.setItem('order', json)
-                esewaForm.submit()
+            const formData = Object.fromEntries(new FormData(checkoutForm).entries())
 
-            } else {
-                fetch('./backend/place-order.php', {
-                        method: 'POST',
-                        body: JSON.stringify(Object.fromEntries(new FormData(checkoutForm).entries()))
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            window.location.href = './track-order.php'
-                        } else {
-                            alert(data.message)
-                        }
-                    })
-                    .catch(err => {
-                        console.error(err)
-                    })
-            }
+            fetch('./backend/validate-checkout-form.php', {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.redirect) {
+                        formData['pm'] = data.pm
+                        localStorage.setItem('checkoutFormData', JSON.stringify(formData))
+                        window.location.href = data.location
+                    } else {
+                        alert(data.message)
+                    }
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         } else {
             checkoutForm.reportValidity()
         }
