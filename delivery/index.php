@@ -28,7 +28,7 @@ if (!isset($_SESSION['delivery-success'])) {
     <main style="margin: 40px 5%;">
 
         <?php
-        if (isset($_SESSION['order-success'])) {
+        if (isset($_SESSION['delivery-success'])) {
         ?>
             <p class="error-container success p_7-20">
                 <?php
@@ -38,7 +38,7 @@ if (!isset($_SESSION['delivery-success'])) {
             </p>
         <?php
         }
-        if (isset($_SESSION['order-error'])) {
+        if (isset($_SESSION['delivery-error'])) {
         ?>
             <p class="error-container error p_7-20">
                 <?php
@@ -59,7 +59,6 @@ if (!isset($_SESSION['delivery-success'])) {
             $sql = "delete from to_be_delivered where Date(date) < DATE_SUB(NOW(), INTERVAL 1 DAY)";
             mysqli_query($conn, $sql) or die("Something went wrong");
 
-            // TODO: fix this based on filters and status provided to the delivery person
             $sql_all = "select tbd_id from to_be_delivered inner join orders on to_be_delivered.order_id  = orders.id group by orders.c_id, orders.date";
             $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
             $data_all = mysqli_num_rows($result_all);

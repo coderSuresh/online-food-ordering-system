@@ -17,10 +17,10 @@ if (!isset($_SESSION['delivery-success'])) {
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
-            $_SESSION['order-success-a'] = "Order status updated successfully";
+            $_SESSION['delivery-success'] = "Order status updated successfully";
             header('location: ../../index.php');
         } else {
-            $_SESSION['order-error-a'] = "Something went wrong. Please try again";
+            $_SESSION['delivery-error'] = "Something went wrong. Please try again";
             header('location: ../../index.php');
         }
     } else {

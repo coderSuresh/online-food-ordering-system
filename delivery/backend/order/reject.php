@@ -20,10 +20,10 @@ if (!isset($_SESSION['delivery-success'])) {
         }
 
         if ($result && $result_reason) {
-            $_SESSION['order-success-a'] = "Order rejected successfully";
+            $_SESSION['delivery-success'] = "Order rejected successfully";
             header('location: ../../index.php');
         } else {
-            $_SESSION['order-error-a'] = "Something went wrong. Please try again";
+            $_SESSION['delivery-error'] = "Something went wrong. Please try again";
             header('location: ../../index.php');
         }
     } else {
