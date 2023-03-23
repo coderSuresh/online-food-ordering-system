@@ -24,7 +24,7 @@
         echo "<script>window.location.href = 'order-details.php';</script>";
     } else {
         $cid = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['cid'])));
-        $date = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['date'])));
+        $id = unserialize(base64_decode(mysqli_real_escape_string($conn, $_GET['id'])));
     }
 
     $sql_all = "SELECT orders.date,
@@ -32,10 +32,12 @@
                     orders.id,
                     orders.total_price,
                     orders.note,
+                    orders.track_id,
                     aos.aos_id,
                     aos.status,
                     customer.names,
                     customer.email,
+                    customer.date as c_date,
                     order_contact_details.address,
                     order_contact_details.phone,
                     order_contact_details.c_name,
@@ -47,7 +49,7 @@
                     INNER JOIN customer ON orders.c_id = customer.id
                     INNER JOIN order_contact_details ON orders.id = order_contact_details.o_id
                     INNER JOIN food ON orders.f_id = food.f_id
-                    WHERE orders.date = '$date' AND customer.id=$cid";
+                    WHERE orders.track_id = '$id'";
 
     $result_all = mysqli_query($conn, $sql_all) or die(mysqli_error($conn));
     $row = mysqli_fetch_assoc($result_all);
@@ -98,6 +100,11 @@
                     <div class="vod_left-body-inner">
                         <div class="vod_left-body-inner-content">
                             <table class="table_order-details">
+                                <tr>
+                                    <td>Order ID</td>
+                                    <td>:</td>
+                                    <td><?php echo $row['track_id']; ?></td>
+                                </tr>
                                 <tr>
                                     <td>Order Date</td>
                                     <td>:</td>
@@ -189,6 +196,11 @@
                                     <td>Shipping Address</td>
                                     <td>:</td>
                                     <td><?php echo $row['address']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Joined On</td>
+                                    <td>:</td>
+                                    <td><?php echo $row['c_date']; ?></td>
                                 </tr>
                             </table>
                         </div>
