@@ -10,7 +10,10 @@ if (!isset($_SESSION['admin-success'])) {
         $order_id = mysqli_real_escape_string($conn, $_POST['id']);
         $aos_id = mysqli_real_escape_string($conn, $_POST['aos_id']);
 
-        $sql = "UPDATE aos SET status = 'delivered' WHERE order_id = {$order_id} and aos_id = {$aos_id}";
+        $order_id = unserialize(base64_decode($order_id));
+        $aos_id = unserialize(base64_decode($aos_id));
+
+        $sql = "UPDATE aos SET status = 'delivered' WHERE order_id in (" . implode(',', $order_id) . ") and aos_id in (" . implode(',', $aos_id) . ")";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
