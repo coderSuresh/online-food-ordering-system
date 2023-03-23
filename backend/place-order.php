@@ -37,7 +37,7 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
         $note = "No note";
     }
 
-    function redirect($errorMessage)
+    function showMessage($errorMessage)
     {
         $response['success'] = false;
         $response['message'] = $errorMessage;
@@ -95,13 +95,13 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
     }
 
     if (!preg_match("/^[a-z A-z]{2,}$/", $name)) {
-        redirect("Name must contain only letters and must be at least 2 characters long");
+        showMessage("Name must contain only letters and must be at least 2 characters long");
     } else if (!preg_match("/^98\d{8}|0\d{8}$/", $phone)) {
-        redirect("Phone number must contain only 10 digits & start with 98");
+        showMessage("Phone number must contain only 10 digits & start with 98");
     } else if (!preg_match("/^[a-zA-z,0-9 -]{5,}$/", $address)) {
-        redirect("Address must contain only letters, numbers, commas and must be at least 5 characters long");
+        showMessage("Address must contain only letters, numbers, commas and must be at least 5 characters long");
     } else if (!preg_match("/^[a-z A-z\/0-9]{5,}$/", $note)) {
-        redirect("Note must contain only letters, numbers and must be at least 5 characters long");
+        showMessage("Note must contain only letters, numbers and must be at least 5 characters long");
     } else {
 
         $sql_get_track_id = "select track_id from orders order by track_id desc limit 1";
