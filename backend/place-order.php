@@ -9,15 +9,15 @@ $response = array();
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset($data['phone']) && isset($data['address']) && isset($data['note'])) {
+if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
 
     $isFromBuy = false;
 
-    try {
+    if (isset($data['f_id']) && isset($data['qty'])) {
         $isFromBuy = true;
         $f_id = mysqli_real_escape_string($conn, $data['f_id']);
         $q = mysqli_real_escape_string($conn, $data['qty']);
-    } catch (Exception $e) {
+    } else if (isset($data['food_id']) && isset($data['quantity'])) {
         $isFromBuy = false;
 
         $food_id = mysqli_real_escape_string($conn, $data['food_id']);
@@ -25,6 +25,9 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
 
         $fo_id = unserialize(base64_decode($food_id));
         $quantity = unserialize(base64_decode($qty));
+    } else {
+        $isFromBuy = false;
+        showMessage("Invalid request");
     }
 
     $uid = $_SESSION['user'];
@@ -83,8 +86,7 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
             $_SESSION['order_placed'] = "Order placed successfully";
             $response['success'] = true;
             $response['message'] = "Order placed successfully";
-            echo json_encode($response);
-            exit();
+            return $response;
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
             $response['success'] = false;
@@ -117,12 +119,15 @@ if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset
         }
 
         if ($isFromBuy) {
-            placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
+            $response = placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
         } else {
             foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
-                placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
+                $response = placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn);
             }
         }
+
+        echo json_encode($response);
+        exit();
     }
 } else {
     header("Location: ../invalid.html");
