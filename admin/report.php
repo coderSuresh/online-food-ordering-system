@@ -36,7 +36,7 @@
             inner join aos on orders.id = aos.order_id
             where YEAR(orders.date) = 2023 AND
             aos.status = 'delivered' AND
-            MONTH(orders.date) = 2
+            MONTH(orders.date) = MONTH(CURRENT_DATE())
             group by category.cat_name
             order by MONTH(orders.date);";
 
@@ -54,12 +54,10 @@
     }
 
     $quantity = array_sum($qty);
-
-    while ($i > 0) {
-        $i--;
-        array_push($percent, round(floatval($qty[$i] / $quantity * 100.0), 2));
+    
+    foreach ($qty as $q) {
+        array_push($percent, round(($q / $quantity) * 100, 2));
     }
-
     ?>
 
     <main class="admin_dashboard_body">
