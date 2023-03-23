@@ -86,9 +86,9 @@
 
         $sql_cat = "SELECT cat_name FROM category";
         $sql_food = "SELECT name FROM food";
-        $sql_order = "SELECT id FROM orders";
+        $sql_order = "SELECT id FROM orders group by track_id";
         $sql_customer = "SELECT names FROM customer";
-        $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id";
+        $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id group by orders.track_id";
         $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered'";
 
         if (isset($_SESSION['filter_option'])) {
@@ -102,36 +102,36 @@
             case "today":
                 $filter_text = "Today";
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and Date(orders.date) = CURDATE() group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders WHERE DATE(date) = CURDATE()";
+                $sql_order = "SELECT id FROM orders WHERE DATE(date) = CURDATE() group by track_id";
                 $sql_customer = "SELECT names FROM customer WHERE DATE(date) = CURDATE()";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE DATE(orders.date) = CURDATE()";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE DATE(orders.date) = CURDATE() group by orders.track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and DATE(orders.date) = CURDATE()";
                 break;
 
             case "yesterday":
                 $filter_text = "Yesterday";
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and Date(orders.date) = CURDATE() - INTERVAL 1 DAY group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders WHERE DATE(date) = CURDATE() - INTERVAL 1 DAY";
+                $sql_order = "SELECT id FROM orders WHERE DATE(date) = CURDATE() - INTERVAL 1 DAY group by track_id";
                 $sql_customer = "SELECT names FROM customer WHERE DATE(date) = CURDATE() - INTERVAL 1 DAY";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE DATE(orders.date) = CURDATE() - INTERVAL 1 DAY";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE DATE(orders.date) = CURDATE() - INTERVAL 1 DAY group by orders.track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and DATE(orders.date) = CURDATE() - INTERVAL 1 DAY";
                 break;
 
             case "last-week":
                 $filter_text = "Last week";
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and YEARWEEK(orders.date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK) group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders WHERE YEARWEEK(date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK)";
+                $sql_order = "SELECT id FROM orders WHERE YEARWEEK(date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK) group by track_id";
                 $sql_customer = "SELECT names FROM customer WHERE YEARWEEK(date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK)";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE YEARWEEK(orders.date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK)";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE YEARWEEK(orders.date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK) group by orders.track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and YEARWEEK(orders.date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK)";
                 break;
 
             case "last-month":
                 $filter_text = "Last month";
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and MONTH(orders.date) = MONTH(CURDATE() - INTERVAL 1 MONTH) group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders WHERE MONTH(date) = MONTH(CURDATE() - INTERVAL 1 MONTH)";
+                $sql_order = "SELECT id FROM orders WHERE MONTH(date) = MONTH(CURDATE() - INTERVAL 1 MONTH) group by track_id";
                 $sql_customer = "SELECT names FROM customer WHERE MONTH(date) = MONTH(CURDATE() - INTERVAL 1 MONTH)";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE MONTH(orders.date) = MONTH(CURDATE() - INTERVAL 1 MONTH)";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE MONTH(orders.date) = MONTH(CURDATE() - INTERVAL 1 MONTH) group by orders.track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and MONTH(orders.date) = MONTH(CURDATE() - INTERVAL 1 MONTH)";
                 break;
 
@@ -140,18 +140,18 @@
                 $end_date = $_SESSION['end_date'];
                 $filter_text = $start_date . " to " . $end_date;
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and orders.date >= '$start_date 00:00:00' AND orders.date <= '$end_date 23:59:59' group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders WHERE date >= '$start_date 00:00:00' AND  date <= '$end_date 23:59:59'";
+                $sql_order = "SELECT id FROM orders WHERE date >= '$start_date 00:00:00' AND  date <= '$end_date 23:59:59' group by track_id";
                 $sql_customer = "SELECT names FROM customer WHERE date >= '$start_date 00:00:00' AND date <= '$end_date 23:59:59'";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE orders.date >= '$start_date 00:00:00' AND orders.date <= '$end_date 23:59:59'";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id WHERE orders.date >= '$start_date 00:00:00' AND orders.date <= '$end_date 23:59:59' group by track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' and orders.date >= '$start_date 00:00:00' AND orders.date <= '$end_date 23:59:59'";
                 break;
 
             default:
                 $filter_text = "All time";
                 $sql_fetch_food = "select (count(f_id) * qty) as total_sold, f_id from orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered' group by f_id order by (count(f_id) * qty) desc limit 5";
-                $sql_order = "SELECT id FROM orders";
+                $sql_order = "SELECT id FROM orders group by track_id";
                 $sql_customer = "SELECT names FROM customer";
-                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id";
+                $sql_order_canceled = "SELECT o_r_id FROM reject_reason inner join orders on reject_reason.order_id = orders.id group by track_id";
                 $sql_calc_rev = "SELECT SUM(total_price) as total_rev FROM orders inner join aos on orders.id = aos.order_id where aos.status = 'delivered'";
                 break;
         }
