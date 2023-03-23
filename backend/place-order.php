@@ -3,27 +3,36 @@ session_start();
 require('../config.php');
 require('../components/get-current-timestamp.php');
 
-if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
+header('Content-Type: application/json; charset=utf-8');
+
+$response = array();
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (isset($data['f_id']) && isset($data['qty']) && isset($data['name']) && isset($data['phone']) && isset($data['address']) && isset($data['note'])) {
 
     $isFromBuy = false;
 
-    if (isset($_POST['place-order-buy'])) {
+    try {
         $isFromBuy = true;
-        $f_id = mysqli_real_escape_string($conn, $_POST['f_id']);
-        $q = mysqli_real_escape_string($conn, $_POST['qty']);
-    } else {
-        $food_id = mysqli_real_escape_string($conn, $_POST['food_id']);
-        $qty = mysqli_real_escape_string($conn, $_POST['quantity']);
+        $f_id = mysqli_real_escape_string($conn, $data['f_id']);
+        $q = mysqli_real_escape_string($conn, $data['qty']);
+    }
+    catch (Exception $e) {
+        $isFromBuy = false;
+        
+        $food_id = mysqli_real_escape_string($conn, $data['food_id']);
+        $qty = mysqli_real_escape_string($conn, $data['quantity']);
 
         $fo_id = unserialize(base64_decode($food_id));
         $quantity = unserialize(base64_decode($qty));
     }
 
     $uid = $_SESSION['user'];
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $address = mysqli_real_escape_string($conn, $_POST['address']);
-    $note = mysqli_real_escape_string($conn, $_POST['note']);
+    $name = mysqli_real_escape_string($conn, $data['name']);
+    $phone = mysqli_real_escape_string($conn, $data['phone']);
+    $address = mysqli_real_escape_string($conn, $data['address']);
+    $note = mysqli_real_escape_string($conn, $data['note']);
 
     if ($note == "") {
         $note = "No note";
@@ -31,11 +40,16 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
 
     function redirect()
     {
-        if (isset($_POST['place-order'])) {
-            header("location: ../checkout.php");
-        } else if (isset($_POST['place-order-buy'])) {
-            header("location: ../buy.php");
-        }
+        // if (isset($data['place-order'])) {
+        //     header("location: ../checkout.php");
+        // } else if (isset($data['place-order-buy'])) {
+        //     header("location: ../buy.php");
+        // }
+
+        $response['success'] = false;
+        $response['message'] = "Could not place order";
+        echo json_encode($response);
+        exit();
     }
 
     function placeOrder($f_id, $q, $track_id, $uid, $name, $phone, $address, $note, $conn)
@@ -66,15 +80,27 @@ if (isset($_POST['place-order']) || isset($_POST['place-order-buy'])) {
             mysqli_query($conn, $sql_remove_cart) or die("Could not remove from cart");
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
-            header("Location: ../track-order.php");
+            // header("Location: ../track-order.php");
+            $response['success'] = false;
+            $response['message'] = "Could not place order";
+            echo json_encode($response);
+            exit();
         }
 
         if ($res && $res_o_c_t && $res_aos) {
             $_SESSION['order_placed'] = "Order placed successfully";
-            header("Location: ../track-order.php");
+            // header("Location: ../track-order.php");
+            $response['success'] = true;
+            $response['message'] = "Order placed successfully";
+            echo json_encode($response);
+            exit();
         } else {
             $_SESSION['order_placed'] = "Order could not be placed";
-            header("Location: ../track-order.php");
+            // header("Location: ../track-order.php");
+            $response['success'] = false;
+            $response['message'] = "Could not place order";
+            echo json_encode($response);
+            exit();
         }
     }
 

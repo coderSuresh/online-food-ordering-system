@@ -71,6 +71,8 @@
         }
     })
 
+    // ==================== handle payment via esewa ====================
+
     const checkoutForm = document.querySelector('.checkout_form');
     const esewaBtn = document.querySelector('.esewa_btn');
     const esewaForm = document.querySelector('.esewa_form');
@@ -94,7 +96,21 @@
                 esewaForm.submit()
 
             } else {
-                checkoutForm.submit()
+                fetch('./backend/place-order.php', {
+                        method: 'POST',
+                        body: JSON.stringify(Object.fromEntries(new FormData(checkoutForm).entries()))
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = './track-order.php'
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err)
+                    })
             }
         } else {
             checkoutForm.reportValidity()
