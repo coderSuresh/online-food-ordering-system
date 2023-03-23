@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2023 at 12:19 PM
+-- Generation Time: Mar 23, 2023 at 04:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -59,32 +59,11 @@ CREATE TABLE `aos` (
 --
 
 INSERT INTO `aos` (`aos_id`, `order_id`, `status`, `date`) VALUES
-(125, 135, 'delivered', '2023-02-23 20:52:14'),
-(126, 136, 'delivered', '2023-02-23 20:57:41'),
-(127, 137, 'rejected', '2023-02-23 21:25:07'),
-(128, 138, 'delivered', '2023-02-23 21:25:43'),
-(129, 139, 'delivered', '2023-02-23 21:26:33'),
-(130, 140, 'delivered', '2023-02-26 14:06:21'),
-(132, 142, 'rejected', '2023-02-26 15:32:48'),
-(133, 143, 'delivered', '2023-02-26 15:32:48'),
-(134, 144, 'delivered', '2023-02-26 16:15:49'),
-(135, 145, 'rejected', '2023-03-05 10:46:37'),
-(137, 147, 'prepared', '2023-03-09 17:23:39'),
-(138, 148, 'prepared', '2023-03-09 17:23:39'),
-(139, 149, 'delivered', '2023-03-09 21:56:15'),
-(141, 151, 'delivered', '2023-03-17 11:33:15'),
-(146, 156, 'prepared', '2023-03-17 14:58:10'),
-(147, 157, 'prepared', '2023-03-17 14:58:10'),
-(148, 158, 'prepared', '2023-03-17 14:58:10'),
-(149, 159, 'pending', '2023-03-17 20:56:41'),
-(150, 160, 'pending', '2023-03-17 20:56:41'),
-(151, 161, 'pending', '2023-03-17 20:56:41'),
-(152, 162, 'accepted', '2023-03-19 13:43:30'),
-(153, 163, 'accepted', '2023-03-19 13:43:30'),
-(154, 164, 'accepted', '2023-03-19 13:43:30'),
-(155, 165, 'accepted', '2023-03-19 13:43:30'),
-(156, 166, 'pending', '2023-03-19 17:30:05'),
-(157, 167, 'pending', '2023-03-19 17:30:05');
+(194, 204, 'delivered', '2023-03-23 18:24:39'),
+(195, 205, 'delivered', '2023-03-23 18:24:39'),
+(196, 206, 'delivered', '2023-03-23 20:49:12'),
+(205, 215, 'pending', '2023-03-23 21:18:24'),
+(206, 216, 'pending', '2023-03-23 21:23:34');
 
 -- --------------------------------------------------------
 
@@ -111,8 +90,7 @@ INSERT INTO `cart` (`id`, `customer_id`, `food_id`, `quantity`) VALUES
 (174, 46, 39, 1),
 (175, 46, 40, 1),
 (183, 46, 44, 1),
-(198, 41, 44, 4),
-(199, 42, 40, 1);
+(198, 41, 44, 4);
 
 -- --------------------------------------------------------
 
@@ -216,8 +194,7 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`emp_id`, `name`, `department`, `email`, `username`, `password`, `image`, `active`) VALUES
 (1, 'Ashika Dulal', 1, 'dulalashika@protonmail.com', 'chef_ashika', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/ashika.jpg', 1),
 (2, 'Suresh Dahal', 2, 'dahalsuresh@gmail.com', 'suresh', '3495a890e500304ce83fc28b928c5269', '/uploads/employees/suresh.jpg', 0),
-(3, 'Adip Sharma', 2, 'adip@gmail.com', 'adip', '332b3091416bc4687821c4653f1c6eb1', '../../../uploads/employees/momo.jpg', 1),
-(5, 'sjflka f', 2, 'sdfjl@jsdlf.sdf', 'sdlfjsd', '5abb790b7f72e0dc9297698ebebe8336', '1679198895logo.png', 0);
+(3, 'Adip Sharma', 2, 'adip@gmail.com', 'adip', '332b3091416bc4687821c4653f1c6eb1', '../../../uploads/employees/momo.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -280,17 +257,9 @@ CREATE TABLE `kos` (
 --
 
 INSERT INTO `kos` (`kos_id`, `order_id`, `status`, `date`) VALUES
-(58, 151, 'pending', '2023-03-17 11:33:41'),
-(63, 156, 'pending', '2023-03-17 18:00:23'),
-(64, 157, 'pending', '2023-03-17 18:00:23'),
-(65, 158, 'pending', '2023-03-17 18:00:23'),
-(66, 156, 'pending', '2023-03-17 18:09:59'),
-(67, 157, 'pending', '2023-03-17 18:09:59'),
-(68, 158, 'pending', '2023-03-17 18:09:59'),
-(69, 164, 'pending', '2023-03-19 13:45:22'),
-(70, 163, 'pending', '2023-03-19 13:45:22'),
-(71, 162, 'pending', '2023-03-19 13:45:22'),
-(72, 165, 'pending', '2023-03-19 13:45:22');
+(85, 204, 'prepared', '2023-03-23 18:33:42'),
+(86, 205, 'prepared', '2023-03-23 18:33:42'),
+(87, 206, 'prepared', '2023-03-23 21:09:06');
 
 -- --------------------------------------------------------
 
@@ -322,6 +291,8 @@ INSERT INTO `newsletter` (`nl_id`, `c_id`, `email`, `date`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `c_id` int(11) NOT NULL,
+  `track_id` varchar(10) NOT NULL,
+  `o_c_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `f_id` int(11) NOT NULL,
   `total_price` int(10) NOT NULL,
@@ -333,34 +304,12 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(135, 41, 1, 42, 396, 'No note', '2023-02-23 20:52:14'),
-(136, 41, 2, 43, 904, 'No note', '2023-02-23 20:57:41'),
-(137, 41, 2, 39, 316, 'No note', '2023-02-23 21:25:07'),
-(138, 41, 2, 39, 316, 'No note', '2023-02-23 21:25:43'),
-(139, 41, 2, 39, 316, 'No note', '2023-02-23 21:26:33'),
-(140, 41, 2, 40, 407, 'No note', '2023-02-26 14:06:21'),
-(141, 41, 2, 44, 904, 'No note', '2023-02-26 15:32:48'),
-(142, 41, 1, 39, 158, 'No note', '2023-02-26 15:32:48'),
-(143, 41, 1, 40, 203, 'No note', '2023-02-26 15:32:48'),
-(144, 41, 1, 39, 158, 'jdlksjflaj', '2023-02-26 16:15:49'),
-(145, 41, 1, 31, 170, 'chado chayo lastai vok lagyo ', '2023-03-05 10:46:37'),
-(147, 41, 1, 37, 124, 'No note', '2023-03-09 17:23:39'),
-(148, 41, 1, 39, 158, 'No note', '2023-03-09 17:23:39'),
-(149, 44, 1, 40, 203, 'No note', '2023-03-09 21:56:15'),
-(151, 41, 2, 39, 316, 'No note', '2023-03-17 11:33:15'),
-(156, 44, 1, 44, 452, 'No note', '2023-03-17 14:58:10'),
-(157, 44, 1, 37, 124, 'No note', '2023-03-17 14:58:10'),
-(158, 44, 1, 36, 136, 'No note', '2023-03-17 14:58:10'),
-(159, 44, 1, 31, 170, 'No note', '2023-03-17 20:56:41'),
-(160, 44, 1, 39, 158, 'No note', '2023-03-17 20:56:41'),
-(161, 44, 1, 40, 203, 'No note', '2023-03-17 20:56:41'),
-(162, 41, 1, 40, 203, 'No note', '2023-03-19 13:43:30'),
-(163, 41, 1, 39, 158, 'No note', '2023-03-19 13:43:30'),
-(164, 41, 1, 31, 170, 'No note', '2023-03-19 13:43:30'),
-(165, 41, 1, 44, 452, 'No note', '2023-03-19 13:43:30'),
-(166, 41, 1, 43, 452, 'No note', '2023-03-19 17:30:05'),
-(167, 41, 1, 40, 203, 'No note', '2023-03-19 17:30:05');
+INSERT INTO `orders` (`id`, `c_id`, `track_id`, `o_c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
+(204, 42, 'rh00000002', 199, 1, 39, 158, 'sdfsdf', '2023-03-23 18:24:39'),
+(205, 42, 'rh00000002', 199, 1, 31, 170, 'sdfsdf', '2023-03-23 18:24:39'),
+(206, 42, 'rh00000003', 200, 1, 44, 452, 'No note', '2023-03-23 20:49:12'),
+(215, 42, 'rh00000004', 206, 1, 40, 203, 'No note', '2023-03-23 21:18:24'),
+(216, 42, 'rh00000005', 207, 1, 40, 203, 'sdfsadfsdfs', '2023-03-23 21:23:34');
 
 -- --------------------------------------------------------
 
@@ -370,7 +319,6 @@ INSERT INTO `orders` (`id`, `c_id`, `qty`, `f_id`, `total_price`, `note`, `date`
 
 CREATE TABLE `order_contact_details` (
   `o_c_id` int(11) NOT NULL,
-  `o_id` int(11) NOT NULL,
   `address` varchar(50) NOT NULL,
   `phone` varchar(10) NOT NULL,
   `c_name` varchar(30) NOT NULL
@@ -380,34 +328,11 @@ CREATE TABLE `order_contact_details` (
 -- Dumping data for table `order_contact_details`
 --
 
-INSERT INTO `order_contact_details` (`o_c_id`, `o_id`, `address`, `phone`, `c_name`) VALUES
-(129, 135, 'sfjlk asjdflk sj flkas jdflak', '9800000000', 'dfkal dsjfalk jfksl j'),
-(130, 136, 'sajdflk asj lfkas', '9800000000', 'asdhf jashd fkj'),
-(131, 137, 'chardobato, banepa', '9800000000', 'Suresh Dahal'),
-(132, 138, 'lkjsdlfk jaslkjdsl', '9800000000', 'sdkfjl asj'),
-(133, 139, 'ksdjf lkajlfk', '9800000000', 'Suresh Dahal'),
-(134, 140, 'sjkfjsljfal jlj', '9800000000', 'sdkf jal'),
-(135, 141, 'chardobato banepa', '9845215362', 'suresh dahal'),
-(136, 142, 'chardobato banepa', '9845215362', 'suresh dahal'),
-(137, 143, 'chardobato banepa', '9845215362', 'suresh dahal'),
-(138, 144, 'aldfjaksjdflk akjsdflajl ', '9800000000', 'Suresh Dahal'),
-(139, 145, 'lokanthali', '9803637795', 'Shuvam Sharma'),
-(141, 147, 'khai kata ho kata', '9814524752', 'Suresh Dahal'),
-(142, 148, 'khai kata ho kata', '9814524752', 'Suresh Dahal'),
-(143, 149, 'Khamba Gaadeko Thau Maa ', '9845725142', 'Khai ko ho'),
-(145, 151, 'djf lasjdkf jadslfj ', '9800000000', 'Suresh'),
-(150, 156, 'suresh ko ghar', '9800000000', 'Suresh Dahal'),
-(151, 157, 'suresh ko ghar', '9800000000', 'Suresh Dahal'),
-(152, 158, 'suresh ko ghar', '9800000000', 'Suresh Dahal'),
-(153, 159, 'djsflksdj flksjd lfj', '9800000000', 'jkhk jhkj'),
-(154, 160, 'djsflksdj flksjd lfj', '9800000000', 'jkhk jhkj'),
-(155, 161, 'djsflksdj flksjd lfj', '9800000000', 'jkhk jhkj'),
-(156, 162, 'xwxwsx', '023233333', 'sxswxsw'),
-(157, 163, 'xwxwsx', '023233333', 'sxswxsw'),
-(158, 164, 'xwxwsx', '023233333', 'sxswxsw'),
-(159, 165, 'xwxwsx', '023233333', 'sxswxsw'),
-(160, 166, 'sjdkf jsakldfj sa', '9800000000', 'safd fjlksa j'),
-(161, 167, 'sjdkf jsakldfj sa', '9800000000', 'safd fjlksa j');
+INSERT INTO `order_contact_details` (`o_c_id`, `address`, `phone`, `c_name`) VALUES
+(199, 'jdslk sldjslk ', '9800000000', 'sfksjlsdfjl '),
+(200, 'sdfjsdkfjsldkjf safjsdl f', '9800000000', ' ajfklsdaj fsk'),
+(206, 'dfk sdjfjsdfkljsd fl', '9800000000', 'jflkdsaj flksdjfl '),
+(207, 'sdf sdaflksdjfkl', '9800000000', 'sdfsad f asdf');
 
 -- --------------------------------------------------------
 
@@ -427,10 +352,8 @@ CREATE TABLE `reject_reason` (
 --
 
 INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
-(18, 137, 'kitchen', 'just for testing purpose'),
-(19, 142, 'kitchen', 'item not available'),
-(20, 145, 'admin', 'this order was placed for fun'),
-(21, 145, 'kitchen', 'Hya, tiktok herira bela kasle momo banune. Reject gardinxu');
+(34, 204, 'delivery', 'rejected for testing purpose'),
+(35, 205, 'delivery', 'rejected for testing purpose');
 
 -- --------------------------------------------------------
 
@@ -444,6 +367,15 @@ CREATE TABLE `to_be_delivered` (
   `status` varchar(10) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `to_be_delivered`
+--
+
+INSERT INTO `to_be_delivered` (`tbd_id`, `order_id`, `status`, `date`) VALUES
+(47, 204, 'rejected', '2023-03-23 18:34:00'),
+(48, 205, 'rejected', '2023-03-23 18:34:00'),
+(49, 206, 'delivered', '2023-03-23 21:09:23');
 
 --
 -- Indexes for dumped tables
@@ -522,14 +454,14 @@ ALTER TABLE `newsletter`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `c_id` (`c_id`),
-  ADD KEY `f_id` (`f_id`);
+  ADD KEY `f_id` (`f_id`),
+  ADD KEY `o_c_id` (`o_c_id`);
 
 --
 -- Indexes for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  ADD PRIMARY KEY (`o_c_id`),
-  ADD KEY `o_id` (`o_id`);
+  ADD PRIMARY KEY (`o_c_id`);
 
 --
 -- Indexes for table `reject_reason`
@@ -559,13 +491,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -601,7 +533,7 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `kos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -613,25 +545,25 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT for table `reject_reason`
 --
 ALTER TABLE `reject_reason`
-  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `o_r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `to_be_delivered`
 --
 ALTER TABLE `to_be_delivered`
-  MODIFY `tbd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `tbd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
@@ -679,13 +611,8 @@ ALTER TABLE `newsletter`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `c_id` FOREIGN KEY (`c_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `f_id` FOREIGN KEY (`f_id`) REFERENCES `food` (`f_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `order_contact_details`
---
-ALTER TABLE `order_contact_details`
-  ADD CONSTRAINT `o_id` FOREIGN KEY (`o_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `f_id` FOREIGN KEY (`f_id`) REFERENCES `food` (`f_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `o_c_id` FOREIGN KEY (`o_c_id`) REFERENCES `order_contact_details` (`o_c_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reject_reason`
