@@ -30,6 +30,7 @@
     $sql_all = "SELECT orders.date,
                     orders.qty,
                     orders.id,
+                    orders.track_id,
                     orders.total_price,
                     orders.note,
                     to_be_delivered.tbd_id,
@@ -91,6 +92,11 @@
                         <div class="vod_left-body-inner-content">
                             <table class="table_order-details">
                                 <tr>
+                                    <td>Order ID</td>
+                                    <td>:</td>
+                                    <td><?php echo $row['track_id']; ?></td>
+                                </tr>
+                                <tr>
                                     <td>Order Date</td>
                                     <td>:</td>
                                     <td><?php echo $row['date']; ?></td>
@@ -121,11 +127,6 @@
                                         <td>Reason</td>
                                         <td>:</td>
                                         <td><?php echo $row_reject['reason']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rejected by</td>
-                                        <td>:</td>
-                                        <td><?php echo $row_reject['rejected_by']; ?></td>
                                     </tr>
                                 <?php }
                                 ?>
