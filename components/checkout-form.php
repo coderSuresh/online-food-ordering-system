@@ -35,12 +35,16 @@
             <p style="font-weight: 700; margin-top: 10px;"> Payment Method </p>
             <div class="flex items-center justify-start payment">
                 <div class="flex items-center">
-                    <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod">
+                    <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod" required checked>
                     <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;"> Cash on Delivery </label>
                 </div>
                 <div class="flex items-center ml-35">
-                    <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" checked>
-                    <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;"> eSewa </label>
+                    <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" required>
+                    <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">
+                        <button type="button" class="mt-20 no_outline no_bg esewa_btn" style="padding: 3px !important">
+                            <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
+                        </button>
+                    </label>
                 </div>
             </div>
             <?php
@@ -60,7 +64,7 @@
             <button type="submit" name="<?php if (isset($isFromBuy))
                                             echo "place-order-buy";
                                         else
-                                            echo "place-order"; ?>" class="button mt-20 w-full border-curve"> Place Order </a>
+                                            echo "place-order"; ?>" class="button place_order mt-20 w-full border-curve"> Place Order </a>
         </form>
     </div>
     <div class="direction-col justify-start ml-35 p-20 shadow border-curve checkout_details">
@@ -73,26 +77,20 @@
             <a href="./menu.php" class="button mt-20 border-curve" style="background-color: #F7922F0a;"> Continue Shopping </a>
         </div>
 
-        <!-- ================ e-Sewa ================== -->
-        <div class="mt-40 flex direction-col">
-            <h4>Pay with eSewa</h4>
-
-            <form action="https://uat.esewa.com.np/epay/main" method="POST">
-                <input value="100" name="tAmt" type="hidden">
-                <input value="90" name="amt" type="hidden">
-                <input value="5" name="txAmt" type="hidden">
-                <input value="2" name="psc" type="hidden">
-                <input value="3" name="pdc" type="hidden">
-                <input value="EPAYTEST" name="scd" type="hidden">
-                <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-                <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-                <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-                <button class="button gray mt-20 no_outline no_bg" style="padding: 3px !important">
-                    <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
-                </button>
-            </form>
-
-        </div>
+        <!-- ======================= eSewa form ======================= -->
+        <form action="https://uat.esewa.com.np/epay/main" method="POST" class="esewa_form">
+            <input value="100" name="tAmt" type="hidden">
+            <input value="90" name="amt" type="hidden">
+            <input value="5" name="txAmt" type="hidden">
+            <input value="2" name="psc" type="hidden">
+            <input value="3" name="pdc" type="hidden">
+            <input value="EPAYTEST" name="scd" type="hidden">
+            <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+        </form>
 
     </div>
+
+</div>
 </div>

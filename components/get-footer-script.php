@@ -70,6 +70,36 @@
             forLaterInputs.innerHTML = ''
         }
     })
+
+    const checkoutForm = document.querySelector('.checkout_form');
+    const esewaBtn = document.querySelector('.esewa_btn');
+    const esewaForm = document.querySelector('.esewa_form');
+    const esewaRadioBtn = document.querySelector('#payment-method-esewa');
+    const placeOrderBtn = document.querySelector('.place_order');
+
+    esewaBtn.addEventListener('click', (e) => {
+        esewaRadioBtn.checked = true
+    })
+
+    placeOrderBtn.addEventListener('click', (e) => {
+        // TODO: maybe store the form data in local storage and then submit it when the user comes back from esewa
+        e.preventDefault()
+        if (checkoutForm.checkValidity()) {
+
+            if (esewaRadioBtn.checked) {
+                const formData = new FormData(checkoutForm)
+                const data = Object.fromEntries(formData.entries())
+                const json = JSON.stringify(data)
+                localStorage.setItem('order', json)
+                esewaForm.submit()
+
+            } else {
+                checkoutForm.submit()
+            }
+        } else {
+            checkoutForm.reportValidity()
+        }
+    })
 </script>
 </body>
 
