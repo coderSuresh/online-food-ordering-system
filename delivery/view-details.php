@@ -33,6 +33,7 @@
                     orders.track_id,
                     orders.total_price,
                     orders.note,
+                    orders.payment_method,
                     to_be_delivered.tbd_id,
                     to_be_delivered.status,
                     customer.names,
@@ -114,7 +115,7 @@
                                 <tr>
                                     <td>Payment Method</td>
                                     <td>:</td>
-                                    <td>COD</td> <!-- TODO: Change this to dynamic -->
+                                    <td><?php echo $row['payment_method']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Note</td>
