@@ -109,6 +109,10 @@
             checkoutForm.reportValidity()
         }
     })
+
+    if (history.replaceState) {
+        history.replaceState("", "", window.location.href)
+    }
 </script>
 </body>
 
