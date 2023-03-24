@@ -60,6 +60,7 @@
             <?php
             }
             ?>
+            <input type="hidden" name="vat" value="<?php echo $vat; ?>">
             <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
             <button type="submit" name="<?php if (isset($isFromBuy))
                                             echo "place-order-buy";

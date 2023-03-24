@@ -97,7 +97,8 @@
                 .then(data => {
                     if (data.redirect) {
                         formData['pm'] = data.pm
-                        localStorage.setItem('checkoutFormData', JSON.stringify(formData))
+                        // localStorage.setItem('checkoutFormData', JSON.stringify(formData))
+                        document.cookie = `checkoutFormData=${JSON.stringify(formData)}`
                         window.location.href = data.location
                     } else {
                         alert(data.message)

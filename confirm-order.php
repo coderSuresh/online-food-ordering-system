@@ -31,23 +31,37 @@
 
         <!-- ======================= eSewa form ======================= -->
         <form action="https://uat.esewa.com.np/epay/main" method="POST" class="esewa_form">
-            <input value="100" name="tAmt" type="hidden">
-            <input value="90" name="amt" type="hidden">
-            <input value="5" name="txAmt" type="hidden">
-            <input value="2" name="psc" type="hidden">
-            <input value="3" name="pdc" type="hidden">
+            <input value="100" id="tAmt" name="tAmt" type="hidden">
+            <input value="100" id="amt" name="amt" type="hidden">
+            <input value="0" id="txAmt" name="txAmt" type="hidden">
+            <input value="0" name="psc" type="hidden">
+            <input value="0" name="pdc" type="hidden">
             <input value="EPAYTEST" name="scd" type="hidden">
-            <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+            <input value="<?php echo time(); ?>" name="pid" type="hidden">
+            <input value="http://localhost/messy-code/components/esewa/success?q=su" type="hidden" name="su">
+            <input value="http://localhost/messy-code/components/esewa/failed?q=fu" type="hidden" name="fu">
         </form>
     </main>
 
     <?php require "./components/footer.php"; ?>
 
     <script>
-        const data = JSON.parse(localStorage.getItem("checkoutFormData"));
+        const data = JSON.parse(
+            document.cookie
+            .split("; ")
+            .find(row => row.startsWith("checkoutFormData"))
+            .split("=")[1]
+        );
+
         const checkoutDetails = document.querySelector(".checkout-details");
+
+        const tAmt = document.getElementById("tAmt");
+        const amt = document.getElementById("amt");
+        const txAmt = document.getElementById("txAmt");
+
+        amt.value = parseInt(data.total_price) - parseInt(data.vat);
+        txAmt.value = data.vat;
+        tAmt.value = data.total_price;
 
         if (data) {
             const p = document.createElement("p");
@@ -158,11 +172,11 @@
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
-                            localStorage.removeItem('checkoutFormData');
-                            localStorage.setItem('checkoutFormData', JSON.stringify({
-                                "msg": "Your order was placed successfully",
-                                "btn": "view order"
-                            }));
+                            document.cookie = "checkoutFormData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost/messey-code;";
+                            document.cookie = `checkoutFormData=${JSON.stringify({
+                            msg: "Your order was placed successfully.",
+                            btn: "view order"
+                        })}; path=http://localhost/messey-code`;
                             window.location.href = './track-order.php'
                         } else {
                             alert(data.message)

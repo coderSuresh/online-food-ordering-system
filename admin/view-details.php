@@ -35,6 +35,7 @@
                     orders.track_id,
                     aos.aos_id,
                     aos.status,
+                    orders.payment_method,
                     customer.names,
                     customer.email,
                     customer.date as c_date,
@@ -123,7 +124,7 @@
                                 <tr>
                                     <td>Payment Method</td>
                                     <td>:</td>
-                                    <td>COD</td> <!-- TODO: Change this to dynamic -->
+                                    <td><?php echo $row['payment_method']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Note</td>

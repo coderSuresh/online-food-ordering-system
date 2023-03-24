@@ -31,7 +31,6 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     }
 
     // ================ for-later ================= 
-
     if (isset($data['for-later'])) {
         $for_later = mysqli_real_escape_string($conn, $data['for-later']);
         if (isset($data['time']) && isset($data['date'])) {
@@ -51,6 +50,13 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     $phone = mysqli_real_escape_string($conn, $data['phone']);
     $address = mysqli_real_escape_string($conn, $data['address']);
     $note = mysqli_real_escape_string($conn, $data['note']);
+    $payment_method = mysqli_real_escape_string($conn, $data['payment-method']);
+
+    if($payment_method == "payment-method-esewa") {
+        $pm = "eSewa";
+    } else {
+        $pm = "COD";
+    }
 
     if ($note == "") {
         $note = "No note";
@@ -64,7 +70,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         exit();
     }
 
-    function placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time)
+    function placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time, $pm)
     {
         $sql_food_info = "select price from food where f_id = $f_id";
         $res_food_info = mysqli_query($conn, $sql_food_info) or die("Could not get food info");
@@ -75,13 +81,13 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         $vat = $total_price * 13 / 100;
         $total_price = $total_price + $vat;
 
-        $date = getCurrentTimestamp();
+        $data = getCurrentTimestamp();
 
-        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$delivery_date', '$delivery_time', '$date')";
+        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$pm', '$delivery_date', '$delivery_time', '$data')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
 
-        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$date')";
+        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$data')";
         $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
 
         if ($res && $res_aos) {
@@ -150,9 +156,9 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
                 showMessage("Could not place order");
             } else {
                 if ($for_later == "no")
-                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, NULL, NULL);
+                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, '0000-00-00', '00:00:00', $pm);
                 else
-                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time);
+                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time, $pm);
             }
         } else {
             $o_c_id = insertContactDetails($address, $phone, $name, $conn);
@@ -161,9 +167,9 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
             } else {
                 foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
                     if ($for_later == "no")
-                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, NULL, NULL);
+                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, '0000-00-00', '00:00:00', $pm);
                     else
-                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time);
+                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time, $pm);
                 }
             }
         }
