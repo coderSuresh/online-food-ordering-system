@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2023 at 04:47 PM
+-- Generation Time: Mar 24, 2023 at 09:42 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -59,11 +59,8 @@ CREATE TABLE `aos` (
 --
 
 INSERT INTO `aos` (`aos_id`, `order_id`, `status`, `date`) VALUES
-(194, 204, 'delivered', '2023-03-23 18:24:39'),
-(195, 205, 'delivered', '2023-03-23 18:24:39'),
-(196, 206, 'delivered', '2023-03-23 20:49:12'),
-(205, 215, 'pending', '2023-03-23 21:18:24'),
-(206, 216, 'pending', '2023-03-23 21:23:34');
+(232, 242, 'pending', '2023-03-24 14:21:44'),
+(233, 243, 'pending', '2023-03-24 14:22:17');
 
 -- --------------------------------------------------------
 
@@ -252,15 +249,6 @@ CREATE TABLE `kos` (
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `kos`
---
-
-INSERT INTO `kos` (`kos_id`, `order_id`, `status`, `date`) VALUES
-(85, 204, 'prepared', '2023-03-23 18:33:42'),
-(86, 205, 'prepared', '2023-03-23 18:33:42'),
-(87, 206, 'prepared', '2023-03-23 21:09:06');
-
 -- --------------------------------------------------------
 
 --
@@ -297,6 +285,9 @@ CREATE TABLE `orders` (
   `f_id` int(11) NOT NULL,
   `total_price` int(10) NOT NULL,
   `note` varchar(100) DEFAULT NULL,
+  `payment_method` varchar(10) NOT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `delivery_time` time DEFAULT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -304,12 +295,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `c_id`, `track_id`, `o_c_id`, `qty`, `f_id`, `total_price`, `note`, `date`) VALUES
-(204, 42, 'rh00000002', 199, 1, 39, 158, 'sdfsdf', '2023-03-23 18:24:39'),
-(205, 42, 'rh00000002', 199, 1, 31, 170, 'sdfsdf', '2023-03-23 18:24:39'),
-(206, 42, 'rh00000003', 200, 1, 44, 452, 'No note', '2023-03-23 20:49:12'),
-(215, 42, 'rh00000004', 206, 1, 40, 203, 'No note', '2023-03-23 21:18:24'),
-(216, 42, 'rh00000005', 207, 1, 40, 203, 'sdfsadfsdfs', '2023-03-23 21:23:34');
+INSERT INTO `orders` (`id`, `c_id`, `track_id`, `o_c_id`, `qty`, `f_id`, `total_price`, `note`, `payment_method`, `delivery_date`, `delivery_time`, `date`) VALUES
+(242, 42, 'rh00000000', 245, 1, 38, 181, 'No note', 'eSewa', '2023-03-24', '14:44:00', '2023-03-24 14:21:44'),
+(243, 42, 'rh00000001', 246, 1, 42, 396, 'dflsadkj lfk', 'COD', '2023-03-24', '19:22:00', '2023-03-24 14:22:17');
 
 -- --------------------------------------------------------
 
@@ -329,10 +317,8 @@ CREATE TABLE `order_contact_details` (
 --
 
 INSERT INTO `order_contact_details` (`o_c_id`, `address`, `phone`, `c_name`) VALUES
-(199, 'jdslk sldjslk ', '9800000000', 'sfksjlsdfjl '),
-(200, 'sdfjsdkfjsldkjf safjsdl f', '9800000000', ' ajfklsdaj fsk'),
-(206, 'dfk sdjfjsdfkljsd fl', '9800000000', 'jflkdsaj flksdjfl '),
-(207, 'sdf sdaflksdjfkl', '9800000000', 'sdfsad f asdf');
+(245, 'suresh ko ghar', '9845156215', 'Suresh Dahal'),
+(246, 'jkdfjlasd jflksdjfkj', '9813534355', 'jasdlk fjsdalkj');
 
 -- --------------------------------------------------------
 
@@ -347,14 +333,6 @@ CREATE TABLE `reject_reason` (
   `reason` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `reject_reason`
---
-
-INSERT INTO `reject_reason` (`o_r_id`, `order_id`, `rejected_by`, `reason`) VALUES
-(34, 204, 'delivery', 'rejected for testing purpose'),
-(35, 205, 'delivery', 'rejected for testing purpose');
-
 -- --------------------------------------------------------
 
 --
@@ -367,15 +345,6 @@ CREATE TABLE `to_be_delivered` (
   `status` varchar(10) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `to_be_delivered`
---
-
-INSERT INTO `to_be_delivered` (`tbd_id`, `order_id`, `status`, `date`) VALUES
-(47, 204, 'rejected', '2023-03-23 18:34:00'),
-(48, 205, 'rejected', '2023-03-23 18:34:00'),
-(49, 206, 'delivered', '2023-03-23 21:09:23');
 
 --
 -- Indexes for dumped tables
@@ -491,13 +460,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `aos`
 --
 ALTER TABLE `aos`
-  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `aos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -545,13 +514,13 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `order_contact_details`
 --
 ALTER TABLE `order_contact_details`
-  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `o_c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 
 --
 -- AUTO_INCREMENT for table `reject_reason`
