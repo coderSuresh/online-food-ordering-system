@@ -34,11 +34,11 @@ if (str_contains($response, "Success")) {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    document.cookie = "checkoutFormData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost/messey-code;";
+                    document.cookie = "checkoutFormData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/messey-code;";
                     document.cookie = `checkoutFormData=${JSON.stringify({
                             msg: "Your order was placed successfully.",
                             btn: "view order"
-                        })}; path=http://localhost/messey-code;`;
+                        })}; path=/messey-code;`;
                     window.location.href = "../../track-order.php";
                 } else {
                     window.location.href = "./failed.php";

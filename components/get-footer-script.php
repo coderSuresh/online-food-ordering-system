@@ -83,7 +83,6 @@
     })
 
     placeOrderBtn.addEventListener('click', (e) => {
-        // TODO: maybe store the form data in local storage and then submit it when the user comes back from esewa
         e.preventDefault()
         if (checkoutForm.checkValidity()) {
 
