@@ -38,8 +38,8 @@
             <input value="0" name="pdc" type="hidden">
             <input value="EPAYTEST" name="scd" type="hidden">
             <input value="<?php echo time(); ?>" name="pid" type="hidden">
-            <input value="http://localhost/messy-code/components/esewa/success?q=su" type="hidden" name="su">
-            <input value="http://localhost/messy-code/components/esewa/failed?q=fu" type="hidden" name="fu">
+            <input value="http://localhost/messy-code/components/esewa/success.php?q=su" type="hidden" name="su">
+            <input value="http://localhost/messy-code/components/esewa/failed.php?q=fu" type="hidden" name="fu">
         </form>
     </main>
 
