@@ -31,16 +31,19 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     }
 
     // ================ for-later ================= 
+
     if (isset($data['for-later'])) {
         $for_later = mysqli_real_escape_string($conn, $data['for-later']);
-        if (isset($data['delivery-time']) && isset($data['delivery-date'])) {
-            $delivery_time = mysqli_real_escape_string($conn, $data['delivery-time']);
-            $delivery_date = mysqli_real_escape_string($conn, $data['delivery-date']);
+        if (isset($data['time']) && isset($data['date'])) {
+            $delivery_time = mysqli_real_escape_string($conn, $data['time']);
+            $delivery_date = mysqli_real_escape_string($conn, $data['date']);
         } else {
             showMessage("Delivery time and date are required");
         }
     } else {
         $for_later = "no";
+        $delivery_date = NULL;
+        $delivery_time = NULL;
     }
 
     $uid = $_SESSION['user'];
@@ -61,7 +64,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         exit();
     }
 
-    function placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id)
+    function placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time)
     {
         $sql_food_info = "select price from food where f_id = $f_id";
         $res_food_info = mysqli_query($conn, $sql_food_info) or die("Could not get food info");
@@ -74,7 +77,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
 
         $date = getCurrentTimestamp();
 
-        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$date')";
+        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$delivery_date', '$delivery_time', '$date')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
 
@@ -146,7 +149,10 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
             if ($o_c_id == 0) {
                 showMessage("Could not place order");
             } else {
-                $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id);
+                if ($for_later == "no")
+                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, NULL, NULL);
+                else
+                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time);
             }
         } else {
             $o_c_id = insertContactDetails($address, $phone, $name, $conn);
@@ -154,7 +160,10 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
                 showMessage("Could not place order");
             } else {
                 foreach (array_combine($fo_id, $quantity) as $f_id => $q) {
-                    $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id);
+                    if ($for_later == "no")
+                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, NULL, NULL);
+                    else
+                        $response = placeOrder($f_id, $q, $track_id, $uid, $note, $conn, $o_c_id, $delivery_date, $delivery_time);
                 }
             }
         }
