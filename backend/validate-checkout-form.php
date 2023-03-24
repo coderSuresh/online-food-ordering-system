@@ -64,6 +64,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     } else if (!preg_match("/^[a-z A-z\/0-9]{5,}$/", $note)) {
         showMessage("Note must contain only letters, numbers and must be at least 5 characters long");
     } else {
+
         $response['redirect'] = true;
         $response['pm'] = $pm;
         $response['location'] = "./confirm-order.php";

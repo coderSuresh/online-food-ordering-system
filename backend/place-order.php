@@ -30,6 +30,19 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         showMessage("Invalid request");
     }
 
+    // ================ for-later ================= 
+    if (isset($data['for-later'])) {
+        $for_later = mysqli_real_escape_string($conn, $data['for-later']);
+        if (isset($data['delivery-time']) && isset($data['delivery-date'])) {
+            $delivery_time = mysqli_real_escape_string($conn, $data['delivery-time']);
+            $delivery_date = mysqli_real_escape_string($conn, $data['delivery-date']);
+        } else {
+            showMessage("Delivery time and date are required");
+        }
+    } else {
+        $for_later = "no";
+    }
+
     $uid = $_SESSION['user'];
     $name = mysqli_real_escape_string($conn, $data['name']);
     $phone = mysqli_real_escape_string($conn, $data['phone']);

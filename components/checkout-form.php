@@ -27,7 +27,7 @@
             </div>
 
             <div class="for_later_inputs">
-                <!-- coming from js below -->
+                <!-- coming from js (get-footer-script.php) -->
             </div>
 
             <label for="note"> Note: </label>

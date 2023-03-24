@@ -101,6 +101,22 @@
                 : ""
             }
 
+            ${data['date']
+                ? `<div class="flex gap mt-20">
+                    <p class="tal"> <b>Delivery Date:</b> </p>
+                    <p class="tar"> ${data['date']} </p>
+                </div>`
+                : ""
+            }
+
+            ${data['time']
+                ? `<div class="flex gap mt-20">
+                    <p class="tal"> <b>Delivery Time:</b> </p>
+                    <p class="tar"> ${data['time']} </p>
+                </div>`
+                : ""
+            }
+
             ${data.pm == "cod" 
                 ? `<button class="button border-curve mt-20 cod_btn">Place Order</button>`
                 : ``
