@@ -17,12 +17,6 @@
                                 required>
                        
                         <label for="time">Time:*</label>
-                        <?php
-                        if (date('H:i', strtotime($time . ' +30 minutes')) > $end_time || date('H:i', strtotime($time . ' +30 minutes')) < $start_time) {
-                            echo "<p><b>Sorry, we are not open at this time. Please select another date if you wish to order for later.</b></p>";
-                        }
-                        ?>
-
                         <select name="time" required>
                             <option value=''>__SELECT__</option>
                             <optgroup class="time_option"> <?php
@@ -65,6 +59,7 @@
                         }
                             ?>`
                 }
+
             })
         } else {
             forLaterInputs.innerHTML = ''

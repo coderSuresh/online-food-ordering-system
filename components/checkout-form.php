@@ -9,8 +9,6 @@
 
         $start_time = "09:00";
         $end_time = "21:00";
-
-        $isToday = false;
         ?>
 
         <form action="./backend/validate-checkout-form.php" method="post" class="checkout_form flex direction-col shadow border-curve p-20">
