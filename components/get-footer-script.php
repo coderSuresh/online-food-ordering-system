@@ -8,7 +8,6 @@
 
     <?php
     // get current date and time
-    $time = "08:00";
     if ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
     ?>
 
@@ -58,7 +57,6 @@
                         <select name="time" id="time" required>
                             <option value=''>__SELECT__</option>
                             <optgroup class="time_option"> <?php
-                                                            $time = "08:00";
                                                             if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
                                                                 $time = "09:00";
                                                             }
@@ -94,7 +92,6 @@
                 } else {
                     timeOption.innerHTML = `
                     <?php
-                    $time = "08:00";
                     if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
                         $time = "09:00";
                     }
