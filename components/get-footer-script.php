@@ -4,8 +4,46 @@
 <script>
     const forLaterInputs = document.querySelector('.for_later_inputs')
     const forLaterCheckBox = document.querySelector('.for_later')
+    const warnContainer = document.querySelector('.warn_msg')
+
+    <?php
+    // get current date and time
+    $time = "08:00";
+    if ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
+    ?>
+
+        forLaterCheckBox.checked = true
+
+        function showWarning() {
+            const warnMsg = document.createElement('p')
+
+            warnMsg.style.color = 'red'
+            warnMsg.style.fontWeight = '700'
+            warnMsg.style.margin = '10px 0'
+            warnMsg.style.fontSize = '0.825rem'
+
+            warnMsg.textContent = "We are closed now. If you wish to order for later, please specify date and time below."
+
+            warnContainer.appendChild(warnMsg)
+
+            const btn = document.querySelector('.place_order')
+            btn.disabled = true
+        }
+
+        showWarning()
+    <?php }
+    ?>
+
+    window.onload = () => {
+        checkIfChecked()
+        validateDateTime()
+    }
 
     forLaterCheckBox.addEventListener("click", () => {
+        checkIfChecked()
+    })
+
+    function checkIfChecked() {
         if (forLaterCheckBox.checked) {
             forLaterInputs.innerHTML = `
                         <label for="date">Date:*</label>
@@ -17,9 +55,13 @@
                                 required>
                        
                         <label for="time">Time:*</label>
-                        <select name="time" required>
+                        <select name="time" id="time" required>
                             <option value=''>__SELECT__</option>
                             <optgroup class="time_option"> <?php
+                                                            $time = "08:00";
+                                                            if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
+                                                                $time = "09:00";
+                                                            }
                                                             while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
                                                                 $time = date('H:i', strtotime($time . ' +30 minutes'))
                                                             ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
@@ -32,6 +74,7 @@
             // ============== listen for date change and set time options accordingly ==============
 
             const dateInput = document.querySelector('#date')
+            const timeInput = document.querySelector('#time')
             const timeOption = document.querySelector('.time_option')
 
             dateInput.addEventListener("change", () => {
@@ -51,7 +94,10 @@
                 } else {
                     timeOption.innerHTML = `
                     <?php
-                    $time = getCurrentTime();
+                    $time = "08:00";
+                    if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
+                        $time = "09:00";
+                    }
                     while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
                         $time = date('H:i', strtotime($time . ' +30 minutes'))
                     ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
@@ -61,10 +107,32 @@
                 }
 
             })
+
+            // ==================== watch time input change ====================
+            timeInput.addEventListener('change', () => {
+                validateDateTime()
+            })
+
         } else {
             forLaterInputs.innerHTML = ''
         }
-    })
+    }
+
+    // ==================== validate date and time ====================
+    function validateDateTime() {
+
+        const dateInput = document.querySelector('#date')
+        const timeInput = document.querySelector('#time')
+        const btn = document.querySelector('.place_order')
+        const warnMsg = document.querySelector('.warn_msg')
+
+        if (dateInput.value == '' || timeInput.value == '') {
+            btn.disabled = true
+        } else {
+            warnMsg.remove()
+            btn.disabled = false
+        }
+    }
 
     // ==================== handle payment via esewa ====================
 

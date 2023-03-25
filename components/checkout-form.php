@@ -19,6 +19,8 @@
             <label for="address">Address:*</label>
             <input type="text" name="address" placeholder="Chardobato, Banepa near check post" class="p_7-20" id="address" required>
 
+            <div class="warn_msg"></div>
+
             <div class="for-later flex items-center">
                 <input type="checkbox" name="for-later" class="p_7-20 for_later" id="for-later">
                 <label for="for-later" style="white-space: nowrap;">&nbsp; Order for Later</label>

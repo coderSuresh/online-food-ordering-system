@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $url = "https://uat.esewa.com.np/epay/transrec";
 $data = [
@@ -16,6 +17,13 @@ $response = curl_exec($curl);
 curl_close($curl);
 
 if (str_contains($response, "Success")) {
+
+    if (isset($_SESSION['order_success'])) {
+        // TODO: redirect to thank you page or something
+        header("Location: ../../track-order.php");
+        exit();
+    }
+
 ?>
 
     <script>
@@ -34,12 +42,22 @@ if (str_contains($response, "Success")) {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+
+                    <?php $_SESSION['order_success'] = "Your order was placed successfully."; ?>
+
                     document.cookie = "checkoutFormData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/messey-code;";
                     document.cookie = `checkoutFormData=${JSON.stringify({
                             msg: "Your order was placed successfully.",
                             btn: "view order"
                         })}; path=/messey-code;`;
-                    window.location.href = "../../track-order.php";
+
+
+                    <?php
+                    if (isset($_SESSION['order_success'])) {
+                        echo "window.location.href = '../../track-order.php';";
+                    }
+                    ?>
+
                 } else {
                     window.location.href = "./failed.php";
                 }
@@ -50,6 +68,10 @@ if (str_contains($response, "Success")) {
     </script>
 
 <?php
+
+    // remove cookie
+    setcookie("checkoutFormData", "", time() - 3600, "/messey-code/");
 } else {
     header("Location: ./failed.php");
 }
+?>
