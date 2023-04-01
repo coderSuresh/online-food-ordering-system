@@ -90,6 +90,9 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         if ($delivery_date == "0000-00-00" && $delivery_time == "00:00:00") {
             $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$date')";
             mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+        } else {
+            $sql_future_orders = "insert into future_orders values (DEFAULT, $order_id, 'pending')";
+            mysqli_query($conn, $sql_future_orders) or die("Could not insert into future orders");
         }
 
         if ($res) {

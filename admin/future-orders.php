@@ -123,13 +123,12 @@
                         order_contact_details.address,
                         order_contact_details.phone,
                         order_contact_details.c_name,
-                        aos.aos_id,
-                        aos.status
+                        future_orders.fo_id,
+                        future_orders.status
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                        inner join aos on orders.id = aos.order_id
-                        WHERE 
-                        Date(orders.date) = CURDATE()
+                        inner join future_orders on orders.id = future_orders.order_id
+                        WHERE Date(orders.date) = CURDATE()
                         group by orders.date, orders.c_id
                         order by orders.id desc";
 
@@ -197,7 +196,7 @@
     <script src="./prevent-redirect-onclick-action.js"></script>
     <script>
         function redirectToViewPage(cid, id) {
-            window.location = `./view-details.php?cid=${cid}&id=${id}`;
+            window.location = `./future-details.php?cid=${cid}&id=${id}`;
         }
     </script>
 
