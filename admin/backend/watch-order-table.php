@@ -22,14 +22,16 @@ if (isset($_SESSION['admin-success'])) {
             $check_if_inserted = "select * from aos where order_id = $order_id";
             $res_check = mysqli_query($conn, $check_if_inserted) or die("Could not check if inserted");
 
-            if (mysqli_num_rows($res_check) == 0) {
-                $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$current_timestamp')";
-                $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
-            }
-
             // check if it is present in future orders
             $check_on_future = "select * from future_orders where order_id = $order_id";
             $res_future = mysqli_query($conn, $check_on_future) or die("Could not check if inserted");
+            $row_future = mysqli_fetch_assoc($res_future);
+            $status = $row_future['status'];
+
+            if (mysqli_num_rows($res_check) == 0) {            
+                $sql_aos = "insert into aos values (DEFAULT, $order_id, '$status', '$current_timestamp')";
+                $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+            }
 
             if (mysqli_num_rows($res_future) > 0) {
                 $sql_delete = "delete from future_orders where order_id = $order_id";
