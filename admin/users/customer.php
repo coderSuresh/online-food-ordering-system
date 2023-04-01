@@ -147,7 +147,7 @@
                 <?php
                 $sql_all = "SELECT names,username,email,date,status FROM customer";
                 $result_all = mysqli_query($conn, $sql_all);
-                $count_all = mysqli_num_rows($result_all);
+                $count = mysqli_num_rows($result_all);
 
                 $sql_active = "SELECT names,username,email,date,status FROM customer WHERE active = 1";
                 $result_active = mysqli_query($conn, $sql_active);
@@ -170,7 +170,7 @@
                     <input type="hidden" name="filter-by" value="all">
                     <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">All
                         <div class="count-top shadow"><?php
-                                                        echo $count_all;
+                                                        echo $count;
                                                         ?>
                         </div>
                 </form>
@@ -215,26 +215,29 @@
         </div>
 
         <?php
-        require("../../config.php");
+        require '../../config.php';
+
+        $limit = 10;
+        require '../components/calculate-offset.php';
 
         // filter by session
-        $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
+        $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
 
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
             } else if ($filter_by == 'active') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 1";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 1 limit $offset, $limit";
             } else if ($filter_by == 'inactive') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 0";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 0 limit $offset, $limit";
             } else if ($filter_by == 'verified') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'verified' limit $offset, $limit";
             } else if ($filter_by == 'not verified') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'not verified' limit $offset, $limit";
             }
         } else {
-            $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
+            $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
         }
 
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -254,7 +257,7 @@
                 </tr>
 
                 <?php
-                $i = 0;
+                $i = $offset;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
@@ -271,7 +274,7 @@
                         </td>
                         <td><?php echo $row['names']; ?></td>
                         <td><?php echo $row['status'] . " | " . $isActive; ?></td>
-                        <td>60</td>
+                        <td>60</td> 
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['date']; ?></td>
                         <td class="table_action_container">
@@ -313,6 +316,7 @@
                 ?>
             </table>
         <?php
+            require '../components/pagination.php';
         } else {
             echo "No data found";
         }
