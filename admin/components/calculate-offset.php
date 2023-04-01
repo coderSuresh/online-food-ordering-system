@@ -9,5 +9,5 @@ if (isset($_GET['page'])) {
     $page = 1;
 }
 
-$offset = ($page - 1) * $limit;
+$offset = intval(($page - 1) * $limit);
 ?>
