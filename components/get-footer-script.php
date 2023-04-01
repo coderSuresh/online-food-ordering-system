@@ -30,6 +30,7 @@
         }
 
         showWarning()
+
     <?php }
     ?>
 
@@ -76,6 +77,7 @@
             const timeOption = document.querySelector('.time_option')
 
             dateInput.addEventListener("change", () => {
+                validateDateTime()
 
                 const date = dateInput.value
                 const today = '<?php echo $date; ?>'
@@ -125,9 +127,13 @@
 
         if (dateInput.value == '' || timeInput.value == '') {
             btn.disabled = true
-        } else {
-            warnMsg.remove()
+        } else if (dateInput.value > '<?php echo $date; ?>' || dateInput.value == <?php echo $date; ?> && timeInput.value > '<?php echo $time; ?>') {
+            warnMsg && warnMsg.remove()
             btn.disabled = false
+        } else {
+            alert('We are closed now. Please select a date and time in the future.')
+            showWarning()
+            btn.disabled = true
         }
     }
 

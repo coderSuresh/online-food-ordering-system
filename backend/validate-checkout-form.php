@@ -65,13 +65,40 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         showMessage("Note must contain only letters, numbers and must be at least 5 characters long");
     } else {
 
-        $response['redirect'] = true;
-        $response['pm'] = $pm;
-        $response['location'] = "./confirm-order.php";
-    }
+        $start_time = "09:00";
+        $end_time = "21:00";
 
-    echo json_encode($response);
-    exit();
+        require '../components/get-current-timestamp.php';
+        $current_date = getCurrentDate();
+        $current_time = getCurrentTime();
+
+        if (isset($data['date']) && isset($data['time'])) {
+            $date = mysqli_real_escape_string($conn, $data['date']);
+            $time = mysqli_real_escape_string($conn, $data['time']);
+
+            if ($date == "" || $time == "") {
+                showMessage("Please select a date and time");
+            } elseif ($date < $current_date || $date == $current_date && $time < $current_time) {
+                showMessage("Please select a date and time in the future");
+            } elseif ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
+                showMessage("We are closed now. Please select a date and time in the future");
+            } else {
+                $response['redirect'] = true;
+                $response['pm'] = $pm;
+                $response['location'] = "./confirm-order.php";
+                echo json_encode($response);
+                exit();
+            }
+        } else if ($current_time < date('H:i', strtotime($start_time . ' +30 minutes')) || $current_time > $end_time) {
+            showMessage("We are closed now. Please select a date and time in the future");
+        } else {
+            $response['redirect'] = true;
+            $response['pm'] = $pm;
+            $response['location'] = "./confirm-order.php";
+            echo json_encode($response);
+            exit();
+        }
+    }
 } else {
     $response['success'] = false;
     $response['message'] = "Invalid request";
