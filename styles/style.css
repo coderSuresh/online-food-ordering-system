@@ -945,16 +945,18 @@ form .text_field {
 .sidebar.open .dashboard_sidebar_content,
 .sidebar_sub-menu li {
     justify-content: space-between;
-    padding: 5px;
+    padding: 0 5px;
     width: 90%;
 }
 
-.sidebar_sub-menu li {
-    width: 100%;
+.sidebar_sub-menu li a {
+    display: inline-block;
+    padding: 5px;
+    width: 95%;
 }
 
 .sidebar .dashboard_sidebar_content:hover,
-.sidebar_sub-menu li:hover,
+.sidebar_sub-menu li a:hover,
 .sidebar.open .dashboard_sidebar_content:hover {
     background-color: var(--trans-black);
 }

@@ -13,17 +13,17 @@
              </a>
 
              <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
-                 <li class="border-curve-lg">
-                     <a href="./order-details.php">Order Details</a>
+                 <li>
+                     <a class="border-curve-md" href="./order-details.php">Order Details</a>
                  </li>
-                 <li class="border-curve-lg">
-                     <a href="./order-history.php">Order History</a>
+                 <li>
+                     <a class="border-curve-md" href="./order-history.php">Order History</a>
                  </li>
-                 <li class="border-curve-lg">
-                     <a href="./report.php">Revenue Details</a>
+                 <li>
+                     <a class="border-curve-md" href="./report.php">Revenue Details</a>
                  </li>
-                 <li class="border-curve-lg">
-                     <a href="#">Reviews</a>
+                 <li>
+                     <a class="border-curve-md" href="#">Reviews</a>
                  </li>
              </ul>
 
@@ -40,11 +40,11 @@
              </a>
 
              <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
-                 <li class="border-curve-lg">
-                     <a href="./manage-foods.php">Manage Foods</a>
+                 <li>
+                     <a class="border-curve-md" href="./manage-foods.php">Manage Foods</a>
                  </li>
-                 <li class="border-curve-lg">
-                     <a href="./manage-offer.php">Manage Offer</a>
+                 <li>
+                     <a class="border-curve-md" href="./manage-offer.php">Manage Offer</a>
                  </li>
              </ul>
 
@@ -61,8 +61,8 @@
              </a>
 
              <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
-                 <li class="border-curve-lg">
-                     <a href="./categories.php">Manage Category</a>
+                 <li>
+                     <a class="border-curve-md" href="./categories.php">Manage Category</a>
                  </li>
              </ul>
 
@@ -79,11 +79,11 @@
              </a>
 
              <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
-                 <li class="border-curve-lg">
-                     <a href="./users/employees.php">Employees</a>
+                 <li>
+                     <a class="border-curve-md" href="./users/employees.php">Employees</a>
                  </li>
-                 <li class="border-curve-lg">
-                     <a href="./users/customer.php">Customers </a>
+                 <li>
+                     <a class="border-curve-md" href="./users/customer.php">Customers </a>
                  </li>
              </ul>
          </li>
