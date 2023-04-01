@@ -91,7 +91,7 @@
                 </form>
 
                 <?php
-                // TODO: maybe show date wise orders such as for later on today, tomorrow, after 2 days, after 3 days etc.
+                // TODO: maybe filter date wise orders such as for later on today, tomorrow, after 2 days, after 3 days etc.
 
                 $sql = "select fo_id from future_orders";
                 $result = mysqli_query($conn, $sql);
@@ -100,7 +100,7 @@
 
                 <form action="#" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
                         <div class="count-top shadow"><?php
                                                         echo $count;
                                                         ?>
