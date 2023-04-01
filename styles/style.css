@@ -1229,6 +1229,12 @@ form .text_field {
     margin-right: 30px;
 }
 
+.table_eye {
+    width: 25px;
+    padding: 5px 0;
+    vertical-align: middle;
+}
+
 .table_action_container {
     position: relative;
 }

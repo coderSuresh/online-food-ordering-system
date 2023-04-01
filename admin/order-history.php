@@ -316,26 +316,8 @@
                         <td><?php echo $row['total_item_bought']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
                         <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
-                        <td class="table_action_container">
-                            <!-- action menu -->
-                            <button class="no_bg no_outline table_option-menu">
-                                <img src="../images//ic_options.svg" alt="options menu">
-                            </button>
-                            <!-- options -->
-                            <div class="table_action_options shadow border-curve p-20 r_70 flex direction-col">
-                                <div>
-                                    <form action="./view-details.php" method="post" class="flex items-center justify-start">
-                                        <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-                                        <input type="hidden" name="aos_id" value="<?php echo $row["aos_id"]; ?>">
-                                        <button type="submit" name="view" class="no_bg no_outline">
-                                            <div class="flex items-center justify-start">
-                                                <img src="../images/ic_view.svg" alt="view icon">
-                                                <p class="body-text">View</p>
-                                            </div>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                        <td>
+                            <img src="../images//ic_view.svg" alt="view option" class="table_eye">
                         </td>
                     </tr>
                 <?php } ?>
