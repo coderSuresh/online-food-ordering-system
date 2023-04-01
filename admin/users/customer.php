@@ -218,23 +218,23 @@
         require("../../config.php");
 
         // filter by session
-        $sql = "SELECT id,names,username,email,date,status,active FROM customer";
+        $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
 
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
-                $sql = "SELECT id,names,username,email,date,status,active FROM customer";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
             } else if ($filter_by == 'active') {
-                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE active = 1";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 1";
             } else if ($filter_by == 'inactive') {
-                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE active = 0";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 0";
             } else if ($filter_by == 'verified') {
-                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'verified'";
             } else if ($filter_by == 'not verified') {
-                $sql = "SELECT id,names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
+                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
             }
         } else {
-            $sql = "SELECT id,names,username,email,date,status,active FROM customer";
+            $sql = "SELECT id, image, names,username,email,date,status,active FROM customer";
         }
 
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -259,11 +259,15 @@
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
                     $id = $row['id'];
+                    $img = $row['image'];
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
                         <td>
-                            <img src="../../images/logo.png" class="table_food-img">
+                            <img src="<?php if ($img != "")
+                                            echo $img;
+                                        else
+                                            echo "../../images/logo.png"; ?>" width="40px" height="40px">
                         </td>
                         <td><?php echo $row['names']; ?></td>
                         <td><?php echo $row['status'] . " | " . $isActive; ?></td>
