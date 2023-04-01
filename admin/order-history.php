@@ -176,7 +176,6 @@
         </div>
 
         <?php
-        require("../config.php");
 
         $limit = 10;
 
@@ -316,9 +315,6 @@
                         <td><?php echo $row['total_item_bought']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
                         <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
-                        <td>
-                            <img src="../images//ic_view.svg" alt="view option" class="table_eye">
-                        </td>
                     </tr>
                 <?php } ?>
             </table>

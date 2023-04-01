@@ -206,8 +206,6 @@
         ?>
 
         <?php
-        require("../config.php");
-
         // filter content by session 
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all' && $_SESSION['filter-by'] != "") {
             $filter_by = $_SESSION['filter-by'];
@@ -295,7 +293,6 @@
                     <th>Item</th>
                     <th>Amount</th>
                     <th>Order Status</th>
-                    <th>Action</th>
                 </tr>
 
                 <?php
@@ -333,9 +330,6 @@
                         <td><?php echo $row['total_item_bought']; ?></td>
                         <td><?php echo $row['total_price']; ?></td>
                         <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
-                        <td>
-                            <img src="../images//ic_view.svg" alt="view option" class="table_eye">
-                        </td>
                     </tr>
                 <?php } ?>
             </table>

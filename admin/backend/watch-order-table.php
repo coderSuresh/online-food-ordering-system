@@ -8,7 +8,7 @@ if (isset($_SESSION['admin-success'])) {
     $current_time = getCurrentTime();
     $current_timestamp = getCurrentTimestamp();
 
-    $sql = "Select id, delivery_time from orders where Date(delivery_date) = Date(NOW())";
+    $sql = "Select id, delivery_time from orders where Date(delivery_date) = Date(NOW())"; //or we can use CURDATE()
     $res = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     while ($data = mysqli_fetch_assoc($res)) {
