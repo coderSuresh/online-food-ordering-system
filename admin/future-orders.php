@@ -93,7 +93,7 @@
                 <?php
                 // TODO: maybe show date wise orders such as for later on today, tomorrow, after 2 days, after 3 days etc.
 
-                $sql = "select id from orders where Date(date) = CURDATE() group by orders.c_id, orders.date";
+                $sql = "select fo_id from future_orders";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
                 ?>

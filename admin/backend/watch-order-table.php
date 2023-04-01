@@ -26,10 +26,19 @@ if (isset($_SESSION['admin-success'])) {
                 $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$current_timestamp')";
                 $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
             }
+
+            // check if it is present in future orders
+            $check_on_future = "select * from future_orders where order_id = $order_id";
+            $res_future = mysqli_query($conn, $check_on_future) or die("Could not check if inserted");
+
+            if (mysqli_num_rows($res_future) > 0) {
+                $sql_delete = "delete from future_orders where order_id = $order_id";
+                mysqli_query($conn, $sql_delete) or die("Could not delete from future orders");
+            }
         }
     }
 
-    $sql = "select * from aos where status = 'pending'";
+    $sql = "select * from aos";
     $res = mysqli_query($conn, $sql) or die("Could not get pending orders");
     $count = mysqli_num_rows($res);
 
