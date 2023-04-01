@@ -20,6 +20,9 @@
                      <a class="border-curve-md" href="../order-history.php">Order History</a>
                  </li>
                  <li>
+                     <a class="border-curve-md" href="../future-orders.php">Future Orders</a>
+                 </li>
+                 <li>
                      <a class="border-curve-md" href="../report.php">Revenue Details</a>
                  </li>
                  <li>
