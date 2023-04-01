@@ -52,7 +52,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
     $note = mysqli_real_escape_string($conn, $data['note']);
     $payment_method = mysqli_real_escape_string($conn, $data['payment-method']);
 
-    if($payment_method == "payment-method-esewa") {
+    if ($payment_method == "payment-method-esewa") {
         $pm = "eSewa";
     } else {
         $pm = "COD";
@@ -81,16 +81,18 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         $vat = $total_price * 13 / 100;
         $total_price = $total_price + $vat;
 
-        $data = getCurrentTimestamp();
+        $date = getCurrentTimestamp();
 
-        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$pm', '$delivery_date', '$delivery_time', '$data')";
+        $sql = "insert into orders values (DEFAULT, $uid, '$track_id', $o_c_id, $q, $f_id, $total_price, '$note', '$pm', '$delivery_date', '$delivery_time', '$date')";
         $res = mysqli_query($conn, $sql) or die("Could not place order");
         $order_id = mysqli_insert_id($conn);
 
-        $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$data')";
-        $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+        if ($delivery_date == "0000-00-00" && $delivery_time == "00:00:00") {
+            $sql_aos = "insert into aos values (DEFAULT, $order_id, 'pending', '$date')";
+            mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
+        }
 
-        if ($res && $res_aos) {
+        if ($res) {
             $sql_remove_cart = "delete from cart where food_id = $f_id and customer_id = $uid";
             mysqli_query($conn, $sql_remove_cart) or die("Could not remove from cart");
         } else {
@@ -101,7 +103,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
             exit();
         }
 
-        if ($res && $res_aos) {
+        if ($res) {
             $_SESSION['order_placed'] = "Order placed successfully";
             $response['success'] = true;
             $response['message'] = "Order placed successfully";

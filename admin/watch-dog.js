@@ -7,6 +7,7 @@ function checkForUpdates() {
         fetch(hostURLDog + "admin/backend/watch-order-table.php")
           .then((response) => response.json())
           .then((new_count) => {
+
             if (new_count.data !== JSON.parse(localStorage.getItem('old_data') ? localStorage.getItem('old_data') : current_count.data)) {
 
               localStorage.setItem('old_data', JSON.stringify(new_count.data));
