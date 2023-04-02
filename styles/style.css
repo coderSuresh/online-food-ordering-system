@@ -1409,7 +1409,8 @@ form .text_field {
 .modal_form select,
 .modal_form button,
 .uploaded-img-preview,
-.modal_form textarea {
+.modal_form textarea,
+.form_input {
     padding: 10px;
     margin: 0 20px 20px 0;
     width: 200px;
