@@ -20,6 +20,7 @@
 
     // TODO: make this functional
     // show current offers
+    // give option to add offer by percentage or by price
     // add new offer
     // delete offer
     // modify offer
