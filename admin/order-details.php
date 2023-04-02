@@ -335,7 +335,7 @@
             </table>
         <?php
         } else {
-            echo "No Record Found";
+            echo "<p class='mt-20'>No Record Found</p>";
         }
         ?>
     </main>

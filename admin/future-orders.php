@@ -187,7 +187,6 @@
             </table>
         <?php
         } else {
-            // TODO: add margin to every other similar pages
             echo "<p class='mt-20'>No Record Found</p>";
         }
         ?>

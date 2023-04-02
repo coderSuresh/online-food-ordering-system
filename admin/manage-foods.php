@@ -512,7 +512,7 @@
         <?php
             require './components/pagination.php';
         } else
-            echo "No records found";
+            echo "<p class='mt-20'>No Record Found</p>";
         ?>
     </main>
 
