@@ -34,6 +34,7 @@
 
              <ul class="flex items-center">
                  <li class="flex direction-col"><a href="menu.php">Menu</a></li>
+                 <li class="flex direction-col"><a href="track-order.php" class="tmo">Track Order</a></li>
 
                  <!-- nav search form -->
                  <?php require './components/search-form.php'; ?>

@@ -721,6 +721,12 @@ newsletterBtn && newsletterBtn.addEventListener("click", (e) => {
     }
 })
 
+// ==================== for header track order btn ==================
+const tmo = document.querySelector(".tmo")
+if (window.innerWidth < 768) {
+    tmo && (tmo.textContent = "TMO")
+}
+
 // ==================== for home page slider (don't code below this block) ==================
 const swiper = new Swiper('.swiper', {
     direction: 'horizontal',

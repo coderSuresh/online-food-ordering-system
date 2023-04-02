@@ -220,6 +220,10 @@
     .footer .social img {
         margin-left: 0;
     }
+
+    nav ul li {
+        margin: 0 5px !important;
+    }
 }
 
 @media (max-width: 565px) {
@@ -232,8 +236,6 @@
     .card__food-img {
         height: 150px;
     }
-
-    
 }
 
 @media (max-width: 500px) {
@@ -272,10 +274,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-    }
-
-    nav ul li {
-        margin: 0 5px !important;
     }
 
     nav ul li img {
@@ -333,6 +331,14 @@
 
     .swiper-button:after {
         display: none;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    .search_form {
+        margin: 0;
     }
 }
 
