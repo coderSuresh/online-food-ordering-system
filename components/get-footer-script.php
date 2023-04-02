@@ -15,20 +15,18 @@
         function showWarning() {
             const warnMsg = document.createElement('p')
 
-            if (warnMsg) {
-                warnMsg.style.color = 'red'
-                warnMsg.style.fontWeight = '700'
-                warnMsg.style.margin = '10px 0'
-                warnMsg.style.fontSize = '0.825rem'
+            warnMsg.style.color = 'red'
+            warnMsg.style.fontWeight = '700'
+            warnMsg.style.margin = '10px 0'
+            warnMsg.style.fontSize = '0.825rem'
 
-                warnMsg.textContent = "We are closed now. If you wish to order for later, please specify date and time below."
+            warnMsg.textContent = "We are closed now. If you wish to order for later, please specify date and time below."
 
-                warnContainer.appendChild(warnMsg)
+            warnContainer.appendChild(warnMsg)
 
-                const btn = document.querySelector('.place_order')
-                btn.disabled = true
-                btn.style.cursor = 'not-allowed'
-            }
+            const btn = document.querySelector('.place_order')
+            btn.disabled = true
+            btn.style.cursor = 'not-allowed'
         }
 
         showWarning()
@@ -38,7 +36,6 @@
 
     window.onload = () => {
         checkIfChecked()
-        validateDateTime()
     }
 
     forLaterCheckBox.addEventListener("click", () => {
@@ -127,22 +124,14 @@
         const btn = document.querySelector('.place_order')
         const warnMsg = document.querySelector('.warn_msg')
 
-        if (dateInput && timeInput) {
-            const date = dateInput.value
-            const time = timeInput.value
-            const today = '<?php echo $date; ?>'
-            const currentTime = '<?php echo $time; ?>'
-
-            if (date == today && time < currentTime) {
-                btn.disabled = true
-                btn.style.cursor = 'not-allowed'
-                warnMsg.innerHTML = `<p style="color: red; font-weight: 700; margin: 10px 0; font-size: 0.825rem;">We are closed now. If you wish to order for later, please specify date and time below.</p>`
-            } else {
-                btn.disabled = false
-                btn.style.cursor = 'pointer'
-                warnMsg.innerHTML = ''
-            }
-        }
+        if (dateInput.value == '' || timeInput.value == '') {
+            btn.disabled = true
+            btn.style.cursor = 'not-allowed'
+        } else if (dateInput.value > '<?php echo $date; ?>' || dateInput.value == <?php echo $date; ?> && timeInput.value > '<?php echo $time; ?>') {
+            warnMsg && warnMsg.remove()
+            btn.disabled = false
+            btn.style.cursor = 'pointer'
+        } 
     }
 
     // ==================== handle payment via esewa ====================
