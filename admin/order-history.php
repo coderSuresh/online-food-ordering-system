@@ -214,7 +214,8 @@
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
-                        where aos.status in ('prepared', 'delivering')
+                        where aos.status in ('prepared', 'delivering') and
+                        orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
                         order by orders.id desc
                         limit $offset, $limit
@@ -235,7 +236,8 @@
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
-                        where aos.status = '$filter_by'
+                        where aos.status = '$filter_by' and
+                        orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
                         order by orders.id desc
                         limit $offset, $limit
@@ -258,6 +260,7 @@
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
+                        where orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
                         order by orders.id desc
                         limit $offset, $limit
