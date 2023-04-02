@@ -46,10 +46,18 @@ if (!isset($_SESSION['admin-success'])) {
         }
 
         if ($result) {
-            $_SESSION['order-success-a'] = "Order accepted successfully";
+            if(isset($_POST['aos_id']) && !empty($_POST['aos_id'])) {
+                $_SESSION['order-success-a'] = "Order Accepted Successfully";
+            } elseif (isset($_POST['fo_id']) && !empty($_POST['fo_id'])) {
+                $_SESSION['order-success-fo'] = "Future Order Accepted Successfully";
+            }
             redirect();
         } else {
-            $_SESSION['order-error-a'] = "Something went wrong. Please try again";
+            if(isset($_POST['aos_id']) && !empty($_POST['aos_id'])) {
+                $_SESSION['order-error-a'] = "Order Accept Failed";
+            } elseif (isset($_POST['fo_id']) && !empty($_POST['fo_id'])) {
+                $_SESSION['order-error-fo'] = "Future Order Accept Failed";
+            }
             redirect();
         }
     } else {

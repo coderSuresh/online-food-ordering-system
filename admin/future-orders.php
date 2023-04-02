@@ -23,6 +23,29 @@
 
     <main class="admin_dashboard_body">
 
+        <?php
+        if (isset($_SESSION['order-success-fo'])) {
+        ?>
+            <p class="error-container success p_7-20">
+                <?php
+                echo $_SESSION['order-success-fo'];
+                unset($_SESSION['order-success-fo']);
+                ?>
+            </p>
+        <?php
+        }
+        if (isset($_SESSION['order-error-fo'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php
+                echo $_SESSION['order-error-fo'];
+                unset($_SESSION['order-error-fo']);
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+
         <section class="dashboard_inner-head flex items-center">
             <h2>Future Order Details</h2>
             <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
