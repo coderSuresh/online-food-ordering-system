@@ -7,7 +7,6 @@
     const warnContainer = document.querySelector('.warn_msg')
 
     <?php
-    // get current date and time
     if ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
     ?>
 
@@ -16,17 +15,20 @@
         function showWarning() {
             const warnMsg = document.createElement('p')
 
-            warnMsg.style.color = 'red'
-            warnMsg.style.fontWeight = '700'
-            warnMsg.style.margin = '10px 0'
-            warnMsg.style.fontSize = '0.825rem'
+            if (warnMsg) {
+                warnMsg.style.color = 'red'
+                warnMsg.style.fontWeight = '700'
+                warnMsg.style.margin = '10px 0'
+                warnMsg.style.fontSize = '0.825rem'
 
-            warnMsg.textContent = "We are closed now. If you wish to order for later, please specify date and time below."
+                warnMsg.textContent = "We are closed now. If you wish to order for later, please specify date and time below."
 
-            warnContainer.appendChild(warnMsg)
+                warnContainer.appendChild(warnMsg)
 
-            const btn = document.querySelector('.place_order')
-            btn.disabled = true
+                const btn = document.querySelector('.place_order')
+                btn.disabled = true
+                btn.style.cursor = 'not-allowed'
+            }
         }
 
         showWarning()
@@ -125,14 +127,21 @@
         const btn = document.querySelector('.place_order')
         const warnMsg = document.querySelector('.warn_msg')
 
-        if (dateInput.value == '' || timeInput.value == '') {
-            btn.disabled = true
-        } else if (dateInput.value > '<?php echo $date; ?>' || dateInput.value == <?php echo $date; ?> && timeInput.value > '<?php echo $time; ?>') {
-            warnMsg && warnMsg.remove()
-            btn.disabled = false
-        } else {
-            showWarning()
-            btn.disabled = true
+        if (dateInput && timeInput) {
+            const date = dateInput.value
+            const time = timeInput.value
+            const today = '<?php echo $date; ?>'
+            const currentTime = '<?php echo $time; ?>'
+
+            if (date == today && time < currentTime) {
+                btn.disabled = true
+                btn.style.cursor = 'not-allowed'
+                warnMsg.innerHTML = `<p style="color: red; font-weight: 700; margin: 10px 0; font-size: 0.825rem;">We are closed now. If you wish to order for later, please specify date and time below.</p>`
+            } else {
+                btn.disabled = false
+                btn.style.cursor = 'pointer'
+                warnMsg.innerHTML = ''
+            }
         }
     }
 
