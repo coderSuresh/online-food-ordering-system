@@ -94,7 +94,11 @@
                 <?php
                 require("../config.php");
 
-                $sql = "select id from orders where Date(date) = CURDATE() group by orders.c_id, orders.date";
+                require '../components/get-current-timestamp.php';
+                $c_time = getCurrentTime();
+                $calculated_time = date('H:i', strtotime('+30 minutes', strtotime($c_time)));
+
+                $sql = "select id from orders where Date(date) = CURDATE() and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
