@@ -131,7 +131,6 @@
             warnMsg && warnMsg.remove()
             btn.disabled = false
         } else {
-            alert('We are closed now. Please select a date and time in the future.')
             showWarning()
             btn.disabled = true
         }
