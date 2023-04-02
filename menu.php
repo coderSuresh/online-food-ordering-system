@@ -24,21 +24,20 @@
     <aside class="sidebar menu_sidebar shadow p_7-20">
         <h4 class="heading">Filter</h4>
 
-        <!-- veg non-veg filter form -->
-        <form action="./backend/veg-filter.php" method="post" class="veg_filter_form form flex direction-col mt-20">
-            <div>
-                <input type="radio" class="cbox-veg_nonveg" name="veg-filter" value="all" id="all" <?php if (isset($_SESSION['veg']) && $_SESSION['veg'] == "all") echo "checked"; ?>>
-                <label for="all"> All</label>
-            </div>
-            <div>
-                <input type="radio" class="cbox-veg_nonveg" name="veg-filter" value="veg" id="veg" <?php if (isset($_SESSION['veg']) && $_SESSION['veg'] == "veg") echo "checked"; ?>>
-                <label for="veg"> Veg</label>
-            </div>
-            <div>
-                <input type="radio" class="cbox-veg_nonveg" name="veg-filter" value="non-veg" id="non-veg" <?php if (isset($_SESSION['veg']) && $_SESSION['veg'] == "non-veg") echo "checked"; ?>>
-                <label for="non-veg"> Non-veg</label>
-            </div>
-        </form>
+        <div class="mt-20">
+            <input type="radio" onchange="vegFilter('all')" class="cbox-veg_nonveg" name="veg-filter" value="all" id="all" <?php if (isset($_GET['veg']) && $_GET['veg'] == "all") echo "checked"; ?>>
+            <label for="all"> All</label>
+        </div>
+
+        <div style="margin-top:10px">
+            <input type="radio" onchange="vegFilter(1)" class="cbox-veg_nonveg" name="veg-filter" value="veg" id="veg" <?php if (isset($_GET['veg']) && $_GET['veg'] == "1") echo "checked"; ?>>
+            <label for="veg"> Veg</label>
+        </div>
+
+        <div style="margin-top:10px">
+            <input type="radio" onchange="vegFilter(0)" class="cbox-veg_nonveg" name="veg-filter" value="non-veg" id="non-veg" <?php if (isset($_GET['veg']) && $_GET['veg'] == "0") echo "checked"; ?>>
+            <label for="non-veg"> Non-Veg</label>
+        </div>
     </aside>
 
     <main class="menu_container">
@@ -92,9 +91,14 @@
 
                 <!-- fetch categories from db -->
                 <?php
+
+                if (isset($_GET['veg'])) {
+                    $isVeg = $_GET['veg'];
+                }
+
                 if (isset($_GET['search'])) {
                     $searchKey = $_GET['search'];
-                    $sql = "SELECT * FROM food where name like '%$searchKey%'" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by f_id desc";
+                    $sql = "SELECT * FROM food where name like '%$searchKey%'" . (isset($_GET['veg']) && $_GET['veg'] != "all" ? " and veg = '{$_GET['veg']}'" : "") . " order by f_id desc";
                 } else {
                     if (isset($_SESSION['cat_name']) && $_SESSION['cat_name'] !== "all") {
                         $sql = "SELECT cat_name FROM category where cat_name = '{$_SESSION['cat_name']}'";
@@ -110,7 +114,7 @@
                 ?>
                             <section class="menu_food-card-container mt-20 flex direction-col">
                                 <?php
-                                $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by food.f_id desc";
+                                $sql_food = "SELECT * FROM food inner join category on food.category = category.cat_id where category.cat_name = '$row[cat_name]' and disabled = 0" . (isset($_GET['veg']) && $_GET['veg'] != "all" ? " and veg = '{$_GET['veg']}'" : "") . " order by food.f_id desc";
                                 $res = mysqli_query($conn, $sql_food);
                                 if (mysqli_num_rows($res) > 0) {
                                 ?>
@@ -164,7 +168,7 @@
                         ?>
                         <section class="menu_food-card-container mt-20 flex direction-col">
                             <?php
-                            $sql_food = "SELECT * FROM food where name like '%$searchKey%' and disabled = 0" . (isset($_SESSION['veg-int']) ? " and veg = '{$_SESSION['veg-int']}'" : "") . " order by f_id desc";
+                            $sql_food = "SELECT * FROM food where name like '%$searchKey%' and disabled = 0" . (isset($_GET['veg']) && $_GET['veg'] != "all" ? " and veg = '{$_GET['veg']}'" : "") . " order by f_id desc";
                             $res = mysqli_query($conn, $sql_food);
                             if (mysqli_num_rows($res) > 0) {
                             ?>
@@ -222,6 +226,16 @@
         </div>
         <?php require("./components/footer.php"); ?>
     </main>
+
+    <script>
+        function vegFilter(key) {
+            let searchKey = "<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>";
+            if (searchKey != "")
+                window.location.href = "./menu.php?search=" + searchKey + "&veg=" + key;
+            else
+                window.location.href = "./menu.php?veg=" + key;
+        }
+    </script>
 
     <script type="module" src="./js/app.js"></script>
 

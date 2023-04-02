@@ -1,22 +1,27 @@
 <?php
-session_start();
 require("../config.php");
-if(isset($_POST['veg-filter'])){
+if (isset($_POST['veg-filter'])) {
     $veg = mysqli_real_escape_string($conn, $_POST['veg-filter']);
-    $_SESSION['veg'] = $veg;
 
-    if($veg == "veg"){
-        $_SESSION['veg-int'] = "1";
+    if ($veg == "veg") {
+        if (isset($_GET['searchKey'])) {
+            header("Location: ../menu.php?veg=1&searchKey=" . $_GET['searchKey']);
+        } else {
+            header("Location: ../menu.php?veg=1");
+        }
+    } else if ($veg == "non-veg") {
+        if (isset($_GET['searchKey'])) {
+            header("Location: ../menu.php?veg=0&searchKey=" . $_GET['searchKey']);
+        } else {
+            header("Location: ../menu.php?veg=0");
+        }
+    } else {
+        if (isset($_GET['searchKey'])) {
+            header("Location: ../menu.php?searchKey=" . $_GET['searchKey']);
+        } else {
+            header("Location: ../menu.php");
+        }
     }
-    else if($veg == "non-veg"){
-        $_SESSION['veg-int'] = "0";
-    } 
-    else{
-        unset($_SESSION['veg-int']);
-    }
-
-    header("Location: ../menu.php");
-}
-else{
+} else {
     header("Location: ../menu.php");
 }
