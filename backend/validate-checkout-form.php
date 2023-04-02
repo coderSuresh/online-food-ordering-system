@@ -82,6 +82,8 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
                 showMessage("Please select a date and time in the future");
             } elseif ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
                 showMessage("We are closed now. Please select a date and time in the future");
+            } elseif ($date > date('Y-m-d', strtotime($current_date . ' +3 day'))) {
+                showMessage("You can't order for more than 3 days in advance");
             } else {
                 $response['redirect'] = true;
                 $response['pm'] = $pm;
