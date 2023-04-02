@@ -93,7 +93,10 @@
                 <?php
                 // TODO: maybe filter date wise orders such as for later on today, tomorrow, after 2 days, after 3 days etc.
 
-                $sql = "select fo_id from future_orders";
+                $sql = "select future_orders.fo_id
+                               from orders
+                               inner join future_orders on orders.id = future_orders.order_id
+                               group by orders.c_id, orders.date";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
                 ?>
