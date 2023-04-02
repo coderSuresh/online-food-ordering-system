@@ -86,12 +86,9 @@
                             <p class="food_details_price"><b>Offer price:</b> Rs. <?php echo $food['price']; ?></p>
                         </div>
                     </div>
-
-                <?php }
-                ?>
             </div>
 
-            <div class="top-right">
+            <div class="offer_related top-right">
                 <div class="mt-20 shadow p-20 w-fit border-curve">
                     <form action="./components/add-offer.php" method="POST" class="flex flex-col">
                         <input type="hidden" name="food_id" value="<?php echo $food['f_id']; ?>">
@@ -105,13 +102,14 @@
                         </div>
                     </form>
                 </div>
-                <div class="bottom-right">
+                <div class="offer_related bottom-right">
                     <div class="mt-20 shadow p-20 w-fit border-curve">
                         <img src="../images/kharbuja ko juice.png" width="300px" height="120px" alt="offer image">
                     </div>
                 </div>
             </div>
-
+        <?php }
+        ?>
         </div>
 
     </main>
