@@ -13,7 +13,7 @@ session_start();
         if (mysqli_num_rows($res_email) == 0) {
             $status = "verified";
             $count = 0;
-            $sql = "INSERT INTO customer VALUES (default, '$names', NULL, '$email', NULL, '$signin_provider', NOW(), '$status', 1, NULL, '$image', $count)";
+            $sql = "INSERT INTO customer VALUES (default, '$names', NULL, '$email', NULL, '$signin_provider', NOW(), '$status', 1, NULL,$count)";
             mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
             $id = mysqli_insert_id($conn);
             $_SESSION['success'] = "success";

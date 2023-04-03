@@ -99,8 +99,6 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "profile_name=" + profile_name;
                         let email = profile.email;
                         document.cookie = "email=" + email;
-                        let image = profile.photoURL;
-                        document.cookie = "image=" + image;
                         location.reload();
                         window.location.href =
                             "https://localhost/messy-code/customer_auth/google_auth.php";
