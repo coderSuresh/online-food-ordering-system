@@ -43,23 +43,15 @@
                  <?php
                     require './config.php';
                     if (isset($_SESSION['success'])) {
-                        $sql = "SELECT * FROM customer WHERE id = '{$_SESSION['user']}'";
+                        $sql = "SELECT names FROM customer WHERE id = '{$_SESSION['user']}'";
                         $result = mysqli_query($conn, $sql);
                         $row_header = mysqli_fetch_assoc($result);
                         $name = $row_header['names'];
-
-                        if ($row_header['image'] != '') {
-                            $profile_img = $row_header['image'];
-                        } else {
-                            $profile_img = '';
                     ?>
-                         <p class="user_name"><?php echo $name; ?></p>
+                     <p class="user_name"><?php echo $name; ?></p>
 
-                     <?php
-                        }
-                        ?>
                      <li class="flex direction-col profile_img-container">
-                         <img src="<?php echo $profile_img; ?>" class="user_profile_icon relative" alt="account">
+                         <img src="" class="user_profile_icon relative" alt="account">
                          <div class="logout-dropdown border-curve shadow p-20">
                              <a href="./customer_auth/logout.php">Logout</a>
                          </div>
