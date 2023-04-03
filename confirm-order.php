@@ -46,12 +46,11 @@
     <?php require "./components/footer.php"; ?>
 
     <script>
-        const data = JSON.parse(
-            document.cookie
-            .split("; ")
+        const cookieString = document.cookie.split("; ")
             .find(row => row.startsWith("checkoutFormData"))
-            .split("=")[1]
-        );
+            .split("checkoutFormData=")[1];
+
+        const data = JSON.parse(decodeURIComponent(cookieString));
 
         const checkoutDetails = document.querySelector(".checkout-details");
 
@@ -150,6 +149,13 @@
                 ? `<div class="mt-20"><a href="./track-order.php" class="button border-curve mt-20">View Order</a></div>`
                 : ""
             }
+        `;
+
+            checkoutDetails.appendChild(p);
+        } else {
+            const p = document.createElement("p");
+            p.innerHTML = `
+            <p class="mt-20">Your cart is empty.</p>
         `;
 
             checkoutDetails.appendChild(p);
