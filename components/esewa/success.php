@@ -27,12 +27,12 @@ if (str_contains($response, "Success")) {
 ?>
 
     <script>
-        const data = JSON.parse(
-            document.cookie
-            .split("; ")
+        const cookieString = document.cookie.split("; ")
             .find(row => row.startsWith("checkoutFormData"))
-            .split("=")[1]
-        );
+            .split("checkoutFormData=")[1];
+
+        const data = JSON.parse(decodeURIComponent(cookieString));
+
         const url = "../../backend/place-order.php";
 
         fetch(url, {
