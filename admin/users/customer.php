@@ -262,12 +262,28 @@
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
                     $id = $row['id'];
 
+                    // find number of items bought
+                    $sql_item_bought = "select count(orders.id) as total
+                                        from orders
+                                        inner join aos on orders.id = aos.order_id
+                                        where aos.status = 'delivered' and
+                                        orders.c_id = $id
+                                        group by orders.c_id";
+
+                    $res_item_bought = mysqli_query($conn, $sql_item_bought);
+                    $row_item_bought = mysqli_fetch_assoc($res_item_bought);
+
+                    $item_bought = 0;
+
+                    if (mysqli_num_rows($res_item_bought) > 0) {
+                        $item_bought = $row_item_bought['total'];
+                    }
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['names']; ?></td>
                         <td><?php echo $row['status'] . " | " . $isActive; ?></td>
-                        <td>60</td>
+                        <td><?php echo $item_bought; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['date']; ?></td>
                         <td class="table_action_container">
