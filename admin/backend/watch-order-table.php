@@ -31,7 +31,7 @@ if (isset($_SESSION['admin-success'])) {
                 $status = $row_future['status'];
 
                 if (mysqli_num_rows($res_check) == 0) {
-                    $sql_aos = "insert into aos values (DEFAULT, $order_id, '$status', '$current_timestamp')";
+                    $sql_aos = "insert into aos values (DEFAULT, $order_id, '$status', '$current_timestamp', '0000-00-00 00:00:00')";
                     $res_aos = mysqli_query($conn, $sql_aos) or die("Could not insert into aos");
                 }
             }
