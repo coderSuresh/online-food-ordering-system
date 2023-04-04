@@ -81,7 +81,7 @@
 
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
-                    <h3 class="heading">Filter</h3>
+                    <h3 class="heading">Category wise</h3>
 
                     <form action="./report.php" method="get" class="filter-form">
                         <select name="percent-filter" id="percent-filter">
@@ -102,7 +102,7 @@
 
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
-                    <h3 class="heading">Filter</h3>
+                    <h3 class="heading">Total sales</h3>
 
                     <?php
                     // initially set to monthly
