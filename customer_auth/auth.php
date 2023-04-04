@@ -32,6 +32,7 @@ if (isset($_POST['login'])) {
             }
         } else {
             $_SESSION["block"] = "You account has been blocked";
+            header("Location:./login.php");
         }
     } else {
         $_SESSION['username'] = "Incorrect username";
