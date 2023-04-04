@@ -207,6 +207,13 @@
             if (!isset($_GET['isf'])) {
                 $_GET['isf'] = "hourly";
             }
+            if (!isset($_GET['food'])) {
+                if (isset($_COOKIE['foodID'])) {
+                    $_GET['food'] = $_COOKIE['foodID'];
+                } else {
+                    $_GET['food'] = 1;
+                }
+            }
             ?>
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
@@ -264,10 +271,10 @@
 
                     // check if the form is for item wise sales
                     if (form.classList.contains('item_wise')) {
-                        const food = localStorage.getItem('foodID');
+                        const foodId = document.cookie.split(';').find(row => row.trim().startsWith('foodID=')).split('=')[1];
                         if (food == '')
                             return;
-                        window.location.href = `./report.php?isf=${query}&food=${food}#line-chart-item`;
+                        window.location.href = `./report.php?isf=${query}&food=${foodId}#line-chart-item`;
                     } else {
                         window.location.href = `./report.php?tsf=${query}`;
                     }
@@ -524,7 +531,7 @@
                 foodList.forEach((foodOption) => {
                     if (foodOption.value === food) {
                         const foodId = foodOption.getAttribute('data-id');
-                        localStorage.setItem('foodID', foodId);
+                        document.cookie = `foodID=${foodId}`;
                         window.location.href = `?food=${foodId}#line-chart-item`;
                     } else {
                         return
@@ -537,7 +544,7 @@
 
         // set the food name in the input field from the local storage
         window.onload = () => {
-            const foodId = localStorage.getItem('foodID');
+            const foodId = document.cookie.split(';').find(row => row.trim().startsWith('foodID=')).split('=')[1];
             if (foodId) {
                 const foodList = document.querySelectorAll('.food_option');
                 foodList.forEach((foodOption) => {
