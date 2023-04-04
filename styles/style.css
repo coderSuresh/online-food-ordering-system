@@ -48,6 +48,10 @@
     color: var(--black);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 hr {
     background-color: var(--trans-black);
     height: 1px;
