@@ -221,23 +221,23 @@
         require '../components/calculate-offset.php';
 
         // filter by session
-        $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
+        $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
 
         if (isset($_SESSION['filter-by'])) {
             $filter_by = $_SESSION['filter-by'];
             if ($filter_by == 'all') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
+                $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
             } else if ($filter_by == 'active') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 1 limit $offset, $limit";
+                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 1 limit $offset, $limit";
             } else if ($filter_by == 'inactive') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE active = 0 limit $offset, $limit";
+                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 0 limit $offset, $limit";
             } else if ($filter_by == 'verified') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'verified' limit $offset, $limit";
+                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'verified' limit $offset, $limit";
             } else if ($filter_by == 'not verified') {
-                $sql = "SELECT id, image, names,username,email,date,status,active FROM customer WHERE status = 'not verified' limit $offset, $limit";
+                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'not verified' limit $offset, $limit";
             }
         } else {
-            $sql = "SELECT id, image, names,username,email,date,status,active FROM customer limit $offset, $limit";
+            $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
         }
 
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -247,7 +247,6 @@
             <table class="mt-20">
                 <tr class="shadow">
                     <th>SN</th>
-                    <th>Image</th>
                     <th>Customer</th>
                     <th>Status</th>
                     <th>Item</th>
@@ -262,19 +261,13 @@
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
                     $id = $row['id'];
-                    $img = $row['image'];
+
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
-                        <td>
-                            <img src="<?php if ($img != "")
-                                            echo $img;
-                                        else
-                                            echo "../../images/logo.png"; ?>" width="40px" height="40px">
-                        </td>
                         <td><?php echo $row['names']; ?></td>
                         <td><?php echo $row['status'] . " | " . $isActive; ?></td>
-                        <td>60</td> 
+                        <td>60</td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['date']; ?></td>
                         <td class="table_action_container">
