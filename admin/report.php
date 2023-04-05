@@ -259,12 +259,85 @@
             <!-- ===================== category wise sales in price ============================== -->
 
             <!-- get data from db -->
+            <?php
+            // daily data
+            $sql_cat_paisa = "SELECT CONCAT(LPAD(HOUR(aos.delivered_at), 2, '0'), ':00') AS interval_start,
+                                    SUM(total_price) AS total_price_sum,
+                                    category.cat_name
+                                    FROM orders
+                                    INNER JOIN aos ON orders.id = aos.order_id
+                                    INNER JOIN food on orders.f_id = food.f_id
+                                    INNER JOIN category on category.cat_id = food.category
+                                    WHERE aos.status = 'delivered'
+                                   	group by category.cat_id, WEEKDAY(aos.delivered_at)
+                                    ORDER BY HOUR(aos.delivered_at);";
+
+            $result_cat_paisa = mysqli_query($conn, $sql_cat_paisa);
+
+            $labels_cat_paisa = array();
+            $total_price_cat_paisa = array();
+            $cat_name = array();
+
+            foreach ($result_cat_paisa as $row) {
+                array_push($labels_cat_paisa, $row['interval_start']);
+                array_push($total_price_cat_paisa, $row['total_price_sum']);
+                array_push($cat_name, $row['cat_name']);
+            }
+
+            // weekly data
+            $sql_cat_paisa_week = "SELECT WEEKDAY(aos.delivered_at) AS day,
+                                    SUM(total_price) AS total_price_sum,
+                                    category.cat_name
+                                    FROM orders
+                                    INNER JOIN aos ON orders.id = aos.order_id
+                                    INNER JOIN food on orders.f_id = food.f_id
+                                    INNER JOIN category on category.cat_id = food.category
+                                    WHERE aos.status = 'delivered'
+                                   	group by category.cat_id, WEEKDAY(aos.delivered_at)
+                                    ORDER BY WEEKDAY(aos.delivered_at);";
+
+            $result_cat_paisa_week = mysqli_query($conn, $sql_cat_paisa_week);
+
+            $labels_cat_paisa_week = array();
+            $total_price_cat_paisa_week = array();
+            $cat_name_week = array();
+
+            foreach ($result_cat_paisa_week as $row) {
+                array_push($labels_cat_paisa_week, $row['day']);
+                array_push($total_price_cat_paisa_week, $row['total_price_sum']);
+                array_push($cat_name_week, $row['cat_name']);
+            }
+
+            // monthly data
+            $sql_cat_paisa_month = "SELECT MONTH(aos.delivered_at) AS month,
+                                    SUM(total_price) AS total_price_sum,
+                                    category.cat_name
+                                    FROM orders
+                                    INNER JOIN aos ON orders.id = aos.order_id
+                                    INNER JOIN food on orders.f_id = food.f_id
+                                    INNER JOIN category on category.cat_id = food.category
+                                    WHERE aos.status = 'delivered'
+                                   	group by category.cat_id, MONTH(aos.delivered_at)
+                                    ORDER BY MONTH(aos.delivered_at);";
+
+            $result_cat_paisa_month = mysqli_query($conn, $sql_cat_paisa_month);
+
+            $labels_cat_paisa_month = array();
+            $total_price_cat_paisa_month = array();
+            $cat_name_month = array();
+
+            foreach ($result_cat_paisa_month as $row) {
+                array_push($labels_cat_paisa_month, $row['month']);
+                array_push($total_price_cat_paisa_month, $row['total_price_sum']);
+                array_push($cat_name_month, $row['cat_name']);
+            }
+            ?>
 
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
                     <h3 class="heading">Category wise sales</h3>
 
-                    <form action="./report.php" method="get" class="filter-form item_wise">
+                    <form action="./report.php" method="get" class="filter-form cat_bar">
                         <select name="bf" id="bf">
                             <option name="monthly" value="monthly" <?php if (isset($_GET['bf']) && $_GET['bf'] == "monthly") echo " selected" ?>>Monthly</option>
                             <option name="weekly" value="weekly" <?php if (isset($_GET['bf']) && $_GET['bf'] == "weekly") echo " selected" ?>>Weekly</option>
@@ -297,6 +370,8 @@
                         window.location.href = `./report.php?isf=${query}&food=${foodId}#line-chart-item`;
                     } else if (form.classList.contains('cat_wise'))
                         window.location.href = `./report.php?percent-filter=${query}`;
+                    else if (form.classList.contains('cat_bar'))
+                        window.location.href = `./report.php?bf=${query}#bar-chart`;
                     else {
                         window.location.href = `./report.php?tsf=${query}`;
                     }
@@ -591,41 +666,84 @@
             <?php echo json_encode($data); ?>
         );
 
-        // =================== Category wise sales bar chart ===================`
+        // =================== Category wise sales bar chart ===================
+
+        <?php
+        $query = getParam('bf');
+        $labels = getLabels($query, $labels_cat_paisa, $labels_cat_paisa_week, $labels_cat_paisa_month);
+        $name = getLabels($query, $cat_name, $cat_name_week, $cat_name_month);
+        $price = getData($query, $total_price_cat_paisa, $total_price_cat_paisa_week, $total_price_cat_paisa_month);
+        ?>
+
+        tempName = <?php echo json_encode($name); ?>;
+        tempData = <?php echo json_encode($price); ?>;
+        tempLabel = <?php echo json_encode($labels); ?>;
+
+        const data = tempLabel.map((label, i) => ({
+            category: tempName[i],
+            day: label,
+            sales: tempData[i],
+        }));
+
+        const salesByCategoryAndDay = {};
+
+        data.forEach(({
+            category,
+            day,
+            sales
+        }) => {
+            if (!salesByCategoryAndDay[category]) {
+                salesByCategoryAndDay[category] = new Array(7).fill(0);
+            }
+            salesByCategoryAndDay[category][day] += sales;
+        });
+        
+        const dataset = Object.entries(salesByCategoryAndDay).map(([category, sales], i) => ({
+            label: category,
+            data: sales,
+            backgroundColor: localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color'))[i] : generateColor(),
+            borderWidth: 1,
+        }));
 
         const barChart = document.querySelector('#bar-chart');
         const dataBar = {
-            labels: months,
-            datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : generateColor(),
-                borderWidth: 1
-            }]
+            labels: days,
+            datasets: dataset,
         };
 
         const barOptions = {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    beginAtZero: true,
+                },
             },
             responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    position: "top",
-                    text: `sales`,
+                    position: 'top',
+                    text: 'sales',
                     fontSize: 18,
-                    fontColor: "#000"
+                    fontColor: '#000',
                 },
-            }
+            },
         };
 
         const bar_chart = new Chart(barChart, {
-            type: "bar",
+            type: 'bar',
             data: dataBar,
-            options: barOptions,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Weekly Sales',
+                    },
+                },
+            },
         });
     </script>
 </body>
