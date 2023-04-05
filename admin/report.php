@@ -84,7 +84,7 @@
                 <div class="flex items-center">
                     <h3 class="heading">Category wise sales</h3>
 
-                    <form action="./report.php" method="get" class="filter-form">
+                    <form action="./report.php" method="get" class="filter-form cat_wise">
                         <select name="percent-filter" id="percent-filter">
                             <option name="pf-quantity" value="pf-quantity" <?php if (isset($_GET['percent-filter']) && $_GET['percent-filter'] == 'pf-quantity')
                                                                                 echo 'selected'; ?>>Show quantity</option>
@@ -275,7 +275,9 @@
                         if (food == '')
                             return;
                         window.location.href = `./report.php?isf=${query}&food=${foodId}#line-chart-item`;
-                    } else {
+                    } else if (form.classList.contains('cat_wise'))
+                        window.location.href = `./report.php?percent-filter=${query}`;
+                    else {
                         window.location.href = `./report.php?tsf=${query}`;
                     }
                 })
