@@ -82,7 +82,7 @@
             <!-- =================== Category wise sales ========================== -->
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
-                    <h3 class="heading">Category wise sales</h3>
+                    <h3 class="heading">Category wise info</h3>
 
                     <form action="./report.php" method="get" class="filter-form cat_wise">
                         <select name="percent-filter" id="percent-filter">
@@ -256,6 +256,26 @@
                 <canvas id="line-chart-item" class="chart"></canvas>
             </div>
 
+            <!-- ===================== category wise sales in price ============================== -->
+
+            <!-- get data from db -->
+
+            <div class="chart_container shadow p-20 border-curve">
+                <div class="flex items-center">
+                    <h3 class="heading">Category wise sales</h3>
+
+                    <form action="./report.php" method="get" class="filter-form item_wise">
+                        <select name="bf" id="bf">
+                            <option name="monthly" value="monthly" <?php if (isset($_GET['bf']) && $_GET['bf'] == "monthly") echo " selected" ?>>Monthly</option>
+                            <option name="weekly" value="weekly" <?php if (isset($_GET['bf']) && $_GET['bf'] == "weekly") echo " selected" ?>>Weekly</option>
+                            <option name="hourly" value="hourly" <?php if (isset($_GET['bf']) && $_GET['bf'] == "hourly") echo " selected" ?>>Daily</option>
+                        </select>
+                    </form>
+                </div>
+
+                <canvas id="bar-chart" class="chart"></canvas>
+            </div>
+
         </section>
 
     </main>
@@ -286,7 +306,8 @@
 
         submitFilterForm();
 
-        function generateColor(len) {
+        function generateColor() {
+            const len = 25;
             const color = [];
             for (let i = 0; i < len; i++) {
                 const colorCode = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
@@ -295,7 +316,7 @@
                 else
                     color.push(colorCode);
             }
-            return color;
+            localStorage.setItem('color', JSON.stringify(color));
         }
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -319,13 +340,7 @@
                         else
                             echo json_encode(array());
                         ?>,
-                backgroundColor: <?php
-                                    $len = count($labels);
-                                    if ($len > 0) {
-                                        echo "generateColor($len)";
-                                        $len--;
-                                    }
-                                    ?>,
+                backgroundColor: localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : generateColor(),
                 borderWidth: [1, 1, 1, 1, 1]
             }]
         };
@@ -575,6 +590,43 @@
             <?php echo json_encode($labels); ?>,
             <?php echo json_encode($data); ?>
         );
+
+        // =================== Category wise sales bar chart ===================`
+
+        const barChart = document.querySelector('#bar-chart');
+        const dataBar = {
+            labels: months,
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : generateColor(),
+                borderWidth: 1
+            }]
+        };
+
+        const barOptions = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    position: "top",
+                    text: `sales`,
+                    fontSize: 18,
+                    fontColor: "#000"
+                },
+            }
+        };
+
+        const bar_chart = new Chart(barChart, {
+            type: "bar",
+            data: dataBar,
+            options: barOptions,
+        });
     </script>
 </body>
 
