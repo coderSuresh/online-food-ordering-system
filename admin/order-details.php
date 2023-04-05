@@ -98,29 +98,30 @@
                 $c_time = getCurrentTime();
                 $calculated_time = date('H:i', strtotime('+30 minutes', strtotime($c_time)));
 
-                $sql = "select id from orders where Date(date) = CURDATE() and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
+                $sql = "select id from orders where (Date(date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
-                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending' and Date(orders.date) = CURDATE() group by orders.c_id, orders.date";
+                $sql_pending = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'pending' and (Date(orders.date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result_pending = mysqli_query($conn, $sql_pending);
                 $count_pending = mysqli_num_rows($result_pending);
 
-                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted' and Date(orders.date) = CURDATE() group by orders.c_id, orders.date";
+                $sql_accepted = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'accepted' and (Date(orders.date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result_accepted = mysqli_query($conn, $sql_accepted);
                 $count_accepted = mysqli_num_rows($result_accepted);
 
-                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering') and Date(orders.date) = CURDATE() group by orders.c_id, orders.date";
+                $sql_to_deliver = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status in ('prepared', 'delivering') and (Date(orders.date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result_to_deliver = mysqli_query($conn, $sql_to_deliver);
                 $count_to_deliver = mysqli_num_rows($result_to_deliver);
 
-                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered' and Date(orders.date) = CURDATE() group by orders.c_id, orders.date";
+                $sql_delivered = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'delivered' and (Date(orders.date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result_delivered = mysqli_query($conn, $sql_delivered);
                 $count_delivered = mysqli_num_rows($result_delivered);
 
-                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected' and Date(orders.date) = CURDATE() group by orders.c_id, orders.date";
+                $sql_rejected = "select orders.id, aos.status from orders inner join aos on orders.id = aos.order_id where status = 'rejected' and (Date(orders.date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result_rejected = mysqli_query($conn, $sql_rejected);
                 $count_rejected = mysqli_num_rows($result_rejected);
+
 
                 ?>
 
@@ -233,7 +234,8 @@
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
                         where aos.status in ('prepared', 'delivering') and
-                        Date(orders.date) = CURDATE()
+                        (Date(orders.date) = CURDATE() or
+                        Date(aos.date) = CURDATE())
                         group by orders.date, orders.c_id
                         order by orders.id desc";
             } else {
@@ -256,7 +258,8 @@
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join aos on orders.id = aos.order_id
                         where aos.status = '$filter_by' and
-                        Date(orders.date) = CURDATE()
+                        (Date(orders.date) = CURDATE()
+                        or Date(aos.date) = CURDATE())
                         group by orders.date, orders.c_id
                         order by orders.id desc";
             }
@@ -278,7 +281,8 @@
                     from orders 
                     inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     inner join aos on orders.id = aos.order_id
-                    where Date(orders.date) = CURDATE()
+                    where (Date(orders.date) = CURDATE()
+                    or Date(aos.date) = CURDATE())
                     group by orders.date, orders.c_id
                     order by orders.id desc
                     ";
