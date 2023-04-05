@@ -184,12 +184,15 @@
                             <label for="add-employee" class="not-required">not required</label>
                             <button type="submit" name="<?php if (isset($_SESSION['emp-name']))
                                                             echo "update";
-                                                        else echo "add" ?>" id="add-employee" class="button modal_form-submit-btn form_add-employees"> Add an
-                                Employee</button>
+                                                        else echo "add" ?>" id="add-employee" class="button modal_form-submit-btn form_add-employees">
+                                                    <?php
+                                                    if (isset($_SESSION['emp-name']))
+                                                        echo "Update Employee";
+                                                    else echo "Add Employee"
+                                                    ?>    
+                                                    </button>
                         </div>
                     </div>
-
-
                 </form>
 
             </div>

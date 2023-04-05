@@ -37,7 +37,7 @@ if (!isset($_SESSION['admin-success'])) {
         }
 
         // upload image to server 
-        $target_dir = "../../../uploads/employees";
+        $target_dir = "../../../uploads/employees/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $temp_file = $_FILES["image"]["tmp_name"];
         $file_name = basename($_FILES["image"]["name"]);
@@ -82,7 +82,7 @@ if (!isset($_SESSION['admin-success'])) {
                     } else if ($isDuplicatePass) {
                         if (move_uploaded_file($temp_file, $target_file)) {
                             // remove previous image
-                            unlink($target_dir . $imageName);
+                            unlink($target_dir . $imgName);
                             $sql_wo_pass = "update employees set name ='$name', username = '$username', image = '$file_name', department = $department, email = '$email' where emp_id = $id ";
                             $res = mysqli_query($conn, $sql_wo_pass) or die("Could not update employee");
                         } else {
@@ -95,7 +95,7 @@ if (!isset($_SESSION['admin-success'])) {
                 } else {
                     if (move_uploaded_file($temp_file, $target_file)) {
                         // remove previous image
-                        unlink($target_dir . $imageName);
+                        unlink($target_dir . $imgName);
                         // update name and image
                         $sql = "update employees set name ='$name', username = '$username', image = '$file_name', department = $department, email = '$email', password = '$password' where emp_id = $id";
                         $res = mysqli_query($conn, $sql) or die("Could not update employee");

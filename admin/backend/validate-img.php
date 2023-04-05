@@ -1,6 +1,7 @@
 <?php
 
 // Check if image file is an actual image 
+try {
 $check = getimagesize($temp_file);
 if ($check !== false) {
     $uploadOk = 1;
@@ -11,7 +12,14 @@ if ($check !== false) {
     echo json_encode($response);
     exit();
 }
-
+}
+catch (Exception){
+    $response["status"] = "error";
+    $response["msg"] = "File is not an image.";
+    $uploadOk = 0;
+    echo json_encode($response);
+    exit();
+}
 // check file name 
 if (!preg_match("/^[A-Za-z0-9 .]+$/", $file_name)) {
     $response["status"] = "error";
