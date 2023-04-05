@@ -182,10 +182,13 @@ const btnName = submitBtn && submitBtn.getAttribute("name");
 if (btnName == "update") {
   // set uploaded image to input field
   const imgURL = uploadedImg && uploadedImg.getAttribute("src");
+  console.log(imgURL);
 
   const imgInput = document.querySelector(".img_upload-input");
+  const isForEmp = imgInput.getAttribute("class").includes("emp")
+
   const dt = new DataTransfer();
-  const img = imgURL && imgURL.split("/")[3];
+  const img = imgURL && imgURL.split("/")[isForEmp? 4 : 3];
   dt.items.add(new File([img], img));
   imgInput && (imgInput.files = dt.files);
 }
@@ -229,7 +232,7 @@ form &&
     } else if (isForEmployees) {
       btnName == "add"
         ? submitForm("./backend/create-employee.php")
-        : submitForm("./backend/update.php");
+        : submitForm("./backend/update-employees.php");
     }
   });
 

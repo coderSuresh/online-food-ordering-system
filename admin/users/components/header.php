@@ -1,7 +1,7 @@
  <?php
     session_start();
     if (!isset($_SESSION['admin-success'])) {
-        header('location: ../invalid.html');
+        header('location: ../../invalid.html');
     }
     ?>
 

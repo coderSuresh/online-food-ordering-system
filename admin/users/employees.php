@@ -20,6 +20,11 @@
     require("./components/sidebar.php");
     require("../../config.php");
     ?>
+    <?php
+    if (!isset($_SESSION['admin-success'])) {
+        header("Location: ../../invalid.php");
+    }
+    ?>
 
     <main class="admin_dashboard_body">
         <?php
@@ -79,33 +84,48 @@
             <h2>Employees</h2>
         </section>
 
-        <section class="modal items-center justify-center">
+        <section class="modal items-center  <?php if (isset($_SESSION['emp-name'])) echo "flex"; ?> justify-center">
             <div class="modal_form-container p-20 shadow border-curve-md">
 
                 <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Add an Employee</h2>
-                    <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></button>
+                    <h2>
+                        <?php
+                        if (isset($_SESSION['emp-name']))
+                            echo "Update Employee";
+                        else
+                            echo "Add an Employee";
+                        ?>
+                    </h2>
+                    <a href="./backend/session-delete.php" class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></a>
+
                 </div>
 
-                <form action="./backend/create-employee.php" enctype="multipart/form-data" method="post" name="model_form" class="form_add-employees modal_form">
+                <form action="<?php if (isset($_SESSION['emp-name'])) {
+                                    echo "./backend/update-employees.php";
+                                } else {
+                                    echo "./backend/create-employees.php";
+                                } ?> " enctype="multipart/form-data" method="post" name="model_form" class="form_add-employees modal_form">
 
                     <div class="row">
                         <div class="col">
                             <div class="col">
                                 <div class="col">
                                     <label for="name">Name:</label>
-                                    <input type="text" name="name" id="name" autofocus required>
+                                    <input type="text" name="name" id="name" value="<?php if (isset($_SESSION['emp-name'])) echo $_SESSION['emp-name']; ?>" autofocus required>
                                 </div>
                             </div>
                             <div class="col">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" required>
+                                <input type="email" name="email" id="email" value="<?php if (isset($_SESSION['emp-email'])) echo $_SESSION['emp-email']; ?>" required>
                             </div>
                         </div>
 
                         <div class="col text-center flex justify-center">
                             <div class="uploaded-img-preview">
-                                <img src="../../images/ic_cloud.svg" class="upload-img" alt="uploaded image">
+                                <img src="<?php if (isset($_SESSION['emp-img'])) {
+                                                echo "../../uploads/employees/" . $_SESSION['emp-img'];
+                                            } else
+                                                echo "../../images/ic_cloud.svg"; ?>" name="upload-img" class="upload-img" alt="uploaded image">
                             </div>
                             <p class="warning">Image should be less than 200 KB</p>
                         </div>
@@ -114,24 +134,24 @@
                     <div class="row">
                         <div class="col">
                             <label for="username">Username:</label>
-                            <input type="text" name="username" id="username" required>
+                            <input type="text" name="username" id="username" value="<?php if (isset($_SESSION['emp-username'])) echo $_SESSION['emp-username']; ?>" required>
                         </div>
 
                         <div class="col">
                             <label for="emp_photo">Image:</label>
-                            <input type="file" name="image" class="img_upload-input" id="emp_photo" required>
+                            <input type="file" name="image" class="img_upload-input emp" id="emp_photo" value="<?php if (isset($_SESSION['emp-image'])) echo $_SESSION['emp-image']; ?>" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="password">Password:</label>
-                            <input type="text" name="password" id="password" required>
+                            <input type="text" name="password" id="password" value="<?php if (isset($_SESSION['emp-password'])) echo $_SESSION['emp-password']; ?>" required>
                         </div>
 
                         <div class="col">
                             <label for="con-password">Confirm Password:</label>
-                            <input type="text" name="con-password" id="con-password" required>
+                            <input type="text" name="con-password" id="con-password" value="<?php if (isset($_SESSION['emp-password'])) echo $_SESSION['emp-password']; ?>" required>
                         </div>
                     </div>
 
@@ -147,19 +167,28 @@
                                 <?php
                                 while ($dep_row = mysqli_fetch_assoc($dep_result)) {
                                 ?>
-                                    <option value="<?php echo $dep_row['dept_id']; ?>"><?php echo $dep_row['department']; ?></option>
+                                    <option value="<?php echo $dep_row['dept_id']; ?>" <?php if (isset($_SESSION['emp-department']) && $_SESSION["emp-department"] == $dep_row["dept_id"]) echo "selected"; ?>><?php echo $dep_row['department']; ?></option>
                                 <?php  }
                                 ?>
 
                             </select>
                         </div>
 
-                        <div class="col">
+                        <?php
+                        if (isset($_SESSION['emp-id'])) {
+                            echo "<input type = 'hidden' name='id' value = '".$_SESSION['emp-id']."'>";
+                        }
+                        ?>
+
+                        <div class=" col">
                             <label for="add-employee" class="not-required">not required</label>
-                            <button type="submit" name="add" id="add-employee" class="button modal_form-submit-btn form_add-employees">Add an
+                            <button type="submit" name="<?php if (isset($_SESSION['emp-name']))
+                                                            echo "update";
+                                                        else echo "add" ?>" id="add-employee" class="button modal_form-submit-btn form_add-employees"> Add an
                                 Employee</button>
                         </div>
                     </div>
+
 
                 </form>
 
@@ -253,14 +282,17 @@
                         $result_dept = mysqli_query($conn, $sql_dept) or die("Query Failed.");
                         $row_dept = mysqli_fetch_assoc($result_dept)['department'];
                         $id = $row['emp_id'];
+
+
                     ?>
                         <div class="employee_card p-20 text-center shadow border-curve-md">
 
                             <!-- overlay for disabled account -->
+
                             <div class="emp_card-overlay border-curve-md"></div>
 
                             <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
-                            <img src="../../images/profile.jpg" alt="user profile">
+                            <img src="../../uploads/employees/<?php echo $row["image"] ?>" class="emp_img" alt="user profile">
                             <h3 class="emp_name"><?php echo $row['name']; ?></h3>
                             <p class="emp_id"><?php echo $row_dept; ?></p>
                             <div class="flex emp_card_content items-center justify-start">
@@ -284,17 +316,8 @@
                                             <button type="submit" name="block" class="no_bg no_outline" style="font-size: 1rem;">Block</button>
                                         </div>
                                     </form>
-
-                                    <form action="#" method="post" class="mt-20">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../../images/ic_edit.svg" alt="edit">
-                                            <button type="submit" name="edit-emp" class="no_bg no_outline" style="font-size: 1rem;">Edit</button>
-                                        </div>
-                                    </form>
                                 <?php
-                                } else {
-                                ?>
+                                } else { ?>
                                     <form action="./backend/emp_enable.php" method="post">
                                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="flex items-center justify-start">
@@ -302,18 +325,23 @@
                                             <button type="submit" name="activate" class="no_bg no_outline" style="font-size: 1rem;">Activate</button>
                                         </div>
                                     </form>
-
-                                    <form action="#" method="post" class="mt-20">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                        <div class="flex items-center justify-start">
-                                            <img src="../../images/ic_edit.svg" alt="edit">
-                                            <button type="submit" name="edit-emp" class="no_bg no_outline" style="font-size: 1rem;">Edit</button>
-                                        </div>
-                                    </form>
-
                                 <?php
                                 }
                                 ?>
+                                <form action="./backend/edit-employee.php" method="post" class="mt-20" class="flex items-center justify-start">
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    <input type="hidden" name="asd" value="asdfasdf">
+                                    <input type="hidden" name="name" value="<?php echo $row["name"]; ?>">
+                                    <input type="hidden" name="department" value="<?php echo $row["department"]; ?>">
+                                    <input type="hidden" name="email" value="<?php echo $row["email"]; ?>">
+                                    <input type="hidden" name="password" value="<?php echo $row["password"]; ?>">
+                                    <input type="hidden" name="username" value="<?php echo $row["username"]; ?>">
+                                    <input type="hidden" name="img" value="<?php echo $row["image"]; ?>">
+                                    <div class="flex items-center justify-start">
+                                        <img src="../../images/ic_edit.svg" alt="edit">
+                                        <button type="submit" name="edit-emp" class="no_bg no_outline" style="font-size: 1rem;">Edit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                 <?php
@@ -323,6 +351,7 @@
 
                 </div>
         </div>
+
     </main>
 
 </body>

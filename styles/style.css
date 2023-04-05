@@ -1822,3 +1822,11 @@ h2 {
 .tar {
     text-align: right;
 }
+
+.emp_img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
