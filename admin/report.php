@@ -324,8 +324,7 @@
                                         INNER JOIN food ON orders.f_id = food.f_id
                                         INNER JOIN category ON category.cat_id = food.category
                                         WHERE aos.status = 'delivered'
-                                        AND aos.delivered_at >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
-                                        AND aos.delivered_at < DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 1 WEEK)
+                                        AND WEEK(aos.delivered_at) = WEEK(CURDATE())
                                         GROUP BY category.cat_id, WEEKDAY(aos.delivered_at)
                                         ORDER BY WEEKDAY(aos.delivered_at);
                                     ";
@@ -426,7 +425,7 @@
             const len = 25;
             const color = [];
             for (let i = 0; i < len; i++) {
-                const colorCode = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+                const colorCode = `hsl(${Math.floor(Math.random() * 360)}, ${Math.floor(Math.random() * 51) + 50}%, ${Math.floor(Math.random() * 51)}%)`;
                 if (color.includes(colorCode))
                     i--;
                 else
