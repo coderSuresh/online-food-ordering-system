@@ -32,7 +32,7 @@ if (!isset($_SESSION['admin-success'])) {
             $row = mysqli_fetch_assoc($res_img);
             $imgName = $row['image'];
 
-            if (!file_exists($target_dir . $imgName)) {
+            if (!file_exists($target_dir . $file_name)) {
                 require('../validate-img.php');
             } else
                 $isDuplicate = true;
