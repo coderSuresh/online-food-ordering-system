@@ -9,10 +9,10 @@ if(isset($_SESSION['admin-success']) && isset($_POST['cat-filter'])) {
             $_SESSION['cat-filter'] = "order by cat_name asc";
             break;
         case "most-selling":
-            $_SESSION['cat-filter'] = "order by total desc";
+            $_SESSION['cat-filter'] = "order by total_delivered desc";
             break;
         case "least-selling":
-            $_SESSION['cat-filter'] = "order by total asc";
+            $_SESSION['cat-filter'] = "order by total_delivered asc";
             break;
         case "last-added":
             $_SESSION['cat-filter'] = "order by cat_id desc";
