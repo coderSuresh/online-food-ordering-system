@@ -325,7 +325,3 @@
 </body>
 
 </html>
-
-<?php
-// unset($_SESSION['cat-name']); 
-?>

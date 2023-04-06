@@ -182,7 +182,7 @@
                     }
                     ?>
 
-                    <form action="./report.php" method="get" class="filter-form">
+                    <form action="./report.php" method="get" class="filter-form tsf">
                         <select name="tsf" id="tsf">
                             <option name="monthly" value="monthly" <?php if (isset($_GET['tsf']) && $_GET['tsf'] == "monthly") echo " selected" ?>>Monthly</option>
                             <option name="weekly" value="weekly" <?php if (isset($_GET['tsf']) && $_GET['tsf'] == "weekly") echo " selected" ?>>Weekly</option>
@@ -443,6 +443,54 @@
                 <canvas id="bar-chart" class="chart mt-20"></canvas>
             </div>
 
+            <!-- =========================== individual foods of each category ========================= -->
+            <div class="w-full mt-20 shadow p-20 border-curve" id="ioc">
+                <div class="flex items-center">
+                    <h3 class="heading">Items of a Category</h3>
+
+                    <form action="./report.php" method="get" class="filter-form iocf">
+                        <select name="iocf" id="iocf">
+                            <option name="monthly" value="monthly" <?php if (isset($_GET['iocf']) && $_GET['iocf'] == "monthly") echo " selected" ?>>Monthly</option>
+                            <option name="weekly" value="weekly" <?php if (isset($_GET['iocf']) && $_GET['iocf'] == "weekly") echo " selected" ?>>Weekly</option>
+                            <option name="hourly" value="hourly" <?php if (isset($_GET['iocf']) && $_GET['iocf'] == "hourly") echo " selected" ?>>Daily</option>
+                        </select>
+                    </form>
+                </div>
+
+                <!-- fetch categories from db -->
+                <?php
+                $sql_cat = "SELECT * FROM category";
+                $result_cat = mysqli_query($conn, $sql_cat);
+                $row = mysqli_fetch_assoc($result_cat);
+
+                if ($row > 0) {
+                    echo '<datalist id="category-list">';
+                    foreach ($result_cat as $row) {
+                        echo '<option class="category_option" data-id="' . $row['cat_id'] . '" value="' . $row['cat_name'] . '">';
+                    }
+                    echo '</datalist>';
+                }
+                ?>
+
+                <div class="mt-20 div_cat_search text-center">
+                    <input list="category-list" name="category" id="category" placeholder="Search category" class="p_7-20 border-curve form_input" required>
+                    <button type="submit" onclick="selectCategory()" class="button no_bg no_outline border-curve p_7-20" id="search_category">Search</button>
+
+                    <?php
+                    if (isset($_GET['category']) || isset($_COOKIE['catID'])) {
+                        $cat_id = $_GET['category'] ?? $_COOKIE['catID'];
+                    }
+
+                    if (isset($_GET['iocf'])) {
+                        $iocf = $_GET['iocf'];
+                    }
+
+                    require './components/food-table-and-filter.php';
+                    ?>
+                </div>
+
+            </div>
+
         </section>
 
     </main>
@@ -456,7 +504,6 @@
                     e.preventDefault();
                     const query = form.childNodes[1].value
 
-                    // check if the form is for item wise sales
                     if (form.classList.contains('item_wise')) {
                         const foodId = document.cookie.split(';').find(row => row.trim().startsWith('foodID=')).split('=')[1];
                         if (food == '')
@@ -469,9 +516,13 @@
                     } else if (form.classList.contains('cat_bar')) {
                         window.location.href = `./report.php?bf=${query}#cws`;
                         document.cookie = `bf=${query};`;
-                    } else {
+                    } else if (form.classList.contains('tsf')) {
                         window.location.href = `./report.php?tsf=${query}#ts`;
                         document.cookie = `tsf=${query};`;
+                    } else if (form.classList.contains('iocf')) {
+                        const categoryId = document.cookie.split(';').find(row => row.trim().startsWith('catID=')).split('=')[1];
+                        window.location.href = `./report.php?iocf=${query}&category=${categoryId}#ioc`;
+                        document.cookie = `iocf=${query};`;
                     }
                 })
             })
@@ -722,13 +773,33 @@
                     if (foodOption.value === food) {
                         const foodId = foodOption.getAttribute('data-id');
                         document.cookie = `foodID=${foodId}`;
-                        window.location.href = `?food=${foodId}#line-chart-item`;
+                        window.location.href = `?food=${foodId}#iws`;
                     } else {
                         return
                     }
                 })
             } else {
                 foodInput.reportValidity();
+            }
+        }
+
+        function selectCategory() {
+            const categoryInput = document.getElementById('category');
+            const category = document.getElementById('category').value;
+            const categoryList = document.querySelectorAll('.category_option');
+
+            if (categoryInput.checkValidity()) {
+                categoryList.forEach((categoryOption) => {
+                    if (categoryOption.value === category) {
+                        const categoryId = categoryOption.getAttribute('data-id');
+                        document.cookie = `catID=${categoryId}`;
+                        window.location.href = `?category=${categoryId}#ioc`;
+                    } else {
+                        return
+                    }
+                })
+            } else {
+                categoryInput.reportValidity();
             }
         }
 
@@ -741,6 +812,17 @@
                     if (foodOption.getAttribute('data-id') === foodId) {
                         const foodName = foodOption.value;
                         document.getElementById('food').value = foodName;
+                    }
+                })
+            }
+
+            const categoryId = document.cookie.split(';').find(row => row.trim().startsWith('catID')).split('=')[1];
+            if (categoryId) {
+                const categoryList = document.querySelectorAll('.category_option');
+                categoryList.forEach((categoryOption) => {
+                    if (categoryOption.getAttribute('data-id') === categoryId) {
+                        const categoryName = categoryOption.value;
+                        document.getElementById('category').value = categoryName;
                     }
                 })
             }
