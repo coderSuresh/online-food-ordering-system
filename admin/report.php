@@ -74,7 +74,7 @@
 
     <main class="admin_dashboard_body">
         <section class="dashboard_inner-head flex items-center">
-            <h2 class="heading">Sales Report</h2>
+            <h2 class="heading">Analytics</h2>
         </section>
 
         <section class="dashboard_inner-body mt-20 flex gap wrap">
@@ -379,12 +379,16 @@
                         if (food == '')
                             return;
                         window.location.href = `./report.php?isf=${query}&food=${foodId}#line-chart-item`;
-                    } else if (form.classList.contains('cat_wise'))
+                        document.cookie = `isf=${query};`;
+                    } else if (form.classList.contains('cat_wise')) {
                         window.location.href = `./report.php?percent-filter=${query}`;
-                    else if (form.classList.contains('cat_bar'))
+                        document.cookie = `percent-filter=${query};`;
+                    } else if (form.classList.contains('cat_bar')) {
                         window.location.href = `./report.php?bf=${query}#bar-chart`;
-                    else {
+                        document.cookie = `bf=${query};`;
+                    } else {
                         window.location.href = `./report.php?tsf=${query}`;
+                        document.cookie = `tsf=${query};`;
                     }
                 })
             })

@@ -112,15 +112,15 @@ input[type="submit"],
 }
 
 .mt-20 {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .mt-40 {
-    margin-top: 40px;
+    margin-top: 40px !important;
 }
 
 .mt-60 {
-    margin-top: 60px;
+    margin-top: 60px !important;
 }
 
 /* set padding 20px */
@@ -1823,10 +1823,10 @@ h2 {
     text-align: right;
 }
 
+/* ====================== employees page ===================== */
 .emp_img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
-
 }
