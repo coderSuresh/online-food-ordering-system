@@ -23,7 +23,7 @@
                      <a class="border-curve-md" href="./future-orders.php">Future Orders</a>
                  </li>
                  <li>
-                     <a class="border-curve-md" href="./report.php">Revenue Details</a>
+                     <a class="border-curve-md" href="./report.php">Analytics</a>
                  </li>
                  <li>
                      <a class="border-curve-md" href="#">Reviews</a>
