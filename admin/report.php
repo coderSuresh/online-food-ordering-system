@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Sales Report | RestroHub</title>
+    <title>Analytics | RestroHub</title>
     <link rel="icon" href="../images/logo.png" type="image/png">
     <link rel="stylesheet" href="../styles/style.css">
     <script src="../js/admin.js" defer></script>
@@ -83,12 +83,70 @@
     <main class="admin_dashboard_body">
         <section class="dashboard_inner-head flex items-center">
             <h2 class="heading">Analytics</h2>
+            <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
-        <section class="dashboard_inner-body mt-20 flex gap wrap">
+        <?php
+        $isForReport = true;
+        require "./components/filter.php";
+        ?>
+
+        <!-- ==================== analytics cards ====================== -->
+        <p class="mt-20"><b>Filter :</b> <?php echo $filter_text; ?></p>
+        <div class="flex gap wrap mt-20">
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_total-customer.svg" alt="total menu" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $count_customer; ?></h2>
+                    <p class="mt-10">Total Customers</p>
+                </div>
+            </article>
+
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_total-revenue.svg" alt="total revenue" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $total_rev; ?></h2>
+                    <p class="mt-10">Total Revenue</p>
+                </div>
+            </article>
+
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_total-order.svg" alt="total menu" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $count_order; ?></h2>
+                    <p class="mt-10">Total Orders</p>
+                </div>
+            </article>
+
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_order-cancel.svg" alt="total revenue" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $count_order_canceled; ?></h2>
+                    <p class="mt-10">Orders Canceled</p>
+                </div>
+            </article>
+
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_total-menu.svg" alt="total menu" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $count_food; ?></h2>
+                    <p class="mt-10">Total Items</p>
+                </div>
+            </article>
+
+            <article class="card flex items-center text-center border-curve-md shadow p-20 w-32">
+                <img src="../images/ic_total-category.svg" alt="total revenue" aria-hidden="true" class="card_icon">
+                <div>
+                    <h2><?php echo $count_cat; ?></h2>
+                    <p class="mt-10">Total Category</p>
+                </div>
+            </article>
+        </div>
+
+        <section class="dashboard_inner-body mt-40 flex gap wrap">
 
             <!-- =================== Category wise sales ========================== -->
-            <div class="chart_container shadow p-20 border-curve">
+            <div class="chart_container shadow p-20 border-curve" id="cwi">
                 <div class="flex items-center">
                     <h3 class="heading">Category wise info</h3>
 
@@ -110,7 +168,7 @@
             </div>
 
             <!-- ========================= Total sales ========================== -->
-            <div class="chart_container shadow p-20 border-curve">
+            <div class="chart_container shadow p-20 border-curve" id="ts">
                 <div class="flex items-center">
                     <h3 class="heading">Total sales</h3>
 
@@ -216,7 +274,7 @@
             <!-- ===================== Item wise sales ============================== -->
 
             <?php
-    
+
             if (!isset($_GET['food'])) {
                 if (isset($_COOKIE['foodID'])) {
                     $_GET['food'] = $_COOKIE['foodID'];
@@ -234,7 +292,7 @@
             }
 
             ?>
-            <div class="chart_container shadow p-20 border-curve">
+            <div class="chart_container shadow p-20 border-curve" id="iws">
                 <div class="flex items-center">
                     <h3 class="heading">Item wise sales</h3>
 
@@ -369,7 +427,7 @@
             }
             ?>
 
-            <div class="chart_container shadow p-20 border-curve">
+            <div class="chart_container shadow p-20 border-curve" id="cws">
                 <div class="flex items-center">
                     <h3 class="heading">Category wise sales</h3>
 
@@ -403,16 +461,16 @@
                         const foodId = document.cookie.split(';').find(row => row.trim().startsWith('foodID=')).split('=')[1];
                         if (food == '')
                             return;
-                        window.location.href = `./report.php?isf=${query}&food=${foodId}#line-chart-item`;
+                        window.location.href = `./report.php?isf=${query}&food=${foodId}#iws`;
                         document.cookie = `isf=${query};`;
                     } else if (form.classList.contains('cat_wise')) {
-                        window.location.href = `./report.php?percent-filter=${query}`;
+                        window.location.href = `./report.php?percent-filter=${query}#cwi`;
                         document.cookie = `percent-filter=${query};`;
                     } else if (form.classList.contains('cat_bar')) {
-                        window.location.href = `./report.php?bf=${query}#bar-chart`;
+                        window.location.href = `./report.php?bf=${query}#cws`;
                         document.cookie = `bf=${query};`;
                     } else {
-                        window.location.href = `./report.php?tsf=${query}`;
+                        window.location.href = `./report.php?tsf=${query}#ts`;
                         document.cookie = `tsf=${query};`;
                     }
                 })
