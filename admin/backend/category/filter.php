@@ -3,25 +3,26 @@ session_start();
 require("../../../config.php");
 if(isset($_SESSION['admin-success']) && isset($_POST['cat-filter'])) {
     $term = mysqli_real_escape_string($conn, $_POST['cat-filter']);
+    
 // TODO: fix this switch statement
     switch($term) {
         case "name":
-            $_SESSION['cat-filter'] = "cat_name asc";
+            $_SESSION['cat-filter'] = "order by cat_name asc";
             break;
         case "most-selling":
-            $_SESSION['cat-filter'] = "active";
+            $_SESSION['cat-filter'] = "order by total desc";
             break;
         case "least-selling":
-            $_SESSION['cat-filter'] = "inactive";
+            $_SESSION['cat-filter'] = "order by total asc";
             break;
         case "last-added":
-            $_SESSION['cat-filter'] = "cat_id desc";
+            $_SESSION['cat-filter'] = "order by cat_id desc";
             break;
         case "first-added":
-            $_SESSION['cat-filter'] = "cat_id asc";
+            $_SESSION['cat-filter'] = "order by cat_id asc";
             break;
         default:
-            $_SESSION['cat-filter'] = "cat_id desc";
+            $_SESSION['cat-filter'] = "order by cat_id desc";
             break;
     }
 

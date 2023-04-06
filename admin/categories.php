@@ -106,7 +106,7 @@
 
                 <form action="./backend/category/search.php" method="post" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_category" name="search-category" id="search-category">
+                        <input type="search" placeholder="Search..." class="no_outline search_category" value="<?php if (isset($_SESSION['search-category'])) echo $_SESSION['search-category'] ?>" name="search-category" id="search-category">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -121,11 +121,11 @@
             <div class="filter flex items-center">
                 <form action="./backend/category/filter.php" method="post" class="filter-form">
                     <select name="cat-filter" class="p_7-20 border-curve" id="cat-filter">
-                        <option value="name" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Sort by name</option>
-                        <option value="most-selling" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Most selling</option>
-                        <option value="least-selling" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Least selling</option>
-                        <option value="last-added" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>Last added</option>
-                        <option value="first-added" <?php if(isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "") echo "selected" ?>>First added</option>
+                        <option value="name" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_name asc") echo "selected" ?>>Sort by name</option>
+                        <option value="most-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total desc") echo "selected" ?>>Most selling</option>
+                        <option value="least-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total asc") echo "selected" ?>>Least selling</option>
+                        <option value="last-added" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_id desc") echo "selected" ?>>Last added</option>
+                        <option value="first-added" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_id asc") echo "selected" ?>>First added</option>
                     </select>
                 </form>
                 <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
@@ -135,16 +135,71 @@
 
         <?php
         require("../config.php");
-        
-        if (isset($_SESSION['search-category'])) {
-            $searchKey = $_SESSION['search-category'];
-            $sql = "select * from category where cat_name like '$searchKey%' order by cat_id desc";
-            unset($_SESSION['search-category']);
-        } else {
-            $sql = "select * from category order by cat_id desc";
-        }
+        if (isset($_SESSION["cat-filter"])) {
+            $filter = $_SESSION["cat-filter"];
 
-        $res = mysqli_query($conn, $sql);
+            $sql_fetch = "SELECT 
+                            c.cat_id,
+                            c.image,
+                            c.cat_name,
+                            COALESCE(total_sold, 0) AS total_all,
+                            COALESCE(total_delivered, 0) AS total_delivered
+                        FROM category c
+                        LEFT JOIN (
+                            SELECT 
+                                f.category AS cat_id,
+                                COUNT(*) AS total_sold,
+                                SUM(CASE WHEN aos.status = 'delivered' THEN 1 ELSE 0 END) AS total_delivered
+                            FROM orders o
+                            INNER JOIN food f ON o.f_id = f.f_id
+                            LEFT JOIN aos ON o.id = aos.order_id
+                            GROUP BY f.category
+                        ) AS sd ON c.cat_id = sd.cat_id 
+                        $filter";
+            unset($_SESSION['cat-filter']);
+        } elseif (isset($_SESSION['search-category'])) {
+            $searchKey = $_SESSION['search-category'];
+            $sql_fetch = "SELECT 
+                            c.cat_id,
+                            c.image,
+                            c.cat_name,
+                            COALESCE(total_sold, 0) AS total_all,
+                            COALESCE(total_delivered, 0) AS total_delivered
+                        FROM category c
+                        LEFT JOIN (
+                            SELECT 
+                                f.category AS cat_id,
+                                COUNT(*) AS total_sold,
+                                SUM(CASE WHEN aos.status = 'delivered' THEN 1 ELSE 0 END) AS total_delivered
+                            FROM orders o
+                            INNER JOIN food f ON o.f_id = f.f_id
+                            LEFT JOIN aos ON o.id = aos.order_id
+                            GROUP BY f.category
+                        ) AS sd ON c.cat_id = sd.cat_id 
+                        WHERE
+                        c.cat_name LIKE '%$searchKey%'";
+
+            unset($_SESSION['cat-filter']);
+        } else {
+            $sql_fetch = "SELECT 
+                            c.cat_id,
+                            c.image,
+                            c.cat_name,
+                            COALESCE(total_sold, 0) AS total_all,
+                            COALESCE(total_delivered, 0) AS total_delivered
+                        FROM category c
+                        LEFT JOIN (
+                            SELECT 
+                                f.category AS cat_id,
+                                COUNT(*) AS total_sold,
+                                SUM(CASE WHEN aos.status = 'delivered' THEN 1 ELSE 0 END) AS total_delivered
+                            FROM orders o
+                            INNER JOIN food f ON o.f_id = f.f_id
+                            LEFT JOIN aos ON o.id = aos.order_id
+                            GROUP BY f.category
+                        ) AS sd ON c.cat_id = sd.cat_id ";
+        }
+        $res = mysqli_query($conn, $sql_fetch);
 
         if (isset($_SESSION['delete_success'])) {
         ?>
@@ -189,20 +244,9 @@
 
                     $sql_total_cat = "select count(*) as total from food where category = $cat_id";
                     $res_total_cat = mysqli_query($conn, $sql_total_cat);
-                    $total_cat = mysqli_fetch_assoc($res_total_cat)['total'];
-
-                    $sql_fetch_order_id_from_cat_id = "select id from orders where f_id in (select f_id from food where category = $cat_id)";
-                    $res_fetch_order_id_from_cat_id = mysqli_query($conn, $sql_fetch_order_id_from_cat_id);
-
-                    // calculate total sold items of a category
-                    $total_sold = 0;
-                    while($row = mysqli_fetch_assoc($res_fetch_order_id_from_cat_id)){
-                        $order_id = $row['id'];
-                        $sql_total_sold = "select (count(*)*orders.qty) as total from orders inner join aos on orders.id = aos.order_id where aos.order_id = $order_id and aos.status = 'delivered'";
-                        $res_total_sold = mysqli_query($conn, $sql_total_sold) or die(mysqli_error($conn));
-                        $total_sold_data = mysqli_fetch_assoc($res_total_sold);
-                        $total_sold += $total_sold_data['total'];
-                    }
+                    $total_cat = mysqli_fetch_assoc($res_total_cat)['total'];    
+                    $total_sold = $data['total_delivered'];
+                    
                 ?>
                     <tr class="shadow">
                         <td> <?php echo $i; ?> </td>
@@ -267,6 +311,17 @@
             ?>
             </p>
     </main>
+    <script>
+        const fForm = document.querySelector('.filter-form')
+        fForm.addEventListener('change', () => {
+            fForm.submit()
+        });
+
+        const searchForm = document.querySelector('.search_form')
+        searchForm.addEventListener('change', () => {
+            searchForm.submit()
+        });
+    </script>
 
 </body>
 
