@@ -74,7 +74,7 @@ if (!isset($_SESSION['admin-success'])) {
             $row = mysqli_fetch_assoc($res_img);
             $imgName = $row['img'];
 
-            if (preg_match("/^[0-9]{10}[a-z 0-9_-]+$/", $imgName) && !preg_match("/^[0-9]{10}[$file_name]+$/", $imgName)) {
+            if (!file_exists($target_dir . $file_name)) {
                 require('../validate-img.php');
             } else
                 $isDuplicate = true;
