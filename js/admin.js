@@ -182,7 +182,6 @@ const btnName = submitBtn && submitBtn.getAttribute("name");
 if (btnName == "update") {
   // set uploaded image to input field
   const imgURL = uploadedImg && uploadedImg.getAttribute("src");
-  console.log(imgURL);
 
   const imgInput = document.querySelector(".img_upload-input");
   const isForEmp = imgInput.getAttribute("class").includes("emp")

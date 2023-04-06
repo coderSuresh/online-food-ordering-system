@@ -1,9 +1,8 @@
 <?php
 
 // Check if image file is an actual image 
-try {
-$check = getimagesize($temp_file);
-if ($check !== false) {
+$check = getimagesize($_FILES["image"]["tmp_name"]);
+if ($check) {
     $uploadOk = 1;
 } else {
     $response["status"] = "error";
@@ -12,16 +11,9 @@ if ($check !== false) {
     echo json_encode($response);
     exit();
 }
-}
-catch (Exception){
-    $response["status"] = "error";
-    $response["msg"] = "File is not an image.";
-    $uploadOk = 0;
-    echo json_encode($response);
-    exit();
-}
+
 // check file name 
-if (!preg_match("/^[A-Za-z0-9 .]+$/", $file_name)) {
+if (!preg_match("/^[A-Za-z0-9_ .]+$/", $file_name)) {
     $response["status"] = "error";
     $response["msg"] = "Sorry, file name should be alphanumeric.";
     $uploadOk = 0;
