@@ -39,6 +39,14 @@
     require './components/header.php';
     require './components/sidebar.php';
 
+    if (!isset($_GET['percent-filter'])) {
+        if (isset($_COOKIE['percent-filter'])) {
+            $_GET['percent-filter'] = $_COOKIE['percent-filter'];
+        } else {
+            $_GET['percent-filter'] = "daily";
+        }
+    }
+
     $sql = "select sum(qty) as total_qty,
             category.cat_name,
             MONTH(orders.date) as month
@@ -107,9 +115,12 @@
                     <h3 class="heading">Total sales</h3>
 
                     <?php
-                    // initially set to hourly
                     if (!isset($_GET['tsf'])) {
-                        $_GET['tsf'] = "hourly";
+                        if (isset($_COOKIE['tsf'])) {
+                            $_GET['tsf'] = $_COOKIE['tsf'];
+                        } else {
+                            $_GET['tsf'] = "daily";
+                        }
                     }
                     ?>
 
@@ -205,10 +216,7 @@
             <!-- ===================== Item wise sales ============================== -->
 
             <?php
-            // initially set to hourly
-            if (!isset($_GET['isf'])) {
-                $_GET['isf'] = "hourly";
-            }
+    
             if (!isset($_GET['food'])) {
                 if (isset($_COOKIE['foodID'])) {
                     $_GET['food'] = $_COOKIE['foodID'];
@@ -216,6 +224,15 @@
                     $_GET['food'] = 1;
                 }
             }
+
+            if (!isset($_GET['isf'])) {
+                if (isset($_COOKIE['isf'])) {
+                    $_GET['isf'] = $_COOKIE['isf'];
+                } else {
+                    $_GET['isf'] = "hourly";
+                }
+            }
+
             ?>
             <div class="chart_container shadow p-20 border-curve">
                 <div class="flex items-center">
@@ -263,6 +280,15 @@
             <!-- get data from db -->
             <?php
             // daily data
+
+            if (!isset($_GET['bf'])) {
+                if (isset($_COOKIE['bf'])) {
+                    $_GET['bf'] = $_COOKIE['bf'];
+                } else {
+                    $_GET['bf'] = "hourly";
+                }
+            }
+
             $sql_cat_paisa = "SELECT CONCAT(LPAD(HOUR(aos.delivered_at), 2, '0'), ':00') AS interval_start,
                                     SUM(total_price) AS total_price_sum,
                                     category.cat_name
