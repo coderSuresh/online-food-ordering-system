@@ -4,7 +4,6 @@ require("../../../config.php");
 if(isset($_SESSION['admin-success']) && isset($_POST['cat-filter'])) {
     $term = mysqli_real_escape_string($conn, $_POST['cat-filter']);
     
-// TODO: fix this switch statement
     switch($term) {
         case "name":
             $_SESSION['cat-filter'] = "order by cat_name asc";

@@ -117,7 +117,6 @@
                 <button class="button ml-35 border-curve-lg popper-btn">Add Category</button>
 
             </div>
-            <!-- TODO: make filter here -->
             <div class="filter flex items-center">
                 <form action="./backend/category/filter.php" method="post" class="filter-form">
                     <select name="cat-filter" class="p_7-20 border-curve" id="cat-filter">
