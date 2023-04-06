@@ -17,7 +17,7 @@
         .chart_container {
             min-width: 350px;
             width: 45%;
-            min-height: 350px;
+            min-height: 410px;
         }
 
         #pie-chart {
@@ -98,7 +98,7 @@
                     </form>
 
                 </div>
-                <canvas id="pie-chart" class="chart"></canvas>
+                <canvas id="pie-chart" class="chart mt-20"></canvas>
             </div>
 
             <!-- ========================= Total sales ========================== -->
@@ -153,6 +153,7 @@
                                     INNER JOIN aos ON orders.id = aos.order_id
                                     WHERE aos.status = 'delivered'
                                     " . ($isForItem && isset($_GET['food']) ? " AND orders.f_id = " . $_GET['food'] : "") . " 
+                                    AND aos.delivered_at >= NOW() - INTERVAL 1 WEEK
                                     GROUP BY WEEKDAY(aos.delivered_at)
                                     ORDER BY WEEKDAY(aos.delivered_at);";
 
@@ -176,6 +177,7 @@
                                         WHERE
                                             aos.status = 'delivered'
                                         " . ($isForItem && isset($_GET['food']) ? " AND orders.f_id = " . $_GET['food'] : "") . "
+                                        AND YEAR(aos.delivered_at) = YEAR(CURRENT_DATE())
                                         GROUP BY
                                             MONTH(aos.delivered_at)
                                         ORDER BY
@@ -197,7 +199,7 @@
                 list($labels_line, $total_price, $labels_line_week, $total_price_week, $labels_line_month, $total_price_month) = queryDB($conn, false);
                 ?>
 
-                <canvas id="line-chart" class="chart"></canvas>
+                <canvas id="line-chart" class="chart mt-20"></canvas>
             </div>
 
             <!-- ===================== Item wise sales ============================== -->
@@ -266,11 +268,13 @@
                                     category.cat_name
                                     FROM orders
                                     INNER JOIN aos ON orders.id = aos.order_id
-                                    INNER JOIN food on orders.f_id = food.f_id
-                                    INNER JOIN category on category.cat_id = food.category
+                                    INNER JOIN food ON orders.f_id = food.f_id
+                                    INNER JOIN category ON category.cat_id = food.category
                                     WHERE aos.status = 'delivered'
-                                   	group by category.cat_id, WEEKDAY(aos.delivered_at)
-                                    ORDER BY HOUR(aos.delivered_at);";
+                                    AND DATE(aos.delivered_at) = CURDATE()
+                                    GROUP BY category.cat_id, interval_start
+                                    ORDER BY interval_start;
+                                ";
 
             $result_cat_paisa = mysqli_query($conn, $sql_cat_paisa);
 
@@ -286,15 +290,19 @@
 
             // weekly data
             $sql_cat_paisa_week = "SELECT WEEKDAY(aos.delivered_at) AS day,
-                                    SUM(total_price) AS total_price_sum,
-                                    category.cat_name
-                                    FROM orders
-                                    INNER JOIN aos ON orders.id = aos.order_id
-                                    INNER JOIN food on orders.f_id = food.f_id
-                                    INNER JOIN category on category.cat_id = food.category
-                                    WHERE aos.status = 'delivered'
-                                   	group by category.cat_id, WEEKDAY(aos.delivered_at)
-                                    ORDER BY WEEKDAY(aos.delivered_at);";
+                                        SUM(total_price) AS total_price_sum,
+                                        category.cat_name,
+                                        aos.delivered_at
+                                        FROM orders
+                                        INNER JOIN aos ON orders.id = aos.order_id
+                                        INNER JOIN food ON orders.f_id = food.f_id
+                                        INNER JOIN category ON category.cat_id = food.category
+                                        WHERE aos.status = 'delivered'
+                                        AND aos.delivered_at >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+                                        AND aos.delivered_at < DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 1 WEEK)
+                                        GROUP BY category.cat_id, WEEKDAY(aos.delivered_at)
+                                        ORDER BY WEEKDAY(aos.delivered_at);
+                                    ";
 
             $result_cat_paisa_week = mysqli_query($conn, $sql_cat_paisa_week);
 
@@ -309,16 +317,19 @@
             }
 
             // monthly data
-            $sql_cat_paisa_month = "SELECT MONTH(aos.delivered_at) AS month,
-                                    SUM(total_price) AS total_price_sum,
-                                    category.cat_name
-                                    FROM orders
-                                    INNER JOIN aos ON orders.id = aos.order_id
-                                    INNER JOIN food on orders.f_id = food.f_id
-                                    INNER JOIN category on category.cat_id = food.category
-                                    WHERE aos.status = 'delivered'
-                                   	group by category.cat_id, MONTH(aos.delivered_at)
-                                    ORDER BY MONTH(aos.delivered_at);";
+            $sql_cat_paisa_month = "SELECT YEAR(aos.delivered_at) AS year,
+                                            MONTH(aos.delivered_at) AS month,
+                                            SUM(total_price) AS total_price_sum,
+                                            category.cat_name
+                                            FROM orders
+                                            INNER JOIN aos ON orders.id = aos.order_id
+                                            INNER JOIN food ON orders.f_id = food.f_id
+                                            INNER JOIN category ON category.cat_id = food.category
+                                            WHERE aos.status = 'delivered'
+                                            AND aos.delivered_at >= NOW() - INTERVAL 1 MONTH
+                                            GROUP BY category.cat_id, YEAR(aos.delivered_at), MONTH(aos.delivered_at)
+                                            ORDER BY YEAR(aos.delivered_at), MONTH(aos.delivered_at);
+                                        ";
 
             $result_cat_paisa_month = mysqli_query($conn, $sql_cat_paisa_month);
 
@@ -346,7 +357,7 @@
                     </form>
                 </div>
 
-                <canvas id="bar-chart" class="chart"></canvas>
+                <canvas id="bar-chart" class="chart mt-20"></canvas>
             </div>
 
         </section>
@@ -426,7 +437,7 @@
                 title: {
                     display: true,
                     position: "top",
-                    text: "Category Wise Sales",
+                    text: "CATEGORY WISE SALES",
                     fontSize: 18,
                     fontColor: "#000"
                 },
@@ -599,7 +610,7 @@
                     title: {
                         display: true,
                         position: "top",
-                        text: `${period} sales`,
+                        text: `${period.toUpperCase()} SALES`,
                         fontSize: 18,
                         fontColor: "#000"
                     },
@@ -675,9 +686,10 @@
         $price = getData($query, $total_price_cat_paisa, $total_price_cat_paisa_week, $total_price_cat_paisa_month);
         ?>
 
-        tempName = <?php echo json_encode($name); ?>;
-        tempData = <?php echo json_encode($price); ?>;
-        tempLabel = <?php echo json_encode($labels); ?>;
+        let query = <?php echo json_encode($query); ?>;
+        let tempName = <?php echo json_encode($name); ?>;
+        let tempData = <?php echo json_encode($price); ?>;
+        let tempLabel = <?php echo json_encode($labels); ?>;
 
         const data = tempLabel.map((label, i) => ({
             category: tempName[i],
@@ -692,12 +704,23 @@
             day,
             sales
         }) => {
+
+            if (query === 'hourly') {
+                day = hours.indexOf(day);
+            } else if (query === 'weekly') {
+                day = parseInt(day) + 1;
+            } else if (query === 'monthly') {
+                day = parseInt(day) - 1;
+            } else {
+                day = parseInt(day);
+            }
+
             if (!salesByCategoryAndDay[category]) {
-                salesByCategoryAndDay[category] = new Array(7).fill(0);
+                salesByCategoryAndDay[category] = new Array(15).fill(0);
             }
             salesByCategoryAndDay[category][day] += sales;
         });
-        
+
         const dataset = Object.entries(salesByCategoryAndDay).map(([category, sales], i) => ({
             label: category,
             data: sales,
@@ -705,9 +728,11 @@
             borderWidth: 1,
         }));
 
+        const realLabels = query === 'hourly' ? hours : query === 'weekly' ? days : query === 'monthly' ? months : hours;
+
         const barChart = document.querySelector('#bar-chart');
         const dataBar = {
-            labels: days,
+            labels: realLabels,
             datasets: dataset,
         };
 
@@ -740,7 +765,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Weekly Sales',
+                        text: `${query.toUpperCase()} SALES`,
                     },
                 },
             },
