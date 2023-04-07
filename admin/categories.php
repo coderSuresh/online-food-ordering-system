@@ -242,9 +242,9 @@
 
                     $sql_total_cat = "select count(*) as total from food where category = $cat_id";
                     $res_total_cat = mysqli_query($conn, $sql_total_cat);
-                    $total_cat = mysqli_fetch_assoc($res_total_cat)['total'];    
+                    $total_cat = mysqli_fetch_assoc($res_total_cat)['total'];
                     $total_sold = $data['total_delivered'];
-                    
+
                 ?>
                     <tr class="shadow">
                         <td> <?php echo $i; ?> </td>
@@ -275,7 +275,7 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <a href="#">
+                                    <a href="./manage-foods.php?search=<?php echo $data['cat_name']; ?>">
                                         <div class="flex items-center justify-start">
                                             <img src="../images/ic_view.svg" alt="view icon">
                                             <p>View</p>
