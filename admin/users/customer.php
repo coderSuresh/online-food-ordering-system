@@ -136,9 +136,9 @@
         <div class="flex items-center mt-20">
             <div class="flex items-center">
 
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./customer.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline" name="search">
                         <button type="submit" class="no_bg no_outline"><img src="../../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -240,6 +240,12 @@
             $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
         }
 
+        // search
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($conn, $_GET['search']);
+            $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE names LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%'";
+        }
+
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if (mysqli_num_rows($result) > 0) {
@@ -325,6 +331,7 @@
                 ?>
             </table>
         <?php
+            $isForSearch = isset($_GET['search']);
             require '../components/pagination.php';
         } else {
             echo "No data found";
