@@ -216,9 +216,9 @@
             <!-- buttons for food management -->
             <div class="flex items-center">
 
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./manage-foods.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search" id="search-employee">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -377,6 +377,12 @@
             $sql = "SELECT * FROM food order by f_id desc limit $offset, $limit";
         }
 
+        // search food by name
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $sql = "SELECT * FROM food where name like '%$search%' order by f_id desc";
+        }
+
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
         if (mysqli_num_rows($res) > 0) {
         ?>
@@ -510,6 +516,7 @@
                 <?php } ?>
             </table>
         <?php
+            $isForSearch = isset($_GET['search']);
             require './components/pagination.php';
         } else
             echo "<p class='mt-20'>No Record Found</p>";

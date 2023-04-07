@@ -80,13 +80,12 @@
         </section>
 
         <div class="flex items-center mt-20">
-            <!-- buttons for order management -->
+            
             <div class="flex items-center">
-
                 <!-- search form for order -->
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./order-history.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -267,6 +266,32 @@
                     ";
         }
 
+        // search order by get request
+        $sql = (isset($_GET['search'])) ? "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        orders.track_id,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        aos.aos_id,
+                        aos.status
+                        from orders 
+                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
+                        inner join aos on orders.id = aos.order_id
+                        where orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
+                        and (orders.track_id like '%{$_GET['search']}%' 
+                        or order_contact_details.c_name like '%{$_GET['search']}%'
+                        or order_contact_details.phone like '%{$_GET['search']}%')
+                        group by orders.date, orders.c_id
+                        order by orders.id desc
+                    " : $sql;
+
         $result = mysqli_query($conn, $sql) or die("Query Failed");
 
         if (mysqli_num_rows($result) > 0) {
@@ -274,6 +299,7 @@
             <table class="mt-20">
                 <tr class="shadow">
                     <th>SN</th>
+                    <th>Order ID</th>
                     <th>Date</th>
                     <th>Customer</th>
                     <th>Location</th>
@@ -309,6 +335,7 @@
                 ?>
                     <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
                         <td><?php echo $i; ?></td>
+                        <td><?php echo $row['track_id']; ?></td>
                         <td>
                             <?php echo $row['date']; ?>
                         </td>
@@ -320,7 +347,10 @@
                     </tr>
                 <?php } ?>
             </table>
-            <?php require './components/pagination.php'; ?>
+            <?php
+            $isForSearch = isset($_GET['search']);
+            require './components/pagination.php';
+            ?>
         <?php
         } else {
             echo "<p class='mt-20'>No Record Found</p>";
