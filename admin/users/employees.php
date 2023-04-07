@@ -290,10 +290,6 @@
                     ?>
                         <div class="employee_card p-20 text-center shadow border-curve-md">
 
-                            <!-- overlay for disabled account -->
-
-                            <div class="emp_card-overlay border-curve-md"></div>
-
                             <img src="../../images/ic_options.svg" alt="options menu" class="emp_card_option-menu table_option-menu">
                             <img src="../../uploads/employees/<?php echo $row["image"] ?>" class="emp_img" alt="user profile">
                             <h3 class="emp_name"><?php echo $row['name']; ?></h3>
