@@ -19,10 +19,6 @@
     <?php
     require("./components/header.php");
     require("./components/sidebar.php");
-
-    if (!isset($_GET['filter-by'])) {
-        $_GET['filter-by'] = "all";
-    }
     ?>
 
     <main class="admin_dashboard_body">
@@ -284,12 +280,6 @@
 
             </div>
 
-            <?php
-            if (!isset($_GET['filter'])) {
-                $_GET['filter'] = "last-added";
-            }
-            ?>
-
             <div class="filter flex items-center">
                 <form action="./manage-foods.php" method="get" class="filter-form">
                     <select name="filter" class="p_7-20 border-curve pointer">
@@ -306,6 +296,8 @@
                         <option value="first-added" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "first-added")
                                                                         echo "selected"; ?>>First added</option>
                         <option value="last-added" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "last-added")
+                                                                        echo "selected";
+                                                                    if (!isset($_GET['filter']))
                                                                         echo "selected"; ?>>Last added</option>
                     </select>
                 </form>
@@ -397,6 +389,7 @@
                             INNER JOIN category c ON f.category = c.cat_id";
 
         if (isset($_GET['filter-by'])) {
+
             $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
             if ($filter_by == 'all') {
                 $sql = $sql_food . " order by f.f_id desc limit $offset, $limit";
