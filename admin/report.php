@@ -39,14 +39,6 @@
     require './components/header.php';
     require './components/sidebar.php';
 
-    if (!isset($_GET['percent-filter'])) {
-        if (isset($_COOKIE['percent-filter'])) {
-            $_GET['percent-filter'] = $_COOKIE['percent-filter'];
-        } else {
-            $_GET['percent-filter'] = "daily";
-        }
-    }
-
     $sql = "select sum(qty) as total_qty,
             category.cat_name,
             MONTH(orders.date) as month
@@ -145,7 +137,17 @@
 
         <section class="dashboard_inner-body mt-40 flex gap wrap">
 
-            <!-- =================== Category wise sales ========================== -->
+            <!-- =================== Category wise info ========================== -->
+            <?php
+            if (!isset($_GET['percent-filter'])) {
+                if (isset($_COOKIE['percent-filter'])) {
+                    $_GET['percent-filter'] = $_COOKIE['percent-filter'];
+                } else {
+                    $_GET['percent-filter'] = "pf-quantity";
+                }
+            }
+            ?>
+
             <div class="chart_container shadow p-20 border-curve" id="cwi">
                 <div class="flex items-center">
                     <h3 class="heading">Category wise info</h3>
@@ -156,8 +158,6 @@
                                                                                 echo 'selected'; ?>>Show quantity</option>
 
                             <option name="pf-percent" value="pf-percent" <?php if (isset($_GET['percent-filter']) && $_GET['percent-filter'] == 'pf-percent')
-                                                                                echo 'selected';
-                                                                            else if (!isset($_GET['percent-filter']))
                                                                                 echo 'selected';
                                                                             ?>>Show percent</option>
                         </select>
@@ -343,7 +343,7 @@
                 if (isset($_COOKIE['bf'])) {
                     $_GET['bf'] = $_COOKIE['bf'];
                 } else {
-                    $_GET['bf'] = "hourly";
+                    $_GET['bf'] = "weekly";
                 }
             }
 
@@ -805,7 +805,10 @@
 
         // set the food name in the input field from the local storage
         window.onload = () => {
-            const foodId = document.cookie.split(';').find(row => row.trim().startsWith('foodID=')).split('=')[1];
+            const foodId = (document.cookie.split(';').find(row => row.trim().startsWith('foodID'))) ?
+                document.cookie.split(';').find(row => row.trim().startsWith('foodID')).split('=')[1] :
+                null;
+
             if (foodId) {
                 const foodList = document.querySelectorAll('.food_option');
                 foodList.forEach((foodOption) => {
@@ -816,7 +819,10 @@
                 })
             }
 
-            const categoryId = document.cookie.split(';').find(row => row.trim().startsWith('catID')).split('=')[1];
+            const categoryId = (document.cookie.split(';').find(row => row.trim().startsWith('catID'))) ?
+                document.cookie.split(';').find(row => row.trim().startsWith('catID')).split('=')[1] :
+                null
+
             if (categoryId) {
                 const categoryList = document.querySelectorAll('.category_option');
                 categoryList.forEach((categoryOption) => {
