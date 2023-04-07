@@ -72,7 +72,7 @@
                 $count = mysqli_num_rows($result);
                 ?>
 
-                <form action="#" method="post">
+                <form action="./future-details.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
                     <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
                         <div class="count-top shadow"><?php
