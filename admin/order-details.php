@@ -79,13 +79,12 @@
         </section>
 
         <div class="flex items-center mt-20">
-            <!-- buttons for order management -->
-            <div class="flex items-center">
 
+            <div class="flex items-center">
                 <!-- search form for order -->
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./order-details.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline" name="search">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -283,6 +282,36 @@
                     inner join aos on orders.id = aos.order_id
                     where (Date(orders.date) = CURDATE()
                     or Date(aos.date) = CURDATE())
+                    group by orders.date, orders.c_id
+                    order by orders.id desc
+                    ";
+        }
+
+        // search order by get
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $sql = "select count(orders.id) as total_item_bought,
+                    orders.id,
+                    orders.c_id,
+                    orders.qty,
+                    orders.track_id,
+                    sum(orders.total_price) as total_price,
+                    orders.note,
+                    orders.date,
+                    orders.f_id,
+                    order_contact_details.address,
+                    order_contact_details.phone,
+                    order_contact_details.c_name,
+                    aos.aos_id,
+                    aos.status
+                    from orders 
+                    inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
+                    inner join aos on orders.id = aos.order_id
+                    where (Date(orders.date) = CURDATE()
+                    or Date(aos.date) = CURDATE())
+                    and (orders.track_id like '%{$search}%' or
+                    order_contact_details.c_name like '%{$search}%' or
+                    order_contact_details.phone like '%{$search}%')
                     group by orders.date, orders.c_id
                     order by orders.id desc
                     ";
