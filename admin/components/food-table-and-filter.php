@@ -1,5 +1,5 @@
 <?php
-
+$c_id = 0;
 if (isset($cat_id)) {
     $c_id = intval($cat_id);
 }
