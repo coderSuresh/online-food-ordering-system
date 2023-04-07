@@ -54,9 +54,9 @@
 
             <div class="flex items-center">
                 <!-- search form for order -->
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./future-orders.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline" name="search">
                         <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -102,9 +102,32 @@
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                         inner join future_orders on orders.id = future_orders.order_id
-                        WHERE Date(orders.date) = CURDATE()
                         group by orders.date, orders.c_id
                         order by orders.id desc";
+
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $sql = "select count(orders.id) as total_item_bought,
+                        orders.id,
+                        orders.c_id,
+                        orders.qty,
+                        orders.track_id,
+                        sum(orders.total_price) as total_price,
+                        orders.note,
+                        orders.date,
+                        orders.f_id,
+                        order_contact_details.address,
+                        order_contact_details.phone,
+                        order_contact_details.c_name,
+                        future_orders.fo_id,
+                        future_orders.status
+                        from orders 
+                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
+                        inner join future_orders on orders.id = future_orders.order_id
+                        where (orders.track_id like '%{$search}%' or order_contact_details.c_name like '%{$search}%')
+                        group by orders.date, orders.c_id
+                        order by orders.id desc";
+        }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
 
