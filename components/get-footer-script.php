@@ -60,9 +60,10 @@
                                                             if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
                                                                 $time = "09:00";
                                                             }
-                                                            while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
-                                                                $time = date('H:i', strtotime($time . ' +30 minutes'))
-                                                            ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
+                                                            $new_time  = $time;
+                                                            while (date('H:i', strtotime($new_time . ' +30 minutes')) <= $end_time) {
+                                                                $new_time = date('H:i', strtotime($new_time . ' +30 minutes'))
+                                                            ?> <option value='<?php echo $new_time; ?>'> <?php echo $new_time; ?> </option>
                         <?php
                                                             }
                         ?> </optgroup>
@@ -80,7 +81,7 @@
 
                 const date = dateInput.value
                 const today = '<?php echo $date; ?>'
-
+                const time = '<?php echo $time; ?>'
                 if (date != today) {
                     timeOption.innerHTML = `
                             <?php
@@ -91,17 +92,7 @@
                             }
                             ?>`
                 } else {
-                    timeOption.innerHTML = `
-                    <?php
-                    if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
-                        $time = "09:00";
-                    }
-                    while (date('H:i', strtotime($time . ' +30 minutes')) <= $end_time) {
-                        $time = date('H:i', strtotime($time . ' +30 minutes'))
-                    ?> <option value='<?php echo $time; ?>'> <?php echo $time; ?> </option>
-                            <?php
-                        }
-                            ?>`
+                    checkIfChecked()             
                 }
 
             })
@@ -118,7 +109,6 @@
 
     // ==================== validate date and time ====================
     function validateDateTime() {
-
         const dateInput = document.querySelector('#date')
         const timeInput = document.querySelector('#time')
         const btn = document.querySelector('.place_order')
@@ -127,11 +117,15 @@
         if (dateInput.value == '' || timeInput.value == '') {
             btn.disabled = true
             btn.style.cursor = 'not-allowed'
-        } else if (dateInput.value > '<?php echo $date; ?>' || dateInput.value == <?php echo $date; ?> && timeInput.value > '<?php echo $time; ?>') {
+        } else if (dateInput.value > '<?php echo $date; ?>' || dateInput.value == '<?php echo $date; ?>' && timeInput.value > '<?php echo $time; ?>') {
             warnMsg && warnMsg.remove()
             btn.disabled = false
             btn.style.cursor = 'pointer'
-        } 
+        }
+        else{
+            btn.disabled = true
+            btn.style.cursor = 'not-allowed'
+        }
     }
 
     // ==================== handle payment via esewa ====================
