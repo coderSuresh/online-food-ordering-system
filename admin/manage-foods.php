@@ -380,7 +380,11 @@
         // search food by name
         if (isset($_GET['search'])) {
             $search = $_GET['search'];
-            $sql = "SELECT * FROM food where name like '%$search%' order by f_id desc";
+            $sql = "SELECT * FROM food 
+                            inner join category on food.category = category.cat_id
+                            where food.name like '%$search%' 
+                            or category.cat_name like '%$search%'
+                            order by f_id desc";
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
