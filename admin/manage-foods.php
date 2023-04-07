@@ -283,17 +283,30 @@
                 </a>
 
             </div>
-            <!-- TODO: make filter here -->
+
+            <?php
+            if (!isset($_GET['filter'])) {
+                $_GET['filter'] = "last-added";
+            }
+            ?>
+
             <div class="filter flex items-center">
-                <form action="#" method="post" class="filter-form">
-                    <select name="cat-filter" class="p_7-20 border-curve pointer" id="cat-filter">
-                        <option value="name" class="pointer">Sort by name</option>
-                        <option value="expensive" class="pointer">Expensive first</option>
-                        <option value="cheap" class="pointer">Cheapest first</option>
-                        <option value="most-selling" class="pointer">Most selling</option>
-                        <option value="least-selling" class="pointer">Least selling</option>
-                        <option value="last-added" class="pointer" selected>Last added</option>
-                        <option value="first-added" class="pointer">First added</option>
+                <form action="./manage-foods.php" method="get" class="filter-form">
+                    <select name="filter" class="p_7-20 border-curve pointer">
+                        <option value="name" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "name")
+                                                                    echo "selected"; ?>>Sort by name</option>
+                        <option value="expensive" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "expensive")
+                                                                        echo "selected"; ?>>Expensive first</option>
+                        <option value="cheap" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "cheap")
+                                                                    echo "selected"; ?>>Cheapest first</option>
+                        <option value="most-selling" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "most-selling")
+                                                                            echo "selected"; ?>>Most selling</option>
+                        <option value="least-selling" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "least-selling")
+                                                                            echo "selected"; ?>>Least selling</option>
+                        <option value="first-added" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "first-added")
+                                                                        echo "selected"; ?>>First added</option>
+                        <option value="last-added" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "last-added")
+                                                                        echo "selected"; ?>>Last added</option>
                     </select>
                 </form>
             </div>
@@ -345,7 +358,7 @@
         $limit = 10;
 
         if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
-            $filter_by = $_GET['filter-by'];
+            $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
             switch ($filter_by) {
                 case 'enabled':
                     $count = $count_enabled;
@@ -361,30 +374,82 @@
 
         require './components/calculate-offset.php';
 
+        $sql_food = "SELECT 
+                            f.f_id,
+                            f.img,
+                            f.name,
+                            f.price,
+                            f.veg,
+                            f.disabled,
+                            f.special,
+                            c.cat_name,
+                            COALESCE(total_sold, 0) AS total_sold
+                        FROM food f
+                        LEFT JOIN (
+                            SELECT 
+                                f.f_id,
+                                SUM(CASE WHEN aos.status = 'delivered' THEN o.qty ELSE 0 END) AS total_sold
+                            FROM orders o
+                            INNER JOIN food f ON o.f_id = f.f_id
+                            LEFT JOIN aos ON o.id = aos.order_id
+                            GROUP BY f.f_id
+                        ) AS sd ON f.f_id = sd.f_id
+                            INNER JOIN category c ON f.category = c.cat_id";
+
         if (isset($_GET['filter-by'])) {
-            $filter_by = $_GET['filter-by'];
+            $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
             if ($filter_by == 'all') {
-                $sql = "SELECT * FROM food order by f_id desc limit $offset, $limit";
+                $sql = $sql_food . " order by f.f_id desc limit $offset, $limit";
             } else if ($filter_by == 'enabled') {
-                $sql = "SELECT * FROM food where disabled = 0 order by f_id desc limit $offset, $limit";
+                $sql = $sql_food . " where disabled = 0 order by f.f_id desc limit $offset, $limit";
             } else if ($filter_by == 'disabled') {
-                $sql = "SELECT * FROM food where disabled = 1 order by f_id desc limit $offset, $limit";
+                $sql = $sql_food . " where disabled = 1 order by f.f_id desc limit $offset, $limit";
             } else if ($filter_by == 'special') {
-                $sql = "SELECT * FROM food where special = 1 order by f_id desc limit $offset, $limit";
+                $sql = $sql_food . " where special = 1 order by f.f_id desc limit $offset, $limit";
             }
         } else {
             $_SESSION['filter-by'] = 'all';
-            $sql = "SELECT * FROM food order by f_id desc limit $offset, $limit";
+            $sql = $sql_food . " order by f.f_id desc limit $offset, $limit";
+        }
+
+        // filter by name, expensive, cheap, most selling, least selling, last added, first added
+        if (isset($_GET['filter'])) {
+            $filter = mysqli_real_escape_string($conn, $_GET['filter']);
+
+            switch ($filter) {
+                case 'name':
+                    $sql = $sql_food . " order by f.name asc limit $offset, $limit";
+                    break;
+                case 'expensive':
+                    $sql = $sql_food . " order by f.price desc limit $offset, $limit";
+                    break;
+                case 'cheap':
+                    $sql = $sql_food . " order by f.price asc limit $offset, $limit";
+                    break;
+                case 'most-selling':
+                    $sql = $sql_food . " order by total_sold desc limit $offset, $limit";
+                    break;
+                case 'least-selling':
+                    $sql = $sql_food . " order by total_sold asc limit $offset, $limit";
+                    break;
+                case 'last-added':
+                    $sql = $sql_food . " order by f.f_id desc limit $offset, $limit";
+                    break;
+                case 'first-added':
+                    $sql = $sql_food . " order by f.f_id asc limit $offset, $limit";
+                    break;
+                default:
+                    $sql = $sql_food . " order by f.f_id desc limit $offset, $limit";
+                    break;
+            }
         }
 
         // search food by name
         if (isset($_GET['search'])) {
-            $search = $_GET['search'];
-            $sql = "SELECT * FROM food 
-                            inner join category on food.category = category.cat_id
-                            where food.name like '%$search%' 
-                            or category.cat_name like '%$search%'
-                            order by f_id desc";
+            $search = mysqli_real_escape_string($conn, $_GET['search']);
+            $sql = $sql_food . " where f.name like '%$search%' 
+                    or c.cat_name like '%$search%'
+                    order by f.f_id desc";
         }
 
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
@@ -404,21 +469,8 @@
                 $i = $offset;
                 while ($row = mysqli_fetch_assoc($res)) {
                     $i++;
-                    // fetch category name
-                    $cat_id = $row['category'];
-                    $sql_cat = "select cat_name from category where cat_id = $cat_id";
-                    $res_cat = mysqli_query($conn, $sql_cat) or die("Could not fetch category name from database");
-                    $row_cat = mysqli_fetch_assoc($res_cat);
-                    $cat_name = $row_cat['cat_name'];
-
-                    $total_sold = "select (count(orders.f_id) * orders.qty) as total_sold
-                                    from orders
-                                    inner join aos on orders.id = aos.order_id
-                                    where aos.status = 'delivered'
-                                    and orders.f_id = $row[f_id]";
-                    $res_sold = mysqli_query($conn, $total_sold) or die("Could not fetch total sold from database");
-                    $row_sold = mysqli_fetch_assoc($res_sold);
-                    $total_sold = $row_sold['total_sold'];
+                    $cat_name = $row['cat_name'];
+                    $total_sold = $row['total_sold'];
 
                     if ($total_sold == null) {
                         $total_sold = 0;
@@ -527,6 +579,12 @@
         ?>
     </main>
 
+    <script>
+        const formFilter = document.querySelector('.filter-form');
+        formFilter.addEventListener('change', () => {
+            formFilter.submit();
+        });
+    </script>
 </body>
 
 </html>
