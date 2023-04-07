@@ -117,17 +117,16 @@
                 <button class="button ml-35 border-curve-lg popper-btn">Add Category</button>
 
             </div>
-            <div class="filter flex items-center">
-                <form action="./backend/category/filter.php" method="post" class="filter-form">
+            <div class="filter">
+                <form action="./backend/category/filter.php" method="post" class="filter-form" style="margin: 0 !important">
                     <select name="cat-filter" class="p_7-20 border-curve" id="cat-filter">
                         <option value="name" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_name asc") echo "selected" ?>>Sort by name</option>
-                        <option value="most-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total desc") echo "selected" ?>>Most selling</option>
-                        <option value="least-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total asc") echo "selected" ?>>Least selling</option>
+                        <option value="most-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total_delivered desc") echo "selected" ?>>Most selling</option>
+                        <option value="least-selling" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by total_delivered asc") echo "selected" ?>>Least selling</option>
                         <option value="last-added" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_id desc") echo "selected" ?>>Last added</option>
                         <option value="first-added" <?php if (isset($_SESSION['cat-filter']) && $_SESSION['cat-filter'] == "order by cat_id asc") echo "selected" ?>>First added</option>
                     </select>
                 </form>
-                <img src="../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
             </div>
 
         </div>
