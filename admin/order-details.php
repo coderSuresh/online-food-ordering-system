@@ -45,7 +45,7 @@
                 $c_time = getCurrentTime();
                 $calculated_time = date('H:i', strtotime('+30 minutes', strtotime($c_time)));
 
-                $sql = "select id from orders where (Date(date) = CURDATE() or Date(delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
+                $sql = "select id from orders inner join aos on orders.id = aos.order_id where (Date(orders.date) = CURDATE() or Date(orders.delivery_date) = CURDATE()) and orders.delivery_time <= '$calculated_time' group by orders.c_id, orders.date";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
