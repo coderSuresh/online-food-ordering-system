@@ -176,7 +176,7 @@
 
                         <?php
                         if (isset($_SESSION['emp-id'])) {
-                            echo "<input type = 'hidden' name='id' value = '".$_SESSION['emp-id']."'>";
+                            echo "<input type = 'hidden' name='id' value = '" . $_SESSION['emp-id'] . "'>";
                         }
                         ?>
 
@@ -185,12 +185,12 @@
                             <button type="submit" name="<?php if (isset($_SESSION['emp-name']))
                                                             echo "update";
                                                         else echo "add" ?>" id="add-employee" class="button modal_form-submit-btn form_add-employees">
-                                                    <?php
-                                                    if (isset($_SESSION['emp-name']))
-                                                        echo "Update Employee";
-                                                    else echo "Add Employee"
-                                                    ?>    
-                                                    </button>
+                                <?php
+                                if (isset($_SESSION['emp-name']))
+                                    echo "Update Employee";
+                                else echo "Add Employee"
+                                ?>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -250,9 +250,9 @@
                 </div>
 
                 <!-- search form for employee -->
-                <form action="#" method="post" class="search_form border-curve-lg">
+                <form action="./employees.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search-employee" id="search-employee">
+                        <input type="search" placeholder="Search..." class="no_outline search_employee" name="search" id="search-employee">
                         <button type="submit" class="no_bg no_outline"><img src="../../images/ic_search.svg" alt="search icon"></button>
                     </div>
                 </form>
@@ -261,18 +261,75 @@
             <!-- employee cards -->
             <?php
             // filter by session
-            $sql = "select * from employees";
+            $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                    ";
             if (isset($_SESSION['filter-by'])) {
                 $filter_by = $_SESSION['filter-by'];
                 if ($filter_by == 'all') {
-                    $sql = "SELECT * FROM employees";
+                    $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                            ";
                 } else if ($filter_by == 'active') {
-                    $sql = "SELECT * FROM employees WHERE active = 1";
+                    $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                                WHERE employees.active = 1";
                 } else if ($filter_by == 'inactive') {
-                    $sql = "SELECT * FROM employees WHERE active = 0";
+                    $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                                WHERE employees.active = 0";
                 }
             } else {
-                $sql = "SELECT * FROM employees";
+                $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                        ";
+            }
+
+            // search by get
+            if (isset($_GET['search'])) {
+                $search = $_GET['search'];
+                $sql = "select employees.emp_id,
+                                employees.name,
+                                employees.image,
+                                employees.email,
+                                employees.username,
+                                department.department
+                                from employees
+                                INNER JOIN department on employees.department = department.dept_id
+                                WHERE employees.name LIKE '{$search}%' OR 
+                                employees.username LIKE '%{$search}%' OR 
+                                employees.email LIKE '%{$search}%' OR 
+                                department.department LIKE '{$search}%'";
             }
 
             $result = mysqli_query($conn, $sql) or die("Query Failed.");
@@ -281,9 +338,7 @@
                 <div class="emp_card_container flex wrap gap justify-start">
 
                     <?php while ($row = mysqli_fetch_assoc($result)) {
-                        $sql_dept = "SELECT * FROM department WHERE dept_id = {$row['department']}";
-                        $result_dept = mysqli_query($conn, $sql_dept) or die("Query Failed.");
-                        $row_dept = mysqli_fetch_assoc($result_dept)['department'];
+                        $row_dept = $row['department'];
                         $id = $row['emp_id'];
 
 
