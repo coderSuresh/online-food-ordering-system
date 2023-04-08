@@ -19,6 +19,8 @@ function checkForStatusUpdates() {
                                     let message = "";
                                     let title = "";
                                     let foodName = new_state[i].food_name;
+                                    let tID = new_state[i].t_id;
+                                    let cID = new_state[i].c_id;
                                     if (status === "accepted") {
                                         title = "Order Accepted";
                                         message = `Order of ${foodName} is accepted by kitchen!`;
@@ -41,11 +43,11 @@ function checkForStatusUpdates() {
                                                             <h3 class="alert-dialog__title">${title} !</h3>
                                                             <p class="alert-dialog__text mt-20">${message}</p>
                                                             <div class="alert-dialog__actions mt-20 flex items-center">
-                                                            <button class="button border-curve-md w-full alert-dialog__action" onclick="hideAlert()">OK</button>
+                                                            <button class="button gray border-curve-md w-full alert-dialog__action" onclick="hideAlert()">OK</button>
                                                             ${status ===
                                             "rejected"
                                             ? `
-                                        <button class="button border-curve-md w-full alert-dialog__action" onclick="redirect()">View</button>`
+                                        <button class="button border-curve-md w-full alert-dialog__action" onclick="redirect('${cID}', '${tID}')">View</button>`
                                             : ""
                                         } 
                                                             </div>
@@ -68,8 +70,8 @@ function checkForStatusUpdates() {
 }
 checkForStatusUpdates();
 
-function redirect() {
-    window.open(hostURLStatus + 'admin/reject-report.php', '_blank')
+function redirect(cid, id) {
+    window.location = `${hostURLStatus}admin/view-details.php?cid=${cid}&id=${id}`;
     const alertDialog = document.querySelector(".alert-dialog");
     alertDialog.remove();
 }

@@ -1,3 +1,4 @@
+const url = "http://localhost/messy-code/";
 function checkForUpdates() {
   fetch("./backend/watch-order-table.php")
     .then((response) => response.json())
@@ -11,28 +12,10 @@ function checkForUpdates() {
               const audio = new Audio("../audio/dog_bark.mp3");
               audio.addEventListener("canplaythrough", () => {
                 audio.play();
-                if (window.location.href == "https://localhost/messy-code/kitchen/index.php" || window.location.href == "https://localhost/messy-code/kitchen/") {
-                  
-                  setTimeout(() => {
-                    location.reload();
-                  }, 1000);
-                  
-                }
-                else {
-                  const alertDialog = document.createElement("div");
-                  alertDialog.classList.add("alert-dialog");
-                  alertDialog.innerHTML = `
-                      <div class="alert-dialog__content border-curve-md p-20 shadow w-fit">
-                        <h3 class="alert-dialog__title">New Order!</h3>
-                        <p class="alert-dialog__text mt-20">You have a new order!</p>
-                        <div class="alert-dialog__actions mt-20 flex items-center">
-                        <button class="button gray border-curve-md w-50 alert-dialog__action" onclick="hideAlert()">OK</button>
-                        <button class="button border-curve-md w-50 alert-dialog__action" onclick="redirect()">View</button>
-                        </div>
-                      </div>
-                    `;
-                  document.body.appendChild(alertDialog);
-                }
+
+                setTimeout(() => {
+                  location.reload();
+                }, 1000);
               });
 
             } else {
@@ -46,12 +29,3 @@ function checkForUpdates() {
 }
 
 checkForUpdates();
-
-function redirect() {
-  window.open('https://localhost/messy-code/kitchen/', '_blank')
-}
-
-function hideAlert() {
-  const alertDialog = document.querySelector(".alert-dialog");
-  alertDialog.remove();
-}
