@@ -16,7 +16,7 @@ if (isset($_POST['create-new-password'])) {
             $sql = "update customer set password = '$password' where email = '$email'";
             $res = mysqli_query($conn, $sql) or die("Error");
             if ($res) {
-                $_SESSION['password'] = "sucessful";
+                $_SESSION['password-success'] = "Password reset successful";
                 header("Location:../login.php");
             }
         } else {

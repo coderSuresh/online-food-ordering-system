@@ -39,14 +39,14 @@ if (isset($_SESSION['success'])) {
             ?>
 
             <?php
-            if (isset($_SESSION["password"])) {
+            if (isset($_SESSION["password-reset"])) {
             ?>
                 <!-- to show error alert -->
-                <p class="error-container error p_7-20">
-                    <?php echo $_SESSION["password"]; ?>
+                <p class="error-container p_7-20">
+                    <?php echo $_SESSION["password-reset"]; ?>
                 </p>
             <?php
-                unset($_SESSION["password"]);
+                unset($_SESSION["password-reset"]);
             }
             ?>
 

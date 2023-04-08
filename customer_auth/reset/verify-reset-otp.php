@@ -16,7 +16,7 @@ if (isset($_POST['verify'])) {
 
     if ($code == $user_otp_code) {
 
-        $_SESSION['verification'] = "sucessful";
+        $_SESSION['verification'] = "Password reset successful";
         header("Location:./new-password.php");
     } else {
         
