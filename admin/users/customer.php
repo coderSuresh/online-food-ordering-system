@@ -79,60 +79,6 @@
             <img src="../../images/ic_calender.svg" class="filter_by_date popper-btn" alt="filter">
         </section>
 
-        <section class="modal items-center justify-center">
-            <div class="modal_form-container p-20 small-modal shadow border-curve-md">
-
-                <div class="modal_title-container flex items-center">
-                    <h2 class="modal-title">Select an option</h2>
-                    <button class="close-icon no_bg no_outline"><img src="../../images/ic_cross.svg" alt="close"></button>
-                </div>
-
-                <form action="#" method="post" class="date_filter_modal_form">
-
-                    <div class="date_filter_form_options flex justify-start items-center wrap">
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-today" checked>
-                            <label for="filter_option-today"> &nbsp; Today</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-yesterday">
-                            <label for="filter_option-yesterday"> &nbsp; Yesterday</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-last-week">
-                            <label for="filter_option-last-week"> &nbsp; Last week</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-last-month">
-                            <label for="filter_option-last-month"> &nbsp; Last month</label>
-                        </div>
-                        <div class="flex justify-start items-center">
-                            <input type="radio" name="filter_option" id="filter_option-custom">
-                            <label for="filter_option-custom"> &nbsp; Custom</label>
-                        </div>
-
-                    </div>
-
-                    <!-- filter using custom date range start -->
-                    <div class="flex justify-evenly date_filter_form_option-custom">
-                        <div class="flex direction-col">
-                            <label for="start-date">From:</label>
-                            <input type="date" name="start-date" id="start-date">
-                        </div>
-                        <div class="flex direction-col">
-                            <label for="end-date">To:</label>
-                            <input type="date" name="end-date" id="end-date">
-                        </div>
-                    </div>
-                    <!-- filter using custom date range end -->
-
-                    <button type="submit" class="no_outline border-curve-md w-full button mt-20">Filter</button>
-
-                </form>
-
-            </div>
-        </section>
-
         <div class="flex items-center mt-20">
             <div class="flex items-center">
 
@@ -164,89 +110,111 @@
                 $sql_not_verified = "SELECT names,username,email,date,status FROM customer WHERE status = 'not verified'";
                 $result_not_verified = mysqli_query($conn, $sql_not_verified);
                 $count_not_verified = mysqli_num_rows($result_not_verified);
+
+                // require filter by date component
+                $whichPage = "customer";
+                require '../components/filter.php';
+                $sql_date_filter = isset($sql_temp_cus) ? $sql_temp_cus : "";
                 ?>
 
-                <form action="./backend/specific-users.php" method="post">
-                    <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">All
-                        <div class="count-top shadow"><?php
-                                                        echo $count;
-                                                        ?>
+                <a href="?filter-by=all" class="ml-35">
+                    <button type="submit" name="specific-users" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == 'all')
+                                                                                                        echo "active"; ?>">All
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count;
+                                                            ?>
                         </div>
-                </form>
+                    </button>
+                </a>
 
-                <form action="./backend/specific-users.php" method="post">
-                    <input type="hidden" name="filter-by" value="active">
-                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Active
-                        <div class="count-top shadow"><?php
-                                                        echo $count_active;
-                                                        ?>
+                <a href="?filter-by=active" class="ml-35">
+                    <button type="submit" name="specific-users" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == 'active')
+                                                                                                        echo "active"; ?>">Active
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_active;
+                                                            ?>
                         </div>
-                </form>
+                    </button>
+                </a>
 
-                <form action="./backend/specific-users.php" method="post">
-                    <input type="hidden" name="filter-by" value="inactive">
-                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Inactive
-                        <div class="count-top shadow"><?php
-                                                        echo $count_inactive;
-                                                        ?>
+                <a href="?filter-by=inactive" class="ml-35">
+                    <button type="submit" name="specific-users" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == 'inactive')
+                                                                                                        echo "active"; ?>">Inactive
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_inactive;
+                                                            ?>
                         </div>
-                </form>
+                    </button>
+                </a>
 
-                <form action="./backend/specific-users.php" method="post">
-                    <input type="hidden" name="filter-by" value="verified">
-                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Verified
-                        <div class="count-top shadow"><?php
-                                                        echo $count_verified;
-                                                        ?>
+                <a href="?filter-by=verified" class="ml-35">
+                    <button type="submit" name="specific-users" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == 'verified')
+                                                                                                        echo "active"; ?>">Verified
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_verified;
+                                                            ?>
                         </div>
-                </form>
+                    </button>
+                </a>
 
-                <form action="./backend/specific-users.php" method="post">
-                    <input type="hidden" name="filter-by" value="not verified">
-                    <button type="submit" name="specific-users" class="button ml-35 border-curve-lg relative">Not verified
-                        <div class="count-top shadow"><?php
-                                                        echo $count_not_verified;
-                                                        ?>
+                <a href="?filter-by=not-verified" class="ml-35">
+                    <button type="submit" name="specific-users" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == 'not-verified')
+                                                                                                        echo "active"; ?>">Not Verified
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_not_verified;
+                                                            ?>
                         </div>
-                </form>
+                    </button>
+                </a>
 
             </div>
         </div>
 
         <?php
-        require '../../config.php';
-
-        $limit = 10;
-        require '../components/calculate-offset.php';
-
         // filter by session
-        $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
+        $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
 
-        if (isset($_SESSION['filter-by'])) {
-            $filter_by = $_SESSION['filter-by'];
+        if (isset($_GET['filter-by'])) {
+            $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
             if ($filter_by == 'all') {
-                $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
+                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
             } else if ($filter_by == 'active') {
-                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 1 limit $offset, $limit";
+                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 1";
             } else if ($filter_by == 'inactive') {
-                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 0 limit $offset, $limit";
+                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 0";
             } else if ($filter_by == 'verified') {
-                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'verified' limit $offset, $limit";
-            } else if ($filter_by == 'not verified') {
-                $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'not verified' limit $offset, $limit";
+                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+            } else if ($filter_by == 'not-verified') {
+                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
             }
         } else {
-            $sql = "SELECT id, names,username,email,date,status,active FROM customer limit $offset, $limit";
+            $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
         }
+
+        $sql_all = "SELECT id, names,username,email,date,status,active FROM customer";
 
         // search
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($conn, $_GET['search']);
-            $sql = "SELECT id, names,username,email,date,status,active FROM customer WHERE names LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%'";
+            $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE names LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%'";
         }
 
-        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+        if (isset($sql_date_filter) && !empty($sql_date_filter) && $sql_date_filter != $sql_all) {
+            $sql_cus = $sql_date_filter;
+        }
+
+        $count = mysqli_num_rows(mysqli_query($conn, $sql_cus));
+
+        $limit = 10;
+        require '../components/calculate-offset.php';
+
+        $sql_cus .= " LIMIT $limit OFFSET $offset";
+
+        if (isset($filter_text)) {
+            echo "<h4 class='mt-20'>Filter : " . $filter_text . "</h4>";
+        }
+
+        $result = mysqli_query($conn, $sql_cus) or die(mysqli_error($conn));
 
         if (mysqli_num_rows($result) > 0) {
         ?>
@@ -334,7 +302,7 @@
             $isForSearch = isset($_GET['search']);
             require '../components/pagination.php';
         } else {
-            echo "No data found";
+            echo "<p class='text-center mt-20'>No data found</p>";
         }
         ?>
     </main>
