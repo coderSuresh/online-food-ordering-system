@@ -222,7 +222,7 @@
                         // popper-btn class listenes for click event and opens modal popup
                         // controlled from admin.js
                     -->
-                <button class="button ml-35 border-curve-lg popper-btn">Add Food</button>
+                <button class="button ml-35 border-curve popper-btn">Add Food</button>
 
                 <?php
                 $sql = "SELECT * FROM food";
@@ -243,8 +243,8 @@
                 ?>
 
                 <a href="?filter-by=all" class="ml-35">
-                    <button class="button border-curve-lg relative">All
-                        <div class="count-top shadow"><?php
+                    <button class="button border-curve relative">All
+                        <div class="count-top rect shadow"><?php
                                                         echo $count;
                                                         ?>
                         </div>
@@ -252,8 +252,8 @@
                 </a>
 
                 <a href="?filter-by=enabled" class="ml-35">
-                    <button class="button border-curve-lg relative">Enabled
-                        <div class="count-top shadow"><?php
+                    <button class="button border-curve relative">Enabled
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_enabled;
                                                         ?>
                         </div>
@@ -261,8 +261,8 @@
                 </a>
 
                 <a href="?filter-by=disabled" class="ml-35">
-                    <button class="button border-curve-lg relative">Disabled
-                        <div class="count-top shadow"><?php
+                    <button class="button border-curve relative">Disabled
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_disabled;
                                                         ?>
                         </div>
@@ -270,8 +270,8 @@
                 </a>
 
                 <a href="?filter-by=special" class="ml-35">
-                    <button class="button border-curve-lg relative">Special
-                        <div class="count-top shadow"><?php
+                    <button class="button border-curve relative">Special
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_special;
                                                         ?>
                         </div>

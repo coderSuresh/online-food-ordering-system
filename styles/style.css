@@ -118,6 +118,7 @@ input[type="submit"],
 .mt-20 {
     margin-top: 20px !important;
 }
+
 .mt-10 {
     margin-top: 10px !important;
 }
@@ -1338,6 +1339,11 @@ form .text_field {
     font-size: 0.8rem;
     min-height: 1.5rem;
     min-width: 1.5rem;
+}
+
+.count-top.rect {
+    border-radius: 3px;
+    top: -25px;
 }
 
 /* resuable modal */

@@ -80,8 +80,8 @@
         </section>
 
         <div class="flex items-center mt-20">
-            
-            <div class="flex items-center">
+
+            <div class="flex items-center mt-20 wrap justify-center">
                 <!-- search form for order -->
                 <form action="./order-history.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
@@ -119,55 +119,55 @@
                 ?>
 
                 <a href="?filter-by=all" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "all") echo "active"; ?>">All
-                        <div class="count-top shadow"><?php
-                                                        echo $count;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "all") echo "active"; ?>">All
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count;
+                                                            ?>
                         </div>
                     </button>
                 </a>
 
                 <a href="?filter-by=pending" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "pending") echo "active"; ?>">Pending
-                        <div class="count-top shadow"><?php
-                                                        echo $count_pending;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "pending") echo "active"; ?>">Pending
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_pending;
+                                                            ?>
                         </div>
                     </button>
                 </a>
 
                 <a href="?filter-by=accepted" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "accepted") echo "active"; ?>">Accepted
-                        <div class="count-top shadow"><?php
-                                                        echo $count_accepted;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_accepted;
+                                                            ?>
                         </div>
                     </button>
                 </a>
 
                 <a href="?filter-by=prepared" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "prepared") echo "active"; ?>">To Deliver
-                        <div class="count-top shadow"><?php
-                                                        echo $count_to_deliver;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "prepared") echo "active"; ?>">To Deliver
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_to_deliver;
+                                                            ?>
                         </div>
                     </button>
                 </a>
 
                 <a href="?filter-by=delivered" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "delivered") echo "active"; ?>">Delivered
-                        <div class="count-top shadow"><?php
-                                                        echo $count_delivered;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "delivered") echo "active"; ?>">Delivered
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_delivered;
+                                                            ?>
                         </div>
                     </button>
                 </a>
 
                 <a href="?filter-by=rejected" class="ml-35">
-                    <button class="button border-curve-lg relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "rejected") echo "active"; ?>">Rejected
-                        <div class="count-top shadow"><?php
-                                                        echo $count_rejected;
-                                                        ?>
+                    <button class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                        <div class="count-top rect shadow"><?php
+                                                            echo $count_rejected;
+                                                            ?>
                         </div>
                     </button>
                 </a>

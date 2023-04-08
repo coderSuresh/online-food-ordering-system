@@ -74,8 +74,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                        <div class="count-top rect shadow"><?php
                                                         echo $count;
                                                         ?>
                         </div>
@@ -84,8 +84,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="pending">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "pending") echo "active"; ?>">Pending
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_pending;
                                                         ?>
                         </div>
@@ -94,8 +94,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="accepted">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "accepted") echo "active"; ?>">Accepted
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_accepted;
                                                         ?>
                         </div>
@@ -104,8 +104,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="prepared">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "prepared") echo "active"; ?>">To Deliver
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "prepared") echo "active"; ?>">To Deliver
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_to_deliver;
                                                         ?>
                         </div>
@@ -114,8 +114,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="delivered">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "delivered") echo "active"; ?>">Delivered
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_delivered;
                                                         ?>
                         </div>
@@ -124,8 +124,8 @@
 
                 <form action="./backend/order/specific-order.php" method="post">
                     <input type="hidden" name="filter-by" value="rejected">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "rejected") echo "active"; ?>">Rejected
+                        <div class="count-top rect shadow"><?php
                                                         echo $count_rejected;
                                                         ?>
                         </div>

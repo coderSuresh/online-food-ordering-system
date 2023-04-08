@@ -206,7 +206,7 @@
                         // popper-btn class listenes for click event and opens modal popup
                         // controlled from admin.js
                     -->
-                    <button class="button border-curve-lg popper-btn">Add</button>
+                    <button class="button border-curve popper-btn">Add</button>
                     <?php
                     $sql_all = "SELECT name,username,email,active,department FROM employees";
                     $result_all = mysqli_query($conn, $sql_all);
@@ -224,24 +224,24 @@
 
                     <form action="./backend/specific-users.php" method="post">
                         <input type="hidden" name="filter-by" value="all">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
-                            <div class="count-top shadow"><?php
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                            <div class="count-top rect shadow"><?php
                                                             echo $count_all;
                                                             ?>
                             </div>
                     </form>
                     <form action="./backend/specific-users.php" method="post">
                         <input type="hidden" name="filter-by" value="active">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "active") echo "active"; ?> ">Active
-                            <div class="count-top shadow"><?php
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "active") echo "active"; ?> ">Active
+                            <div class="count-top rect shadow"><?php
                                                             echo $count_active;
                                                             ?>
                             </div>
                     </form>
                     <form action="./backend/specific-users.php" method="post">
                         <input type="hidden" name="filter-by" value="inactive">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve-lg relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "inactive") echo "active"; ?> ">Inactive
-                            <div class="count-top shadow"><?php
+                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "inactive") echo "active"; ?> ">Inactive
+                            <div class="count-top rect shadow"><?php
                                                             echo $count_inactive;
                                                             ?>
                             </div>

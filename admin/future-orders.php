@@ -74,8 +74,8 @@
 
                 <form action="./future-details.php" method="post">
                     <input type="hidden" name="filter-by" value="all">
-                    <button type="submit" name="specific-order" class="button ml-35 border-curve-lg relative">All
-                        <div class="count-top shadow"><?php
+                    <button type="submit" name="specific-order" class="button ml-35 border-curve relative">All
+                        <div class="count-top rect shadow"><?php
                                                         echo $count;
                                                         ?>
                         </div>

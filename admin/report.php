@@ -79,7 +79,7 @@
         </section>
 
         <?php
-        $isForReport = true;
+        $whichPage = 'report';
         require "./components/filter.php";
         ?>
 

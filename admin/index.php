@@ -15,6 +15,7 @@
 
 <body>
     <?php
+    require '../config.php';
     require("./components/header.php");
     require("./components/sidebar.php");
     ?>
