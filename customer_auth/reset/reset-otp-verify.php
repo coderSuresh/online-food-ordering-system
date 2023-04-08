@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config.php");
+include("../../config.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -46,6 +46,7 @@ if (isset($_POST['resend_otp'])) {
   
                     $mail->send();
                     $_SESSION['code'] = $code;
+                    $_SESSION['user_email'] = $email;
                     header("Location:./reset-verify.php");   
                     $_SESSION['email'] = $email;
                 } catch (Exception $e) {
@@ -60,6 +61,6 @@ if (isset($_POST['resend_otp'])) {
             }
      }
 
-            else{
-                header("Location:./login.php");
-            }
+    else{
+        header("Location:../login.php");
+    }

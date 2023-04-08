@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +39,28 @@
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Verify Account</h1>
+        <?php if (isset($_SESSION["otp-reset-count"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["otp-reset-count"]; ?>
+            </p>
 
+        <?php
+            unset($_SESSION["otp-reset-count"]);
+        }
+        ?>
+        <?php if (isset($_SESSION["invalid-otp"])) {
+        ?>
+            <!-- to show error alert -->
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION["invalid-otp"]; ?>
+            </p>
+
+        <?php
+            unset($_SESSION["invalid-otp"]);
+        }
+        ?>
         <form action="./verify-reset-otp.php" method="post">
 
             <div class="text_field">

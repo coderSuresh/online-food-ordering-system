@@ -44,7 +44,7 @@
                 <label>Email</label>
             </div>
             <div>
-                <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="send_otp" value="Send OTP">
+                <input type="submit" class="button h-40 w-full no_outline border-curve-lg mt-20" name="resend_otp" value="Send OTP">
             </div>
             <p class="mt-20 text-center">Remember password? <a href="../login.php" class="cta">Login</a></p>
         </form>
