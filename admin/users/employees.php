@@ -201,7 +201,7 @@
         <div class="emplooyee_stat mt-20">
 
             <div class="flex items-center">
-                <div class="emp_button-container flex gap items-center justify-start">
+                <div class="emp_button-container flex items-center justify-start">
                     <!-- 
                         // popper-btn class listenes for click event and opens modal popup
                         // controlled from admin.js
@@ -222,31 +222,32 @@
 
                     ?>
 
-                    <form action="./backend/specific-users.php" method="post">
-                        <input type="hidden" name="filter-by" value="all">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "all") echo "active"; ?>">All
+                    <a href="?filter-by=all" class="ml-35">
+                        <button type="submit" name="specific-emp" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "all") echo "active"; ?>">All
                             <div class="count-top rect shadow"><?php
-                                                            echo $count_all;
-                                                            ?>
+                                                                echo $count_all;
+                                                                ?>
                             </div>
-                    </form>
-                    <form action="./backend/specific-users.php" method="post">
-                        <input type="hidden" name="filter-by" value="active">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "active") echo "active"; ?> ">Active
-                            <div class="count-top rect shadow"><?php
-                                                            echo $count_active;
-                                                            ?>
-                            </div>
-                    </form>
-                    <form action="./backend/specific-users.php" method="post">
-                        <input type="hidden" name="filter-by" value="inactive">
-                        <button type="submit" name="specific-emp" class="button ml-35 border-curve relative <?php if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] == "inactive") echo "active"; ?> ">Inactive
-                            <div class="count-top rect shadow"><?php
-                                                            echo $count_inactive;
-                                                            ?>
-                            </div>
-                    </form>
+                        </button>
+                    </a>
 
+                    <a href="?filter-by=active" class="ml-35">
+                        <button type="submit" name="specific-emp" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "active") echo "active"; ?>">Active
+                            <div class="count-top rect shadow"><?php
+                                                                echo $count_active;
+                                                                ?>
+                            </div>
+                        </button>
+                    </a>
+
+                    <a href="?filter-by=inactive" class="ml-35">
+                        <button type="submit" name="specific-emp" class="button border-curve relative <?php if (isset($_GET['filter-by']) && $_GET['filter-by'] == "inactive") echo "active"; ?>">Inactive
+                            <div class="count-top rect shadow"><?php
+                                                                echo $count_inactive;
+                                                                ?>
+                            </div>
+                        </button>
+                    </a>
                 </div>
 
                 <!-- search form for employee -->
@@ -270,8 +271,8 @@
                                 from employees
                                 INNER JOIN department on employees.department = department.dept_id
                     ";
-            if (isset($_SESSION['filter-by'])) {
-                $filter_by = $_SESSION['filter-by'];
+            if (isset($_GET['filter-by'])) {
+                $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
                 if ($filter_by == 'all') {
                     $sql = "select employees.emp_id,
                                 employees.name,
