@@ -1843,3 +1843,10 @@ h2 {
     object-fit: cover;
     border-radius: 50%;
 }
+
+/* ==================== for track order page ================== */
+.empty_box {
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+}
