@@ -4,9 +4,12 @@ Options -Indexes
 RewriteEngine On
 # RewriteCond %{HTTPS} !=on
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.php [NC,L]
+
+ErrorDocument 404 http://localhost/messy-code/404.php
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^\.]+)$ $1.php [NC,L]
+#RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.php [NC,L]
 
 # # Redirect URLs with .php extension to URL without .php
 # RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.php [NC]
