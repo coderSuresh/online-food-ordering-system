@@ -43,7 +43,7 @@ if (isset($_SESSION['order_placed'])) {
         </section>
 
         <section class="p-20 mt-40 border-curve w-fit flex direction-col justify-center items-center ml-auto">
-            <h2 class="text-center">404</h2>
+            <h2 class="text-center" style="letter-spacing: 2px">NO ORDERS</h2>
             <img src="./images/empty.png" alt="empty" width="300" class="empty_box ml-auto">
             <p class="text-center mt-20">You don't have any order in process.</p>
         </section>
