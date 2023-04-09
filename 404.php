@@ -43,7 +43,7 @@
     <main class="flex direction-col items-center justify-center">
         <h1 class="yellow-text">Not Found</h1>
         <img src="./images/lost.gif" width="400px" height="320px" alt="page not found">
-        <p class="text-center">Uh oh! It seems like you've landed on a page that's currently on vacation or enjoying an extended coffee break. We tried calling it back</p>
+        <p class="text-center">Uh oh! It seems like you've landed on a page that's currently on vacation or enjoying an extended coffee break. We are trying to calling it back</p>
         <a href="./index.php" class="button border-curve mt-20">Go Home</a>
     </main>
 
