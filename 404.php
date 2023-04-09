@@ -12,11 +12,7 @@
     <title>Not Found</title>
 
     <style>
-        main {
-            min-height: 100vh;
-        }
-
-        h1 {
+        .err_h1 {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
@@ -24,13 +20,13 @@
             letter-spacing: 0.2em;
         }
 
-        img {
+        .err_img {
             height: auto;
             margin: -40px 0;
             z-index: -1;
         }
 
-        p {
+        .err_p {
             width: 80%;
             max-width: 500px;
             font-size: 0.9rem;
@@ -40,13 +36,17 @@
 
 <body>
 
+    <?php require './components/header.php'; ?>
+
     <main class="flex direction-col items-center justify-center">
-        <h1 class="yellow-text">Not Found</h1>
-        <img src="./images/lost.gif" width="400px" height="320px" alt="page not found">
-        <p class="text-center">Uh oh! It seems like you've landed on a page that's currently on vacation or enjoying an extended coffee break. We are trying to calling it back</p>
+        <h1 class="yellow-text err_h1 mt-40">Not Found</h1>
+        <img src="./images/lost.gif" width="400" class="err_img" alt="page not found">
+        <p class="text-center err_p">Uh oh! It seems like you've landed on a page that's currently on vacation or enjoying an extended coffee break. We are trying to calling it back</p>
         <a href="./index.php" class="button border-curve mt-20">Go Home</a>
     </main>
 
+    <?php require './components/footer.php'; ?>
+    <script src="./js/app.js" type="module"></script>
 </body>
 
 </html>
