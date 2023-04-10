@@ -63,7 +63,7 @@
                                  <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID" required>
                                  <button type="submit" class="button mt-10 border-curve w-full">Track</button>
                              </form>
-                             <a href="./track-order.php#history" class="view_all w-full text-center button gray border-curve">View all orders</a>
+                             <a href="./track-order.php" class="view_all w-full text-center button gray border-curve">View all orders</a>
                          </div>
                  <?php
                                     } else {
