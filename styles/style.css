@@ -351,7 +351,7 @@ header {
     position: absolute;
     top: 30px;
     right: -50%;
-    width: fit-content;
+    min-width: fit-content;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 5px;

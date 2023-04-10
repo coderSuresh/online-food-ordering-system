@@ -224,6 +224,11 @@
     nav ul li {
         margin: 0 5px !important;
     }
+
+    .track_dropdown {
+        left: -140px;
+        right: 0;
+    }
 }
 
 @media (max-width: 565px) {
