@@ -545,7 +545,7 @@
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const hours = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+        const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
 
         // =============================== Pie Chart =====================================
         let pieChart = document.getElementById('pie-chart');
@@ -575,7 +575,7 @@
                 title: {
                     display: true,
                     position: "top",
-                    text: "CATEGORY WISE SALES",
+                    text: "CATEGORY WISE INFO",
                     fontSize: 18,
                     fontColor: "#000"
                 },
