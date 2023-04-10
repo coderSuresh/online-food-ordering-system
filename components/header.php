@@ -42,7 +42,7 @@
                         require './config.php';
                         if (isset($_SESSION['success'])) {
                             $user_id = $_SESSION['user'];
-                            $sql = "SELECT * FROM orders WHERE c_id =0 GROUP BY track_id ORDER BY id DESC LIMIT 5";
+                            $sql = "SELECT * FROM orders WHERE c_id = $user_id GROUP BY track_id ORDER BY id DESC LIMIT 5";
                             $result = mysqli_query($conn, $sql);
                         ?>
                          <div class="track_dropdown shadow p-20 border-curve">
@@ -55,8 +55,9 @@
                                             $track_id = $row['track_id'];
                                         ?>
                                          <a href="./track-order.php?id=<?php echo strtolower($track_id) ?>"><?php echo strtoupper($track_id); ?></a>
-                                         <?php
-                                            ?>
+                                     <?php
+                                        }
+                                        ?>
                              </div>
                              <form action="./track-order.php" method="get">
                                  <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID" required>
@@ -64,15 +65,14 @@
                              </form>
                              <a href="./track-order.php#history" class="view_all w-full text-center button gray border-curve">View all orders</a>
                          </div>
-             <?php
-                                        }
+                 <?php
                                     } else {
                                         echo '<p class="text-center">No recent orders</p>';
                                     }
                                 } else {
                                     echo '<p class="text-center">No recent orders</p>';
                                 }
-                ?>
+                    ?>
                  </li>
 
                  <!-- nav search form -->
