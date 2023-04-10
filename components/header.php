@@ -38,14 +38,14 @@
                  <li class="flex direction-col"><a href="menu.php">Menu</a></li>
                  <li class="flex direction-col relative">
                      <button class="tmo no_bg no_outline">Track Order</button>
-                     <?php
-                        require './config.php';
-                        if (isset($_SESSION['success'])) {
-                            $user_id = $_SESSION['user'];
-                            $sql = "SELECT * FROM orders WHERE c_id = $user_id GROUP BY track_id ORDER BY id DESC LIMIT 5";
-                            $result = mysqli_query($conn, $sql);
-                        ?>
-                         <div class="track_dropdown shadow p-20 border-curve">
+                     <div class="track_dropdown shadow p-20 border-curve">
+                         <?php
+                            require './config.php';
+                            if (isset($_SESSION['success'])) {
+                                $user_id = $_SESSION['user'];
+                                $sql = "SELECT * FROM orders WHERE c_id = $user_id GROUP BY track_id ORDER BY id DESC LIMIT 5";
+                                $result = mysqli_query($conn, $sql);
+                            ?>
                              <div class="recent_orders">
                                  <?php
                                     if (mysqli_num_rows($result) > 0) {
@@ -64,15 +64,15 @@
                                  <button type="submit" class="button mt-10 border-curve w-full">Track</button>
                              </form>
                              <a href="./track-order.php" class="view_all w-full text-center button gray border-curve">View all orders</a>
-                         </div>
-                 <?php
+                     <?php
                                     } else {
                                         echo '<p class="text-center">No recent orders</p>';
                                     }
                                 } else {
                                     echo '<p class="text-center">No recent orders</p>';
                                 }
-                    ?>
+                        ?>
+                     </div>
                  </li>
 
                  <!-- nav search form -->

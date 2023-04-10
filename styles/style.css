@@ -415,8 +415,10 @@ header {
     width: 400px;
 }
 
+.table,
 .checkout_table {
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 .checkout_form input,
@@ -1898,4 +1900,17 @@ h2 {
     width: 80%;
     max-width: 400px;
     margin: auto;
+}
+
+#order-search {
+    width: fit-content;
+}
+
+.track_order_body {
+    margin: 40px;
+    padding: 10px;
+}
+
+.table {
+    padding: 5px;
 }

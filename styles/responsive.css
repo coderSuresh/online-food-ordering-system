@@ -104,6 +104,20 @@
 
 @media (max-width: 768px) {
 
+    /* ============ for track order page ================= */
+    .track_order_body {
+        margin: 40px 10px;
+        padding: 0;
+    }
+
+    .table {
+        padding: 0;
+    }
+
+    #order-search {
+        width: 120px;
+    }
+
     /* ============ for privacy page ===================== */
     .privacy_page {
         flex-direction: column;
