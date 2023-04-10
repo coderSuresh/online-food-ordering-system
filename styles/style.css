@@ -344,6 +344,9 @@ header {
 .recent_orders a {
     display: block;
     margin: 10px 0;
+}
+
+.recent_orders a:hover {
     text-decoration: underline;
 }
 

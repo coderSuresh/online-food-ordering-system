@@ -36,20 +36,36 @@
                  <li class="flex direction-col"><a href="menu.php">Menu</a></li>
                  <li class="flex direction-col relative">
                      <button class="tmo no_bg no_outline">Track Order</button>
-                     <div class="track_dropdown shadow p-20 border-curve">
-                         <div class="recent_orders">
-                             <a href="#">RH00000008</a>
-                             <a href="#">RH00000007</a>
-                             <a href="#">RH00000006</a>
-                             <a href="#">RH00000005</a>
-                             <a href="#">RH00000004</a>
+                     <?php
+                        require './config.php';
+                        if (isset($_SESSION['success'])) {
+                            $user_id = $_SESSION['user'];
+                            $sql = "SELECT * FROM orders WHERE c_id = $user_id GROUP BY track_id ORDER BY id DESC LIMIT 5";
+                            $result = mysqli_query($conn, $sql);
+                        ?>
+                         <div class="track_dropdown shadow p-20 border-curve">
+                             <div class="recent_orders">
+                                 <h3>Recent Orders</h3>
+                                 <?php
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $track_id = $row['track_id'];
+                                    ?>
+                                         <a href="./track-order.php?id=<?php echo strtolower($track_id) ?>"><?php echo strtoupper($track_id); ?></a>
+                                     <?php }
+                                        ?>
+                             </div>
+                             <form action="./track-order.php" method="get">
+                                 <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID" required>
+                                 <button type="submit" class="button mt-10 border-curve w-full">Track</button>
+                             </form>
+                             <a href="./track-order.php#history" class="view_all w-full text-center button gray border-curve">View all orders</a>
                          </div>
-                         <form action="./track-order.php" method="get">
-                             <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID">
-                             <button type="submit" class="button mt-10 border-curve w-full">Track</button>
-                         </form>
-                         <a href="#" class="view_all w-full text-center button gray border-curve">View all orders</a>
-                     </div>
+                 <?php }
+                                } else {
+                                    echo '<p class="text-center">No recent orders</p>';
+                                }
+                    ?>
                  </li>
 
                  <!-- nav search form -->
@@ -57,7 +73,6 @@
 
                  <!-- show profile icon if the user is logged in -->
                  <?php
-                    require './config.php';
                     if (isset($_SESSION['success'])) {
                         $sql = "SELECT names FROM customer WHERE id = '{$_SESSION['user']}'";
                         $result = mysqli_query($conn, $sql);
