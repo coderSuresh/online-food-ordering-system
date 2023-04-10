@@ -46,10 +46,17 @@ if (!isset($_SESSION['admin-success'])) {
             $result_delete = mysqli_query($conn, $sql_delete) or die(mysqli_error($conn));
         }
 
+        $track_id = "";
+
         foreach ($order_id as $id) {
-            $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, $id, 'admin', '$reject_reason')";
-            $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
+            $sql_get_track_id = "select track_id from orders where order_id = $id";
+            $result_get_track_id = mysqli_query($conn, $sql_get_track_id) or die(mysqli_error($conn));
+            $row = mysqli_fetch_assoc($result_get_track_id);
+            $track_id = $row['track_id'];
         }
+
+        $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, $track_id, 'admin', '$reject_reason')";
+        $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
 
         if ($result && $result_reason) {
             $_SESSION['order-success-a'] = "Order rejected successfully";
