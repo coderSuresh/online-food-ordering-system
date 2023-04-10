@@ -57,7 +57,7 @@
                         <select name="time" id="time" required>
                             <option value=''>__SELECT__</option>
                             <optgroup class="time_option"> <?php
-                                                            if ($time < date('H:i', strtotime($start_time . ' +30 minutes'))) {
+                                                            if ($time < $start_time) {
                                                                 $time = "09:00";
                                                             }
                                                             $new_time  = $time;
