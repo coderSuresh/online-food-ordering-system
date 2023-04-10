@@ -330,6 +330,50 @@ header {
     cursor: pointer;
 }
 
+/* for track order drop down */
+.tmo {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.recent_orders {
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+}
+
+.recent_orders a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: underline;
+}
+
+.track_dropdown {
+    position: absolute;
+    top: 30px;
+    right: -50%;
+    width: fit-content;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 999;
+    display: none;
+}
+
+.track_dropdown.visible {
+    display: block;
+}
+
+.track_dropdown form {
+    margin-bottom: 10px;
+}
+
+.view_all {
+    display: block;
+    font-weight: 400;
+    padding: 3px !important;
+}
+
 /* user profile logout button and cart drop down */
 .user_profile_icon_text,
 .user_profile_icon {

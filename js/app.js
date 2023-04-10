@@ -85,9 +85,6 @@ google && google.addEventListener('click', (_e) => {
             // The signed-in user info.
             const user = result.user;
 
-            alert(user.displayName);
-            // console.log(window.location)
-            // window.location.assign("../../index.php ")
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
                 if (user) {
@@ -405,6 +402,9 @@ window.addEventListener("click", (e) => {
     }
     if (!e.target.closest(".logout-dropdown") && !e.target.closest(".user_profile_icon") && !e.target.closest(".user_profile_icon_text") && !e.target.closest(".user_profile_icon")) {
         userLogoutDropdown && userLogoutDropdown.classList.remove("visible")
+    }
+    if (!e.target.closest(".track_dropdown") && !e.target.closest(".tmo")) {
+        trackOrderDropdown && trackOrderDropdown.classList.remove("visible")
     }
 })
 
@@ -724,6 +724,14 @@ const tmo = document.querySelector(".tmo")
 if (window.innerWidth < 768) {
     tmo && (tmo.textContent = "TMO")
 }
+
+// ==================== for track order drop down ==================
+const trackOrderBtn = document.querySelector(".tmo")
+const trackOrderDropdown = document.querySelector(".track_dropdown")
+
+trackOrderBtn && trackOrderBtn.addEventListener("click", () => {
+    trackOrderDropdown.classList.toggle("visible")
+})
 
 // ==================== for home page slider (don't code below this block) ==================
 const swiper = new Swiper('.swiper', {

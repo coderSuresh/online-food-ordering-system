@@ -34,7 +34,23 @@
 
              <ul class="flex items-center">
                  <li class="flex direction-col"><a href="menu.php">Menu</a></li>
-                 <li class="flex direction-col"><a href="track-order.php" class="tmo">Track Order</a></li>
+                 <li class="flex direction-col relative">
+                     <button class="tmo no_bg no_outline">Track Order</button>
+                     <div class="track_dropdown shadow p-20 border-curve">
+                         <div class="recent_orders">
+                             <a href="#">RH00000008</a>
+                             <a href="#">RH00000007</a>
+                             <a href="#">RH00000006</a>
+                             <a href="#">RH00000005</a>
+                             <a href="#">RH00000004</a>
+                         </div>
+                         <form action="./track-order.php" method="get">
+                             <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID">
+                             <button type="submit" class="button mt-10 border-curve w-full">Track</button>
+                         </form>
+                         <a href="#" class="view_all w-full text-center button gray border-curve">View all orders</a>
+                     </div>
+                 </li>
 
                  <!-- nav search form -->
                  <?php require './components/search-form.php'; ?>
@@ -48,11 +64,12 @@
                         $row_header = mysqli_fetch_assoc($result);
                         $name = $row_header['names'];
                     ?>
-                     <p class="user_name"><?php echo $name; ?></p>
+                     <p class=" user_name"><?php echo $name; ?></p>
 
                      <li class="flex direction-col profile_img-container">
                          <img src="" class="user_profile_icon relative" alt="account">
                          <div class="logout-dropdown border-curve shadow p-20">
+                             <p><?php echo $name; ?></p>
                              <a href="./customer_auth/logout.php">Logout</a>
                          </div>
                      </li>
