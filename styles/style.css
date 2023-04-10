@@ -334,6 +334,8 @@ header {
 .tmo {
     font-size: 1rem;
     font-weight: bold;
+    height: 25px;
+    line-height: 25px;
 }
 
 .recent_orders {
