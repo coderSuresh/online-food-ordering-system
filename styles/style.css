@@ -1914,3 +1914,26 @@ h2 {
 .table {
     padding: 5px;
 }
+
+.ti_success {
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+.ti_success.not {
+    background-color: var(--light-gray);
+}
+
+.ti_success.reject {
+    background-color: var(--trans-red-text);
+}
+
+.line {
+    height: 2px;
+    background-color: var(--primary-color);
+    width: 100px;
+}

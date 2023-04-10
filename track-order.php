@@ -79,20 +79,28 @@ if (isset($_SESSION['order_placed'])) {
                                LEFT JOIN future_orders on orders.id = future_orders.order_id
                                WHERE orders.track_id = '$track_id' AND 
                                orders.c_id = $user_id
-                               GROUP BY orders.track_id
                                ORDER BY orders.id DESC";
             $res = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($res) > 0) {
+                $data = mysqli_fetch_assoc($res);
+                $status = $data['status'] ? $data['status'] : $data['future_status'];
+
+                mysqli_data_seek($res, 0); // reset the pointer
         ?>
                 <div class="flex items-center justify-start w-fit mt-20">
-                    <h4>Order ID: <?php echo $track_id; ?></h4>
+                    <h4 class="yellow-text">Order ID: <?php echo $track_id; ?></h4>
                     <button class="no_bg no_outline ml-35">
                         <a href="./track-order.php">
                             <img src="./images/ic_cross.svg" alt="clear" width="15">
                         </a>
                     </button>
                 </div>
+
+                <div class="tracking_icons flex items-center mt-20 justify-center">
+                    <?php require './components/tracking-icons.php'; ?>
+                </div>
+
                 <div class="table">
                     <table class="mt-20">
                         <tr class="shadow">
@@ -160,10 +168,7 @@ if (isset($_SESSION['order_placed'])) {
 
             if (mysqli_num_rows($result_current_order) > 0) {
             ?>
-                <div class="w-fit">
-                    <h3 class="mt-40">Orders in process</h3>
-                    <hr class="underline">
-                </div>
+                <h3 class="mt-40">Orders in process</h3>
                 <?php
                 $i = 1;
                 while ($row = mysqli_fetch_assoc($result_current_order)) {
@@ -186,18 +191,19 @@ if (isset($_SESSION['order_placed'])) {
                                                           LEFT JOIN future_orders on orders.id = future_orders.order_id
                                                           WHERE orders.track_id = '$track_id' AND 
                                                           orders.c_id = $user_id
-                                                          
                                                           ORDER BY orders.id DESC";
 
                     $res = mysqli_query($conn, $sql_foods_in_current_order);
                 ?>
-                    <h4 class="mt-20">Order ID: <?php echo $track_id; ?></h4>
+                    <h4 class="mt-20 yellow-text">Order ID: <?php echo $track_id; ?></h4>
 
                     <?php
                     if (mysqli_num_rows($res) > 0) {
                     ?>
+                        <div class="tracking_icons flex items-center mt-20 justify-center">
+                            <?php require './components/tracking-icons.php'; ?>
+                        </div>
 
-                        <!-- make order tracking icons or something here -->
                         <div class="table">
                             <table class="mt-20">
                                 <tr class="shadow">

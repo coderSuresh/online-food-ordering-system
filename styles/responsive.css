@@ -255,6 +255,16 @@
     .card__food-img {
         height: 150px;
     }
+
+    /* =============== for tracking page ================ */
+    .tracking_icons {
+        flex-direction: column-reverse;
+    }
+
+    .line {
+        width: 2px;
+        height: 50px;
+    }
 }
 
 @media (max-width: 500px) {
