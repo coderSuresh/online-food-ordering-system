@@ -48,6 +48,9 @@ if (!isset($_SESSION['admin-success'])) {
 
         $track_id = "";
 
+        // I think here is no need of foreach loop as what we want is just an order track id
+        // looping may cause unnecessary query.
+        // maybe we can do $order_id[0] or something
         foreach ($order_id as $id) {
             $sql_get_track_id = "select track_id from orders where order_id = $id";
             $result_get_track_id = mysqli_query($conn, $sql_get_track_id) or die(mysqli_error($conn));
