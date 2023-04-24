@@ -3,7 +3,7 @@ session_start();
 require('./config.php');
 
 if (isset($_GET['name'])) {
-    $raw_name = $_GET['name'];
+    $raw_name = mysqli_real_escape_string($conn, $_GET['name']);
     $name = mysqli_real_escape_string($conn, str_replace('-', ' ', $raw_name));
     $sql = "select * from food where name = '$name'";
     $res = mysqli_query($conn, $sql) or die("could not fetch from database");
@@ -20,7 +20,16 @@ if (isset($_GET['name'])) {
     $data = mysqli_fetch_assoc($res_cat);
 
     $category = $data['cat_name'];
+
     $title = $row['name'];
+    $short_desc = $row['short_desc'];
+    $price = $row['price'];
+    $img = $row['img'];
+    $f_id = $row['f_id'];
+    $desc = $row['description'];
+    $cooking_time = $row['cooking_time'];
+    $ingredients = $row['ingredients'];
+
     require('./components/header.php');
 ?>
     <main class="details_main">
@@ -29,15 +38,15 @@ if (isset($_GET['name'])) {
 
         <section class="details_container flex justify-center">
             <div class="details_img-container">
-                <img src="./uploads/foods/<?php echo $row['img']; ?>" class="details_img border-curve-md" alt="food image">
+                <img src="./uploads/foods/<?php echo $img; ?>" class="details_img border-curve-md" alt="food image">
             </div>
 
             <section class="details_right-container">
 
                 <p class="details_category"><?php echo $category; ?></p>
-                <h1 class="details_title heading"><?php echo $row['name']; ?></h1>
-                <p class="details_short-desc mt-20"><?php echo $row['short_desc']; ?></p>
-                <p class="details_price mt-20"><b>Rs. <?php echo $row['price']; ?></b></p>
+                <h1 class="details_title heading"><?php echo $title; ?></h1>
+                <p class="details_short-desc mt-20"><?php echo $short_desc; ?></p>
+                <p class="details_price mt-20"><b>Rs. <?php echo $price; ?></b></p>
 
                 <div class="details_add-to-cart">
                     <form action="./backend/add-to-cart.php" method="post" class="form_food-card flex items-center justify-start" name="form_food-card">
@@ -50,14 +59,14 @@ if (isset($_GET['name'])) {
                                 <img src=" ./images/ic_add-yellow.svg" alt="increment">
                             </button>
                         </div>
-                        <input type="hidden" name="f_id" value="<?php echo $row['f_id']; ?>">
+                        <input type="hidden" name="f_id" value="<?php echo $f_id; ?>">
                         <button class="button gray btn_add-to-cart details border-curve mt-20 ml-35" style="outline: 2px solid #F7922F">Add to Cart</button>
                     </form>
                 </div>
 
                 <form action="./buy.php" method="post">
                     <input type="hidden" class="buy_qty" name="quantity" value="1">
-                    <input type="hidden" name="f_id" value="<?php echo $row['f_id']; ?>">
+                    <input type="hidden" name="f_id" value="<?php echo $f_id; ?>">
                     <button class="button btn_buy-now border-curve mt-20" name="buy-now">Buy now</button>
                 </form>
 
@@ -66,12 +75,12 @@ if (isset($_GET['name'])) {
 
         <section class="details_description">
             <h2 class="description heading">Description</h2>
-            <p class="mt-20">Cooking time: <?php echo $row['cooking_time']; ?> Minute</p>
+            <p class="mt-20">Cooking time: <?php echo $cooking_time; ?> Minute</p>
             <p class="mt-20" style="text-align: justify;">
-                <?php echo $row['description']; ?>
+                <?php echo $desc; ?>
             </p>
             <h3 class="heading mt-20">Ingredients</h3>
-            <pre class="ingredients-font mt-20"><?php echo $row['ingredients']; ?></pre>
+            <pre class="ingredients-font mt-20"><?php echo $ingredients; ?></pre>
         </section>
 
         <section class="similar-foods mt-60">
@@ -81,12 +90,11 @@ if (isset($_GET['name'])) {
 
             <div class="food_cards flex gap wrap justify-center p-20">
                 <?php
-                $sql_food = "select * from food where category = $cat_id and name not in ('{$row['name']}') order by f_id desc limit 4";
+                $sql_food = "select * from food where category = $cat_id and name not in ('{$title}') order by f_id desc limit 4";
                 $res_food = mysqli_query($conn, $sql_food);
                 while ($data = mysqli_fetch_assoc($res_food)) {
                 ?>
                     <div class="menu_food-card border-curve shadow">
-                        <!-- testing badge or something for card -->
                         <p class="card__tag text-center heading"><?php if ($data['veg'] == 1)
                                                                         echo "Veg";
                                                                     else
