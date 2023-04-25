@@ -69,9 +69,11 @@
         array_push($a_id, $row['aos_id']);
 
         if ($row['status'] == 'rejected') {
-            $sql_reject = "SELECT reason, rejected_by FROM reject_reason WHERE order_id in (" . implode(',', $id) . ")";
-            $result_reject = mysqli_query($conn, $sql_reject) or die(mysqli_error($conn));
-            $row_reject = mysqli_fetch_assoc($result_reject);
+            $sql_reason = "SELECT reason, rejected_by FROM reject_reason WHERE track_id = '$row[track_id]'";
+            $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
+            $row_reason = mysqli_fetch_assoc($result_reason);
+            $reject_reason = $row_reason['reason'];
+            $reject_by = $row_reason['rejected_by'];
         }
     }
 

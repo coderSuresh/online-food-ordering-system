@@ -37,9 +37,11 @@ if (!isset($_SESSION['admin-success'])) {
             $result_fetch_kitchen_status = mysqli_query($conn, $sql_fetch_kitchen_status) or die(mysqli_error($conn));
             $row = mysqli_fetch_assoc($result_fetch_kitchen_status);
 
-            if ($row['status'] == 'pending') {
-                $sql_delete = "delete from kos where order_id in (" . implode(',', $order_id) . ")";
-                $result_delete = mysqli_query($conn, $sql_delete) or die(mysqli_error($conn));
+            if (mysqli_num_rows($result_fetch_kitchen_status) > 0) {
+                if ($row['status'] == 'pending') {
+                    $sql_delete = "delete from kos where order_id in (" . implode(',', $order_id) . ")";
+                    $result_delete = mysqli_query($conn, $sql_delete) or die(mysqli_error($conn));
+                }
             }
         } else {
             $sql_delete = "delete from future_orders where order_id in (" . implode(',', $order_id) . ")";
@@ -48,17 +50,12 @@ if (!isset($_SESSION['admin-success'])) {
 
         $track_id = "";
 
-        // I think here is no need of foreach loop as what we want is just an order track id
-        // looping may cause unnecessary query.
-        // maybe we can do $order_id[0] or something
-        foreach ($order_id as $id) {
-            $sql_get_track_id = "select track_id from orders where order_id = $id";
-            $result_get_track_id = mysqli_query($conn, $sql_get_track_id) or die(mysqli_error($conn));
-            $row = mysqli_fetch_assoc($result_get_track_id);
-            $track_id = $row['track_id'];
-        }
+        $sql_get_track_id = "select track_id from orders where id in (" . implode(',', $order_id) . ") limit 1";
+        $result_get_track_id = mysqli_query($conn, $sql_get_track_id) or die("err: " . mysqli_error($conn));
+        $row = mysqli_fetch_assoc($result_get_track_id);
+        $track_id = $row['track_id'];
 
-        $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, $track_id, 'admin', '$reject_reason')";
+        $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, '$track_id', 'admin', '$reject_reason')";
         $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
 
         if ($result && $result_reason) {

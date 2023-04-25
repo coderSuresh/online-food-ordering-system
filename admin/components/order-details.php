@@ -43,12 +43,12 @@
                         ?> <tr>
                                 <td>Reason</td>
                                 <td>:</td>
-                                <td><?php echo $row_reject['reason']; ?></td>
+                                <td><?php echo $reject_reason; ?></td>
                             </tr>
                             <tr>
                                 <td>Rejected by</td>
                                 <td>:</td>
-                                <td><?php echo $row_reject['rejected_by']; ?></td>
+                                <td><?php echo $reject_by; ?></td>
                             </tr>
                         <?php }
                         ?>
