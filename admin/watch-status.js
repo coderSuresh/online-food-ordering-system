@@ -84,9 +84,11 @@ function playSound() {
 }
 
 function hideAlert() {
-    if (window.location.href.includes('order-details.php')) {
+    if (window.location.href.includes('order-details.php') || window.location.href.includes('view-details.php')) {
         window.location.reload();
     }
-    const alertDialog = document.querySelector(".alert-dialog");
-    alertDialog.remove();
+    const alertDialog = document.querySelectorAll(".alert-dialog");
+    alertDialog.forEach((item) => {
+        document.body.removeChild(item);
+    })
 }
