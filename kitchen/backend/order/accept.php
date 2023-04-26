@@ -7,10 +7,10 @@ if (!isset($_SESSION['kitchen-success'])) {
 } else {
     if (isset($_POST['accept'])) {
 
-        $order_id = mysqli_real_escape_string($conn, $_POST['id']);
-        $kos_id = mysqli_real_escape_string($conn, $_POST['kos_id']);
-
-        $sql = "UPDATE kos SET status = 'accepted' WHERE order_id = {$order_id} and kos_id = {$kos_id}";
+        $order_id = unserialize(base64_decode(mysqli_real_escape_string($conn, $_POST['id'])));
+        $kos_id = unserialize(base64_decode(mysqli_real_escape_string($conn, $_POST['kos_id'])));
+       
+        $sql = "UPDATE kos SET status = 'accepted' WHERE order_id in (" . implode(',', $order_id) . ") AND kos_id in (" . implode(',', $kos_id) . ")";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         if ($result) {
