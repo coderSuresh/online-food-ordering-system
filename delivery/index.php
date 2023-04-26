@@ -16,6 +16,7 @@ if (!isset($_SESSION['delivery-success'])) {
     <title>Delivery | RestroHub</title>
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
     <script src="./watch-dog.js" defer></script>
 </head>
 
@@ -29,29 +30,29 @@ if (!isset($_SESSION['delivery-success'])) {
     <main style="margin: 40px 5%;">
 
         <?php
-        if (isset($_SESSION['delivery-success'])) {
+        if (isset($_SESSION['deliver-success'])) {
         ?>
             <p class="error-container success p_7-20">
                 <?php
-                echo $_SESSION['order-success'];
-                unset($_SESSION['order-success']);
+                echo $_SESSION['deliver-success'];
+                unset($_SESSION['deliver-success']);
                 ?>
             </p>
         <?php
         }
-        if (isset($_SESSION['delivery-error'])) {
+        if (isset($_SESSION['deliver-error'])) {
         ?>
             <p class="error-container error p_7-20">
                 <?php
-                echo $_SESSION['order-error'];
-                unset($_SESSION['order-error']);
+                echo $_SESSION['deliver-error'];
+                unset($_SESSION['deliver-error']);
                 ?>
             </p>
         <?php
         }
         ?>
 
-        <div class="flex items-center mt-20 justify-center">
+        <div class="flex items-center mt-20 justify-center scroll">
 
             <!-- filter by status -->
             <?php
@@ -179,51 +180,53 @@ if (!isset($_SESSION['delivery-success'])) {
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>SN</th>
-                    <th>Track ID</th>
-                    <th>Customer Name</th>
-                    <th>Address</th>
-                    <th>Contact</th>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Order Status</th>
-                </tr>
-                <?php
-                $i = 0;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $i++;
-
-                    $address = $row["address"];
-                    $phone = $row["phone"];
-
-                    $status = $row["status"];
-                    $quantity = $row["qty"];
-
-                    $cid = $row["c_id"];
-                    $id = $row["track_id"];
-                ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
-                        <td><?php echo $i; ?> </td>
-                        <td><?php echo $row["track_id"]; ?> </td>
-                        <td><?php echo $row["c_name"]; ?> </td>
-                        <td><?php echo $address; ?> </td>
-                        <td><?php echo $phone; ?> </td>
-                        <td><?php echo $row['total_item_bought']; ?> </td>
-                        <td><?php echo $row["total_price"]; ?> </td>
-                        <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
+            <div class="scroll">
+                <table class="mt-20">
+                    <tr class="shadow">
+                        <th>SN</th>
+                        <th>Track ID</th>
+                        <th>Customer Name</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Order Status</th>
                     </tr>
+                    <?php
+                    $i = 0;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
 
+                        $address = $row["address"];
+                        $phone = $row["phone"];
+
+                        $status = $row["status"];
+                        $quantity = $row["qty"];
+
+                        $cid = $row["c_id"];
+                        $id = $row["track_id"];
+                    ?>
+                        <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
+                            <td><?php echo $i; ?> </td>
+                            <td><?php echo $row["track_id"]; ?> </td>
+                            <td><?php echo $row["c_name"]; ?> </td>
+                            <td><?php echo $address; ?> </td>
+                            <td><?php echo $phone; ?> </td>
+                            <td><?php echo $row['total_item_bought']; ?> </td>
+                            <td><?php echo $row["total_price"]; ?> </td>
+                            <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
+                        </tr>
+
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <p class="mt-20 text-center">No records found</p>
                 <?php
                 }
-            } else {
                 ?>
-                <p class="mt-20 text-center">No records found</p>
-            <?php
-            }
-            ?>
-            </table>
+                </table>
+            </div>
     </main>
     <script>
         function redirectToViewPage(cid, id) {
