@@ -266,6 +266,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
@@ -278,6 +280,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
@@ -288,6 +292,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
@@ -298,6 +304,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
@@ -309,6 +317,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
@@ -323,6 +333,8 @@
                                 employees.name,
                                 employees.image,
                                 employees.email,
+                                employees.active,
+                                employees.password,
                                 employees.username,
                                 department.department
                                 from employees
