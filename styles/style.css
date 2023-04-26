@@ -1293,6 +1293,11 @@ form .text_field {
     margin-right: 30px;
 }
 
+.scroll {
+    padding: 20px 0;
+    overflow-x: auto;
+} 
+
 .table_eye {
     width: 25px;
     padding: 5px 0;

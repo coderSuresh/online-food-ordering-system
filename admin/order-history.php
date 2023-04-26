@@ -79,7 +79,7 @@
             </div>
         </section>
 
-        <div class="flex items-center mt-20">
+        <div class="flex items-center mt-20 scroll">
 
             <div class="flex items-center mt-20 wrap justify-center">
                 <!-- search form for order -->

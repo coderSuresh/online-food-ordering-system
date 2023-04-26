@@ -208,7 +208,7 @@
             </div>
         </section>
 
-        <div class="flex items-center mt-20">
+        <div class="flex items-center mt-20 scroll">
             <!-- buttons for food management -->
             <div class="flex items-center">
 
@@ -280,8 +280,8 @@
 
             </div>
 
-            <div class="filter flex items-center">
-                <form action="./manage-foods.php" method="get" class="filter-form">
+            <div class="filter flex items-center ml-35">
+                <form action="./manage-foods.php" method="get" class="filter-form ml-35">
                     <select name="filter" class="p_7-20 border-curve pointer">
                         <option value="name" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "name")
                                                                     echo "selected"; ?>>Sort by name</option>
