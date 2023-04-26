@@ -13,7 +13,7 @@
              </a>
          </div>
 
-         <h1 class="heading">Kitchen Department</h1>
+         <h2 class="heading">Kitchen Department</h2>
 
          <ul class="flex items-center">
 
