@@ -52,23 +52,23 @@
             $sql = "delete from kos where Date(date) < DATE_SUB(NOW(), INTERVAL 1 DAY)";
             mysqli_query($conn, $sql) or die("Something went wrong");
 
-            $sql_all = "select kos_id as total from kos";
+            $sql_all = "select kos_id as total from orders inner join kos on orders.id = kos.order_id where kos.order_id = orders.id group by orders.track_id";
             $result_all = mysqli_query($conn, $sql_all) or die("Query Failed");
             $data_all = mysqli_num_rows($result_all);
 
-            $sql_pending = "select kos_id as total from kos where status = 'pending'";
+            $sql_pending = "select kos_id as total from orders inner join kos on orders.id = kos.order_id where status = 'pending' group by orders.track_id";
             $result_pending = mysqli_query($conn, $sql_pending) or die("Query Failed");
             $data_pending = mysqli_num_rows($result_pending);
 
-            $sql_accepted = "select kos_id as total from kos where status = 'accepted'";
+            $sql_accepted = "select kos_id as total from orders inner join kos on orders.id = kos.order_id where status = 'accepted' group by orders.track_id";
             $result_accepted = mysqli_query($conn, $sql_accepted) or die("Query Failed");
             $data_accepted = mysqli_num_rows($result_accepted);
 
-            $sql_rejected = "select kos_id as total from kos where status = 'rejected'";
+            $sql_rejected = "select kos_id as total from orders inner join kos on orders.id = kos.order_id where status = 'rejected' group by orders.track_id";
             $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
             $data_rejected = mysqli_num_rows($result_rejected);
 
-            $sql_prepared = "select kos_id as total from kos where status = 'prepared'";
+            $sql_prepared = "select kos_id as total from orders inner join kos on orders.id = kos.order_id where status = 'prepared' group by orders.track_id";
             $result_prepared = mysqli_query($conn, $sql_prepared) or die("Query Failed");
             $data_prepared = mysqli_num_rows($result_prepared);
 
@@ -130,20 +130,14 @@
         </div>
 
         <?php
-        // TODO: show appropriate information only
         if (isset($_SESSION['filter-by']) && $_SESSION['filter-by'] != 'all') {
             $filter_by = $_SESSION['filter-by'];
             $sql = "select count(orders.id) as total_item_bought,
-                    orders.id,
                     orders.c_id,
-                    orders.qty,
                     orders.track_id,
                     sum(orders.total_price) as total_price,
                     orders.note,
                     orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
                     kos.kos_id,
                     kos.status
                     from orders 
@@ -152,22 +146,25 @@
                     where (Date(orders.date) = CURDATE()
                     or Date(kos.date) = CURDATE())
                     group by orders.date, orders.c_id
+                    having kos.status = '$filter_by'
                     order by orders.id desc
                     ";
             unset($_SESSION['filter-by']);
         } else {
-            $sql = "select orders.id,
+            $sql = "select count(orders.id) as total_item_bought,
                     orders.c_id,
-                    orders.qty,
+                    orders.track_id,
+                    sum(orders.total_price) as total_price,
                     orders.note,
                     orders.f_id,
-                    orders.track_id,
                     kos.kos_id,
-                    kos.status,
-                    aos.aos_id
+                    kos.status
                     from orders 
+                    inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     inner join kos on orders.id = kos.order_id
-                    inner join aos on orders.id = aos.order_id
+                    where (Date(orders.date) = CURDATE()
+                    or Date(kos.date) = CURDATE())
+                    group by orders.date, orders.c_id
                     order by orders.id desc
                     ";
             if (isset($_SESSION['filter-by']))
