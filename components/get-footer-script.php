@@ -7,6 +7,7 @@
     const warnContainer = document.querySelector('.warn_msg')
 
     <?php
+    $time = '10:00';
     if ($time < date('H:i', strtotime($start_time . ' +30 minutes')) || $time > $end_time) {
     ?>
 

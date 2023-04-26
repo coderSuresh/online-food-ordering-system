@@ -68,6 +68,14 @@
       </p>
     </section>
 
+
+    <section class="question mt-20">
+      <h2>What if you failed to verify during registration?</h2>
+      <p class="answer">
+        If you failed to verify during registration, you can go to the login page to verify again. There will be an OTP (One-Time Password) required for full verification.
+      </p>
+    </section>
+
     <?php require './components/top-selling-food.php'; ?>
 
   </main>
