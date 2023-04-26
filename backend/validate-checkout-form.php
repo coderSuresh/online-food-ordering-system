@@ -61,7 +61,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         showMessage("Phone number must contain only 10 digits & start with 98");
     } else if (!preg_match("/^[a-zA-z,0-9 -]{5,}$/", $address)) {
         showMessage("Address must contain only letters, numbers, commas and must be at least 5 characters long");
-    } else if (!preg_match("/^[a-z A-z\/0-9]{5,}$/", $note)) {
+    } else if (!preg_match("/^[a-z A-z\/0-9:,]{5,}$/", $note)) {
         showMessage("Note must contain only letters, numbers and must be at least 5 characters long");
     } else {
 
