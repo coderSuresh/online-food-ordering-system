@@ -18,19 +18,19 @@ function checkForStatusUpdates() {
                                     let status = new_state[i].status;
                                     let message = "";
                                     let title = "";
-                                    let foodName = new_state[i].food_name;
+                                    let trackID = new_state[i].track_id;
                                     let tID = new_state[i].t_id;
                                     let cID = new_state[i].c_id;
                                     if (status === "accepted") {
                                         title = "Order Accepted";
-                                        message = `Order of ${foodName} is accepted by kitchen!`;
+                                        message = `Order of ID ${trackID} is accepted by kitchen!`;
                                     } else if (status === "prepared") {
                                         title = "Order Prepared";
-                                        message = `Order of ${foodName} is prepared by kitchen!`;
+                                        message = `Order of ID ${trackID} is prepared by kitchen!`;
                                     } else if (status === "rejected") {
                                         let reason = new_state[i].reason;
                                         title = "Order Rejected";
-                                        message = `Order of ${foodName} is rejected by kitchen!\nReason: ${reason}`;
+                                        message = `Order of ID ${trackID} is rejected by kitchen!\nReason: ${reason}`;
                                     }
 
                                     playSound();
