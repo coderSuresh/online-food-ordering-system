@@ -76,14 +76,14 @@ if (!isset($_SESSION['delivery-success'])) {
             $result_rejected = mysqli_query($conn, $sql_rejected) or die("Query Failed");
             $data_rejected = mysqli_num_rows($result_rejected);
 
-            if (!isset($_GET['filter'])) {
+            if (!isset($_GET['filter']) && !isset($_GET['search'])) {
                 $_GET['filter'] = "pending";
             }
 
             ?>
 
             <a href="?filter=all" class="ml-35">
-                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "all") echo "active"; ?>">All
+                <button class="button border-curve-lg relative <?php if (isset($_GET['filter']) && $_GET['filter'] == "all") echo "active"; ?>">All
                     <div class="count-top shadow"><?php
                                                     echo $data_all;
                                                     ?>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['delivery-success'])) {
             </a>
 
             <a href="?filter=pending" class="ml-35">
-                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "pending") echo "active"; ?>">Pending
+                <button class="button border-curve-lg relative <?php if (isset($_GET['filter']) && $_GET['filter'] == "pending") echo "active"; ?>">Pending
                     <div class="count-top shadow"><?php
                                                     echo $data_pending;
                                                     ?>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['delivery-success'])) {
             </a>
 
             <a href="?filter=delivered" class="ml-35">
-                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "delivered") echo "active"; ?>">Delivered
+                <button class="button border-curve-lg relative <?php if (isset($_GET['filter']) && $_GET['filter'] == "delivered") echo "active"; ?>">Delivered
                     <div class="count-top shadow"><?php
                                                     echo $data_delivered;
                                                     ?>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['delivery-success'])) {
             </a>
 
             <a href="?filter=rejected" class="ml-35">
-                <button class="button border-curve-lg relative <?php if ($_GET['filter'] == "rejected") echo "active"; ?>">Rejected
+                <button class="button border-curve-lg relative <?php if (isset($_GET['filter']) && $_GET['filter'] == "rejected") echo "active"; ?>">Rejected
                     <div class="count-top shadow"><?php
                                                     echo $data_rejected;
                                                     ?>
@@ -119,9 +119,9 @@ if (!isset($_SESSION['delivery-success'])) {
             </a>
 
             <!-- search form for order in case someone is calling delivery staff and asking if he has their order -->
-            <form action="#" method="post" class="search_form relative border-curve-lg" style="margin-left: 35px !important">
+            <form action="./index.php" method="get" class="search_form relative border-curve-lg" style="margin-left: 35px !important">
                 <div class="flex items-center">
-                    <input type="search" placeholder="Search..." class="no_outline search_order" name="search-order" id="search-order">
+                    <input type="search" placeholder="Search..." class="no_outline search_order" name="search" id="search-order">
                     <button type="submit" class="no_bg no_outline"><img src="../images/ic_search.svg" alt="search icon"></button>
                 </div>
             </form>
@@ -129,9 +129,8 @@ if (!isset($_SESSION['delivery-success'])) {
         </div>
 
         <?php
-        if (isset($_GET['filter']) && $_GET['filter'] != 'all') {
-            $filter_by = $_GET['filter'];
-            $sql = "select count(orders.id) as total_item_bought,
+
+        $sql_base = "select count(orders.id) as total_item_bought,
                     orders.c_id,
                     orders.qty,
                     orders.track_id,
@@ -148,31 +147,27 @@ if (!isset($_SESSION['delivery-success'])) {
                     from orders 
                     inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
                     inner join to_be_delivered on orders.id = to_be_delivered.order_id
-                    inner join aos on orders.id = aos.order_id
+                    inner join aos on orders.id = aos.order_id";
+
+        if (isset($_GET['filter']) && $_GET['filter'] != 'all') {
+            $filter_by = $_GET['filter'];
+            $sql = $sql_base . "
                     where to_be_delivered.status = '{$filter_by}'
                     group by orders.c_id, orders.date
                     order by orders.id desc
                     ";
             unset($_GET['filter']);
+        } elseif (isset($_GET['search'])) {
+            $search_key = mysqli_real_escape_string($conn, $_GET['search']);
+            $sql = $sql_base . "
+                    where orders.track_id like '%{$search_key}%'
+                    or order_contact_details.c_name like '{$search_key}%'
+                    or order_contact_details.phone like '%{$search_key}%'
+                    group by orders.c_id, orders.date
+                    order by orders.id desc
+                    ";
         } else {
-            $sql = "select count(orders.id) as total_item_bought,
-                    orders.c_id,
-                    orders.qty,
-                    orders.track_id,
-                    sum(orders.total_price) as total_price,
-                    orders.note,
-                    orders.date,
-                    orders.f_id,
-                    order_contact_details.address,
-                    order_contact_details.phone,
-                    order_contact_details.c_name,
-                    to_be_delivered.tbd_id,
-                    to_be_delivered.status,
-                    aos.aos_id
-                    from orders 
-                    inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                    inner join to_be_delivered on orders.id = to_be_delivered.order_id
-                    inner join aos on orders.id = aos.order_id
+            $sql = $sql_base . "
                     group by orders.c_id, orders.date
                     order by orders.id desc
                     ";
@@ -181,54 +176,54 @@ if (!isset($_SESSION['delivery-success'])) {
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
+
+        if (mysqli_num_rows($result) > 0) {
         ?>
-        <table class="mt-20">
-            <tr class="shadow">
-                <th>SN</th>
-                <th>Customer Name</th>
-                <th>Address</th>
-                <th>Contact</th>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Order Status</th>
-                <th>Action</th>
-            </tr>
-            <?php
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($result)) {
-                $i++;
-
-                $address = $row["address"];
-                $phone = $row["phone"];
-
-                $status = $row["status"];
-                $quantity = $row["qty"];
-
-                $cid = $row["c_id"];
-                $id = $row["track_id"];
-            ?>
-                <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
-                    <td><?php echo $i; ?> </td>
-                    <td><?php echo $row["c_name"]; ?> </td>
-                    <td><?php echo $address; ?> </td>
-                    <td><?php echo $phone; ?> </td>
-                    <td><?php echo $row['total_item_bought']; ?> </td>
-                    <td><?php echo $row["total_price"]; ?> </td>
-                    <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
-
-                    <td class="table_action_container">
-                        <!-- action menu -->
-                        <button class="no_bg no_outline">
-                            <img src="../images//ic_eye.svg" width="30px" style="vertical-align: middle;" alt="options menu">
-                        </button>
-                    </td>
+            <table class="mt-20">
+                <tr class="shadow">
+                    <th>SN</th>
+                    <th>Track ID</th>
+                    <th>Customer Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Order Status</th>
                 </tr>
+                <?php
+                $i = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $i++;
 
+                    $address = $row["address"];
+                    $phone = $row["phone"];
+
+                    $status = $row["status"];
+                    $quantity = $row["qty"];
+
+                    $cid = $row["c_id"];
+                    $id = $row["track_id"];
+                ?>
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
+                        <td><?php echo $i; ?> </td>
+                        <td><?php echo $row["track_id"]; ?> </td>
+                        <td><?php echo $row["c_name"]; ?> </td>
+                        <td><?php echo $address; ?> </td>
+                        <td><?php echo $phone; ?> </td>
+                        <td><?php echo $row['total_item_bought']; ?> </td>
+                        <td><?php echo $row["total_price"]; ?> </td>
+                        <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
+                    </tr>
+
+                <?php
+                }
+            } else {
+                ?>
+                <p class="mt-20 text-center">No records found</p>
             <?php
             }
             ?>
-
-        </table>
+            </table>
     </main>
     <script>
         function redirectToViewPage(cid, id) {
