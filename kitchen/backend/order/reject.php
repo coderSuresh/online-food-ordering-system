@@ -25,6 +25,9 @@ if (!isset($_SESSION['kitchen-success'])) {
         $sql_reason = "INSERT INTO reject_reason VALUES (DEFAULT, '$track_id', 'kitchen', '$reject_reason')";
         $result_reason = mysqli_query($conn, $sql_reason) or die(mysqli_error($conn));
 
+        $sql_aos = "UPDATE aos SET status = 'rejected' WHERE order_id in (" . implode(',', $order_id) . ")";
+        $result_aos = mysqli_query($conn, $sql_aos) or die(mysqli_error($conn));
+
         if ($result && $result_reason) {
             $_SESSION['order-success-k'] = "Order rejected successfully";
             header('location: ../../index.php');
