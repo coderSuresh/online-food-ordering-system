@@ -19,7 +19,7 @@
              </div>
          </div>
 
-         <h1 class="heading">Admin Department</h1>
+         <h2 class="heading">Admin Department</h2>
 
          <ul class="flex items-center">
 

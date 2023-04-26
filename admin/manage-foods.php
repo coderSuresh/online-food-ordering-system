@@ -448,6 +448,7 @@
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
         if (mysqli_num_rows($res) > 0) {
         ?>
+        <div class="scroll">
             <table class="mt-20">
                 <tr class="shadow">
                     <th>SN</th>
@@ -564,6 +565,7 @@
                     </tr>
                 <?php } ?>
             </table>
+        </div>
         <?php
             $isForSearch = isset($_GET['search']);
             require './components/pagination.php';

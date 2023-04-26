@@ -219,6 +219,7 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
+        <div class="scroll">
             <table class="mt-20">
                 <tr class="shadow">
                     <th>SN</th>
@@ -268,6 +269,7 @@
                     </tr>
                 <?php } ?>
             </table>
+        </div>
         <?php
         } else {
             echo "<p class='mt-20'>No Record Found</p>";
