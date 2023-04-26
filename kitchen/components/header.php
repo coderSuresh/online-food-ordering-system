@@ -24,8 +24,21 @@
 
              </li>
 
+             <?php
+                if (isset($_SESSION['kitchen-username'])) {
+                    $sql_get_img = "SELECT image FROM employees WHERE username = '{$_SESSION['kitchen-username']}'";
+                    $result_get_img = mysqli_query($conn, $sql_get_img);
+                    $row_get_img = mysqli_fetch_assoc($result_get_img);
+                    if ($row_get_img['image'] == "") {
+                        $image = "../images/profile.jpg";
+                    } else {
+                        $image = "../uploads/employees/". $row_get_img['image'];
+                    }
+                }
+                ?>
+                
              <li>
-                 <img src="../images/profile.jpg" alt="admin profile picture" class="admin_profile_image">
+                 <img src="<?php echo $image ?>" alt="kitchen profile picture" class="admin_profile_image">
 
                  <ul class="admin_profile p-20 shadow border-curve-md">
                      <li>

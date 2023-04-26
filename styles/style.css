@@ -1052,6 +1052,7 @@ form .text_field {
 
 .admin_profile_image {
     width: 40px;
+    border-radius: 50%;
 }
 
 .admin_profile_img,
