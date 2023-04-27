@@ -449,7 +449,7 @@
         if (mysqli_num_rows($res) > 0) {
         ?>
         <div class="scroll">
-            <table class="mt-20">
+            <table>
                 <tr class="shadow">
                     <th>SN</th>
                     <th>Image</th>
