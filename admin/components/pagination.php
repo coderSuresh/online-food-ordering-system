@@ -3,8 +3,8 @@ if (!$isForSearch) {
     $getLink = "?";
     if (isset($_GET['filter-by'])) {
         $getLink .= "filter-by=" . $_GET['filter-by'] . "&";
-    } 
-    
+    }
+
     if (isset($_GET['filter'])) {
         $getLink .= "filter=" . $_GET['filter'] . "&";
     }
@@ -47,9 +47,9 @@ if (!$isForSearch) {
                 <?php } ?>
             <?php } ?>
 
-            <?php if ($page < $total_pages) { ?>
-                <a href='<?php if (isset($getLink))
-                                echo $getLink; ?>page=<?php echo $page + 1; ?>' class='pagination-nums border-curve button gray'>Next</a>
+            <?php if ($page < $total_pages) { ?><a href='<?php
+                                                            if (isset($getLink))
+                                                                echo $getLink; ?>page=<?php echo $page + 1; ?>' class='pagination-nums border-curve button gray'>Next</a>
             <?php } ?>
         </div>
 <?php }

@@ -115,6 +115,7 @@
                 $whichPage = "customer";
                 require '../components/filter.php';
                 $sql_date_filter = isset($sql_temp_cus) ? $sql_temp_cus : "";
+                $sql_temp_cus = '';
                 ?>
 
                 <a href="?filter-by=all" class="ml-35">
@@ -168,56 +169,89 @@
                 </a>
 
             </div>
+
+            <div class="filter">
+                <form action="./filter-customer.php" method="post" class="filter-form" style="margin: 0 !important">
+                    <select name="customer-filter" class="p_7-20 border-curve" id="customer-filter">
+                        <option value="name" <?php if (isset($_SESSION['customer-filter']) && $_SESSION['customer-filter'] == "order by customer.names asc") echo "selected" ?>>Sort by name</option>
+                        <option value="most-selling" <?php if (isset($_SESSION['customer-filter']) && $_SESSION['customer-filter'] == "order by item_bought desc") echo "selected" ?>>Most buying</option>
+                        <option value="least-selling" <?php if (isset($_SESSION['customer-filter']) && $_SESSION['customer-filter'] == "order by item_bought asc") echo "selected" ?>>Least buying</option>
+                        <option value="last-added" <?php if (isset($_SESSION['customer-filter']) && $_SESSION['customer-filter'] == "order by customer.id desc")
+                                                        echo "selected";
+                                                    if (!isset($_SESSION['customer-filter']))
+                                                        echo "selected"; ?>>Last added</option>
+                        <option value="first-added" <?php if (isset($_SESSION['customer-filter']) && $_SESSION['customer-filter'] == "order by customer.id asc") echo "selected" ?>>First added</option>
+                    </select>
+                </form>
+            </div>
         </div>
-
         <?php
-        // filter by session
-        $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
+        $sql_base = "SELECT customer.id,
+                customer.names,
+                customer.status,
+                COALESCE(COUNT(orders.f_id * orders.qty), 0) as item_bought,
+                customer.email,
+                customer.date,
+                customer.active
+            FROM customer
+            LEFT JOIN orders ON orders.c_id = customer.id
+            LEFT JOIN aos ON orders.id = aos.order_id
+           
+        ";
 
+        if (isset($_SESSION["customer-filter"])) {
+            $filter = $_SESSION["customer-filter"];
+            $sql_cus = $sql_base . " WHERE aos.status = 'delivered' OR aos.status IS NULL
+                    GROUP By customer.id" . " $filter";
+            unset($_SESSION['cat-filter']);
+        } else {
+            $sql_cus = $sql_base . " WHERE aos.status = 'delivered' OR aos.status IS NULL
+                    GROUP By customer.id";
+        }
+
+        // filter by session
         if (isset($_GET['filter-by'])) {
             $filter_by = mysqli_real_escape_string($conn, $_GET['filter-by']);
             if ($filter_by == 'all') {
-                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
+                $sql_cus = $sql_base . " WHERE aos.status = 'delivered' OR aos.status IS NULL
+                    GROUP By customer.id";
             } else if ($filter_by == 'active') {
-                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 1";
+                $sql_cus =  $sql_base . " WHERE customer.active = 1 AND (aos.status = 'delivered' OR aos.status IS NULL) GROUP By customer.id";
             } else if ($filter_by == 'inactive') {
-                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE active = 0";
+                $sql_cus = $sql_base . " WHERE customer.active = 0 AND (aos.status = 'delivered' OR aos.status IS NULL) GROUP By customer.id";
             } else if ($filter_by == 'verified') {
-                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'verified'";
+                $sql_cus = $sql_base . " WHERE customer.status = 'verified' AND (aos.status = 'delivered' OR aos.status IS NULL) GROUP By customer.id";
             } else if ($filter_by == 'not-verified') {
-                $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE status = 'not verified'";
+                $sql_cus = $sql_base . " WHERE customer.status = 'not verified'AND (aos.status = 'delivered' OR aos.status IS NULL) GROUP By customer.id";
             }
-        } else {
-            $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer";
         }
 
-        $sql_all = "SELECT id, names,username,email,date,status,active FROM customer";
-
-        // search
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($conn, $_GET['search']);
-            $sql_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE names LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%'";
+            $sql_cus = $sql_base . " WHERE names LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%' AND (aos.status = 'delivered' OR aos.status IS NULL
+                ) GROUP By customer.id";
         }
-
-        if (isset($sql_date_filter) && !empty($sql_date_filter) && $sql_date_filter != $sql_all) {
-            $sql_cus = $sql_date_filter;
-        }
-
-        $count = mysqli_num_rows(mysqli_query($conn, $sql_cus));
-
         $limit = 10;
         require '../components/calculate-offset.php';
-
         $sql_cus .= " LIMIT $limit OFFSET $offset";
-
         if (isset($filter_text)) {
             echo "<h4 class='mt-20'>Filter : " . $filter_text . "</h4>";
         }
 
-        $result = mysqli_query($conn, $sql_cus) or die(mysqli_error($conn));
-
-        if (mysqli_num_rows($result) > 0) {
+        if (isset($sql_date_filter) && !empty($sql_date_filter) && $sql_date_filter != $sql_all) {
+            $sql_cus_df = $sql_base . $sql_date_filter;
+            $count = mysqli_num_rows(mysqli_query($conn, $sql_cus_df));
+            $result = mysqli_query($conn, $sql_cus_df) or die(mysqli_error($conn));
+             
+        } else {
+            $count_query = mysqli_query($conn, $sql_cus) or die(mysqli_error($conn));
+            $count = mysqli_num_rows($count_query);
+            $result = mysqli_query($conn, $sql_cus) or die(mysqli_error($conn));
+        }
+        
+        if (mysqli_num_rows($result) > 0)  {
         ?>
+
             <table class="mt-20">
                 <tr class="shadow">
                     <th>SN</th>
@@ -235,29 +269,13 @@
                     $i++;
                     $isActive = $row['active'] == 1 ? "Active" : "Inactive";
                     $id = $row['id'];
-
-                    // find number of items bought
-                    $sql_item_bought = "select count(orders.id) as total
-                                        from orders
-                                        inner join aos on orders.id = aos.order_id
-                                        where aos.status = 'delivered' and
-                                        orders.c_id = $id
-                                        group by orders.c_id";
-
-                    $res_item_bought = mysqli_query($conn, $sql_item_bought);
-                    $row_item_bought = mysqli_fetch_assoc($res_item_bought);
-
-                    $item_bought = 0;
-
-                    if (mysqli_num_rows($res_item_bought) > 0) {
-                        $item_bought = $row_item_bought['total'];
-                    }
+                    $item_bought = $row['item_bought'];
                 ?>
                     <tr class="shadow">
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['names']; ?></td>
                         <td><?php echo $row['status'] . " | " . $isActive; ?></td>
-                        <td><?php echo $item_bought; ?></td>
+                        <td><?php echo $row['item_bought']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['date']; ?></td>
                         <td class="table_action_container">
@@ -306,7 +324,12 @@
         }
         ?>
     </main>
-
+    <script>
+        const fForm = document.querySelector('.filter-form')
+        fForm.addEventListener('change', () => {
+            fForm.submit()
+        });
+    </script>
 </body>
 
 </html>

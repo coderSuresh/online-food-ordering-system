@@ -26,7 +26,7 @@
                     <label for="filter_option-all-time"> &nbsp; All time</label>
                 </div>
                 <div class="flex justify-start items-center">
-                    <input type="radio" name="filter_option" value="today" id="filter_option-today" checked>
+                    <input type="radio" name="filter_option" value="today" id="filter_option-today">
                     <label for="filter_option-today"> &nbsp; Today</label>
                 </div>
                 <div class="flex justify-start items-center">
@@ -172,48 +172,49 @@ if (!isset($whichPage) || (isset($whichPage) && $whichPage != "customer")) {
 
 // ==================== for customer page ====================
 elseif (isset($whichPage) && $whichPage == "customer") {
-
-    $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer";
-
-    if (isset($_SESSION['filter_option'])) {
+    if (isset($_SESSION['filter_option']) && $_SESSION['filter_option'] != 'all-time') {
         $filter_option = $_SESSION['filter_option'];
         unset($_SESSION['filter_option']);
     } else {
         $filter_option = "all";
     }
 
-    switch ($filter_option) {
-        case 'today':
-            $filter_text = "Today";
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE date >= CURDATE() AND date <= CURDATE() + INTERVAL 1 DAY";
-            break;
+    if ($filter_option != 'all') {
 
-        case 'yesterday':
-            $filter_text = "Yesterday";
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE date >= CURDATE() - INTERVAL 1 DAY AND date <= CURDATE()";
-            break;
+        switch ($filter_option) {
+            case 'today':
+                $filter_text = "Today";
+                $sql_temp_cus = " WHERE customer.date >= CURDATE() AND customer.date <= CURDATE() + INTERVAL 1 DAY AND(aos.status = 'delivered' OR aos.status IS NULL) GROUP BY customer.id";
+                break;
 
-        case 'last-week':
-            $filter_text = "Last week";
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE YEARWEEK(date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK)";
-            break;
+            case 'yesterday':
+                $filter_text = "Yesterday";
+                $sql_temp_cus = " WHERE customer.date >= CURDATE() - INTERVAL 1 DAY AND customer.date <= CURDATE() AND(aos.status = 'delivered' OR aos.status IS NULL) GROUP BY customer.id";
+                break;
 
-        case 'last-month':
-            $filter_text = "Last month";
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE MONTH(date) = MONTH(CURDATE() - INTERVAL 1 MONTH)";
-            break;
+            case 'last-week':
+                $filter_text = "Last week";
+                $sql_temp_cus = " WHERE YEARWEEK(customer.date) = YEARWEEK(CURDATE() - INTERVAL 1 WEEK) AND(aos.status = 'delivered' OR aos.status IS NULL) GROUP BY customer.id";
+                break;
 
-        case 'custom':
-            $start_date = $_SESSION['start_date'];
-            $end_date = $_SESSION['end_date'];
-            $filter_text = $start_date . " to " . $end_date;
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer WHERE date >= '$start_date 00:00:00' AND date <= '$end_date 23:59:59'";
-            break;
+            case 'last-month':
+                $filter_text = "Last month";
+                $sql_temp_cus = " WHERE MONTH(customer.date) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND(aos.status = 'delivered' OR aos.status IS NULL) GROUP BY customer.id";
+                break;
 
-        default:
-            $filter_text = "All time";
-            $sql_temp_cus = "SELECT id, names,username,email,date,status,active FROM customer";
-            break;
+            case 'custom':
+                $start_date = $_SESSION['start_date'];
+                $end_date = $_SESSION['end_date'];
+                $filter_text = $start_date . " to " . $end_date;
+                $sql_temp_cus = " WHERE customer.date >= '$start_date 00:00:00' AND date <= '$end_date 23:59:59' AND(aos.status = 'delivered' OR aos.status IS NULL) GROUP BY customer.id";
+                break;
+
+            default:
+                $filter_text = "All time";
+                $sql_temp_cus = " WHERE aos.status = 'delivered' OR aos.status IS NULL
+                        GROUP By customer.id desc";
+                break;
+        }
     }
 }
 ?>
