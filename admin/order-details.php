@@ -219,7 +219,7 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-        <div class="scroll">
+        <div class="table scroll">
             <table>
                 <tr class="shadow">
                     <th>SN</th>

@@ -79,9 +79,9 @@
             </div>
         </section>
 
-        <div class="flex items-center mt-20 scroll">
+        <div class="flex items-center scroll">
 
-            <div class="flex items-center mt-20 wrap justify-center">
+            <div class="flex items-center wrap justify-center">
                 <!-- search form for order -->
                 <form action="./order-history.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
@@ -296,7 +296,7 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-            <div class="scroll">
+            <div class="table scroll">
                 <table>
                     <tr class="shadow">
                         <th>SN</th>

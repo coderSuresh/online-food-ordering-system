@@ -1298,6 +1298,10 @@ form .text_field {
     overflow-x: auto;
 } 
 
+.table.scroll {
+    padding: 0 !important;
+}
+
 .table_eye {
     width: 25px;
     padding: 5px 0;

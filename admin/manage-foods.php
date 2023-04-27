@@ -448,7 +448,7 @@
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
         if (mysqli_num_rows($res) > 0) {
         ?>
-        <div class="scroll">
+        <div class="table scroll">
             <table>
                 <tr class="shadow">
                     <th>SN</th>
