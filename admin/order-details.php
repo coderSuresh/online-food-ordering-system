@@ -26,7 +26,7 @@
             <h2>Current Order Details</h2>
         </section>
 
-        <div class="flex items-center mt-20">
+        <div class="flex items-center mt-20 scroll">
 
             <div class="flex items-center">
                 <!-- search form for order -->
@@ -219,7 +219,8 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-            <table class="mt-20">
+        <div class="table scroll">
+            <table>
                 <tr class="shadow">
                     <th>SN</th>
                     <th>Order ID</th>
@@ -268,6 +269,7 @@
                     </tr>
                 <?php } ?>
             </table>
+        </div>
         <?php
         } else {
             echo "<p class='mt-20'>No Record Found</p>";

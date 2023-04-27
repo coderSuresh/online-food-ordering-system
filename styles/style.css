@@ -1052,6 +1052,7 @@ form .text_field {
 
 .admin_profile_image {
     width: 40px;
+    border-radius: 50%;
 }
 
 .admin_profile_img,
@@ -1289,6 +1290,15 @@ form .text_field {
 
 .filter-form {
     margin-right: 30px;
+}
+
+.scroll {
+    padding: 20px 0;
+    overflow-x: auto;
+} 
+
+.table.scroll {
+    padding: 0 !important;
 }
 
 .table_eye {

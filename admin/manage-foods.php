@@ -208,7 +208,7 @@
             </div>
         </section>
 
-        <div class="flex items-center mt-20">
+        <div class="flex items-center mt-20 scroll">
             <!-- buttons for food management -->
             <div class="flex items-center">
 
@@ -280,8 +280,8 @@
 
             </div>
 
-            <div class="filter flex items-center">
-                <form action="./manage-foods.php" method="get" class="filter-form">
+            <div class="filter flex items-center ml-35">
+                <form action="./manage-foods.php" method="get" class="filter-form ml-35">
                     <select name="filter" class="p_7-20 border-curve pointer">
                         <option value="name" class="pointer" <?php if (isset($_GET['filter']) && $_GET['filter'] == "name")
                                                                     echo "selected"; ?>>Sort by name</option>
@@ -448,7 +448,8 @@
         $res = mysqli_query($conn, $sql) or die("Could not fetch food items from database");
         if (mysqli_num_rows($res) > 0) {
         ?>
-            <table class="mt-20">
+        <div class="table scroll">
+            <table>
                 <tr class="shadow">
                     <th>SN</th>
                     <th>Image</th>
@@ -564,6 +565,7 @@
                     </tr>
                 <?php } ?>
             </table>
+        </div>
         <?php
             $isForSearch = isset($_GET['search']);
             require './components/pagination.php';

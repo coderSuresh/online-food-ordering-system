@@ -8,6 +8,7 @@
     <title>Orders | RestroHub</title>
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
     <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
 </head>
@@ -44,7 +45,7 @@
         }
         ?>
 
-        <div class="flex items-center mt-20 justify-center">
+        <div class="flex items-center mt-20 justify-center scroll">
             <!-- filter by status -->
             <?php
 
@@ -173,39 +174,41 @@
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
         ?>
-        <table class="mt-20">
-            <tr class="shadow">
-                <th>SN</th>
-                <th>Track ID</th>
-                <th>Total Items</th>
-                <th>Note</th>
-                <th>Order Status</th>
-            </tr>
-            <?php
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($result)) {
-                $i++;
-                $sql_food_name = "Select name from food where f_id ={$row['f_id']}";
-                $res_food_name = mysqli_query($conn, $sql_food_name);
-                $data_food_name = mysqli_fetch_assoc($res_food_name);
-
-                $status = $row["status"];
-                $quantity = $row["total_item_bought"];
-                $note = $row["note"];
-                $id = $row["track_id"];
-                $cid = $row["c_id"];
-            ?>
-                <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
-                    <td><?php echo $i; ?> </td>
-                    <td><?php echo $id; ?> </td>
-                    <td><?php echo $quantity; ?> </td>
-                    <td><?php echo $note; ?> </td>
-                    <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
+        <div class="scroll">
+            <table class="mt-20">
+                <tr class="shadow">
+                    <th>SN</th>
+                    <th>Track ID</th>
+                    <th>Total Items</th>
+                    <th>Note</th>
+                    <th>Order Status</th>
                 </tr>
-            <?php
-            }
-            ?>
-        </table>
+                <?php
+                $i = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $i++;
+                    $sql_food_name = "Select name from food where f_id ={$row['f_id']}";
+                    $res_food_name = mysqli_query($conn, $sql_food_name);
+                    $data_food_name = mysqli_fetch_assoc($res_food_name);
+
+                    $status = $row["status"];
+                    $quantity = $row["total_item_bought"];
+                    $note = $row["note"];
+                    $id = $row["track_id"];
+                    $cid = $row["c_id"];
+                ?>
+                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
+                        <td><?php echo $i; ?> </td>
+                        <td><?php echo $id; ?> </td>
+                        <td><?php echo $quantity; ?> </td>
+                        <td><?php echo $note; ?> </td>
+                        <td><span class="<?php echo $status ?> border-curve-lg p_7-20"><?php echo $status; ?></span></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </table>
+        </div>
     </main>
 
     <script src="../admin/prevent-redirect-onclick-action.js"></script>

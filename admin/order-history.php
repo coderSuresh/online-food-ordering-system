@@ -79,9 +79,9 @@
             </div>
         </section>
 
-        <div class="flex items-center mt-20">
+        <div class="flex items-center scroll">
 
-            <div class="flex items-center mt-20 wrap justify-center">
+            <div class="flex items-center wrap justify-center">
                 <!-- search form for order -->
                 <form action="./order-history.php" method="get" class="search_form border-curve-lg">
                     <div class="flex items-center">
@@ -296,57 +296,59 @@
 
         if (mysqli_num_rows($result) > 0) {
         ?>
-            <table class="mt-20">
-                <tr class="shadow">
-                    <th>SN</th>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Location</th>
-                    <th>Item</th>
-                    <th>Amount</th>
-                    <th>Order Status</th>
-                </tr>
-
-                <?php
-                $i = $offset;
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $i++;
-
-                    $food_id = $row['f_id'];
-                    $sql_food = "select name from food where f_id = {$food_id}";
-                    $result_food = mysqli_query($conn, $sql_food) or die("Query Failed");
-                    $row_food = mysqli_fetch_assoc($result_food);
-                    $food_name = $row_food['name'];
-                    $order_id = $row['id'];
-
-                    $cid = $row['c_id'];
-                    $id = $row['track_id'];
-
-                    $status = $row['status'];
-
-                    $sql_k_o_s = "select status from kos where order_id = {$order_id}";
-                    $result_k_o_s = mysqli_query($conn, $sql_k_o_s) or die("Query Failed");
-
-                    if (mysqli_num_rows($result_k_o_s) > 0) {
-                        $data = mysqli_fetch_assoc($result_k_o_s);
-                        $k_o_s = $data['status'];
-                    }
-                ?>
-                    <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $row['track_id']; ?></td>
-                        <td>
-                            <?php echo $row['date']; ?>
-                        </td>
-                        <td><?php echo $row['c_name']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $row['total_item_bought']; ?></td>
-                        <td><?php echo $row['total_price']; ?></td>
-                        <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
+            <div class="table scroll">
+                <table>
+                    <tr class="shadow">
+                        <th>SN</th>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Location</th>
+                        <th>Item</th>
+                        <th>Amount</th>
+                        <th>Order Status</th>
                     </tr>
-                <?php } ?>
-            </table>
+
+                    <?php
+                    $i = $offset;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $i++;
+
+                        $food_id = $row['f_id'];
+                        $sql_food = "select name from food where f_id = {$food_id}";
+                        $result_food = mysqli_query($conn, $sql_food) or die("Query Failed");
+                        $row_food = mysqli_fetch_assoc($result_food);
+                        $food_name = $row_food['name'];
+                        $order_id = $row['id'];
+
+                        $cid = $row['c_id'];
+                        $id = $row['track_id'];
+
+                        $status = $row['status'];
+
+                        $sql_k_o_s = "select status from kos where order_id = {$order_id}";
+                        $result_k_o_s = mysqli_query($conn, $sql_k_o_s) or die("Query Failed");
+
+                        if (mysqli_num_rows($result_k_o_s) > 0) {
+                            $data = mysqli_fetch_assoc($result_k_o_s);
+                            $k_o_s = $data['status'];
+                        }
+                    ?>
+                        <tr class="shadow pointer" onclick="redirectToViewPage('<?php echo base64_encode(serialize($cid)); ?>', '<?php echo base64_encode(serialize($id)); ?>');">
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row['track_id']; ?></td>
+                            <td>
+                                <?php echo $row['date']; ?>
+                            </td>
+                            <td><?php echo $row['c_name']; ?></td>
+                            <td><?php echo $row['address']; ?></td>
+                            <td><?php echo $row['total_item_bought']; ?></td>
+                            <td><?php echo $row['total_price']; ?></td>
+                            <td><span class="<?php echo $row['status']; ?> border-curve-lg p_7-20"><?php echo $row['status']; ?></span></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
             <?php
             $isForSearch = isset($_GET['search']);
             require './components/pagination.php';
