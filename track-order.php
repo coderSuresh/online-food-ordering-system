@@ -125,11 +125,11 @@ if (isset($_SESSION['order_placed'])) {
         if (mysqli_num_rows($res) > 0) {
         ?>
             <?php
-            if (isset($track_id) && !empty($track_id)) {
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
             ?>
                 <h3 class="mt-40">Orders</h3>
                 <div class="flex gap items-center justify-start mt-20">
-                    <h4 class="yellow-text"><?php echo $track_id; ?></h4>
+                    <h4 class="yellow-text"><?php echo $_GET['id']; ?></h4>
                     <a href="./track-order.php">
                         <img src="./images/ic_cross.svg" alt="clear" width="15" class="ml-35 pointer" />
                     </a>
