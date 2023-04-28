@@ -90,6 +90,24 @@
                  </li>
              </ul>
          </li>
+
+         <li class="sidebar_accordion">
+             <a href="#">
+                 <article class="dashboard_sidebar_content border-curve-lg flex items-center justify-center">
+                     <div class="flex items-center justify-start">
+                         <img class="dashboard_sidebar_content_img" src="../images/ic_newsletter.svg" alt="newsletter" aria-hidden="true">
+                         <h4 class="dashboard_sidebar_content_text hide-on-close">Newsletter</h4>
+                     </div>
+                     <img src="../images/ic_accordion_arrow.svg" class="accordion_arrow hide-on-close" aria-hidden="true" alt="accordion arrow">
+                 </article>
+             </a>
+
+             <ul class="sidebar_sub-menu p-20 shadow border-curve-md">
+                 <li>
+                     <a class="border-curve-md" href="./newsletter.php">Newsletter</a>
+                 </li>
+             </ul>
+         </li>
      </ul>
 
  </aside>
