@@ -20,7 +20,7 @@ if (isset($_POST['register'])) {
     } else if (!preg_match("/^[0-9A-Za-z_-]{2,30}$/", $username)) {
         $_SESSION["invalid_username"] = "Username shouldn't contain special characters";
         header("Location:./register.php");
-    } else if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+    } else if (!preg_match("/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$/", $email)) {
         $_SESSION["invalid_email"] = "invalid_email";
         header("Location:./register.php");
     } else if (!preg_match("/^[0-9A-Z a-z,!@#$%^&*()_+]{8,50}$/", $password)) {
