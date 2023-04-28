@@ -136,6 +136,10 @@ input[type="submit"],
     padding: 20px;
 }
 
+.p-40 {
+    padding: 40px;
+}
+
 /* set padding 7px 20px */
 .p_7-20 {
     padding: 7px 20px;

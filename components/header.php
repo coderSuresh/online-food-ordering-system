@@ -54,12 +54,12 @@
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $track_id = $row['track_id'];
                                         ?>
-                                         <a href="./track-order.php?id=<?php echo strtolower($track_id) ?>"><?php echo strtoupper($track_id); ?></a>
+                                         <a href="./order-details.php?id=<?php echo strtolower($track_id) ?>"><?php echo strtoupper($track_id); ?></a>
                                      <?php
                                         }
                                         ?>
                              </div>
-                             <form action="./track-order.php" method="get">
+                             <form action="./order-details.php" method="get">
                                  <input type="text" name="id" class="p_7-20 border-curve" id="id" placeholder="Order ID" required>
                                  <button type="submit" class="button mt-10 border-curve w-full">Track</button>
                              </form>

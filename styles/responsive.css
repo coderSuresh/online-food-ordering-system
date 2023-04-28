@@ -275,6 +275,11 @@
 
 @media (max-width: 500px) {
 
+    /* ======== for order details (customer) ========== */
+    .p-40 {
+        padding: 20px !important;
+    }
+
     /* ======== for cart ================== */
     .cart_dropdown {
         left: 5px;
