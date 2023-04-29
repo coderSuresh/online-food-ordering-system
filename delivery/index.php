@@ -52,7 +52,7 @@ if (!isset($_SESSION['delivery-success'])) {
         }
         ?>
 
-        <div class="flex items-center mt-20 justify-center scroll">
+        <div class="flex items-center mt-20 scroll">
 
             <!-- filter by status -->
             <?php
