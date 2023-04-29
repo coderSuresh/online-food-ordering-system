@@ -192,11 +192,7 @@
 
         require './components/calculate-offset.php';
 
-        // filter content by session 
-        if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
-            $filter_by = $_GET['filter-by'];
-            $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ? "
-            select count(orders.id) as total_item_bought,
+        $sql_base = "select count(orders.id) as total_item_bought,
                         orders.id,
                         orders.c_id,
                         orders.qty,
@@ -212,29 +208,18 @@
                         aos.status
                         from orders 
                         inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                        inner join aos on orders.id = aos.order_id
-                        where aos.status in ('prepared', 'delivering') and
+                        inner join aos on orders.id = aos.order_id";
+
+        // filter content by session 
+        if (isset($_GET['filter-by']) && $_GET['filter-by'] != 'all') {
+            $filter_by = $_GET['filter-by'];
+            $sql = ($filter_by == 'delivering' || $filter_by == 'prepared') ?
+                $sql_base . " where aos.status in ('prepared', 'delivering') and
                         orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
                         order by orders.id desc
                         limit $offset, $limit
-                    " : "select count(orders.id) as total_item_bought,
-                        orders.id,
-                        orders.c_id,
-                        orders.qty,
-                        orders.track_id,
-                        sum(orders.total_price) as total_price,
-                        orders.note,
-                        orders.date,
-                        orders.f_id,
-                        order_contact_details.address,
-                        order_contact_details.phone,
-                        order_contact_details.c_name,
-                        aos.aos_id,
-                        aos.status
-                        from orders 
-                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                        inner join aos on orders.id = aos.order_id
+                    " : $sql_base . "
                         where aos.status = '$filter_by' and
                         orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
@@ -242,23 +227,7 @@
                         limit $offset, $limit
                     ";
         } else {
-            $sql = "select count(orders.id) as total_item_bought,
-                        orders.id,
-                        orders.c_id,
-                        orders.qty,
-                        orders.track_id,
-                        sum(orders.total_price) as total_price,
-                        orders.note,
-                        orders.date,
-                        orders.f_id,
-                        order_contact_details.address,
-                        order_contact_details.phone,
-                        order_contact_details.c_name,
-                        aos.aos_id,
-                        aos.status
-                        from orders 
-                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                        inner join aos on orders.id = aos.order_id
+            $sql = $sql_base . "
                         where orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         group by orders.date, orders.c_id
                         order by orders.id desc
@@ -267,23 +236,7 @@
         }
 
         // search order by get request
-        $sql = (isset($_GET['search'])) ? "select count(orders.id) as total_item_bought,
-                        orders.id,
-                        orders.c_id,
-                        orders.qty,
-                        orders.track_id,
-                        sum(orders.total_price) as total_price,
-                        orders.note,
-                        orders.date,
-                        orders.f_id,
-                        order_contact_details.address,
-                        order_contact_details.phone,
-                        order_contact_details.c_name,
-                        aos.aos_id,
-                        aos.status
-                        from orders 
-                        inner join order_contact_details on orders.o_c_id = order_contact_details.o_c_id
-                        inner join aos on orders.id = aos.order_id
+        $sql = (isset($_GET['search'])) ? $sql_base . "
                         where orders.delivery_date <= NOW() and orders.delivery_time <= NOW()
                         and (orders.track_id like '%{$_GET['search']}%' 
                         or order_contact_details.c_name like '%{$_GET['search']}%'
