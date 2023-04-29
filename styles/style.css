@@ -1910,6 +1910,11 @@ h2 {
 }
 
 /* ==================== for track order page ================== */
+
+.delivery_and_payment_info {
+    justify-content: space-evenly;
+}
+
 .empty_box {
     width: 80%;
     max-width: 400px;
