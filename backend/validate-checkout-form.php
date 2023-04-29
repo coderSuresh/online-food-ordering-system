@@ -90,7 +90,7 @@ if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
                     showMessage("We are closed now. Please select a date and time in the future");
                 } elseif ($date > date('Y-m-d', strtotime($current_date . ' +3 day'))) {
                     showMessage("You can't order for more than 3 days in advance");
-                } elseif ($time < date('H:i', strtotime($current_time . ' +30 minutes'))) {
+                } elseif ( $date <= $current_date && $time < date('H:i', strtotime($current_time . ' +30 minutes'))) {
                     showMessage("You can't order for less than 30 minutes in advance");
                 } else {
                     $response['redirect'] = true;
