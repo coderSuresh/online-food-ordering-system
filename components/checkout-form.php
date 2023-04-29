@@ -62,6 +62,25 @@
             ?>
             <input type="hidden" name="vat" value="<?php echo $vat; ?>">
             <input type="hidden" name="total_price" value="<?php echo $totalPrice + $vat; ?>">
+            <label>
+                Enter captcha text:
+                <input type="text" name="captcha" placeholder="Enter captcha text">
+                <button class="captcha-refresh" type="button">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </label>
+
+            <div class="captcha">
+                <label for="captcha-input">Enter Captcha</label>
+                <div class="preview"></div>
+                <div class="captcha-form">
+                    <input type="text" id="captcha-form" placeholder="Enter captcha">
+                    <button class="refresh-button">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+
             <button type="submit" name="<?php if (isset($isFromBuy))
                                             echo "place-order-buy";
                                         else
