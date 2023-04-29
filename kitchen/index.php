@@ -173,6 +173,10 @@
         }
 
         $result = mysqli_query($conn, $sql) or die("Query Failed");
+        if(mysqli_num_rows($result) == 0){
+            echo "<p class='text-center mt-20'>No Orders Found</p>";
+            exit();
+        }
         ?>
         <div class="scroll">
             <table class="mt-20">
