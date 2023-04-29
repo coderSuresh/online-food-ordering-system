@@ -12,7 +12,6 @@
     <title>Confirm | RestroHub</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-lzWBfOg8p7zGW/ezcR1uyPluv1v0I/7OVt3qTDtN/9Q1Sb20VzT3lck06lKgsf4C4OFsVw0uA4R+1OmjrXzLGw==" crossorigin="anonymous" />
 
 </head>
 

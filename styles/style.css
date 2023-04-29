@@ -1951,3 +1951,20 @@ h2 {
     background-color: var(--primary-color);
     width: 100px;
 }
+.captcha .preview{
+    color: #555;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 8px;
+    border: 1px solid #888;
+    font-family: monospace;
+}
+
+.captcha .captcha-form input {
+
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #888;
+}
