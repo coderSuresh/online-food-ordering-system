@@ -10,6 +10,13 @@
 
          <ul class="flex items-center">
 
+             <li>
+                 <a href="#">
+                     <img src="../images/ic_dark_mode.svg" class="dark-mode-icon" alt="toggle night mode">
+                 </a>
+
+             </li>
+
              <?php
                 if (isset($_SESSION['delivery-username'])) {
                     $sql_get_img = "SELECT image FROM employees WHERE username = '{$_SESSION['delivery-username']}'";
@@ -24,7 +31,7 @@
                 ?>
 
              <li>
-                 <img src="<?php echo $image; ?>" alt="admin profile picture" class="admin_profile_image">
+                 <img src="<?php echo $image; ?>" alt="delivery profile picture" class="admin_profile_image">
 
                  <ul class="admin_profile p-20 shadow border-curve-md">
                      <li>

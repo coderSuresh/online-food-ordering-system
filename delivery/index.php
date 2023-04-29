@@ -17,6 +17,7 @@ if (!isset($_SESSION['delivery-success'])) {
     <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/responsive.css">
+    <script src="../js/admin.js" defer></script>
     <script src="./watch-dog.js" defer></script>
 </head>
 
