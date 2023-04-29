@@ -142,7 +142,7 @@
                     $row = mysqli_fetch_assoc($res);
                     ?>
 
-                    <div class="flex justify-evenly mt-20 gap wrap">
+                    <div class="flex delivery_and_payment_info mt-20 gap wrap">
                         <div>
                             <h4 class="yellow-text">Delivery Information</h4>
                             <p class="mt-10"><b>Name : </b> <?php echo $row['c_name']; ?></p>

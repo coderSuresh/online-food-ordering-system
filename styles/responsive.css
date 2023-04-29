@@ -114,6 +114,10 @@
         padding: 0;
     }
 
+    .delivery_and_payment_info {
+        justify-content: space-between;
+    }
+
     .table {
         padding: 0;
     }
