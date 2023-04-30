@@ -198,7 +198,8 @@
                             INNER JOIN food f ON o.f_id = f.f_id
                             LEFT JOIN aos ON o.id = aos.order_id
                             GROUP BY f.category
-                        ) AS sd ON c.cat_id = sd.cat_id ";
+                        ) AS sd ON c.cat_id = sd.cat_id 
+                        ORDER BY c.cat_id DESC";
         }
         $res = mysqli_query($conn, $sql_fetch);
 
