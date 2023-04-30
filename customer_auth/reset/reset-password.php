@@ -35,6 +35,18 @@
     </header>
 
     <main class="center border-curve-lg shadow">
+    <?php
+    session_start();
+    if (isset($_SESSION['email_error_user'])) {
+    ?>
+        <p class="error-container error p_7-20">
+            <?php echo $_SESSION['email_error_user']; ?>
+        </p>
+
+    <?php
+        unset($_SESSION['email_error_user']);
+    }
+    ?>
         <h1 class="heading text-center">Reset Password</h1>
 
         <form action="./reset-otp-verify.php" method="post">

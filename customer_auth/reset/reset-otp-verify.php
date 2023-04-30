@@ -56,7 +56,7 @@ if (isset($_POST['resend_otp'])) {
             }    
             
             else{
-                $_SESSION['email_error'] = "Email not found";
+                $_SESSION['email_error_user'] = "Email not found";
                 header("Location:./reset-password.php");
             }
      }
