@@ -157,11 +157,12 @@ const map = document.querySelector(".footer_map iframe")
 const footerMap = document.querySelector(".footer_map")
 const footer = document.querySelector(".footer")
 
-if (footer.clientWidth < 1123) {
-    map && map.setAttribute("style", "width: 100% !important; border: none")
-    footerMap && footerMap.setAttribute("style", "width: 100% !important")
+if (footer) {
+    if (footer.clientWidth < 1123) {
+        map && map.setAttribute("style", "width: 100% !important; border: none")
+        footerMap && footerMap.setAttribute("style", "width: 100% !important")
+    }
 }
-
 // to toggle user logout dropdown
 const userProfileIcon = document.querySelector(".user_profile_icon")
 const userLogoutDropdown = document.querySelector(".logout-dropdown")
