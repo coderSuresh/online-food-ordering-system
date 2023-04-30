@@ -39,6 +39,18 @@ if (isset($_SESSION['success'])) {
             ?>
 
             <?php
+            if (isset($_SESSION["user_password"])) {
+            ?>
+                <!-- to show error alert -->
+                <p class="error-container error p_7-20">
+                    <?php echo $_SESSION["user_password"]; ?>
+                </p>
+            <?php
+                unset($_SESSION["user_password"]);
+            }
+            ?>
+
+            <?php
             if (isset($_SESSION["password-reset"])) {
             ?>
                 <!-- to show error alert -->

@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
             while ($data = mysqli_fetch_array($result)) {
                 if ($data['status'] == "verified") {
                     if ($password != $data['password']) {
-                        $_SESSION['password'] = "Incorrect password";
+                        $_SESSION['user_password'] = "Incorrect password";
                         header("Location:./login.php");
                     } else {
                         $id = $data['id'];
