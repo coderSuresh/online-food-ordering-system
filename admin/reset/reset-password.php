@@ -17,10 +17,8 @@
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
-                        alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
-                        alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -31,11 +29,23 @@
                 <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
+
+    <?php
+    session_start();
+    if (isset($_SESSION['email_error'])) {
+    ?>
+        <p class="error-container error p_7-20">
+            <?php echo $_SESSION['email_error']; ?>
+        </p>
+
+    <?php
+        unset($_SESSION['email_error']);
+    }
+    ?>
 
     <main class="center border-curve-lg shadow">
         <h1 class="heading text-center">Reset Password</h1>
@@ -43,11 +53,10 @@
         <form action="./reset-otp-verify.php" method="post">
 
             <div class="text_field">
-                <input type="text" class="no_bg no_outline" placeholder="johndoe@gmail.com" name="email" required
-                    autofocus>
+                <input type="text" class="no_bg no_outline" placeholder="johndoe@gmail.com" name="email" required autofocus>
                 <label>Email</label>
             </div>
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="send_otp" value="Send OTP">
+            <input type="submit" class="no_outline button w-full border-curve-lg mt-20" name="send_otp" value="Send OTP">
             <p class="mt-20 text-center">Remember password? <a href="../login.php" class="cta">Login</a></p>
         </form>
     </main>

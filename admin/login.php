@@ -41,14 +41,26 @@ if (isset($_SESSION['admin-success'])) {
                 ?>
 
                 <?php
-                if (isset($_SESSION['password'])) {
+                if (isset($_SESSION['password-error'])) {
                 ?>
                     <p class="error-container error p_7-20">
-                        <?php echo $_SESSION['password']; ?>
+                        <?php echo $_SESSION['password-error']; ?>
                     </p>
 
                 <?php
-                    unset($_SESSION['password']);
+                    unset($_SESSION['password-error']);
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION['password-success'])) {
+                ?>
+                    <p class="error-container success p_7-20">
+                        <?php echo $_SESSION['password-success']; ?>
+                    </p>
+
+                <?php
+                    unset($_SESSION['password-success']);
                 }
                 ?>
 

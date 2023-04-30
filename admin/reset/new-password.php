@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['verification-sucess'])){
+if (!isset($_SESSION['verification-success']) && !isset($_SESSION['cnp_page'])) {
     header("Location:../login.php");
 }
 ?>
@@ -22,10 +22,8 @@ if(!isset($_SESSION['verification-sucess'])){
         <nav class="top_nav flex items-center">
             <div class="logo__back-btn flex items-center">
                 <!-- back btn -->
-                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg"
-                        alt="go back"></button>
-                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png"
-                        alt="logo">Restro
+                <button class="nav__btn-back no_bg no_outline"><img src="../../images/ic_back.svg" alt="go back"></button>
+                <a href="../../" class="logo heading flex items-center"><img src="../../images/logo.png" alt="logo">Restro
 
                     <span>Hub</span>
                 </a>
@@ -36,32 +34,51 @@ if(!isset($_SESSION['verification-sucess'])){
                 <li class="flex direction-col"><a href="#"><img src="../../images/ic_acc.svg" alt="account"></a>
                     <span class="nav__tooltip">Account</span>
                 </li>
-                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span
-                        class="nav__tooltip">Cart</span> </li>
+                <li class="flex direction-col"><a href="#"><img src="../../images/ic_cart.svg" alt="cart"></a> <span class="nav__tooltip">Cart</span> </li>
             </ul>
         </nav>
     </header>
 
     <main class="center border-curve-lg shadow">
+
+        <?php
+        if (isset($_SESSION['verification-success'])) {
+        ?>
+            <p class="error-container success p_7-20">
+                <?php echo $_SESSION['verification-success']; ?>
+            </p>
+        <?php
+            unset($_SESSION['verification-success']);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['password-error'])) {
+        ?>
+            <p class="error-container error p_7-20">
+                <?php echo $_SESSION['password-error']; ?>
+            </p>
+        <?php
+            unset($_SESSION['password-error']);
+        }
+        ?>
+
         <h1 class="heading text-center">Create New Account</h1>
 
         <form action="./create-new-password.php" method="post">
 
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="new-password" required
-                    autofocus>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="new-password" required autofocus>
                 <label>New password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
             <div class="text_field">
-                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="confirm-password" required
-                    autofocus>
+                <input type="password" class="no_bg no_outline password_input" placeholder="xxxxxxxxx" name="confirm-password" required autofocus>
                 <label>Confirm password</label>
                 <img src="../../images/ic_eye-off.svg" alt="hide password" class="pointer password_toggle_btn">
             </div>
 
-            <input type="submit" class="no_outline border-curve-lg mt-20" name="create-new-password"
-                value="Create New Password">
+            <input type="submit" class="no_outline button w-full border-curve-lg mt-20" name="create-new-password" value="Create New Password">
         </form>
     </main>
 
@@ -69,4 +86,3 @@ if(!isset($_SESSION['verification-sucess'])){
 </body>
 
 </html>
-
