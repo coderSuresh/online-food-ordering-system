@@ -98,7 +98,7 @@ google && google.addEventListener('click', (_e) => {
                         document.cookie = "email=" + email;
                         location.reload();
                         window.location.href =
-                            "https://localhost/messy-code/customer_auth/google_auth.php";
+                            "https://localhost/online-food-ordering-system/customer_auth/google_auth.php";
                     });
                 }
             });
