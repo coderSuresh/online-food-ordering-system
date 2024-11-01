@@ -30,7 +30,7 @@
             </div>
         </section>
 
-        <!-- ======================= eSewa form ======================= -->
+        <!-- ======================= eSewa form =======================
         <form action="https://uat.esewa.com.np/epay/main" method="POST" class="esewa_form">
             <input value="100" id="tAmt" name="tAmt" type="hidden">
             <input value="100" id="amt" name="amt" type="hidden">
@@ -41,7 +41,7 @@
             <input value="<?php echo time(); ?>" name="pid" type="hidden">
             <input value="http://localhost/messy-code/components/esewa/success.php?q=su" type="hidden" name="su">
             <input value="http://localhost/messy-code/components/esewa/failed.php?q=fu" type="hidden" name="fu">
-        </form>
+        </form> -->
     </main>
 
     <?php require "./components/footer.php"; ?>

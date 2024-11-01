@@ -38,14 +38,14 @@
                     <input type="radio" name="payment-method" value="payment-method-cod" id="payment-method-cod" required checked>
                     <label for="payment-method-cod" style="white-space: nowrap; margin-left: 10px;"> Cash on Delivery </label>
                 </div>
-                <div class="flex items-center ml-35">
+                <!-- <div class="flex items-center ml-35">
                     <input type="radio" name="payment-method" value="payment-method-esewa" id="payment-method-esewa" required>
                     <label for="payment-method-esewa" style="white-space: nowrap; margin-left: 10px;">
                         <button type="button" class="mt-20 no_outline no_bg esewa_btn" style="padding: 3px !important">
                             <img src="./images/esewa.svg" alt="e-sewa" style="width: 100px;">
                         </button>
                     </label>
-                </div>
+                </div> -->
             </div>
             <?php
             if (isset($isFromBuy)) {
