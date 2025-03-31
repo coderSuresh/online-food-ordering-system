@@ -50,6 +50,6 @@
          </div>
      </section>
      <div class="footer_map">
-         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23386.30356597996!2d88.05731135729734!3d26.891957725073073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sne!2snp!4v1676360500953!5m2!1sne!2snp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29369536.98840816!2d109.36421915904732!3d-26.028694855370475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0dcb74f75e4b0d%3A0x1780af1122c49f2d!2z4KSo4KWN4KSv4KWCIOCkuOCkvuCkieCkpSDgpLXgpYfgpLLgpY3gpLgsIOCkheCkt-CljeCkn-CljeCksOClh-CksuCkv-Ckr-Ckvg!5e0!3m2!1sne!2snp!4v1743387751230!5m2!1sne!2snp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
      </div>
  </footer>
